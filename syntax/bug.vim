@@ -58,11 +58,12 @@ hi bugBlock ctermfg=244
 
 "=============================================================================== region
 " Include Programming Syntax Highlight
-syn include @cppSnippet syntax/cpp.vim
-syn region bugcppFunction start=+\/\/cppbegin+ keepend end=+\/\/cppend+ contains=@cppSnippet
-syn region bugcppDataType start=/</ end=/>/ contains=@cppSnippet
+syn include @codeSnippet syntax/cpp.vim
+syn region bugFunction start=+\/\/codebegin+ keepend end=+\/\/codeend+ contains=@codeSnippet
+syn region bugDataType start=/</ end=/>/ contains=@codeSnippet
 
-syn include @javaSnippet syntax/java.vim
-syn region bugjavaFunction start=+\/\/javabegin+ keepend end=+\/\/javaend+ contains=@javaSnippet
+"syn include @cppSnippet syntax/cpp.vim
+"syn region bugcppFunction start=+\/\/cppbegin+ keepend end=+\/\/cppend+ contains=@cppSnippet
+"syn region bugcppDataType start=/</ end=/>/ contains=@cppSnippet
 
 let b:current_syntax = "bug"
