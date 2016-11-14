@@ -1,3 +1,10 @@
 .netrwhist
 *.swp
+compiler/
+doc/
+ftdetect/
+ftplugin/
+indent/
+keymap/
 plugged/
+plugin/
