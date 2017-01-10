@@ -30,52 +30,52 @@ syn match noteDelimite_2 /\]/ conceal contained
 
 "=============================================================================== Capital Tags
 " {dark text, blue box, bold}
-syn match noteTagCapB /\[B.*\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+syn match noteTagCapB /\[B.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
 hi noteTagCapB guifg=#262626 guibg=#00D7FF gui=bold
 hi noteTagCapB ctermfg=235 ctermbg=45 cterm=bold
 
 " {dark text, green box, bold}
-syn match noteTagCapG /\[G.*\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+syn match noteTagCapG /\[G.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
 hi noteTagCapG guifg=#262626 guibg=#87D700 gui=bold
 hi noteTagCapG ctermfg=235 ctermbg=112 cterm=bold
 
 " {dark text, orange box, bold}
-syn match noteTagCapO /\[O.*\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+syn match noteTagCapO /\[O.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
 "syn match noteTagCapO /\[O\].*\s/me=e-1 contains=noteDelimite
 hi noteTagCapO guifg=#262626 guibg=#FFAF00 gui=bold
 hi noteTagCapO ctermfg=235 ctermbg=214 cterm=bold
 
 " {dark text, red box, bold}
-syn match noteTagCapR /\[R.*\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+syn match noteTagCapR /\[R.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
 hi noteTagCapR guifg=#262626 guibg=#FF5FAF gui=bold
 hi noteTagCapR ctermfg=235 ctermbg=205 cterm=bold
 
 "=============================================================================== Small Tags
 " {blue text}
-syn match noteTagSmlb /\[b.*\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+syn match noteTagSmlb /\[b.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
 hi noteTagSmlb guifg=#00D7FF
 hi noteTagSmlb ctermfg=45
 
 " {green text}
-syn match noteTagSmlg /\[g.*\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+syn match noteTagSmlg /\[g.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
 hi noteTagSmlg guifg=#87D700
 hi noteTagSmlg ctermfg=112
 
 " {orange text}
-syn match noteTagSmlo /\[o.*\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+syn match noteTagSmlo /\[o.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
 hi noteTagSmlo guifg=#FFAF00
 hi noteTagSmlo ctermfg=214
 
 " {red text}
-syn match noteTagSmlr /\[r.*\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+syn match noteTagSmlr /\[r.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
 hi noteTagSmlr guifg=#FF5FAF
 hi noteTagSmlr ctermfg=205
 
 
 if has("conceal")
   "setlocal cole=2 cocu=nc
-  setlocal cole=2 cocu=n
-  "setlocal cole=2
+  "setlocal cole=2 cocu=n
+  setlocal cole=2
 endif
 
 let b:current_syntax = "note"
