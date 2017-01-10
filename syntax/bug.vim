@@ -22,17 +22,17 @@ hi bugSource ctermfg=15 ctermbg=129 cterm=bold
 "hi bugDate ctermfg=197
 
 " Tag
-" {white text, red background, bold}
+" {gray text, red background, bold}
 syn keyword bugBug BUG
 hi bugBug guifg=#585858 guibg=#FF5FAF gui=bold
 hi bugBug ctermfg=240 ctermbg=205 cterm=bold
 
-" {grey text, green background, bold}
+" {gray text, green background, bold}
 syn keyword bugSolution SOLUTION SOL
 hi bugSolution guifg=#585858 guibg=#87D700 gui=bold
 hi bugSolution ctermfg=240 ctermbg=112 cterm=bold
 
-" {grey text, orange background, bold}
+" {gray text, orange background, bold}
 syn keyword bugTodo TODO
 hi bugTodo guifg=#585858 guibg=#FFAF00 gui=bold
 hi bugTodo ctermfg=240 ctermbg=214 cterm=bold
