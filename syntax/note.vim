@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:	general note for plain text
 " Maintainer:	Jihang Li <LeeJihg@gmail.com>
-" Last Change:	2017 January 10
+" Last Change:	2017 Jan 10
 
 " Quit when a (custom) syntax file was already loaded
 if exists("b:current_syntax")
@@ -12,8 +12,10 @@ endif
 " Block
 " {dark asterisk}
 syn match noteBlock /^*.*/
-hi noteBlock guifg=#808080
-hi noteBlock ctermfg=244
+"hi noteBlock guifg=#808080
+"hi noteBlock ctermfg=244
+hi noteBlock guifg=#3A3A3A
+hi noteBlock ctermfg=237
 
 " Ignore Linux terminal command lines spelling checking
 syn match noteCommand /^$.*/ contains=@NoSpell
@@ -61,6 +63,11 @@ syn match noteTagSmlg /\[g.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 contai
 hi noteTagSmlg guifg=#87D700
 hi noteTagSmlg ctermfg=112
 
+" {black text}
+syn match noteTagSmlk /\[k.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+hi noteTagSmlk guifg=#000000
+hi noteTagSmlk ctermfg=0
+
 " {orange text}
 syn match noteTagSmlo /\[o.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
 hi noteTagSmlo guifg=#FFAF00
@@ -71,11 +78,34 @@ syn match noteTagSmlr /\[r.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 contai
 hi noteTagSmlr guifg=#FF5FAF
 hi noteTagSmlr ctermfg=205
 
+"=============================================================================== region
+" Include Programming Syntax Highlight
+syn include @codeSnippet syntax/cpp.vim
+syn region bugFunction start=+\/\/codebegin+ keepend end=+\/\/codeend+ contains=@codeSnippet
+syn region bugDataType start=/</ end=/>/ contains=@codeSnippet
 
+
+"=============================================================================== set behavior
+" Set to read-only by default
+setlocal ro
+
+" Conceal highlighting controlling syntax
 if has("conceal")
-  "setlocal cole=2 cocu=nc
-  "setlocal cole=2 cocu=n
-  setlocal cole=2
+    setlocal cole=2 cocu=n
 endif
+"
+"if has("conceal")
+"    if has("ro")
+"        setlocal cole=2 cocu=n
+"    else
+"        setlocal cole=2
+"    endif
+"endif
+
+"if has("conceal")
+"    "setlocal cole=2 cocu=nc
+"    "setlocal cole=2 cocu=n
+"    setlocal cole=2
+"endif
 
 let b:current_syntax = "note"
