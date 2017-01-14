@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:	general note for plain text
 " Maintainer:	Jihang Li <LeeJihg@gmail.com>
-" Last Change:	2017 Jan 10
+" Last Change:	2017 Jan 13
 
 " Quit when a (custom) syntax file was already loaded
 if exists("b:current_syntax")
