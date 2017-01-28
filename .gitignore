@@ -3,3 +3,6 @@
 
 ## Ignore the backup files manually made by myself
 *.bkpz
+
+## Ignore plugin directory managed by vimplug
+plugged/
