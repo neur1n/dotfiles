@@ -1,10 +1,5 @@
 .netrwhist
 *.swp
-compiler/
-doc/
-ftdetect/
-ftplugin/
-indent/
-keymap/
-plugged/
-plugin/
+
+## Ignore the backup files manually made by myself
+*.bkpz
