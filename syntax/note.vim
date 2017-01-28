@@ -18,10 +18,10 @@ hi noteBlock guifg=#3A3A3A
 hi noteBlock ctermfg=237
 
 " Ignore Linux terminal command lines spelling checking
-syn match noteCommand /^$.*/ contains=@NoSpell
+"syn match noteCommand /^\$.*$/ contains=@NoSpell
 
 " Comment
-syn match noteComment /^#.*/ contains=ALLBUT,noteBlock,noteCommand
+syn match noteComment /^\#.*/ contains=ALLBUT,noteBlock,noteCommand
 hi noteComment guifg=#666666
 hi noteComment ctermfg=242
 
@@ -46,6 +46,11 @@ syn match noteTagCapO /\[O.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 contai
 "syn match noteTagCapO /\[O\].*\s/me=e-1 contains=noteDelimite
 hi noteTagCapO guifg=#262626 guibg=#FFAF00 gui=bold
 hi noteTagCapO ctermfg=235 ctermbg=214 cterm=bold
+
+" {dark text, purple box, bold}
+syn match noteTagCapP /\[P.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+hi noteTagCapP guifg=#262626 guibg=#AF00FF gui=bold
+hi noteTagCapP ctermfg=235 ctermbg=129 cterm=bold
 
 " {dark text, red box, bold}
 syn match noteTagCapR /\[R.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
@@ -72,6 +77,11 @@ hi noteTagSmlk ctermfg=0
 syn match noteTagSmlo /\[o.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
 hi noteTagSmlo guifg=#FFAF00
 hi noteTagSmlo ctermfg=214
+"
+" {purple text}
+syn match noteTagSmlp /\[p.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
+hi noteTagSmlp guifg=#AF00FF
+hi noteTagSmlp ctermfg=129
 
 " {red text}
 syn match noteTagSmlr /\[r.\{-}\]/ contains=noteDelimite_1,noteDelimite_2 containedin=noteComment
