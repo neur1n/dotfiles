@@ -1,15 +1,15 @@
-[submodule "plugged/vim-misc"]
-	path = plugged/vim-misc
-	url = https://github.com/xolox/vim-misc
-[submodule "plugged/vim-session"]
-	path = plugged/vim-session
-	url = https://github.com/xolox/vim-session
-[submodule "plugged/vim-latex"]
-	path = plugged/vim-latex
-	url = https://github.com/vim-latex/vim-latex
-[submodule "plugged/vim-airline"]
-	path = plugged/vim-airline
-	url = https://github.com/vim-airline/vim-airline
-[submodule "plugged/vim-airline-themes"]
-	path = plugged/vim-airline-themes
-	url = https://github.com/vim-airline/vim-airline-themes
+#[submodule "plugged/vim-misc"]
+#	path = plugged/vim-misc
+#	url = https://github.com/xolox/vim-misc
+#[submodule "plugged/vim-session"]
+#	path = plugged/vim-session
+#	url = https://github.com/xolox/vim-session
+#[submodule "plugged/vim-latex"]
+#	path = plugged/vim-latex
+#	url = https://github.com/vim-latex/vim-latex
+#[submodule "plugged/vim-airline"]
+#	path = plugged/vim-airline
+#	url = https://github.com/vim-airline/vim-airline
+#[submodule "plugged/vim-airline-themes"]
+#	path = plugged/vim-airline-themes
+#	url = https://github.com/vim-airline/vim-airline-themes
