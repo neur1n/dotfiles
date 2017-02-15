@@ -90,9 +90,9 @@ hi noteTagSmlr ctermfg=205
 
 "=============================================================================== region
 " Include Programming Syntax Highlight
-syn include @codeSnippet syntax/cpp.vim
-syn region bugFunction start=+\/\/codebegin+ keepend end=+\/\/codeend+ contains=@codeSnippet
-syn region bugDataType start=/</ end=/>/ contains=@codeSnippet
+"syn include @codeSnippet syntax/cpp.vim
+"syn region bugFunction start=+\/\/codebegin+ keepend end=+\/\/codeend+ contains=@codeSnippet
+"syn region bugDataType start=/</ end=/>/ contains=@codeSnippet
 
 
 "=============================================================================== set behavior
