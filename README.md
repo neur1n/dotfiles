@@ -1,1 +1,1 @@
-Vim setup repository for Windows.
+Vim/Neovim configurations for Windows and Linux.
