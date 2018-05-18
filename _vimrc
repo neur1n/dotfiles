@@ -73,6 +73,7 @@ set colorcolumn=80                                          " show right margin
 set cursorline                                          " highlight current row
 set expandtab shiftwidth=4 softtabstop=4     " set <Tab> width to be 4 <space>s
 set tabstop=4                                " make real <Tab> to be width of 4
+set hlsearch
 set iminsert=0 imsearch=0                                " make IME more usable
 set foldmethod=indent                      " fold code according to indentation
 set foldlevelstart=99                              " start with no folds closed
@@ -82,9 +83,7 @@ set lines=30 columns=120                                  " initial window size
 set linespace=0                                         " set line spacing to 0
 set number                                                   " show line number
 set relativenumber                                       " relative line number
-" set scrolloff=10                                               " set scroll off
 set showcmd                                                 " show pressed keys
-"set spell spelllang=en_us                                      " spelling check
 set wildmenu                                 " show possible matches when <Tab>
 set tags+=../tags
 
@@ -147,7 +146,7 @@ noremap <C-F2> :set cursorline! nocursorline?<CR>
 noremap <C-F3> :set hlsearch! hlsearch?<CR>
 
 "                                                        toggle spellcheck
-nmap <C-F4> :set spell! spelllang=en_us<CR>
+nnoremap <C-F4> :set spell! spelllang=en_us<CR>
 
 "                                              toggle relative line number
 function ToggleRelativeLineNumber()
@@ -160,11 +159,11 @@ endfunction
 nnoremap <C-F5> :call ToggleRelativeLineNumber()<CR>
 
 "      insert a new line without entering insert mode (shift-enter, enter)
-nmap <CR> o<Esc>
-nmap <S-CR> O<Esc>
+nnoremap <CR> o<Esc>
+nnoremap <S-CR> O<Esc>
 
 "                                         split open definition (for tags)
-map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 "                    go to a line and make it one the center of the screen
 nnoremap G Gzz
@@ -191,10 +190,15 @@ inoremap <A-l> <Right>
 inoremap <A-j> <Down>
 inoremap <A-k> <Up>
 
-"                                                              parentheses
-" inoremap ( ()<Left>
-" inoremap [ []<Left>
-" inoremap { {}<Left>
+"                                                    delete hidden buffers
+function DeleteHiddenBuffers()
+    let tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+    for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+        silent execute 'bwipeout' buf
+    endfor
+endfunction
+nnoremap <leader>dh :call DeleteHiddenBuffers()<CR>
 
 "------------------------------------------------------------ Run or Build
 "                                                        run Python script
@@ -236,7 +240,8 @@ function MakeKeilTarget(options)
 endfunction
 nnoremap <leader>kb :call MakeKeilTarget('-b')<CR>
 nnoremap <leader>kr :call MakeKeilTarget('-cr ')<CR>
-nnoremap <leader>kd :call MakeKeilTarget('-f ')<CR>
+nnoremap <leader>kf :call MakeKeilTarget('-f ')<CR>
+nnoremap <leader>kd :call MakeKeilTarget('-d ')<CR>
 
 "============================================================== <Abbreviations>
 cabbrev tw %s/\s\+$//gc
@@ -274,8 +279,6 @@ Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 "====================================================== <Plugin configurations>
-"------------------------------------------------------ <SirVer/ultisnips>
-let g:UltiSnipsExpandTrigger = '<C-j>'
 "--------------------------------------------------------- <lervag/vimtex>
 let g:vimtex_view_general_viewer = 'E:\ProgramFiles\SumatraPDF\SumatraPDF.exe'
 let g:vimtex_view_general_options
@@ -319,35 +322,6 @@ let g:tagbar_sort = 0
 "---------------------------------------------------- <mhinz/vim-startify>
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_dir = 'E:\ProgramFiles\Vim\recovery\session'
-"let g:ascii = [
-"               \ ' _____  _       _____                 ___',
-"               \ '|  |  ||_|     |   | | ___  _ _  ___ |_  |   ___',
-"               \ '|     || | _   | | | || -_|| | ||  _| _| |_ |   |',
-"               \ '|__|__||_|| |  |_|___||___||___||_|  |_____||_|_|',
-"               \ '          |_|'
-"               \]
-
-"let g:ascii = [
-"               \ '      ___                           ___',
-"               \ '     /__/\      ___                /  /\',
-"               \ '     \  \ \    /  /\              /  / /',
-"               \ '      \__\ \  /  / /             /__/  \',
-"               \ '  ___ /  /  \/__/  \             \__\/\ \',
-"               \ ' /__/\  / /\ \__\/\ \__             \  \ \',
-"               \ ' \  \ \/ /__\/  \  \ \/\             \__\ \',
-"               \ '  \  \  /        \__\  /             /  / /',
-"               \ '   \  \ \        /__/ /             /__/ /',
-"               \ '    \  \ \       \__\/              \__\/',
-"               \ '     \__\/'
-"               \]
-
-"let g:ascii = [
-"               \ ' _____  _          __ ',
-"               \ '|  |  ||_|      __|  |',
-"               \ '|     || | _   |  |  |',
-"               \ '|__|__||_|| |  |_____|',
-"               \ '          |_|'
-"               \]
 
 if strftime("%H") % 3 == 0
     let g:ascii = startify#fortune#boxed()
@@ -412,6 +386,8 @@ let g:startify_custom_header = map(g:ascii + g:animal, "\"   \".v:val")
 "--------------------------------------- <nathanaelkane/vim-indent-guides>
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 4
+"------------------------------------------------------ <SirVer/ultisnips>
+let g:UltiSnipsExpandTrigger = '<C-j>'
 "----------------------------------------- <roxma/nvim-completion-manager>
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
