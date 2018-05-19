@@ -30,21 +30,11 @@ if has('syntax')
     if has('gui_running')
         set background=dark
         colorscheme solarized
-        " let g:solarized_contrast="high"
+        let g:solarized_contrast="high"
     else
         colorscheme molokai
     endif
 endif
-
-"====================================================== <Overwrite Colorscheme>
-hi LineNr guibg=#002B36
-hi MatchParen ctermfg=197 ctermbg=NONE cterm=underline guifg=#f92672 guibg=NONE gui=underline
-hi VertSplit guifg=#808080 guibg=#002B36
-set guicursor+=a:blinkon0
-set fillchars=vert:\|
-" hi SignColumn guibg=#002B36  " 063642
-" hi lCursor guifg=NONE guibg=Cyan
-" hi! link airline_tabfill LineNr
 
 "======================================================================= <Misc>
 augroup pwd
@@ -199,6 +189,14 @@ function DeleteHiddenBuffers()
     endfor
 endfunction
 nnoremap <leader>dh :call DeleteHiddenBuffers()<CR>
+
+"                                  automatically append closing characters
+inoremap ( ()<Left>
+inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap [ []<Left>
+inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+inoremap { {}<Left>
+inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 
 "------------------------------------------------------------ Run or Build
 "                                                        run Python script
@@ -387,7 +385,7 @@ let g:startify_custom_header = map(g:ascii + g:animal, "\"   \".v:val")
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 4
 "------------------------------------------------------ <SirVer/ultisnips>
-let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsExpandTrigger = '<C-s>'
 "----------------------------------------- <roxma/nvim-completion-manager>
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"

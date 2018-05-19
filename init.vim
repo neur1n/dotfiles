@@ -22,18 +22,8 @@ if has('syntax')
     " set termguicolors
     " colorscheme molokai
     colorscheme solarized
-    " let g:solarized_contrast="high"
+    let g:solarized_contrast="high"
 endif
-
-"====================================================== <Overwrite Colorscheme>
-hi LineNr guibg=#002B36
-hi MatchParen ctermfg=197 ctermbg=NONE cterm=underline guifg=#f92672 guibg=NONE gui=underline
-hi VertSplit guifg=#808080 guibg=#002B36
-set guicursor+=a:blinkon0
-set fillchars=vert:\|
-" hi lCursor guifg=NONE guibg=Cyan
-" hi! link airline_tabfill LineNr
-" hi SignColumn guibg=#002B36  " 063642
 
 "======================================================================= <Misc>
 augroup pwd
@@ -185,6 +175,14 @@ function DeleteHiddenBuffers()
     endfor
 endfunction
 nnoremap <leader>dh :call DeleteHiddenBuffers()<CR>
+
+"                                  automatically append closing characters
+inoremap ( ()<Left>
+inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap [ []<Left>
+inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+inoremap { {}<Left>
+inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 
 "------------------------------------------------------------ Run or Build
 "                                                        run Python script
