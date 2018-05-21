@@ -232,6 +232,7 @@ function MakeKeilTarget(options)
     if !empty(l:target)
         execute ':silent !uv4 '.a:options.l:target.' -o "\%TEMP\%/log.txt"'
         execute ':sp $TEMP/log.txt'
+        execute 'normal! Gzz'
     else
         echo 'Target not found!'
     endif
