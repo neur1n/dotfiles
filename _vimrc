@@ -170,10 +170,6 @@ nnoremap <Right> <C-W>l
 nnoremap <Down> <C-W>j
 nnoremap <Up> <C-W>k
 
-"                                                               move lines
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-
 "                                               move cursor in insert mode
 inoremap <A-h> <Left>
 inoremap <A-l> <Right>
@@ -259,10 +255,12 @@ Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
+Plug 'matze/vim-move'
 Plug 'mhinz/vim-startify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'roxma/nvim-completion-manager'
+" Plug 'roxma/nvim-completion-manager'
+Plug 'ikalnytskyi/nvim-completion-manager', {'branch': 'use-user_data-for-extra'}
 Plug 'roxma/ncm-clang'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-fugitive'
