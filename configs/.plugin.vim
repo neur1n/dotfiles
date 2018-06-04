@@ -1,6 +1,7 @@
 call plug#begin('E:\ProgramFiles\Vim\vimfiles\plugged')
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'honza/vim-snippets'
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', {'for': ['tex']}
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar', {'on': 'TagbarOpenAutoClose'}
 Plug 'matze/vim-move'
@@ -15,6 +16,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
 Plug 'wesQ3/vim-windowswap'
 Plug 'will133/vim-dirdiff', {'on': 'DirDiff'}

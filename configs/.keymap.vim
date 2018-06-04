@@ -1,5 +1,6 @@
 "                                          Replace <leader> key to <space>
 let mapleader = ' '
+let maplocalleader = ' '
 
 " *****************************************************************************
 "                                                                       General
@@ -138,6 +139,7 @@ function MakeKeilTarget(options)
     endif
 
     if !empty(l:target)
+        execute 'wa'
         execute ':silent !uv4 '.a:options.l:target.' -o "\%TEMP\%/log.txt"'
         execute ':sp $TEMP/log.txt'
         execute 'normal! Gzz'
@@ -145,7 +147,7 @@ function MakeKeilTarget(options)
         echo 'Target not found!'
     endif
 endfunction
-nnoremap <leader>kb :call MakeKeilTarget('-b')<CR>
+nnoremap <leader>kb :call MakeKeilTarget('-b ')<CR>
 nnoremap <leader>kr :call MakeKeilTarget('-cr ')<CR>
 nnoremap <leader>kf :call MakeKeilTarget('-f ')<CR>
 nnoremap <leader>kd :call MakeKeilTarget('-d ')<CR>

@@ -106,6 +106,13 @@ if has('win32')
 else
     let s:source_path = $HOME
 endif
+
+"============================================================= <File Templates>
+augroup templates
+  au!
+  autocmd BufNewFile *.* silent! execute '0r E:\ProgramFiles\Vim\vimfiles\templates\skeleton.'.expand("<afile>:e")
+augroup END
+
 "================================================================ <Key Mapping>
 exec 'source '.s:source_path.'/configs/.keymap.vim'
 

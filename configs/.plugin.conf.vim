@@ -7,7 +7,7 @@ let g:vimtex_latexmk_options =
         \'xelatex -verbose -file-line-error -synctex=1'.
         \'-shell-escape -interaction=nonstopmode $*'
 
-augroup my_cm_setup
+function SetupVimtexForNCM()
     autocmd!
     autocmd User CmSetup call cm#register_source({
         \ 'name' : 'vimtex',
@@ -18,7 +18,8 @@ augroup my_cm_setup
         \ 'cm_refresh_patterns': g:vimtex#re#ncm,
         \ 'cm_refresh': {'omnifunc': 'vimtex#complete#omnifunc'},
         \ })
-augroup END
+endfunction
+autocmd BufRead *.tex :call SetupVimtexForNCM()
 
 " let g:tex_flavor = 'latex'
 " " let g:latex_viewer='SumatraPDF -reuse-instance -inverse-search '.
@@ -29,10 +30,10 @@ augroup END
 "         \'-reuse-instance -forward-search "\"'.$VIMRUNTIME.
 "         \'\gvim.exe\" -n --remote-silent +\%l \"\%f\""  @tex @line @pdf'
 "--------------------------------------------------- <luochen1990/rainbow>
-nnoremap <C-F6> :RainbowToggle<CR>
+nnoremap <leader>rt :RainbowToggle<CR>
 let g:rainbow_active = 1
 "----------------------------------------------------- <majutsushi/tagbar>
-nnoremap <C-F7> :TagbarOpenAutoClose<CR>
+nnoremap <leader>tb :TagbarOpenAutoClose<CR>
 let g:tagbar_iconchars = ['', '']
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_silent = 1
@@ -118,7 +119,7 @@ set laststatus=2                                 " show even only 1 window
 let g:airline_detect_iminsert = 1
 let g:airline_detect_spelllang = 0
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'dark'
+let g:airline_theme = 'solarized_flood'
 
 let g:airline_mode_map = {
     \ '__' : '-',
@@ -159,18 +160,20 @@ let g:airline#extensions#tabline#right_alt_sep = ''
 " let g:airline#extensions#tabline#tabs_label = 't'
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = 's'
 
 let g:airline_section_z = '%{airline#util#wrap(airline#extensions#windowswap#get_status(),0)}%1p%% %#__accent_bold#%{g:airline_symbols.linenr}:%1l%#__restore__#%#__accent_bold#/%L %{g:airline_symbols.maxlinenr}%#__restore__#:%1v'
 "-------------------------------------------------------------- <w0rp/ale>
-let g:airline#extensions#ale#enabled = 1
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '' "
 let g:ale_sign_warning = '⚡' "
 let g:ale_lint_on_text_changed='normal'
-nnoremap <Leader>s :ALEToggle<CR>
-nmap <silent> <C-k> <Plug>(ale_next_wrap)
+nnoremap <Leader>at :ALEToggle<CR>
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
 " let g:ale_linters = {
 "     \   'c': ['clang'],
 "     \   'cpp': ['clang++'],
