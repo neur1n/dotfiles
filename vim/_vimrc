@@ -24,10 +24,11 @@ endif
 
 if has('syntax')
     syntax on
+    filetype plugin indent on
     if has('gui_running')
         set background=dark
         colorscheme solarized
-        let g:solarized_contrast="high"
+        let g:solarized_contrast='low'
     else
         colorscheme molokai
     endif
@@ -64,12 +65,14 @@ set hlsearch
 set iminsert=0 imsearch=0                                " make IME more usable
 set foldmethod=indent                      " fold code according to indentation
 set foldlevelstart=99                              " start with no folds closed
-set guifont=mononoki\ NF:h10                                 " set default font
+set guifont=input:h10
+" set guifont=Aix:h12
 set incsearch                                              " incremental search
 set lines=30 columns=120                                  " initial window size
 set linespace=0                                         " set line spacing to 0
 set number                                                   " show line number
 set relativenumber                                       " relative line number
+set sessionoptions-=folds                 " do not create folds when sessioning
 set showcmd                                                 " show pressed keys
 set wildmenu                                 " show possible matches when <Tab>
 set tags+=../tags
@@ -101,17 +104,21 @@ set backupdir=E:\ProgramFiles\Vim\recovery\backup
 let g:netrw_winsize=15                     " set explorer window width to be 30
 let g:netrw_liststyle=3                         " set explorer to be tree style
 
+"============================================================= <File Templates>
+augroup templates
+    au!
+    autocmd BufNewFile *.* silent! execute '0r E:\ProgramFiles\Vim\vimfiles\templates\skeleton.'.expand("<afile>:e")
+augroup END
+
+
 if has('win32')
     let s:source_path = $VIM
 else
     let s:source_path = $HOME
 endif
 
-"============================================================= <File Templates>
-augroup templates
-  au!
-  autocmd BufNewFile *.* silent! execute '0r E:\ProgramFiles\Vim\vimfiles\templates\skeleton.'.expand("<afile>:e")
-augroup END
+"======================================================= <Colorscheme Overrule>
+exec 'source '.s:source_path.'/configs/.colorscheme.vim'
 
 "================================================================ <Key Mapping>
 exec 'source '.s:source_path.'/configs/.keymap.vim'

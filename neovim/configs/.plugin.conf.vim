@@ -1,4 +1,85 @@
-"--------------------------------------------------------- <lervag/vimtex>
+scriptencoding utf-8
+
+if has('win32')
+    let s:source_path = '~/AppData/Local/nvim'
+else
+    let s:source_path = $HOME
+endif
+
+"------------------------------------------------------ <itchyny/lightline.vim>
+set laststatus=2
+set showtabline=2
+
+if !exists('g:lightline')
+    let g:lightline = {}
+endif
+
+let g:lightline = {
+    \ 'active': {
+    \     'left': [['mode', 'paste', 'spell'],
+    \              ['gitbranch'],
+    \              ['filename'],
+    \              ['modified', 'readonly']],
+    \     'right': [['linter_errors', 'trailing', 'linter_warnings'],
+    \               ['lineinfo'],
+    \               ['fileformat', 'fileencoding'],
+    \               ['tagbar']],
+    \ },
+    \ 'colorscheme': 'solarized_flood',
+    \ 'component': {
+    \     'fileencoding': '%{&fenc ==# "utf-8" ? "":&fenc}',
+    \     'fileformat': '%{&ff ==# "unix" ? "":&ff}',
+    \     'lineinfo': '%4l/%L:%-2v',
+    \     'readonly': '%{&readonly ? "":""}',
+    \     'spell': '%{&spell ? "S":""}',
+    \ },
+    \ 'component_expand': {
+    \     'buffers': 'lightline#bufferline#buffers',
+    \     'linter_warnings': 'lightline#ale#warnings',
+    \     'linter_errors': 'lightline#ale#errors',
+    \     'trailing': 'lightline#trailing_whitespace#component',
+    \ },
+    \ 'component_function': {
+    \     'gitbranch': 'gitbranch#name',
+    \     'tagbar': 'lightline_tagbar#component',
+    \ },
+    \ 'component_type': {
+    \     'buffers': 'tabsel',
+    \     'linter_warnings': 'warning',
+    \     'linter_errors': 'error',
+    \     'trailing': 'warning',
+    \ },
+    \ 'separater': {
+    \     'left': '', 'right': ''
+    \ },
+    \ 'subseparater': {
+    \     'left': '|', 'right': '|',
+    \ },
+    \ 'tabline': {
+    \     'left': [['buffers']], 'right': [['close']],
+    \ },
+\ }
+
+let g:lightline#bufferline#show_number = 1
+let g:lightline#trailing_whitespace#indicator = '☰'
+let g:lightline_tagbar#format = '%s'
+let g:lightline_tagbar#flags = ''
+
+let g:lightline.mode_map = {
+    \ 'n': 'N',
+    \ 'i': 'I',
+    \ 'r': 'R',
+    \ 'R': 'R',
+    \ 'v': 'V',
+    \ 'V': 'V',
+    \ "\<C-v>": 'V',
+    \ 'c': 'C',
+    \ 's': 'S',
+    \ 'S': 'S',
+    \ "\<C-s>": 'S',
+    \ 't': 'TERMINAL',
+    \ }
+"-------------------------------------------------------------- <lervag/vimtex>
 let g:vimtex_view_general_viewer = 'E:\ProgramFiles\SumatraPDF\SumatraPDF.exe'
 let g:vimtex_view_general_options
         \ = '-reuse-instance -forward-search @tex @line @pdf'
@@ -29,23 +110,23 @@ autocmd BufRead *.tex :call SetupVimtexForNCM()
 " let g:vimtex_view_general_options  =
 "         \'-reuse-instance -forward-search "\"'.$VIMRUNTIME.
 "         \'\gvim.exe\" -n --remote-silent +\%l \"\%f\""  @tex @line @pdf'
-"--------------------------------------------------- <luochen1990/rainbow>
+"-------------------------------------------------------- <luochen1990/rainbow>
 nnoremap <leader>rt :RainbowToggle<CR>
 let g:rainbow_active = 1
-"----------------------------------------------------- <majutsushi/tagbar>
+"---------------------------------------------------------- <majutsushi/tagbar>
 nnoremap <leader>tb :TagbarOpenAutoClose<CR>
 let g:tagbar_iconchars = ['', '']
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_silent = 1
 let g:tagbar_sort = 0
 "let g:tagbar_autoclose = 1
-"---------------------------------------------------- <mhinz/vim-startify>
+"--------------------------------------------------------- <mhinz/vim-startify>
 let g:startify_fortune_use_unicode = 1
-let g:startify_session_dir = 'E:\ProgramFiles\Vim\recovery\session'
+let g:startify_session_dir = s:source_path.'/recovery/session'
 
-if strftime("%H") % 3 == 0
+if strftime('%H') % 3 == 0
     let g:ascii = startify#fortune#boxed()
-elseif strftime("%H") < 12
+elseif strftime('%H') < 12
     let g:ascii = [
                    \ ' _____             _                  __ ',
                    \ '|     |___ ___ ___|_|___ ___       __|  |',
@@ -53,7 +134,7 @@ elseif strftime("%H") < 12
                    \ '|_|_|_|___|_| |_|_|_|_|_|_  || |  |_____|',
                    \ '                        |___||_|         '
                    \]
-elseif strftime("%H") < 18
+elseif strftime('%H') < 18
     let g:ascii = [
                    \ ' _____ ___ _                                    __ ',
                    \ '|  _  |  _| |_ ___ ___ ___ ___ ___ ___       __|  |',
@@ -71,7 +152,7 @@ else
                    \]
 endif
 
-if strftime("%H") < 12
+if strftime('%H') < 12
     let g:animal = [
                     \ '       o',
                     \ '        o   ^__^',
@@ -80,7 +161,7 @@ if strftime("%H") < 12
                     \ '                ||----w |',
                     \ '                ||     ||',
                     \ ]
-elseif strftime("%H") < 18
+elseif strftime('%H') < 18
     let g:animal = [
                     \ '       o',
                     \ '        o    ____',
@@ -103,85 +184,42 @@ else
                      \ ]
 endif
 let g:startify_custom_header = map(g:ascii + g:animal, "\"   \".v:val")
-"--------------------------------------- <nathanaelkane/vim-indent-guides>
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 4
-"------------------------------------------------------ <SirVer/ultisnips>
-let g:UltiSnipsExpandTrigger = '<C-s>'
-"----------------------------------------- <roxma/nvim-completion-manager>
+"---------------------------------------------------------------- <ncm-2/ncm-2>
+augroup NCM2
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+    au User Ncm2Plugin call ncm2#register_source({
+        \ 'name' : 'vimtex',
+        \ 'priority': 1,
+        \ 'subscope_enable': 1,
+        \ 'complete_length': 1,
+        \ 'scope': ['tex'],
+        \ 'matcher': {'name': 'combine',
+        \           'matchers': [
+        \               {'name': 'abbrfuzzy', 'key': 'menu'},
+        \               {'name': 'prefix', 'key': 'word'},
+        \           ]},
+        \ 'mark': 'tex',
+        \ 'word_pattern': '\w+',
+        \ 'complete_pattern': g:vimtex#re#ncm,
+        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+\ })
+augroup END
+set completeopt=noinsert,menuone,noselect
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"--------------------------------------------- <roxma/nvim-hug_neovim-rpc>
-let g:python3_host_prog='E:\ProgramFiles\Python36\python.exe'
-"----------------------------------------------- <vim-airline/vim-airline>
-set laststatus=2                                 " show even only 1 window
-let g:airline_detect_iminsert = 1
-let g:airline_detect_spelllang = 0
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'solarized_flood'
-
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
-
-if !exists('g:airline_symbols')
-let g:airline_symbols = {}
-endif
-
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.spell = 'S'
-let g:airline_symbols.branch = '' "
-let g:airline_symbols.notexists = '+' "
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''"
-let g:airline_symbols.maxlinenr = ''"
-let g:airline_symbols.whitespace = 'Ξ' "
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ' ' "
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
-" let g:airline#extensions#tabline#buffers_label = 'b'
-" let g:airline#extensions#tabline#tabs_label = 't'
-let g:airline#extensions#tabline#buffer_nr_show = 1
-
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline#extensions#tagbar#flags = 's'
-
-let g:airline_section_z = '%{airline#util#wrap(airline#extensions#windowswap#get_status(),0)}%1p%% %#__accent_bold#%{g:airline_symbols.linenr}:%1l%#__restore__#%#__accent_bold#/%L %{g:airline_symbols.maxlinenr}%#__restore__#:%1v'
-"-------------------------------------------------------------- <w0rp/ale>
+" inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+" imap <backspace> <backspace><Plug>(ncm2_auto_trigger)
+"------------------------------------------------------------ <neomake/neomake>
+" call neomake#configure#automake('nrwi', 500)
+" let g:neomake_error_sign['text'] = '‼'
+" let g:neomake_warning_sign['text'] = '⚡'
+"----------------------------------------------------------- <SirVer/ultisnips>
+let g:UltiSnipsExpandTrigger = '<C-s>'
+"------------------------------------------------------------------- <w0rp/ale>
 let g:ale_sign_column_always = 1
-let g:ale_sign_error = '' "
-let g:ale_sign_warning = '⚡' "
-let g:ale_lint_on_text_changed='normal'
+let g:ale_sign_error = '‼'
+let g:ale_sign_warning = '⚡'
 nnoremap <Leader>at :ALEToggle<CR>
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
-" let g:ale_linters = {
-"     \   'c': ['clang'],
-"     \   'cpp': ['clang++'],
-"     \}
-let g:ale_fixers = {
-    \   'c': ['clang-format'],
-    \   'cpp': ['clang-format'],
-    \}
-" autocmd BufEnter *.cpp,*.h,*.hpp,*.hxx let g:ale_cpp_clang_options = join(ncm_clang#compilation_info()['args'])
-"------------------------------------------------ <ryanoasis/vim-devicons>
-" let g:webdevicons_enable = 0
