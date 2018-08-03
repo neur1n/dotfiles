@@ -1,47 +1,5 @@
 scriptencoding utf-8
 "******************************************************************************
-"                                                autozimu/LanguageClient-neovim
-"******************************************************************************
-let g:LanguageClient_serverCommands = {
-    \ 'python': ['pyls'],
-\ }
-
-let g:LanguageClient_diagnosticsList = 'Location'
-
-let g:LanguageClient_diagnosticsDisplay = {
-    \ 1: {
-    \     'name': 'Error',
-    \     'texthl': 'SpellBad',
-    \     'signText': '',
-    \     'signTexthl': 'error',
-    \ },
-    \ 2: {
-    \     'name': 'Warning',
-    \     'texthl': 'SpellCap',
-    \     'signText': '⚡',
-    \     'signTexthl': 'todo',
-    \ },
-    \ 3: {
-    \     'name': 'Information',
-    \     'texthl': 'SpellCap',
-    \     'signText': '',
-    \     'signTexthl': 'todo',
-    \ },
-    \ 4: {
-    \     'name': 'Hint',
-    \     'texthl': 'SpellCap',
-    \     'signText': '',
-    \     'signTexthl': 'todo',
-    \ },
-\ }
-
-nnoremap <silent> <leader>gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <leader>gr :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> <C-p> :call Neur1n#func#DiagnosticJump('prev', 1)<CR>
-nnoremap <silent> <C-n> :call Neur1n#func#DiagnosticJump('next', 1)<CR>
-
-"******************************************************************************
 "                                                   iamcco/markdown-preview.vim
 "******************************************************************************
 let g:mkdp_refresh_slow = 1
@@ -71,7 +29,7 @@ let g:vimtex_latexmk_options =
 "******************************************************************************
 "                                                           luochen1990/rainbow
 "******************************************************************************
-nnoremap <leader>rb :RainbowToggle<CR>
+nnoremap <leader>rp :RainbowToggle<CR>
 let g:rainbow_active = 1
 
 "******************************************************************************
@@ -88,11 +46,11 @@ let g:tagbar_sort = 0
 "                                                            mhinz/vim-startify
 "******************************************************************************
 let g:startify_fortune_use_unicode = 1
-let g:startify_session_dir = '$VIMCONFIG/recovery/session'
+let g:startify_session_dir = '$HOME\vimfiles\recovery\session'
 
-if strftime('%M') % 3 == 0
+if strftime('%H') % 3 == 0
     let b:greeting = startify#fortune#boxed()
-elseif strftime('%M') % 3 == 1
+elseif strftime('%H') % 3 == 1
     let b:greeting = b:greetings['hello']
 else
     let b:greeting = b:greetings['vim']
@@ -119,20 +77,19 @@ augroup NCM2
         \ 'complete_length': 1,
         \ 'scope': ['tex'],
         \ 'matcher': {'name': 'combine',
-        \             'matchers': [
-        \                  {'name': 'abbrfuzzy', 'key': 'menu'},
-        \                  {'name': 'prefix', 'key': 'word'},
-        \             ]
-        \            },
+        \           'matchers': [
+        \               {'name': 'abbrfuzzy', 'key': 'menu'},
+        \               {'name': 'prefix', 'key': 'word'},
+        \           ]},
         \ 'mark': 'tex',
         \ 'word_pattern': '\w+',
         \ 'complete_pattern': g:vimtex#re#ncm,
         \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-    \ })
+\ })
 augroup END
 set completeopt=noinsert,menuone,noselect
 inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<C-y>\<CR>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -149,6 +106,7 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 "******************************************************************************
 "                                                       vim-airline/vim-airline
 "******************************************************************************
+set laststatus=2                                      " show even only 1 window
 let g:airline_detect_iminsert = 1
 let g:airline_detect_spelllang = 0
 let g:airline_powerline_fonts = 1
@@ -185,7 +143,7 @@ if !exists('g:airline_symbols')
 let g:airline_symbols = {}
 endif
 
-"Ξ•☰☰Ξ
+"Ξ•☰
 let g:airline_symbols = {
     \ 'branch': '',
     \ 'linenr': '',
@@ -193,7 +151,7 @@ let g:airline_symbols = {
     \ 'notexists': '+',
     \ 'readonly': '',
     \ 'spell': 'S',
-    \ 'whitespace': ''
+    \ 'whitespace': '☰'
 \ }
 
 let g:airline#extensions#tabline#enabled = 1
@@ -202,17 +160,17 @@ let g:airline#extensions#tabline#left_alt_sep = '' " 
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#right_alt_sep = ''
 
-let g:airline#extensions#whitespace#long_format = 'L (%s)'
-let g:airline#extensions#whitespace#mixed_indent_format = 'MI (%s)'
-let g:airline#extensions#whitespace#mixed_indent_file_format = 'MIF (%s)'
-let g:airline#extensions#whitespace#trailing_format = 'Ξ (%s)'
+let g:airline#extensions#whitespace#long_format = 'L(%s)'
+let g:airline#extensions#whitespace#mixed_indent_format = 'MI(%s)'
+let g:airline#extensions#whitespace#mixed_indent_file_format = 'MIF(%s)'
+let g:airline#extensions#whitespace#trailing_format = 'T(%s)'
 
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#excludes = ['log.txt']
 
-" let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 
-" let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 
 function AirlineOverrule()
@@ -220,10 +178,9 @@ function AirlineOverrule()
     let g:airline_section_x =
         \ airline#section#create_right(['windowswap', 'tagbar'])
     let g:airline_section_z = airline#section#create_right(['%4l/%L:%-2v'])
-    let g:airline_section_warning = airline#section#create(
-        \ ['whitespace', ' %{Neur1n#func#DiagnosticCount()[1]}'])
-    let g:airline_section_error = airline#section#create(
-        \ ['%{Neur1n#func#DiagnosticCount()[0]}'])
+    let g:airline_section_warning =
+        \ airline#section#create(['whitespace', 'ale_warning_count'])
+    let g:airline_section_error = airline#section#create(['ale_error_count'])
 endfunction
 
 augroup airline_overrule
@@ -237,9 +194,9 @@ augroup END
 "⚡ 
 " let g:ale_lint_on_insert_leave = 1
 " let g:ale_lint_on_text_changed = 'never'
-" let g:ale_sign_column_always = 1
-" let g:ale_sign_error = ''
-" let g:ale_sign_warning = '⚡'
-" nnoremap <Leader>al :ALEToggle<CR>
-" nmap <silent> <C-p> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-n> <Plug>(ale_next_wrap)
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = ''
+let g:ale_sign_warning = '⚡'
+nnoremap <Leader>al :ALEToggle<CR>
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+nmap <silent> <C-n> <Plug>(ale_next_wrap)

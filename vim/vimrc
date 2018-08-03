@@ -4,11 +4,11 @@ set fileformats=unix,dos
 
 if has('win32')
     let $VIMCONFIG = $HOME.'/vimfiles'
+    let g:python3_host_prog='E:\ProgramFiles\Python36\python.exe'
 else
     let $VIMCONFIG = $HOME.'/.vim'
 endif
 
-let g:python3_host_prog='E:\ProgramFiles\Python36\python.exe'
 let g:python_host_skip_check=1
 let g:loaded_python3_provider=1
 
@@ -69,12 +69,14 @@ set foldmethod=indent                      " fold code according to indentation
 set foldlevelstart=99                              " start with no folds closed
 set guifont=input\ NF:h10
 set incsearch                                              " incremental search
+set laststatus=2                                      " show even only 1 window
 set lines=30 columns=120                                  " initial window size
 set linespace=0                                         " set line spacing to 0
 set number                                                   " show line number
 set relativenumber                                       " relative line number
 set sessionoptions-=folds                 " do not create folds when sessioning
 set showcmd                                                 " show pressed keys
+set signcolumn=yes
 set wildmenu                                 " show possible matches when <Tab>
 set tags+=../tags
 
