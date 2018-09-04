@@ -1,47 +1,5 @@
 scriptencoding utf-8
 "******************************************************************************
-"                                                autozimu/LanguageClient-neovim
-"******************************************************************************
-let g:LanguageClient_serverCommands = {
-    \ 'python': ['pyls'],
-\ }
-
-let g:LanguageClient_diagnosticsList = 'Location'
-
-let g:LanguageClient_diagnosticsDisplay = {
-    \ 1: {
-    \     'name': 'Error',
-    \     'texthl': 'SpellBad',
-    \     'signText': '',
-    \     'signTexthl': 'error',
-    \ },
-    \ 2: {
-    \     'name': 'Warning',
-    \     'texthl': 'SpellCap',
-    \     'signText': '⚡',
-    \     'signTexthl': 'todo',
-    \ },
-    \ 3: {
-    \     'name': 'Information',
-    \     'texthl': 'SpellCap',
-    \     'signText': '',
-    \     'signTexthl': 'todo',
-    \ },
-    \ 4: {
-    \     'name': 'Hint',
-    \     'texthl': 'SpellCap',
-    \     'signText': '',
-    \     'signTexthl': 'todo',
-    \ },
-\ }
-
-nnoremap <silent> <leader>gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <leader>gr :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
-nnoremap <silent> <C-p> :call Neur1n#func#DiagnosticJump('prev', 1)<CR>
-nnoremap <silent> <C-n> :call Neur1n#func#DiagnosticJump('next', 1)<CR>
-
-"******************************************************************************
 "                                                   iamcco/markdown-preview.vim
 "******************************************************************************
 let g:mkdp_refresh_slow = 1
@@ -53,11 +11,21 @@ nmap <silent> <leader>ms <Plug>StopMarkdownPreview
 "******************************************************************************
 let g:vimtex_view_general_viewer = 'E:\ProgramFiles\SumatraPDF\SumatraPDF.exe'
 let g:vimtex_view_general_options
-        \ = '-reuse-instance -forward-search @tex @line @pdf'
+    \ = '-reuse-instance -forward-search @tex @line @pdf'
 let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 let g:vimtex_latexmk_options =
-        \'xelatex -verbose -file-line-error -synctex=1'.
-        \'-shell-escape -interaction=nonstopmode $*'
+    \ 'xelatex -verbose -file-line-error '.
+    \ '-synctex=1 -shell-escape -interaction=nonstopmode $*'
+
+if !exists('g:vimtex_compiler_latexmk')
+    let g:vimtex_compiler_latexmk = {}
+endif
+
+let g:vimtex_compiler_latexmk = {
+    \ 'build_dir': './build/',
+    \ 'callback': 1,
+    \ 'continuous': 0,
+\ }
 
 " let g:tex_flavor = 'latex'
 " " let g:latex_viewer='SumatraPDF -reuse-instance -inverse-search '.
@@ -110,13 +78,14 @@ let g:startify_custom_header = map(b:greeting + b:animal, "\"   \".v:val")
 "******************************************************************************
 "                                                                   ncm-2/ncm-2
 "******************************************************************************
-augroup NCM2
+set completeopt=noinsert,menuone,noselect
+
+augroup ncm_tex
+    autocmd!
     autocmd InsertEnter * call ncm2#enable_for_buffer()
-    au User Ncm2Plugin call ncm2#register_source({
-        \ 'name' : 'vimtex',
-        \ 'priority': 1,
-        \ 'subscope_enable': 1,
-        \ 'complete_length': 1,
+    autocmd Filetype tex call ncm2#register_source({
+        \ 'name': 'vimtex',
+        \ 'priority': 8,
         \ 'scope': ['tex'],
         \ 'matcher': {'name': 'combine',
         \             'matchers': [
@@ -126,11 +95,11 @@ augroup NCM2
         \            },
         \ 'mark': 'tex',
         \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm,
+        \ 'complete_pattern': g:vimtex#re#ncm2,
         \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-    \ })
+        \ })
 augroup END
-set completeopt=noinsert,menuone,noselect
+
 inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<C-y>\<CR>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -142,94 +111,101 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <silent> <expr> <C-s> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
 smap <C-s> <Plug>(ultisnips_expand)
 let g:UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
-" let g:UltiSnipsJumpForwardTrigger	= '<c-j>'
-" let g:UltiSnipsJumpBackwardTrigger	= '<c-k>'
 let g:UltiSnipsRemoveSelectModeMappings = 0
+" let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+" let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 "******************************************************************************
 "                                                       vim-airline/vim-airline
 "******************************************************************************
-let g:airline_detect_iminsert = 1
-let g:airline_detect_spelllang = 0
-let g:airline_powerline_fonts = 1
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-
-if g:colors_name ==# 'solarized'
-    let g:airline_theme = 'solarized_flood'
-    " let g:solarized_flood_dam = 1
-else
-    let g:airline_theme = 'dark'
-endif
-
-let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
-
-" 
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = '|'
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = '|'
-
-if !exists('g:airline_symbols')
-let g:airline_symbols = {}
-endif
-
-"Ξ•☰☰Ξ
-let g:airline_symbols = {
-    \ 'branch': '',
-    \ 'linenr': '',
-    \ 'maxlinenr': '',
-    \ 'notexists': '+',
-    \ 'readonly': '',
-    \ 'spell': 'S',
-    \ 'whitespace': ''
-\ }
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = '' " 
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
-
-let g:airline#extensions#whitespace#long_format = 'L (%s)'
-let g:airline#extensions#whitespace#mixed_indent_format = 'MI (%s)'
-let g:airline#extensions#whitespace#mixed_indent_file_format = 'MIF (%s)'
-let g:airline#extensions#whitespace#trailing_format = 'Ξ (%s)'
-
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#excludes = ['log.txt']
-
-" let g:airline#extensions#ale#enabled = 1
-
-" let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
-
-function AirlineOverrule()
-    let g:airline_section_b = '%{gitbranch#name()}'
-    let g:airline_section_x =
-        \ airline#section#create_right(['windowswap', 'tagbar'])
-    let g:airline_section_z = airline#section#create_right(['%4l/%L:%-2v'])
-    let g:airline_section_warning = airline#section#create(
-        \ ['whitespace', ' %{Neur1n#func#DiagnosticCount()[1]}'])
-    let g:airline_section_error = airline#section#create(
-        \ ['%{Neur1n#func#DiagnosticCount()[0]}'])
-endfunction
-
-augroup airline_overrule
-    " autocmd FileType c,cpp let g:airline#extensions#tagbar#enabled = 0
-    autocmd User AirlineAfterInit call AirlineOverrule()
-augroup END
+" let g:airline_detect_iminsert = 1
+" let g:airline_detect_spelllang = 0
+" let g:airline_powerline_fonts = 1
+" let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+"
+" if g:colors_name ==# 'solarized'
+"     let g:airline_theme = 'solarized_flood'
+"     " let g:solarized_flood_dam = 1
+" else
+"     let g:airline_theme = 'dark'
+" endif
+"
+" let g:airline_mode_map = {
+"     \ '__' : '-',
+"     \ 'n'  : 'N',
+"     \ 'i'  : 'I',
+"     \ 'R'  : 'R',
+"     \ 'c'  : 'C',
+"     \ 'v'  : 'V',
+"     \ 'V'  : 'V',
+"     \ '' : 'V',
+"     \ 's'  : 'S',
+"     \ 'S'  : 'S',
+"     \ '' : 'S',
+"     \ }
+"
+" " 
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = '|'
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = '|'
+"
+" if !exists('g:airline_symbols')
+" let g:airline_symbols = {}
+" endif
+"
+" "Ξ•☰☰Ξ
+" let g:airline_symbols = {
+"     \ 'branch': '',
+"     \ 'linenr': '',
+"     \ 'maxlinenr': '',
+"     \ 'notexists': '+',
+"     \ 'readonly': '',
+"     \ 'spell': 'S',
+"     \ 'whitespace': ''
+" \ }
+"
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ''
+" let g:airline#extensions#tabline#left_alt_sep = '' " 
+" let g:airline#extensions#tabline#right_sep = ''
+" let g:airline#extensions#tabline#right_alt_sep = ''
+"
+" let g:airline#extensions#whitespace#long_format = ' L(%s)'
+" let g:airline#extensions#whitespace#mixed_indent_format = ' MI(%s)'
+" let g:airline#extensions#whitespace#mixed_indent_file_format = ' MIF(%s)'
+" let g:airline#extensions#whitespace#trailing_format = 'Ξ (%s)'
+"
+" let g:airline#extensions#tabline#buffer_nr_show = 1
+" let g:airline#extensions#tabline#excludes = ['log.txt']
+"
+" " let g:airline#extensions#ale#enabled = 1
+" let g:airline#extensions#ale#error_symbol = '✗ '
+" let g:airline#extensions#ale#warning_symbol = '⚡'
+" let g:airline#extensions#ale#open_lnum_symbol = '('
+" let g:airline#extensions#ale#close_lnum_symbol = ')'
+"
+" let g:airline#extensions#tagbar#enabled = 1
+"
+" function AirlineOverrule()
+"     let g:airline_section_b = '%{gitbranch#name()}'
+"     let g:airline_section_x =
+"         \ airline#section#create_right(['windowswap', 'tagbar'])
+"     let g:airline_section_z = airline#section#create_right(['%4l/%L:%-2v'])
+"     let g:airline_section_warning =
+"         \ airline#section#create(['whitespace', 'ale_warning_count'])
+"     let g:airline_section_error = airline#section#create(['ale_error_count'])
+"
+"     " let g:airline_section_warning = airline#section#create(
+"     "     \ ['whitespace', ' %{airline#util#wrap(neur1n#loclist#Count()[1], 0)}'])
+"     " let g:airline_section_error = airline#section#create(
+"     "     \ ['%{airline#util#wrap(neur1n#loclist#Count()[0], 0)}'])
+" endfunction
+"
+" augroup airline_overrule
+"     " autocmd FileType c,cpp let g:airline#extensions#tagbar#enabled = 0
+"     autocmd User AirlineAfterInit call AirlineOverrule()
+" augroup END
 
 "******************************************************************************
 "                                                                      w0rp/ale
@@ -237,9 +213,16 @@ augroup END
 "⚡ 
 " let g:ale_lint_on_insert_leave = 1
 " let g:ale_lint_on_text_changed = 'never'
-" let g:ale_sign_column_always = 1
-" let g:ale_sign_error = ''
-" let g:ale_sign_warning = '⚡'
-" nnoremap <Leader>al :ALEToggle<CR>
-" nmap <silent> <C-p> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-n> <Plug>(ale_next_wrap)
+
+if !exists('g:ale_linters')
+    let g:ale_linters = {}
+endif
+let g:ale_linters.python = ['pyls']
+
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
+nnoremap <Leader>al :ALEToggle<CR>
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
+nnoremap <silent> <leader>gd :ALEGoToDefinitionInTab<CR>
+nnoremap <silent> <leader>gr :ALEFindReference<CR>

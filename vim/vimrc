@@ -13,6 +13,11 @@ let g:python_host_skip_check=1
 let g:loaded_python3_provider=1
 
 "******************************************************************************
+"                                                               Moduled Configs
+"******************************************************************************
+exec 'source $VIMCONFIG/configs/autocmd.vim'
+
+"******************************************************************************
 "                                                                            UI
 "******************************************************************************
 let $LANG = 'en'                                         " set message language
@@ -31,6 +36,7 @@ if has('gui_running')
     set guioptions-=m
     set guioptions-=L
     set guioptions-=r
+    set guioptions-=e
 endif
 
 if has('syntax')
@@ -67,6 +73,7 @@ set hlsearch
 set iminsert=0 imsearch=0                                " make IME more usable
 set foldmethod=indent                      " fold code according to indentation
 set foldlevelstart=99                              " start with no folds closed
+set guicursor+=a:blinkon0
 set guifont=input\ NF:h10
 set incsearch                                              " incremental search
 set laststatus=2                                      " show even only 1 window
@@ -76,6 +83,7 @@ set number                                                   " show line number
 set relativenumber                                       " relative line number
 set sessionoptions-=folds                 " do not create folds when sessioning
 set showcmd                                                 " show pressed keys
+" set showtabline=2
 set signcolumn=yes
 set wildmenu                                 " show possible matches when <Tab>
 set tags+=../tags
@@ -90,7 +98,7 @@ set backupdir=$VIMCONFIG/recovery/backup/
 "                                                               Moduled Configs
 "******************************************************************************
 exec 'source $VIMCONFIG/configs/abbrev.vim'
-exec 'source $VIMCONFIG/configs/autocmd.vim'
+" exec 'source $VIMCONFIG/configs/autocmd.vim'
 exec 'source $VIMCONFIG/configs/colorscheme.vim'
 exec 'source $VIMCONFIG/configs/keymap.vim'
 exec 'source $VIMCONFIG/configs/plugin.vim'

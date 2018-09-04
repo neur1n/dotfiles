@@ -46,23 +46,27 @@ nnoremap <leader>hs :set hlsearch! hlsearch?<CR>
 "                                                        Toggle spellcheck: \sc
 nnoremap <leader>sc :set spell! spelllang=en_us<CR>
 "                                              Toggle relative line number: \rn
-nnoremap <leader>rn :call Neur1n#func#ToggleRelLnr()<CR>
+nnoremap <leader>rn :call neur1n#general#ToggleRelLnr()<CR>
 "                                                         Toggle read only: \ro
-nnoremap <leader>ro :call Neur1n#func#ToggleReadOnly()<CR>
+nnoremap <leader>ro :call neur1n#general#ToggleReadOnly()<CR>
 "                                                    Delete hidden buffers: \db
-nnoremap <leader>db :call Neur1n#func#DelHiddenBuf<CR>
+nnoremap <leader>db :call neur1n#general#DelHiddenBuf()<CR>
 
 " *****************************************************************************
 "                                                                  Run or Build
 " *****************************************************************************
 "                                                                            Go
-nnoremap <leader>go :wa<CR>:call Neur1n#func#RunGo()<CR>
+nnoremap <leader>go :wa<CR>:call neur1n#general#RunGo()<CR>
+"                                                                         Julia
+nnoremap <leader>jl :wa<CR>:call neur1n#general#RunJulia()<CR>
 "                                                                          Keil
-nnoremap <leader>kb :call Neur1n#func#RunKeil('-b ')<CR>
-nnoremap <leader>kr :call Neur1n#func#RunKeil('-cr ')<CR>
-nnoremap <leader>kf :call Neur1n#func#RunKeil('-f ')<CR>
-nnoremap <leader>kd :call Neur1n#func#RunKeil('-d ')<CR>
+nnoremap <leader>kb :call neur1n#general#RunKeil('-b ')<CR>
+nnoremap <leader>kr :call neur1n#general#RunKeil('-cr ')<CR>
+nnoremap <leader>kf :call neur1n#general#RunKeil('-f ')<CR>
+nnoremap <leader>kd :call neur1n#general#RunKeil('-d ')<CR>
 "                                                                      Markdown
-nnoremap <leader>md :call Neur1n#func#ViewMarkdown()<CR>
+nnoremap <leader>md :call neur1n#general#ViewMarkdown()<CR>
 "                                                                        Python
-nnoremap <leader>py :wa<CR>:call Neur1n#func#RunPython()<CR>
+nnoremap <leader>py :wa<CR>:call neur1n#general#RunPython()<CR>
+"                                                                             R
+nnoremap <leader>rs :wa<CR>:call neur1n#general#RunRScript()<CR>
