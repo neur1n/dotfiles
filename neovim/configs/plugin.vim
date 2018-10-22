@@ -13,21 +13,25 @@ Plug 'w0rp/ale'
 Plug 'wesQ3/vim-windowswap'
 " Plug 'will133/vim-dirdiff', {'on': 'DirDiff'}
 " Plug 'nathanaelkane/vim-indent-guides', {'for': ['c', 'cpp', 'python']}
-" ----------------------------------------------------------------------- NCM 2
-" Plug 'roxma/nvim-yarp'
+" ------------------------------------------------------------- Auto-completion
 " Plug 'autozimu/LanguageClient-neovim', {'branch': 'next'}
-Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-Plug 'Shougo/neco-vim'
-Plug 'honza/vim-snippets', {'for': ['go', 'python', 'tex', 'vim']}
-Plug 'SirVer/ultisnips', {'for': ['go', 'python', 'tex', 'vim']}
-" Plug 'ncm2/ncm2'
-" Plug 'ncm2/ncm2-bufword'
+" Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+" Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}
+Plug 'Shougo/neco-vim', {'for': ['vim']}
+
+Plug 'honza/vim-snippets' ", {'for': ['c', 'cpp', 'go', 'python', 'tex', 'vim']}
+Plug 'SirVer/ultisnips' ", {'for': ['c', 'cpp', 'go', 'python', 'tex', 'vim']}
+
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
+Plug 'ncm2/ncm2-bufword'
 " Plug 'ncm2/ncm2-go', {'for': 'go'}
-" Plug 'ncm2/ncm2-jedi', {'for': 'python'}
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-tagprefix'
-" Plug 'ncm2/ncm2-ultisnips', {'for': ['go', 'python', 'tex', 'vim']}
-" Plug 'ncm2/ncm2-vim'
+Plug 'ncm2/ncm2-jedi', {'for': 'python'}
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-pyclang', {'for': ['c', 'cpp']}
+Plug 'ncm2/ncm2-tagprefix'
+Plug 'ncm2/ncm2-ultisnips', {'for': ['c', 'cpp', 'go', 'python', 'tex', 'vim']}
+Plug 'ncm2/ncm2-vim', {'for': 'vim'}
 " ------------------------------------------------------------- Load at the end
 Plug 'itchyny/vim-gitbranch'
 Plug 'morhetz/gruvbox'

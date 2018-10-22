@@ -80,8 +80,20 @@ let g:gruvbox_undercurl=1
 "******************************************************************************
 "                                                                   ncm-2/ncm-2
 "******************************************************************************
-" set completeopt=noinsert,menuone,noselect
-"
+set completeopt=noinsert,menuone,noselect
+let g:ncm2_pyclang#clang_path = '/usr/bin/clang++-6.0'
+let g:ncm2_pyclang#library_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
+
+inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<C-y>\<CR>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+augroup ncm2
+    autocmd InsertEnter * call ncm2#enable_for_buffer()
+    " autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
+augroup END
+
 " augroup ncm_tex
 "     autocmd!
 "     autocmd InsertEnter * call ncm2#enable_for_buffer()
@@ -101,11 +113,6 @@ let g:gruvbox_undercurl=1
 "         \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
 "         \ })
 " augroup END
-
-" inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<C-y>\<CR>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
-" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 "******************************************************************************
 "                                                             neoclide/coc.nvim
@@ -137,23 +144,28 @@ let g:gruvbox_undercurl=1
 
 "******************************************************************************
 "                                                          Shougo/deoplete.nvim
+"                                                          zchee/deoplete-clang
 "******************************************************************************
-let g:deoplete#enable_at_startup=1
-call deoplete#custom#option({
-    \ 'auto_complete_delay': 0,
-    \ 'smart_case': v:true,
-\ })
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" let g:deoplete#enable_at_startup=1
+" call deoplete#custom#option({
+"     \ 'auto_complete_delay': 0,
+"     \ 'smart_case': v:true,
+" \ })
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+
+" let g:deoplete#sources#clang#libclang_path='/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
+" let g:deoplete#sources#clang#clang_header='/usr/lib/llvm-6.0/lib/clang/6.0.1/include/'
 
 "******************************************************************************
 "                                                              SirVer/ultisnips
 "******************************************************************************
-" imap <silent> <expr> <C-s> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
-" smap <C-s> <Plug>(ultisnips_expand)
+imap <silent> <expr> <C-s> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
+smap <C-s> <Plug>(ultisnips_expand)
 let g:UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
-let g:UltiSnipsRemoveSelectModeMappings = 0
+" let g:UltiSnipsExpandTrigger = '<C-s>'
+" let g:UltiSnipsRemoveSelectModeMappings = 0
 " let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 " let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
@@ -173,14 +185,16 @@ if !exists('g:ale_fixers')
 endif
 
 let g:ale_linters = {
-    \ 'python': ['pycodestyle', 'pyflakes', 'pyls'],
+    \ 'c': ['clang'],
+    \ 'cpp': ['clang'],
+    \ 'python': ['pyls'],
 \ }
-" let g:ale_linters = {
-"     \ 'python': ['pyls'],
-" \ }
 let g:ale_fixers = {
     \ 'python': ['yapf', 'autopep8'],
 \ }
+
+let g:ale_c_clang_executable='clang-6.0'
+let g:ale_cpp_clang_executable='clang++-6.0'
 
 let g:ale_sign_error = ''
 let g:ale_sign_warning = ''

@@ -86,7 +86,7 @@ set foldmethod=indent                      " fold code according to indentation
 set foldlevelstart=99                              " start with no folds closed
 set incsearch                                              " incremental search
 set laststatus=2                           " show statusline even only 1 window
-set lines=30 columns=120                                  " initial window size
+" set lines=30 columns=120                                  " initial window size
 set linespace=0                                         " set line spacing to 0
 set noshowmode
 set number                                                   " show line number

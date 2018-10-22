@@ -35,6 +35,32 @@ endfunction
 " *****************************************************************************
 "                                                                  Run or Build
 " *****************************************************************************
+"                                                                      C or C++
+function! neur1n#general#BuildC()
+    if filereadable('MAINFILE')
+        let l:file_id = readfile('MAINFILE')
+        if &ft ==# 'cpp'
+            execute '!g++ '.l:file_id[0].' -o '.l:file_id[1]
+        elseif &ft ==# 'c'
+            execute '!gcc '.l:file_id[0].' -o '.l:file_id[1]
+        endif
+    else
+        if &ft ==# 'cpp'
+            execute '!g++ '.bufname('%').' -o '.expand('%:r').'.out'
+        elseif &ft ==# 'c'
+            execute '!gcc '.bufname('%').' -o '.expand('%:r').'.out'
+        endif
+    endif
+endfunction
+
+function! neur1n#general#RunC()
+    if filereadable('MAINFILE')
+        let l:file_id = readfile('MAINFILE')
+        execute '!./'.l:file_id[1]
+    else
+        execute '!./'.expand('%:r').'.out'
+    endif
+endfunction
 "                                                                            Go
 function! neur1n#general#RunGo()
     if filereadable('MAINFILE')
@@ -69,7 +95,11 @@ function! neur1n#general#RunKeil(options)
 endfunction
 "                                                                      Markdown
 function! neur1n#general#ViewMarkdown()
-    let l:browser = 'E:\ProgramFiles\Opera\launcher.exe'
+    if has('unix')
+        let l:browser = '/usr/bin/vivaldi'
+    elseif has('win32')
+        let l:browser = 'E:/ProgramFiles/Opera/launcher.exe'
+    endif
 
     let l:html = expand('%:r').'.html'
     if filereadable(l:html)

@@ -30,12 +30,19 @@ augroup END
 augroup status_line
     au!
     autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost * call neur1n#statusline#Update()
-    autocmd BufUnload * call neur1n#statusline#UpdateOnce()
-    autocmd CursorMoved,SessionLoadPost * call neur1n#statusline#UpdateColor()
+    autocmd CursorMoved,BufUnload * call neur1n#statusline#UpdateOnce()
+    autocmd SessionLoadPost * call neur1n#statusline#UpdateColor()
 augroup END
+
+function! SelectTemplate()
+    if has('win32')
+        execute ':silent! 0r $VIMCONFIG/templates/win/skeleton.'.expand("<afile>:e")
+    elseif has('unix')
+        execute ':silent! 0r $VIMCONFIG/templates/unix/skeleton.'.expand("<afile>:e")
+    endif
+endfunction
 
 augroup templates
     au!
-    autocmd BufNewFile *.* silent!
-        \ execute '0r $VIMCONFIG/templates/skeleton.'.expand("<afile>:e")
+    autocmd BufNewFile *.* call SelectTemplate()
 augroup END
