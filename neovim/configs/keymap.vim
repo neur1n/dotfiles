@@ -24,10 +24,10 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 "                                                Move over panes in normal mode
-nnoremap <Left> <C-W>h
-nnoremap <Right> <C-W>l
-nnoremap <Down> <C-W>j
-nnoremap <Up> <C-W>k
+nnoremap <Left> <C-w>h
+nnoremap <Right> <C-w>l
+nnoremap <Down> <C-w>j
+nnoremap <Up> <C-w>k
 "                                                    Move cursor in insert mode
 inoremap <A-h> <Left>
 inoremap <A-l> <Right>

@@ -7,10 +7,10 @@ augroup comment_format
 augroup END
 
 augroup file_types
+    au!
     au BufRead,BufNewFile *.jl setf julia
-    au BufRead,BufNewFile *.nim setf nim
     au BufRead,BufNewFile *.note setf note
-    au BufRead,BufNewFile *.tut setf tut
+    au BufRead,BufNewFile *.sdf,*.world setf xml
     au BufRead,BufNewFile *.oct setf octave
 augroup END
 

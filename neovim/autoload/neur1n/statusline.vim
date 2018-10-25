@@ -97,7 +97,7 @@ function! s:GitBranch()
 endfunction
 
 function! s:Name()
-    return '%#Name_#'.s:spc.'%n:%f'
+    return '%#Name_#'.s:spc.'%n:%{expand("%:p:h:t")}/%t'
 endfunction
 
 function! s:Modification()
@@ -123,10 +123,10 @@ function! s:Info()
     " if &fileformat ==# 'unix'
     "     let l:fileformat = ''
     " else
-    let l:fileformat = '[%{&fileformat}]'
+    let l:fileformat = '%{&fileformat}'
     " endif
 
-    return '%#Info_#'.l:encoding.l:fileformat
+    return '%#Info_#%Y'.'['.l:encoding.':'.l:fileformat.']'
 endfunction
 
 function! s:Ruler()

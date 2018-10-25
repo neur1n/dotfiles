@@ -91,7 +91,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 augroup ncm2
     autocmd InsertEnter * call ncm2#enable_for_buffer()
-    " autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
+    autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
 augroup END
 
 " augroup ncm_tex
