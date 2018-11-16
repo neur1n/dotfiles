@@ -21,8 +21,21 @@ elseif g:colors_name ==# 'gruvbox'
     hi! CursorLine guibg=#32302f ctermbg=236
     hi! CursorLineNr guibg=#282828 ctermbg=235
 
-    " hi Search ctermfg=136 ctermbg=NONE cterm=bold,underline
-    "     \ guifg=#b58900 guibg=NONE gui=bold,underline
+    hi Search ctermfg=208 ctermbg=NONE cterm=bold,italic,underline
+        \ guifg=#fe8019 guibg=NONE gui=bold,underline
+
+    if get(g:, 'loaded_ale', 0)
+        if get(g:, 'gruvbox_contrast_dark', 'medium') ==# 'soft'
+            hi ALEErrorSign ctermfg=167 ctermbg=236 guifg=#fb4934 guibg=#32302f
+            hi ALEWarningSign ctermfg=214 ctermbg=236 guifg=#fabd2f guibg=#32302f
+        elseif get(g:, 'gruvbox_contrast_dark', 'medium') ==# 'medium'
+            hi ALEErrorSign ctermfg=167 ctermbg=235 guifg=#fb4934 guibg=#282828
+            hi ALEWarningSign ctermfg=214 ctermbg=235 guifg=#fabd2f guibg=#282828
+        elseif get(g:, 'gruvbox_contrast_dark', 'medium') ==# 'hard'
+            hi ALEErrorSign ctermfg=167 ctermbg=234 guifg=#fb4934 guibg=#1d2021
+            hi ALEWarningSign ctermfg=214 ctermbg=234 guifg=#fabd2f guibg=#1d2021
+        endif
+    endif
 
     " hi StatusLine guifg=#002b36 guibg=#2aa198 ctermfg=234 ctermbg=36
     " hi StatusLineNC guifg=#1d2021 guibg=NONE ctermfg=234 ctermbg=NONE

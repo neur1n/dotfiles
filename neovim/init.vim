@@ -57,7 +57,7 @@ endif
 "******************************************************************************
 "                                                               Moduled Configs
 "******************************************************************************
-exec 'source $VIMCONFIG/configs/colorscheme.vim'
+" exec 'source $VIMCONFIG/configs/colorscheme.vim'
 exec 'source $VIMCONFIG/configs/palette.vim'
 exec 'source $VIMCONFIG/configs/autocmd.vim'
 
@@ -95,6 +95,7 @@ set sessionoptions-=folds                 " do not create folds when sessioning
 set showcmd                                                 " show pressed keys
 set signcolumn=yes
 set wildmenu                                 " show possible matches when <Tab>
+set wildignorecase
 set tags+=../tags
 
 set splitright                                            " split on right side

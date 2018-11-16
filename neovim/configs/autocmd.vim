@@ -8,10 +8,11 @@ augroup END
 
 augroup file_types
     au!
-    au BufRead,BufNewFile *.jl setf julia
-    au BufRead,BufNewFile *.note setf note
-    au BufRead,BufNewFile *.sdf,*.world setf xml
-    au BufRead,BufNewFile *.oct setf octave
+    au BufNewFile,BufRead *.jl setf julia
+    au BufNewFile,BufRead *.material,*.partical,*.program setf ogrematerial
+    au BufNewFile,BufRead *.note setf note
+    au BufNewFile,BufRead *.launch,*.sdf,*.world setf xml
+    au BufNewFile,BufRead *.oct setf octave
 augroup END
 
 augroup cd_pwd
@@ -45,4 +46,9 @@ endfunction
 augroup templates
     au!
     autocmd BufNewFile *.* call SelectTemplate()
+augroup END
+
+augroup post
+    au!
+    autocmd VimEnter * execute 'source $VIMCONFIG/configs/colorscheme.vim'
 augroup END
