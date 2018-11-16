@@ -1,5 +1,5 @@
 scriptencoding utf-8
-" ✗
+" ✗
 
 function! neur1n#loclist#Count() abort
     let l:bufnr = bufnr('%')
@@ -28,7 +28,7 @@ function! neur1n#loclist#Count() abort
         endif
     endfor
 
-    let l:e_cnt = l:e_cnt == 0 ? '' : ''.l:e_cnt.'('.l:first_e.')'
+    let l:e_cnt = l:e_cnt == 0 ? '' : '✘'.l:e_cnt.'('.l:first_e.')'
     let l:w_cnt = l:w_cnt == 0 ? '' : ''.l:w_cnt.'('.l:first_w.')'
     return [l:e_cnt, l:w_cnt]
 endfunction

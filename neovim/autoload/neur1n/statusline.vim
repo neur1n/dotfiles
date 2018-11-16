@@ -60,7 +60,7 @@ endfunction
 
 function! s:Right(status)
     if a:status ==# 'active'
-        return s:Tag().s:Info().s:Ruler().s:Warning().s:spc.s:Error()
+        return s:Tag().'%<'.s:Info().s:Ruler().s:Warning().s:spc.s:Error()
     elseif a:status ==# 'inactive'
         return s:Ruler()
     endif
@@ -107,7 +107,7 @@ function! s:Modification()
 endfunction
 
 function! s:Tag()
-    return '%#Tag_#'.'%{tagbar#currenttag("%s", "")}'.s:spc
+    return '%#Tag_#'.'%{tagbar#currenttag("%s", "", "%f")}'.s:spc
 endfunction
 
 function! s:Info()
