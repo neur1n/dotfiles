@@ -80,19 +80,23 @@ let g:gruvbox_undercurl=1
 "******************************************************************************
 "                                                                   ncm-2/ncm-2
 "******************************************************************************
-set completeopt=noinsert,menuone,noselect
-let g:ncm2_pyclang#clang_path = '/usr/bin/clang++-6.0'
-let g:ncm2_pyclang#library_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
-
-inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<C-y>\<CR>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-augroup ncm2
-    autocmd InsertEnter * call ncm2#enable_for_buffer()
-    autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
-augroup END
+" set completeopt=noinsert,menuone,noselect
+" let g:ncm2_pyclang#clang_path = '/usr/bin/clang++-6.0'
+" let g:ncm2_pyclang#library_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
+" let g:ncm2_pyclang#database_path = [
+"             \ 'compile_commands.json',
+"             \ 'build/compile_commands.json',
+"             \ ]
+" 
+" inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<C-y>\<CR>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" 
+" augroup ncm2
+"     autocmd InsertEnter * call ncm2#enable_for_buffer()
+"     autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
+" augroup END
 
 " augroup ncm_tex
 "     autocmd!
@@ -117,30 +121,32 @@ augroup END
 "******************************************************************************
 "                                                             neoclide/coc.nvim
 "******************************************************************************
-" function! s:check_back_space() abort
-"   let a:col = col('.') - 1
-"   return !a:col || getline('.')[a:col - 1]  =~# '\s'
-" endfunction
+set completeopt=menuone,noinsert,noselect
+function! s:check_back_space() abort
+  let a:col = col('.') - 1
+  return !a:col || getline('.')[a:col - 1]  =~# '\s'
+endfunction
 
-" inoremap <silent><expr> <TAB>
-"     \ pumvisible() ? "\<C-n>" :
-"     \ <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" " inoremap <expr> <CR> pumvisible() ? "\<C-y>\<cr>" : "\<CR>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
-" nmap <leader>gd <Plug>(coc-definition)
-" nmap <leader>gr <Plug>(coc-reference)
-" nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-reference)
+nmap <leader>rn <Plug>(coc-rename)
 " nmap <C-p> <Plug>(coc-diagnostic-prev)
 " nmap <C-n> <Plug>(coc-diagnostic-next)
 
-" highlight link CocErrorSign error
-" highlight link CocWarningSign todo
-" highlight link CocInfoSign todo
-" highlight link CocHintSign todo
+" highlight link CocErrorSign Error_
+" highlight link CocWarningSign Warning_
+" highlight link CocInfoSign Warning_
+" highlight link CocHintSign Warning_
 
 "******************************************************************************
 "                                                          Shougo/deoplete.nvim
@@ -161,13 +167,13 @@ augroup END
 "******************************************************************************
 "                                                              SirVer/ultisnips
 "******************************************************************************
-imap <silent> <expr> <C-s> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
-smap <C-s> <Plug>(ultisnips_expand)
-let g:UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
-" let g:UltiSnipsExpandTrigger = '<C-s>'
+" imap <silent> <expr> <C-s> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
+" smap <C-s> <Plug>(ultisnips_expand)
+" let g:UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
+let g:UltiSnipsExpandTrigger = '<C-s>'
 " let g:UltiSnipsRemoveSelectModeMappings = 0
-" let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-" let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsJumpForwardTrigger = '<C-f>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
 
 "******************************************************************************
 "                                                                      w0rp/ale
@@ -185,19 +191,25 @@ if !exists('g:ale_fixers')
 endif
 
 let g:ale_linters = {
-    \ 'c': ['clang'],
-    \ 'cpp': ['clang'],
+    \ 'c': ['clang', 'clangd'],
+    \ 'cpp': ['cpplint', 'clang', 'clangd'],
     \ 'python': ['pyls'],
 \ }
 let g:ale_fixers = {
+    \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \ 'c': ['cpplint'],
+    \ 'cpp': ['cpplint'],
     \ 'python': ['yapf', 'autopep8'],
 \ }
 
-let g:ale_c_clang_executable='clang-6.0'
-let g:ale_cpp_clang_executable='clang++-6.0'
+let g:ale_c_clang_executable='clang-7'
+let g:ale_c_clangd_executable='clangd-7'
+let g:ale_cpp_clang_executable='clang-7'
+let g:ale_cpp_clangd_executable='clangd-7'
 
-let g:ale_sign_error = ''
+let g:ale_sign_error = '✘'
 let g:ale_sign_warning = ''
+let g:ale_echo_msg_format = '[%linter%] %s'
 nnoremap <Leader>al :ALEToggle<CR>
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 nmap <silent> <C-n> <Plug>(ale_next_wrap)

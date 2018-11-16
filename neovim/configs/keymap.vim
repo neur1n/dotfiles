@@ -24,10 +24,10 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 "                                                Move over panes in normal mode
-nnoremap <Left> <C-w>h
-nnoremap <Right> <C-w>l
-nnoremap <Down> <C-w>j
-nnoremap <Up> <C-w>k
+nnoremap <A-Left> <C-w>h
+nnoremap <A-Right> <C-w>l
+nnoremap <A-Down> <C-w>j
+nnoremap <A-Up> <C-w>k
 "                                                    Move cursor in insert mode
 inoremap <A-h> <Left>
 inoremap <A-l> <Right>
@@ -37,7 +37,7 @@ inoremap <A-k> <Up>
 " *****************************************************************************
 "                                                                       Editing
 " *****************************************************************************
-"      Insert a new line without entering insert mode (shift-enter, enter)
+"           Insert a new line without entering insert mode (shift-enter, enter)
 nnoremap <CR> o<Esc>
 nnoremap <S-CR> O<Esc>
 "                                         Toggle current line highlighting: \cl
