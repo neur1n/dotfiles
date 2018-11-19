@@ -1,0 +1,9 @@
+# vim: ft=sh
+
+export ROS_WS=/home/yy/Documents/ws/ros_ws
+
+alias cdros="cd $ROS_WS"
+
+source /opt/ros/kinetic/setup.bash
+source /home/yy/Documents/ws/ros_ws/devel/setup.bash
+export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:${ROS_WS}
