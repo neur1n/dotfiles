@@ -1,6 +1,6 @@
 # vim: ft=sh
 
-#------------------------------------------------------------------- Git Prompt
+#=================================================================== Git Prompt
 # Show mode
 function show_mode()
 {
@@ -26,7 +26,7 @@ function parse_git_branch()
 }
 
 # Get current status of git repo
-function parse_git_dirty
+function parse_git_dirty()
 {
 	status=`git status 2>&1 | tee`
 	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
@@ -60,3 +60,20 @@ function parse_git_dirty
 		echo ""
 	fi
 }
+
+#================================================================= Toggle Proxy
+function toggle_proxy()
+{
+    state=$(gsettings get org.gnome.system.proxy mode)
+
+    if [ $state == "'none'" ]; then
+        gsettings set org.gnome.system.proxy mode 'auto'
+        gsettings set org.gnome.system.proxy autoconfig-url 'file:///home/yy/Downloads/autoproxy.pac'
+        echo 'Automatic mode on.'
+    elif [ $state == "'auto'" ]; then
+        gsettings set org.gnome.system.proxy mode 'none'
+        echo 'Automatic mode off.'
+    fi
+}
+
+export -f toggle_proxy
