@@ -49,7 +49,7 @@ function! s:GetNearest(direction, wrap) abort
 
     if !empty(l:buflist)
         let l:nearest = s:MarginCheck(l:buflist, l:cur_lnum,
-                                                 \ a:direction, a:wrap)
+                                    \ a:direction, a:wrap)
         if !empty(l:nearest)
             return l:nearest
         endif

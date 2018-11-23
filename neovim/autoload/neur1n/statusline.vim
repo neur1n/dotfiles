@@ -60,9 +60,10 @@ endfunction
 
 function! s:Right(status)
     if a:status ==# 'active'
-        return s:Tag().'%<'.s:Info().s:Ruler().s:Warning().s:spc.s:Error()
+        return s:Tag().s:Swap().'%<'.s:Info().s:Ruler()
+                    \.s:Whitespace().s:Warning().s:Error()
     elseif a:status ==# 'inactive'
-        return s:Ruler()
+        return s:Swap().s:Ruler()
     endif
 endfunction
 
@@ -110,6 +111,11 @@ function! s:Tag()
     return '%#Tag_#'.'%{tagbar#currenttag("%s", "", "%f")}'.s:spc
 endfunction
 
+function! s:Swap()
+    " Indicator for WindowSwap plugin.
+    return '%#Swap_#'.'%{WindowSwap#IsCurrentWindowMarked() ? "WS" : ""}'
+endfunction
+
 function! s:Info()
     " let l:value = '0x%B'
     " let l:type = '%Y'
@@ -133,18 +139,22 @@ function! s:Ruler()
     return '%#Ruler_#'.'%4l/%L:%-3v'
 endfunction
 
+function! s:Whitespace()
+    return '%#Whitespace_#'.'%{neur1n#whitespace#NextTrailing().info}'
+endfunction
+
 function! s:Warning()
-    return '%#Warning_#'.'%{neur1n#loclist#Count()[1]}'
+    return '%#Warning_#'.'%{neur1n#lintinfo#WarnCount()}'
 endfunction
 
 function! s:Error()
-    return '%#Error_#'.'%{neur1n#loclist#Count()[0]}'
+    return '%#Error_#'.'%{neur1n#lintinfo#ErrorCount()}'
 endfunction
 
 "******************************************************************************
 "                                                                  Highlighting
 "******************************************************************************
-" exec 'source $VIMCONFIG/configs/palette.vim'
+exec 'source $VIMCONFIG/autoload/neur1n/palette.vim'
 if g:colors_name ==# 'gruvbox'
     let s:scheme = 'g:gruvbox'
 elseif g:colors_name ==# 'solarized'
@@ -177,80 +187,84 @@ function! neur1n#statusline#UpdateColor(...)
 endfunction
 
 function! s:StaticColor()
-    exec printf("call s:Highlight('VCS_', %s.vcs[0], %s.bg[0], %s.vcs[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('VCS_', %s.fg0[0], %s.bg0_h[0], %s.fg0[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Tag_', %s.tag[0], %s.bg[0], %s.tag[1], %s.bg[1], 'italic')",
+    exec printf("call s:Highlight('Tag_', %s.fg1[0], %s.bg0_h[0], %s.fg1[1], %s.bg0_h[1], 'italic')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Info_', %s.info[0], %s.bg[0], %s.info[1], %s.bg[1], 'NONE')",
+    exec printf("call s:Highlight('Swap_', %s.aqua[0], %s.bg0_h[0], %s.aqua[1], %s.bg0_h[1], 'bold')",
+                \ s:scheme, s:scheme, s:scheme, s:scheme)
+    exec printf("call s:Highlight('Info_', %s.gray[0], %s.bg0_h[0], %s.gray[1], %s.bg0_h[1], 'NONE')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
 
-    exec printf("call s:Highlight('Warning_', %s.warning[0], %s.bg[0], %s.warning[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Whitespace_', %s.yellow[0], %s.bg0_h[0], %s.yellow[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Error_', %s.error[0], %s.bg[0], %s.error[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Warning_', %s.orange[0], %s.bg0_h[0], %s.orange[1], %s.bg0_h[1], 'bold')",
+                \ s:scheme, s:scheme, s:scheme, s:scheme)
+    exec printf("call s:Highlight('Error_', %s.red[0], %s.bg0_h[0], %s.red[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
 endfunction
 
 function! s:NormalColor()
-    exec printf("call s:Highlight('Mode_', %s.bg[0], %s.nor[0], %s.bg[1], %s.nor[1], 'bold')",
+    exec printf("call s:Highlight('Mode_', %s.bg0_h[0], %s.green[0], %s.bg0_h[1], %s.green[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Name_', %s.nornam[0], %s.bg[0], %s.nornam[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Name_', %s.aqua[0], %s.bg0_h[0], %s.aqua[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Modification_', %s.modact[0], %s.bg[0], %s.modact[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Modification_', %s.red[0], %s.bg0_h[0], %s.red[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Ruler_', %s.nor[0], %s.bg[0], %s.nor[1], %s.bg[1], 'NONE')",
+    exec printf("call s:Highlight('Ruler_', %s.green[0], %s.bg0_h[0], %s.green[1], %s.bg0_h[1], 'NONE')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
 endfunction
 
 function! s:InsertColor()
-    exec printf("call s:Highlight('Mode_', %s.bg[0], %s.ins[0], %s.bg[1], %s.ins[1], 'bold')",
+    exec printf("call s:Highlight('Mode_', %s.bg0_h[0], %s.aqua[0], %s.bg0_h[1], %s.aqua[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Name_', %s.insnam[0], %s.bg[0], %s.insnam[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Name_', %s.blue[0], %s.bg0_h[0], %s.blue[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Modification_', %s.modact[0], %s.bg[0], %s.modact[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Modification_', %s.red[0], %s.bg0_h[0], %s.red[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Ruler_', %s.ins[0], %s.bg[0], %s.ins[1], %s.bg[1], 'NONE')",
+    exec printf("call s:Highlight('Ruler_', %s.blue[0], %s.bg0_h[0], %s.blue[1], %s.bg0_h[1], 'NONE')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
 endfunction
 
 function! s:VisualColor()
-    exec printf("call s:Highlight('Mode_', %s.bg[0], %s.vis[0], %s.bg[1], %s.vis[1], 'bold')",
+    exec printf("call s:Highlight('Mode_', %s.bg0_h[0], %s.yellow[0], %s.bg0_h[1], %s.yellow[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Name_', %s.visnam[0], %s.bg[0], %s.visnam[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Name_', %s.orange[0], %s.bg0_h[0], %s.orange[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Modification_', %s.modact[0], %s.bg[0], %s.modact[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Modification_', %s.red[0], %s.bg0_h[0], %s.red[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Ruler_', %s.vis[0], %s.bg[0], %s.vis[1], %s.bg[1], 'NONE')",
+    exec printf("call s:Highlight('Ruler_', %s.yellow[0], %s.bg0_h[0], %s.yellow[1], %s.bg0_h[1], 'NONE')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
 endfunction
 
 function! s:ReplaceColor()
-    exec printf("call s:Highlight('Mode_', %s.bg[0], %s.rep[0], %s.bg[1], %s.rep[1], 'bold')",
+    exec printf("call s:Highlight('Mode_', %s.bg0_h[0], %s.purple[0], %s.bg0_h[1], %s.purple[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Name_', %s.repnam[0], %s.bg[0], %s.repnam[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Name_', %s.blue[0], %s.bg0_h[0], %s.blue[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Modification_', %s.modact[0], %s.bg[0], %s.modact[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Modification_', %s.red[0], %s.bg0_h[0], %s.red[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Ruler_', %s.rep[0], %s.bg[0], %s.rep[1], %s.bg[1], 'NONE')",
+    exec printf("call s:Highlight('Ruler_', %s.purple[0], %s.bg0_h[0], %s.purple[1], %s.bg0_h[1], 'NONE')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
 endfunction
 
 function! s:CmdlineColor()
-    exec printf("call s:Highlight('Mode_', %s.bg[0], %s.cmd[0], %s.bg[1], %s.cmd[1], 'bold')",
+    exec printf("call s:Highlight('Mode_', %s.bg0_h[0], %s.red[0], %s.bg0_h[1], %s.red[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Name_', %s.cmdnam[0], %s.bg[0], %s.cmdnam[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Name_', %s.aqua[0], %s.bg0_h[0], %s.aqua[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Modification_', %s.modact[0], %s.bg[0], %s.modact[1], %s.bg[1], 'bold')",
+    exec printf("call s:Highlight('Modification_', %s.red[0], %s.bg0_h[0], %s.red[1], %s.bg0_h[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Ruler_', %s.cmd[0], %s.bg[0], %s.cmd[1], %s.bg[1], 'NONE')",
+    exec printf("call s:Highlight('Ruler_', %s.red[0], %s.bg0_h[0], %s.red[1], %s.bg0_h[1], 'NONE')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
 endfunction
 
 function! s:InactiveColor()
-    exec printf("call s:Highlight('Name_', %s.bg[0], %s.bgi[0], %s.bg[1], %s.bgi[1], 'bold')",
+    exec printf("call s:Highlight('Name_', %s.fg1[0], %s.bg0_s[0], %s.fg1[1], %s.bg0_s[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Modification_', %s.modina[0], %s.bgi[0], %s.modina[1], %s.bgi[1], 'bold')",
+    exec printf("call s:Highlight('Modification_', %s.purple[0], %s.bg0_s[0], %s.purple[1], %s.bg0_s[1], 'bold')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
-    exec printf("call s:Highlight('Ruler_', %s.bgi[0], %s.bg[0], %s.bgi[1], %s.bg[1], 'NONE')",
+    exec printf("call s:Highlight('Ruler_', %s.fg1[0], %s.bg0_s[0], %s.fg1[1], %s.bg0_s[1], 'NONE')",
                 \ s:scheme, s:scheme, s:scheme, s:scheme)
 endfunction
 

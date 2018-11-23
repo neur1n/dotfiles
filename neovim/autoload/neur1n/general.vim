@@ -1,15 +1,22 @@
 " *****************************************************************************
 "                                                                       Editing
 " *****************************************************************************
-"                                              Toggle relative line number: \rn
-function! neur1n#general#ToggleRelLnr()
-    if(&relativenumber == 1)
-        set norelativenumber
-    else
-        set relativenumber
+"                                             Delete hidden buffers: <leader>db
+function neur1n#general#DelHiddenBuf()
+    let l:tpbl=[]
+    call map(range(1, tabpagenr('$')), 'extend(l:tpbl, tabpagebuflist(v:val))')
+    for l:buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(l:tpbl, v:val)==-1')
+        silent execute 'bdelet' l:buf
+    endfor
+endfunction
+"                                              Jump to a position: <C-n>, <C-p>
+function! neur1n#general#Jump(pos) abort
+    if !empty(a:pos)
+        normal! m`
+        call cursor(l:pos)
     endif
 endfunction
-"                                                         Toggle read only: \ro
+"                                                  Toggle read only: <leader>ro
 function neur1n#general#ToggleReadOnly()
     if &readonly == 1
         setl noreadonly
@@ -23,13 +30,13 @@ function neur1n#general#ToggleReadOnly()
         endif
     endif
 endfunction
-"                                                    Delete hidden buffers: \db
-function neur1n#general#DelHiddenBuf()
-    let l:tpbl=[]
-    call map(range(1, tabpagenr('$')), 'extend(l:tpbl, tabpagebuflist(v:val))')
-    for l:buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(l:tpbl, v:val)==-1')
-        silent execute 'bdelet' l:buf
-    endfor
+"                                       Toggle relative line number: <leader>rn
+function! neur1n#general#ToggleRelLnr()
+    if(&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
 endfunction
 
 " *****************************************************************************
