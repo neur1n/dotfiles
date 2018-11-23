@@ -58,7 +58,6 @@ endif
 "                                                               Moduled Configs
 "******************************************************************************
 " exec 'source $VIMCONFIG/configs/colorscheme.vim'
-exec 'source $VIMCONFIG/configs/palette.vim'
 exec 'source $VIMCONFIG/configs/autocmd.vim'
 
 "=================================================================== <Encoding>

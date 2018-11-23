@@ -1,48 +1,18 @@
 scriptencoding utf-8
-"******************************************************************************
-"                                                   iamcco/markdown-preview.vim
-"******************************************************************************
-let g:mkdp_refresh_slow = 1
-nmap <silent> <leader>mp <Plug>MarkdownPreview
-nmap <silent> <leader>ms <Plug>StopMarkdownPreview
 
-"******************************************************************************
-"                                                                 lervag/vimtex
-"******************************************************************************
-" let g:vimtex_compiler_progname = 'nvr'
-let g:vimtex_view_general_viewer = 'E:\ProgramFiles\SumatraPDF\SumatraPDF.exe'
-let g:vimtex_view_general_options
-    \ = '-reuse-instance -forward-search @tex @line @pdf'
-let g:vimtex_view_general_options_latexmk = '-reuse-instance'
-let g:vimtex_latexmk_options =
-    \ 'xelatex -verbose -file-line-error '.
-    \ '-synctex=1 -shell-escape -interaction=nonstopmode $*'
-
-if !exists('g:vimtex_compiler_latexmk')
-    let g:vimtex_compiler_latexmk = {}
-endif
-
-let g:vimtex_compiler_latexmk = {
-    \ 'build_dir': './build/',
-    \ 'callback': 1,
-    \ 'continuous': 0,
-\ }
-
-"******************************************************************************
-"                                                           luochen1990/rainbow
-"******************************************************************************
+"********************************************************* {luochen1990/rainbow
 nnoremap <leader>rp :RainbowToggle<CR>
 let g:rainbow_active = 1
+" }
 
-"******************************************************************************
-"                                                             majutsushi/tagbar
-"******************************************************************************
+"*********************************************************** {majutsushi/tagbar
 nnoremap <leader>tb :TagbarOpenAutoClose<CR>
 let g:tagbar_iconchars = ['►', '▼'] " 
 let g:tagbar_show_linenumbers = -1
 let g:tagbar_silent = 1
 let g:tagbar_sort = 0
 "let g:tagbar_autoclose = 1
+" }
 
 "******************************************************************************
 "                                                            mhinz/vim-startify
@@ -72,51 +42,10 @@ let g:startify_custom_header = map(b:greeting + b:animal, "\"   \".v:val")
 "******************************************************************************
 " let g:gruvbox_improved_strings=1
 " let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_improved_warnings=1
+" let g:gruvbox_improved_warnings=1
 let g:gruvbox_italic=1
 let g:gruvbox_underline=1
 let g:gruvbox_undercurl=1
-
-"******************************************************************************
-"                                                                   ncm-2/ncm-2
-"******************************************************************************
-" set completeopt=noinsert,menuone,noselect
-" let g:ncm2_pyclang#clang_path = '/usr/bin/clang++-6.0'
-" let g:ncm2_pyclang#library_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
-" let g:ncm2_pyclang#database_path = [
-"             \ 'compile_commands.json',
-"             \ 'build/compile_commands.json',
-"             \ ]
-" 
-" inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<C-y>\<CR>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
-" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" 
-" augroup ncm2
-"     autocmd InsertEnter * call ncm2#enable_for_buffer()
-"     autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
-" augroup END
-
-" augroup ncm_tex
-"     autocmd!
-"     autocmd InsertEnter * call ncm2#enable_for_buffer()
-"     autocmd Filetype tex call ncm2#register_source({
-"         \ 'name': 'vimtex',
-"         \ 'priority': 8,
-"         \ 'scope': ['tex'],
-"         \ 'matcher': {'name': 'combine',
-"         \             'matchers': [
-"         \                  {'name': 'abbrfuzzy', 'key': 'menu'},
-"         \                  {'name': 'prefix', 'key': 'word'},
-"         \             ]
-"         \            },
-"         \ 'mark': 'tex',
-"         \ 'word_pattern': '\w+',
-"         \ 'complete_pattern': g:vimtex#re#ncm2,
-"         \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-"         \ })
-" augroup END
 
 "******************************************************************************
 "                                                             neoclide/coc.nvim
@@ -129,12 +58,12 @@ endfunction
 
 inoremap <silent><expr> <TAB>
     \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    \ <SID>check_back_space() ? "\<Tab>" : coc#refresh()
+inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
 nmap <leader>gd <Plug>(coc-definition)
@@ -148,32 +77,24 @@ nmap <leader>rn <Plug>(coc-rename)
 " highlight link CocInfoSign Warning_
 " highlight link CocHintSign Warning_
 
-"******************************************************************************
-"                                                          Shougo/deoplete.nvim
-"                                                          zchee/deoplete-clang
-"******************************************************************************
-" let g:deoplete#enable_at_startup=1
-" call deoplete#custom#option({
-"     \ 'auto_complete_delay': 0,
-"     \ 'smart_case': v:true,
-" \ })
-" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-
-" let g:deoplete#sources#clang#libclang_path='/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
-" let g:deoplete#sources#clang#clang_header='/usr/lib/llvm-6.0/lib/clang/6.0.1/include/'
 
 "******************************************************************************
 "                                                              SirVer/ultisnips
 "******************************************************************************
-" imap <silent> <expr> <C-s> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
-" smap <C-s> <Plug>(ultisnips_expand)
-" let g:UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
 let g:UltiSnipsExpandTrigger = '<C-s>'
 " let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsJumpForwardTrigger = '<C-f>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
+
+"******************************************************************************
+"                                                               nermake/nermake
+"******************************************************************************
+" call neomake#configure#automake({
+" \   'TextChanged': {},
+" \   'InsertLeave': {},
+" \   'BufWritePost': {'delay': 0},
+" \   'BufWinEnter': {},
+" \ }, 500)
 
 "******************************************************************************
 "                                                                      w0rp/ale

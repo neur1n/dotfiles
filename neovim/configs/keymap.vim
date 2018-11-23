@@ -1,4 +1,3 @@
-
 "                                               Replace <leader> key to <space>
 let mapleader = ' '
 let maplocalleader = ' '
@@ -40,18 +39,18 @@ inoremap <A-k> <Up>
 "           Insert a new line without entering insert mode (shift-enter, enter)
 nnoremap <CR> o<Esc>
 nnoremap <S-CR> O<Esc>
-"                                         Toggle current line highlighting: \cl
+"                                              Toggle current line highlighting
 nnoremap <leader>cl :set cursorline! nocursorline?<CR>
-"                                               Toggle search highlighting: \hs
+"                                                    Toggle search highlighting
 nnoremap <leader>hs :set hlsearch! hlsearch?<CR>
-"                                                        Toggle spellcheck: \sc
+"                                                             Toggle spellcheck
 nnoremap <leader>sc :set spell! spelllang=en_us<CR>
-"                                              Toggle relative line number: \rn
-nnoremap <leader>rn :call neur1n#general#ToggleRelLnr()<CR>
-"                                                         Toggle read only: \ro
-nnoremap <leader>ro :call neur1n#general#ToggleReadOnly()<CR>
-"                                                    Delete hidden buffers: \db
+"                                                         Delete hidden buffers
 nnoremap <leader>db :call neur1n#general#DelHiddenBuf()<CR>
+"                                                              Toggle read only
+nnoremap <leader>ro :call neur1n#general#ToggleReadOnly()<CR>
+"                                                   Toggle relative line number
+nnoremap <leader>rn :call neur1n#general#ToggleRelLnr()<CR>
 
 " *****************************************************************************
 "                                                                  Run or Build
