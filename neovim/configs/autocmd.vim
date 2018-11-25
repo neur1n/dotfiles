@@ -28,13 +28,6 @@ augroup scroll_off
         \ let &scrolloff=winheight(win_getid())/3
 augroup END
 
-augroup status_line
-    au!
-    autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost * call neur1n#statusline#Update()
-    autocmd CursorMoved,BufUnload * call neur1n#statusline#UpdateOnce()
-    autocmd SessionLoadPost * call neur1n#statusline#UpdateColor()
-augroup END
-
 function! SelectTemplate()
     if has('win32')
         execute ':silent! 0r $VIMCONFIG/templates/win/skeleton.'.expand("<afile>:e")
