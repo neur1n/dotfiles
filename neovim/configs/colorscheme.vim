@@ -27,13 +27,13 @@ elseif g:colors_name ==# 'gruvbox'
     if get(g:, 'loaded_ale', 0)
         if get(g:, 'gruvbox_contrast_dark', 'medium') ==# 'soft'
             hi ALEErrorSign ctermfg=167 ctermbg=236 guifg=#fb4934 guibg=#32302f
-            hi ALEWarningSign ctermfg=214 ctermbg=236 guifg=#fabd2f guibg=#32302f
+            hi ALEWarningSign ctermfg=208 ctermbg=236 guifg=#fe8019 guibg=#32302f
         elseif get(g:, 'gruvbox_contrast_dark', 'medium') ==# 'medium'
             hi ALEErrorSign ctermfg=167 ctermbg=235 guifg=#fb4934 guibg=#282828
-            hi ALEWarningSign ctermfg=214 ctermbg=235 guifg=#fabd2f guibg=#282828
+            hi ALEWarningSign ctermfg=208 ctermbg=235 guifg=#fe8019 guibg=#282828
         elseif get(g:, 'gruvbox_contrast_dark', 'medium') ==# 'hard'
             hi ALEErrorSign ctermfg=167 ctermbg=234 guifg=#fb4934 guibg=#1d2021
-            hi ALEWarningSign ctermfg=214 ctermbg=234 guifg=#fabd2f guibg=#1d2021
+            hi ALEWarningSign ctermfg=208 ctermbg=234 guifg=#fe8019 guibg=#1d2021
         endif
     endif
 
