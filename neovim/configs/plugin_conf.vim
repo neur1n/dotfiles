@@ -14,9 +14,7 @@ let g:tagbar_sort = 0
 "let g:tagbar_autoclose = 1
 " }
 
-"******************************************************************************
-"                                                            mhinz/vim-startify
-"******************************************************************************
+"********************************************************** {mhinz/vim-startify
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_dir = '$VIMCONFIG/recovery/session'
 
@@ -36,39 +34,44 @@ else
     let b:animal = b:animals['moose']
 endif
 let g:startify_custom_header = map(b:greeting + b:animal, "\"   \".v:val")
+" }
 
-"******************************************************************************
-"                                                               morhetz/gruvbox
-"******************************************************************************
+"************************************************************* {mileszs/ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+nnoremap <Leader>ag :Ack!<Space>
+" }
+
+"************************************************************* {morhetz/gruvbox
 " let g:gruvbox_improved_strings=1
 " let g:gruvbox_contrast_dark='hard'
 " let g:gruvbox_improved_warnings=1
 let g:gruvbox_italic=1
 let g:gruvbox_underline=1
 let g:gruvbox_undercurl=1
+" }
 
-"******************************************************************************
-"                                                             neoclide/coc.nvim
-"******************************************************************************
+"*********************************************************** {neoclide/coc.nvim
 set completeopt=menuone,noinsert,noselect
 function! s:check_back_space() abort
   let a:col = col('.') - 1
   return !a:col || getline('.')[a:col - 1]  =~# '\s'
 endfunction
 
-inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" :
     \ <SID>check_back_space() ? "\<Tab>" : coc#refresh()
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-reference)
 nmap <leader>rn <Plug>(coc-rename)
+
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
+
 " nmap <C-p> <Plug>(coc-diagnostic-prev)
 " nmap <C-n> <Plug>(coc-diagnostic-next)
 
@@ -76,15 +79,14 @@ nmap <leader>rn <Plug>(coc-rename)
 " highlight link CocWarningSign Warning_
 " highlight link CocInfoSign Warning_
 " highlight link CocHintSign Warning_
+"}
 
-
-"******************************************************************************
-"                                                              SirVer/ultisnips
-"******************************************************************************
+"************************************************************ {SirVer/ultisnips
 let g:UltiSnipsExpandTrigger = '<C-s>'
 " let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsJumpForwardTrigger = '<C-f>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
+" }
 
 "******************************************************************************
 "                                                               nermake/nermake
@@ -96,10 +98,8 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
 " \   'BufWinEnter': {},
 " \ }, 500)
 
-"******************************************************************************
-"                                                                      w0rp/ale
-"******************************************************************************
-"⚡ 
+"******************************************************************** {w0rp/ale
+"
 " let g:ale_lint_on_insert_leave = 1
 " let g:ale_lint_on_text_changed = 'never'
 " let g:ale_sign_column_always = 1
@@ -136,3 +136,4 @@ nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
 nnoremap <silent> <leader>gd :ALEGoToDefinitionInTab<CR>
 nnoremap <silent> <leader>gr :ALEFindReference<CR>
+" }
