@@ -23,7 +23,5 @@ Plug 'honza/vim-snippets' ", {'for': ['c', 'cpp', 'go', 'python', 'tex', 'vim']}
 Plug 'SirVer/ultisnips' ", {'for': ['c', 'cpp', 'go', 'python', 'tex', 'vim']}
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 "********************************************************************** The End
-Plug 'Neur1n/lintinfo.vim'
-Plug 'Neur1n/whitespace.vim'
 Plug 'Neur1n/statusline.vim'
 call plug#end()
