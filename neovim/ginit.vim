@@ -1,5 +1,5 @@
-if exists('GtkGuiLoaded')
-    call rpcnotify(1, 'Gui', 'Font', 'input 10')
-else
+if has('unix')
+    exec 'GuiFont! Input\ NF:h8'
+elseif has('win32')
     exec 'GuiFont! Input\ NF:h10'
 endif
