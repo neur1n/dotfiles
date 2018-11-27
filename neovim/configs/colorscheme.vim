@@ -35,6 +35,17 @@ elseif g:colors_name ==# 'gruvbox'
             hi ALEErrorSign ctermfg=167 ctermbg=234 guifg=#fb4934 guibg=#1d2021
             hi ALEWarningSign ctermfg=208 ctermbg=234 guifg=#fe8019 guibg=#1d2021
         endif
+    elseif get(g:, 'loaded_neomake', 0)
+        if get(g:, 'gruvbox_contrast_dark', 'medium') ==# 'soft'
+            hi NeomakeErrorSign ctermfg=167 ctermbg=236 guifg=#fb4934 guibg=#32302f
+            hi NeomakeWarningSign ctermfg=208 ctermbg=236 guifg=#fe8019 guibg=#32302f
+        elseif get(g:, 'gruvbox_contrast_dark', 'medium') ==# 'medium'
+            hi NeomakeErrorSign ctermfg=167 ctermbg=235 guifg=#fb4934 guibg=#282828
+            hi NeomakeWarningSign ctermfg=208 ctermbg=235 guifg=#fe8019 guibg=#282828
+        elseif get(g:, 'gruvbox_contrast_dark', 'medium') ==# 'hard'
+            hi NeomakeErrorSign ctermfg=167 ctermbg=234 guifg=#fb4934 guibg=#1d2021
+            hi NeomakeWarningSign ctermfg=208 ctermbg=234 guifg=#fe8019 guibg=#1d2021
+        endif
     endif
 
     " hi StatusLine guifg=#002b36 guibg=#2aa198 ctermfg=234 ctermbg=36
@@ -42,6 +53,3 @@ elseif g:colors_name ==# 'gruvbox'
 
     " hi VertSplit guifg=#586e75 guibg=NONE
 endif
-
-" hi lCursor guifg=NONE guibg=Cyan
-" hi! link airline_tabfill LineNr

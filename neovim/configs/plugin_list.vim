@@ -11,19 +11,20 @@ Plug 'majutsushi/tagbar' " {'on': 'TagbarOpenAutoClose'}
 Plug 'matze/vim-move'
 Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
-" Plug 'neomake/neomake'
-" Plug 'scrooloose/nerdcommenter'
+Plug 'neomake/neomake'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'wesQ3/vim-windowswap'
+Plug 'Yggdroot/LeaderF'
 " }
 "************************************************************* {Auto-completion
 Plug 'Shougo/neco-vim', {'for': ['vim']}
-Plug 'honza/vim-snippets' ", {'for': ['c', 'cpp', 'go', 'python', 'tex', 'vim']}
-Plug 'SirVer/ultisnips' ", {'for': ['c', 'cpp', 'go', 'python', 'tex', 'vim']}
+Plug 'neoclide/coc-neco', {'for': ['vim']}
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " }
 "********************************************************************* {The End

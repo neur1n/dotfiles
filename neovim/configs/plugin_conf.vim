@@ -88,15 +88,33 @@ let g:UltiSnipsJumpForwardTrigger = '<C-f>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
 " }
 
-"******************************************************************************
-"                                                               nermake/nermake
-"******************************************************************************
-" call neomake#configure#automake({
-" \   'TextChanged': {},
-" \   'InsertLeave': {},
-" \   'BufWritePost': {'delay': 0},
-" \   'BufWinEnter': {},
-" \ }, 500)
+"************************************************************* {nermake/nermake
+call neomake#configure#automake({
+\   'TextChanged': {},
+\   'InsertLeave': {},
+\   'BufWritePost': {'delay': 0},
+\   'BufWinEnter': {},
+\ }, 500)
+
+let g:neomake_error_sign = {'text': '✘'}
+let g:neomake_warning_sign = {'text': ''}
+let g:neomake_message_sign = {'text': ''}
+let g:neomake_info_sign = {'text': ''}
+
+" {linter
+let g:neomake_cpp_enabled_makers = ['clang', 'cpplint']
+let g:neomake_cpp_clang_exe = 'clang-7'
+let g:neomake_cpp_cpplint_exe = 'cpplint'
+
+let g:neomake_c_enabled_makers = ['clang']
+let g:neomake_c_clang_exe = 'clang-7'
+
+let g:neomake_python_enabled_makers = ['pyflakes', 'pycodestyle', 'pydocstyle']
+let g:neomake_python_pyflakes_exe = 'pyflakes'
+let g:neomake_python_pycodestyle_exe = 'pycodestyle'
+let g:neomake_python_pydocstyle_exe = 'pydocstyle'
+" }
+" }
 
 "******************************************************************** {w0rp/ale
 "
@@ -104,36 +122,41 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
 " let g:ale_lint_on_text_changed = 'never'
 " let g:ale_sign_column_always = 1
 
-if !exists('g:ale_linters')
-    let g:ale_linters = {}
-endif
-if !exists('g:ale_fixers')
-    let g:ale_linters = {}
-endif
-
-let g:ale_linters = {
-    \ 'c': ['clang', 'clangd'],
-    \ 'cpp': ['cpplint', 'clang', 'clangd'],
-    \ 'python': ['pyls'],
-\ }
-let g:ale_fixers = {
-    \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \ 'c': ['cpplint'],
-    \ 'cpp': ['cpplint'],
-    \ 'python': ['yapf', 'autopep8'],
-\ }
-
-let g:ale_c_clang_executable='clang-7'
-let g:ale_c_clangd_executable='clangd-7'
-let g:ale_cpp_clang_executable='clang-7'
-let g:ale_cpp_clangd_executable='clangd-7'
-
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = ''
-let g:ale_echo_msg_format = '[%linter%] %s'
-nnoremap <Leader>al :ALEToggle<CR>
-nmap <silent> <C-p> <Plug>(ale_previous_wrap)
-nmap <silent> <C-n> <Plug>(ale_next_wrap)
-nnoremap <silent> <leader>gd :ALEGoToDefinitionInTab<CR>
-nnoremap <silent> <leader>gr :ALEFindReference<CR>
+"if !exists('g:ale_linters')
+"    let g:ale_linters = {}
+"endif
+"if !exists('g:ale_fixers')
+"    let g:ale_linters = {}
+"endif
+"
+"let g:ale_linters = {
+"    \ 'c': ['clang', 'clangd'],
+"    \ 'cpp': ['cpplint', 'clang', 'clangd'],
+"    \ 'python': ['pyls'],
+"\ }
+"let g:ale_fixers = {
+"    \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+"    \ 'c': ['cpplint'],
+"    \ 'cpp': ['cpplint'],
+"    \ 'python': ['yapf', 'autopep8'],
+"\ }
+"
+"let g:ale_c_clang_executable='clang-7'
+"let g:ale_c_clangd_executable='clangd-7'
+"let g:ale_cpp_clang_executable='clang-7'
+"let g:ale_cpp_clangd_executable='clangd-7'
+"
+"let g:ale_sign_error = '✘'
+"let g:ale_sign_warning = ''
+"let g:ale_echo_msg_format = '[%linter%] %s'
+"nnoremap <Leader>al :ALEToggle<CR>
+"nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+"nmap <silent> <C-n> <Plug>(ale_next_wrap)
+"" nnoremap <silent> <leader>gd :ALEGoToDefinitionInTab<CR>
+"" nnoremap <silent> <leader>gr :ALEFindReference<CR>
+"
+"highlight link ALEErrorSign Error_
+"highlight link ALEWarningSign Warning_
+"highlight link ALEInfoSign Warning_
+"highlight link ALEHintSign Warning_
 " }
