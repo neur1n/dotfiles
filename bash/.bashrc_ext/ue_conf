@@ -1,0 +1,39 @@
+# vim: ft=sh
+
+UE_HOME=~/Downloads/UnrealEngine
+
+function unrealbuild
+{
+    CURR_DIR=`pwd`;
+    PROJ_NAME=$(basename ${1%.uproject});
+    $UE_HOME/Engine/Build/BatchFiles/Linux/Build.sh $PROJ_NAME Linux Development -editorrecompile "${CURR_DIR}/${PROJ_NAME}.uproject" -progress -editor -game -NoHotReloadFromIDE
+}
+
+complete -f -X '!*.@(uproject)' unrealbuild
+
+function unrealeditor
+{
+    DIR="$( cd "$( dirname "$i" )" && pwd )"
+    $UE_HOME/Engine/Binaries/Linux/UE4Editor $DIR/$1
+}
+
+complete -f -X '!*.@(uproject)' unrealeditor
+
+function unrealgen
+{
+    DIR="$( cd "$( dirname "$i" )" && pwd )"
+    pushd $UE_HOME
+    ./GenerateProjectFiles.sh -project="$DIR/$1" -game -engine -editor
+    popd
+}
+
+complete -f -X '!*.@(uproject)' unrealgen
+
+# For automation tests, if used
+function unrealtest
+{
+    DIR="$( cd "$( dirname "$i" )" && pwd )"
+    $UE_HOME/Engine/Binaries/Linux/UE4Editor $DIR/$1 -Game -ExecCmds="Automation RunTests $2" -log
+}
+
+complete -f -X '!*.@(uproject)' unrealtest

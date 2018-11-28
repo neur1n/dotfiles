@@ -1,8 +1,8 @@
 # vim: ft=sh
 
-#=================================================================== Git Prompt
+#****************************************************************** {Git Prompt
 # Show mode
-function show_mode()
+function show_mode
 {
     MODE=`bind -v | awk '/keymap/ {print $NF}'`
     if [ "${MODE}" == 'vi-insert' ]; then
@@ -13,7 +13,7 @@ function show_mode()
 }
 
 # Get current branch in git repo
-function parse_git_branch()
+function parse_git_branch
 {
 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 	if [ ! "${BRANCH}" == "" ]
@@ -26,7 +26,7 @@ function parse_git_branch()
 }
 
 # Get current status of git repo
-function parse_git_dirty()
+function parse_git_dirty
 {
 	status=`git status 2>&1 | tee`
 	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
@@ -60,9 +60,10 @@ function parse_git_dirty()
 		echo ""
 	fi
 }
+# }
 
-#================================================================= Toggle Proxy
-function toggle_proxy()
+#**************************************************************** {Proxy Toggle
+function toggle_proxy
 {
     state=$(gsettings get org.gnome.system.proxy mode)
 
@@ -77,3 +78,45 @@ function toggle_proxy()
 }
 
 export -f toggle_proxy
+# }
+
+#********************************************** {Terminal Profile Export/Import
+# Credit: https://github.com/yktoo/yktools/blob/master/gnome-terminal-profile
+function term_prof
+{
+    if [ "$1" == "-h" -o "--help" ]; then
+        echo "Usage: $0 import|export <filename>"
+    fi
+
+    # Check variables
+    mode="$1"
+    filename="$2"
+    [[ -z "$mode"     ]] && echo "No mode specified"
+    [[ -z "$filename" ]] && echo "No filename specified"
+
+    # Get default profile ID
+    profile="$(gsettings get org.gnome.Terminal.ProfilesList default)"
+    profile="${profile:1:-1}" # remove leading and trailing single quotes
+
+    case "$mode" in
+        # Export profile
+        export)
+            dconf dump "/org/gnome/terminal/legacy/profiles:/:$profile/" > "$filename"
+            echo "Saved the default profile ${CLR_VAR}${profile}${CLR_OFF} in ${CLR_VAR}${filename}${CLR_OFF}"
+            ;;
+
+        # Import profile
+        import)
+            [[ ! -r "$filename" ]] && err "Failed to read from file $filename"
+            dconf load "/org/gnome/terminal/legacy/profiles:/:$profile/" < "$filename"
+            echo "Loaded ${CLR_VAR}${filename}${CLR_OFF} into the default profile ${CLR_VAR}${profile}${CLR_OFF}"
+            ;;
+
+        *)
+            echo "Incorrect mode: $mode"
+            ;;
+    esac
+}
+
+export -f term_prof
+# }
