@@ -1,6 +1,4 @@
-" *****************************************************************************
-"                                                                       Editing
-" *****************************************************************************
+"********************************************************************* {Editing
 "                                             Delete hidden buffers: <leader>db
 function neur1n#general#DelHiddenBuf()
     let l:tpbl=[]
@@ -38,10 +36,9 @@ function! neur1n#general#ToggleRelLnr()
         set relativenumber
     endif
 endfunction
+" }
 
-" *****************************************************************************
-"                                                                  Run or Build
-" *****************************************************************************
+"**************************************************************** {Run or Build
 "                                                                      C or C++
 function! neur1n#general#BuildC()
     if filereadable('MAINFILE')
@@ -119,9 +116,9 @@ endfunction
 function! neur1n#general#RunPython()
     if filereadable('MAINFILE')
         let l:file = readfile('MAINFILE')
-        execute '!python '.l:file[0]
+        execute '!python3 '.l:file[0]
     else
-        execute '!python %'
+        execute '!python3 %'
     endif
 endfunction
 "                                                                             R
@@ -133,3 +130,4 @@ function! neur1n#general#RunRScript()
         execute '!Rscript %'
     endif
 endfunction
+" }
