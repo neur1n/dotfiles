@@ -25,7 +25,8 @@ Plug 'Shougo/neco-vim', {'for': ['vim']}
 Plug 'neoclide/coc-neco', {'for': ['vim']}
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install'}
 " }
 "********************************************************************* {The End
 Plug 'Neur1n/statusline.vim'

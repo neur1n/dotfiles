@@ -17,16 +17,13 @@ Plug 'ncm2/ncm2-tagprefix'
 Plug 'ncm2/ncm2-ultisnips', {'for': ['c', 'cpp', 'go', 'python', 'tex', 'vim']}
 Plug 'ncm2/ncm2-vim', {'for': 'vim'}
 
-"******************************************************************************
-"                                                   iamcco/markdown-preview.vim
-"******************************************************************************
+"************************************************* {iamcco/markdown-preview.vim
 let g:mkdp_refresh_slow = 1
 nmap <silent> <leader>mp <Plug>MarkdownPreview
 nmap <silent> <leader>ms <Plug>StopMarkdownPreview
+" }
 
-"******************************************************************************
-"                                                                 lervag/vimtex
-"******************************************************************************
+"*************************************************************** {lervag/vimtex
 " let g:vimtex_compiler_progname = 'nvr'
 let g:vimtex_view_general_viewer = 'E:\ProgramFiles\SumatraPDF\SumatraPDF.exe'
 let g:vimtex_view_general_options
@@ -45,10 +42,9 @@ let g:vimtex_compiler_latexmk = {
     \ 'callback': 1,
     \ 'continuous': 0,
 \ }
+" }
 
-"******************************************************************************
-"                                                                   ncm-2/ncm-2
-"******************************************************************************
+"***************************************************************** {ncm-2/ncm-2
 set completeopt=noinsert,menuone,noselect
 let g:ncm2_pyclang#clang_path = '/usr/bin/clang++-6.0'
 let g:ncm2_pyclang#library_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
@@ -90,11 +86,10 @@ augroup END
 imap <silent> <expr> <C-s> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
 smap <C-s> <Plug>(ultisnips_expand)
 let g:UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
+" }
 
-"******************************************************************************
-"                                                          Shougo/deoplete.nvim
+"******************************************************** {Shougo/deoplete.nvim
 "                                                          zchee/deoplete-clang
-"******************************************************************************
 let g:deoplete#enable_at_startup=1
 call deoplete#custom#option({
     \ 'auto_complete_delay': 0,
@@ -106,3 +101,49 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
 let g:deoplete#sources#clang#libclang_path='/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
 let g:deoplete#sources#clang#clang_header='/usr/lib/llvm-6.0/lib/clang/6.0.1/include/'
+" }
+
+"******************************************************************** {w0rp/ale
+"
+" let g:ale_lint_on_insert_leave = 1
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_sign_column_always = 1
+
+if !exists('g:ale_linters')
+    let g:ale_linters = {}
+endif
+if !exists('g:ale_fixers')
+    let g:ale_linters = {}
+endif
+
+let g:ale_linters = {
+    \ 'c': ['clang', 'clangd'],
+    \ 'cpp': ['cpplint', 'clang', 'clangd'],
+    \ 'python': ['pyls'],
+\ }
+let g:ale_fixers = {
+    \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \ 'c': ['cpplint'],
+    \ 'cpp': ['cpplint'],
+    \ 'python': ['yapf', 'autopep8'],
+\ }
+
+let g:ale_c_clang_executable='clang-7'
+let g:ale_c_clangd_executable='clangd-7'
+let g:ale_cpp_clang_executable='clang-7'
+let g:ale_cpp_clangd_executable='clangd-7'
+
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = ''
+let g:ale_echo_msg_format = '[%linter%] %s'
+nnoremap <Leader>al :ALEToggle<CR>
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
+" nnoremap <silent> <leader>gd :ALEGoToDefinitionInTab<CR>
+" nnoremap <silent> <leader>gr :ALEFindReference<CR>
+
+highlight link ALEErrorSign Error_
+highlight link ALEWarningSign Warning_
+highlight link ALEInfoSign Warning_
+highlight link ALEHintSign Warning_
+ }

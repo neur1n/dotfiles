@@ -2,19 +2,16 @@
 let mapleader = ' '
 let maplocalleader = ' '
 
-" *****************************************************************************
-"                                                                       General
-" *****************************************************************************
+"********************************************************************* {General
 map Q <nop>
 "           Remap F1 to esc, also need to disable F1 of gnome terminal manually
 map <F1> <Esc>
 imap <F1> <Esc>
 "                                                     Split open tag definition
-nnoremap <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap <A-]> :vsp <cr>:exec("tag ".expand("<cword>"))<cr>
+" }
 
-" *****************************************************************************
-"                                                                   Move Around
-" *****************************************************************************
+"***************************************************************** {Move Around
 "                         Go to a line and make it one the center of the screen
 nnoremap G Gzz
 "                                   Modify the behavior of j & k in normal mode
@@ -32,44 +29,43 @@ inoremap <A-h> <Left>
 inoremap <A-l> <Right>
 inoremap <A-j> <Down>
 inoremap <A-k> <Up>
+" }
 
-" *****************************************************************************
-"                                                                       Editing
-" *****************************************************************************
+" ******************************************************************** {Editing
 "           Insert a new line without entering insert mode (shift-enter, enter)
-nnoremap <CR> o<Esc>
-nnoremap <S-CR> O<Esc>
+nnoremap <cr> o<Esc>
+nnoremap <S-cr> O<Esc>
 "                                              Toggle current line highlighting
-nnoremap <leader>cl :set cursorline! nocursorline?<CR>
+nnoremap <leader>cl :set cursorline! nocursorline?<cr>
 "                                                    Toggle search highlighting
-nnoremap <leader>hs :set hlsearch! hlsearch?<CR>
+nnoremap <leader>hs :set hlsearch! hlsearch?<cr>
 "                                                             Toggle spellcheck
-nnoremap <leader>sc :set spell! spelllang=en_us<CR>
+nnoremap <leader>sc :set spell! spelllang=en_us<cr>
 "                                                         Delete hidden buffers
-nnoremap <leader>db :call neur1n#general#DelHiddenBuf()<CR>
+nnoremap <leader>db :call neur1n#general#DelHiddenBuf()<cr>
 "                                                              Toggle read only
-nnoremap <leader>ro :call neur1n#general#ToggleReadOnly()<CR>
+nnoremap <leader>ro :call neur1n#general#ToggleReadOnly()<cr>
 "                                                   Toggle relative line number
-nnoremap <leader>rn :call neur1n#general#ToggleRelLnr()<CR>
+nnoremap <leader>rn :call neur1n#general#ToggleRelLnr()<cr>
+" }
 
-" *****************************************************************************
-"                                                                  Run or Build
-" *****************************************************************************
+" *************************************************************** {Run or Build
 "                                                                      C or C++
-nnoremap <leader>bc :wa<CR>:call neur1n#general#BuildC()<CR>
-nnoremap <leader>rc :wa<CR>:call neur1n#general#RunC()<CR>
+nnoremap <leader>bc :wa<cr>:call neur1n#general#BuildC()<cr>
+nnoremap <leader>rc :wa<cr>:call neur1n#general#RunC()<cr>
 "                                                                            Go
-nnoremap <leader>go :wa<CR>:call neur1n#general#RunGo()<CR>
+nnoremap <leader>go :wa<cr>:call neur1n#general#RunGo()<cr>
 "                                                                         Julia
-nnoremap <leader>jl :wa<CR>:call neur1n#general#RunJulia()<CR>
+nnoremap <leader>jl :wa<cr>:call neur1n#general#RunJulia()<cr>
 "                                                                          Keil
-nnoremap <leader>kb :call neur1n#general#RunKeil('-b ')<CR>
-nnoremap <leader>kr :call neur1n#general#RunKeil('-cr ')<CR>
-nnoremap <leader>kf :call neur1n#general#RunKeil('-f ')<CR>
-nnoremap <leader>kd :call neur1n#general#RunKeil('-d ')<CR>
+nnoremap <leader>kb :call neur1n#general#RunKeil('-b ')<cr>
+nnoremap <leader>kr :call neur1n#general#RunKeil('-cr ')<cr>
+nnoremap <leader>kf :call neur1n#general#RunKeil('-f ')<cr>
+nnoremap <leader>kd :call neur1n#general#RunKeil('-d ')<cr>
 "                                                                      Markdown
-nnoremap <leader>md :call neur1n#general#ViewMarkdown()<CR>
+nnoremap <leader>md :call neur1n#general#ViewMarkdown()<cr>
 "                                                                        Python
-nnoremap <leader>py :wa<CR>:call neur1n#general#RunPython()<CR>
+nnoremap <leader>py :wa<cr>:call neur1n#general#RunPython()<cr>
 "                                                                             R
-nnoremap <leader>rs :wa<CR>:call neur1n#general#RunRScript()<CR>
+nnoremap <leader>rs :wa<cr>:call neur1n#general#RunRScript()<cr>
+" }
