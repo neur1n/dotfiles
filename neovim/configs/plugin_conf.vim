@@ -54,6 +54,8 @@ let g:gruvbox_undercurl=1
 
 "*********************************************************** {neoclide/coc.nvim
 set completeopt=menuone,noinsert,noselect
+set hidden
+
 function! s:check_back_space() abort
   let a:col = col('.') - 1
   return !a:col || getline('.')[a:col - 1]  =~# '\s'
@@ -96,8 +98,9 @@ call neomake#configure#automake({
 \   'BufWinEnter': {},
 \ }, 500)
 
+" 
 let g:neomake_error_sign = {'text': '✘'}
-let g:neomake_warning_sign = {'text': ''}
+let g:neomake_warning_sign = {'text': ''}
 let g:neomake_message_sign = {'text': ''}
 let g:neomake_info_sign = {'text': ''}
 
@@ -114,4 +117,8 @@ let g:neomake_python_pyflakes_exe = 'pyflakes'
 let g:neomake_python_pycodestyle_exe = 'pycodestyle'
 let g:neomake_python_pydocstyle_exe = 'pydocstyle'
 " }
+" }
+
+"*********************************************************** {Yggdroot/LeaderF
+let g:Lf_ShowHidden=1
 " }
