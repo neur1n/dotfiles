@@ -28,17 +28,21 @@ augroup scroll_off
         \ let &scrolloff=winheight(win_getid())/3
 augroup END
 
-function! SelectTemplate()
-    if has('win32')
-        execute ':silent! 0r $VIMCONFIG/templates/win/skeleton.'.expand("<afile>:e")
-    elseif has('unix')
-        execute ':silent! 0r $VIMCONFIG/templates/unix/skeleton.'.expand("<afile>:e")
+function! SelectTemplate(mode)
+    if a:mode ==# 'ex'  " Choose by extension
+        execute ':silent! 0r $VIMCONFIG/templates/skeleton.'.expand('<afile>:e')
+    elseif a:mode ==# 'ft'  " Choose by file type
+        execute ':silent! 0r $VIMCONFIG/templates/skeleton.'.eval('&filetype')
     endif
 endfunction
 
 augroup templates
     au!
-    autocmd BufNewFile *.* call SelectTemplate()
+    autocmd BufNewFile *.* if count(['cmake'], &filetype)
+                \ |     call SelectTemplate('ft')
+                \ | else
+                \ |     call SelectTemplate('ex')
+                \ | endif
 augroup END
 
 augroup post
