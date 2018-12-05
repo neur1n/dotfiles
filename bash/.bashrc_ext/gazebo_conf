@@ -1,6 +1,6 @@
 # vim: ft=sh
 
-export GZ_WS=/home/yy/Documents/ws/gazebo_ws
+export GZ_WS=~/Documents/ws/gazebo_ws
 
 alias cdgz="cd $GZ_WS"
 alias gzv="gazebo -u --verbose"

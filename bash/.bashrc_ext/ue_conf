@@ -1,6 +1,7 @@
 # vim: ft=sh
 
 UE_HOME=~/Downloads/UnrealEngine
+export UE_INCLUDE_DIRS=$UE_HOME/Engine/Source/Runtime
 
 function unrealbuild
 {

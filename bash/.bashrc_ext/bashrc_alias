@@ -2,3 +2,5 @@
 
 alias cmjs="cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES .."
 alias lnjs="ln -sf ${PWD}/compile_commands.json ${PWD}/../"
+
+alias nvimqt="/usr/local/bin/nvim-qt --geometry 840x480"
