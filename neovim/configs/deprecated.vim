@@ -27,21 +27,21 @@ nmap <silent> <leader>ms <Plug>StopMarkdownPreview
 " let g:vimtex_compiler_progname = 'nvr'
 let g:vimtex_view_general_viewer = 'E:\ProgramFiles\SumatraPDF\SumatraPDF.exe'
 let g:vimtex_view_general_options
-    \ = '-reuse-instance -forward-search @tex @line @pdf'
+      \ = '-reuse-instance -forward-search @tex @line @pdf'
 let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 let g:vimtex_latexmk_options =
-    \ 'xelatex -verbose -file-line-error '.
-    \ '-synctex=1 -shell-escape -interaction=nonstopmode $*'
+      \ 'xelatex -verbose -file-line-error '.
+      \ '-synctex=1 -shell-escape -interaction=nonstopmode $*'
 
 if !exists('g:vimtex_compiler_latexmk')
-    let g:vimtex_compiler_latexmk = {}
+  let g:vimtex_compiler_latexmk = {}
 endif
 
 let g:vimtex_compiler_latexmk = {
-    \ 'build_dir': './build/',
-    \ 'callback': 1,
-    \ 'continuous': 0,
-\ }
+      \ 'build_dir': './build/',
+      \ 'callback': 1,
+      \ 'continuous': 0,
+      \ }
 " }
 
 "***************************************************************** {ncm-2/ncm-2
@@ -49,9 +49,9 @@ set completeopt=noinsert,menuone,noselect
 let g:ncm2_pyclang#clang_path = '/usr/bin/clang++-6.0'
 let g:ncm2_pyclang#library_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
 let g:ncm2_pyclang#database_path = [
-            \ 'compile_commands.json',
-            \ 'build/compile_commands.json',
-            \ ]
+      \ 'compile_commands.json',
+      \ 'build/compile_commands.json',
+      \ ]
 
 inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<C-y>\<CR>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
@@ -59,14 +59,14 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 augroup ncm2
-    autocmd InsertEnter * call ncm2#enable_for_buffer()
-    autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
+  autocmd InsertEnter * call ncm2#enable_for_buffer()
+  autocmd FileType c,cpp nnoremap <buffer> gd :<c-u>call ncm2_pyclang#goto_declaration()<cr>
 augroup END
 
 augroup ncm_tex
-    autocmd!
-    autocmd InsertEnter * call ncm2#enable_for_buffer()
-    autocmd Filetype tex call ncm2#register_source({
+  autocmd!
+  autocmd InsertEnter * call ncm2#enable_for_buffer()
+  autocmd Filetype tex call ncm2#register_source({
         \ 'name': 'vimtex',
         \ 'priority': 8,
         \ 'scope': ['tex'],
@@ -92,9 +92,9 @@ let g:UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
 "                                                          zchee/deoplete-clang
 let g:deoplete#enable_at_startup=1
 call deoplete#custom#option({
-    \ 'auto_complete_delay': 0,
-    \ 'smart_case': v:true,
-\ })
+      \ 'auto_complete_delay': 0,
+      \ 'smart_case': v:true,
+      \ })
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -110,23 +110,23 @@ let g:deoplete#sources#clang#clang_header='/usr/lib/llvm-6.0/lib/clang/6.0.1/inc
 " let g:ale_sign_column_always = 1
 
 if !exists('g:ale_linters')
-    let g:ale_linters = {}
+  let g:ale_linters = {}
 endif
 if !exists('g:ale_fixers')
-    let g:ale_linters = {}
+  let g:ale_linters = {}
 endif
 
 let g:ale_linters = {
-    \ 'c': ['clang', 'clangd'],
-    \ 'cpp': ['cpplint', 'clang', 'clangd'],
-    \ 'python': ['pyls'],
-\ }
+      \ 'c': ['clang', 'clangd'],
+      \ 'cpp': ['cpplint', 'clang', 'clangd'],
+      \ 'python': ['pyls'],
+      \ }
 let g:ale_fixers = {
-    \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \ 'c': ['cpplint'],
-    \ 'cpp': ['cpplint'],
-    \ 'python': ['yapf', 'autopep8'],
-\ }
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'c': ['cpplint'],
+      \ 'cpp': ['cpplint'],
+      \ 'python': ['yapf', 'autopep8'],
+      \ }
 
 let g:ale_c_clang_executable='clang-7'
 let g:ale_c_clangd_executable='clangd-7'
@@ -146,4 +146,4 @@ highlight link ALEErrorSign Error_
 highlight link ALEWarningSign Warning_
 highlight link ALEInfoSign Warning_
 highlight link ALEHintSign Warning_
- }
+" }

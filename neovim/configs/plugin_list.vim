@@ -31,4 +31,3 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'Neur1n/statusline.vim'
 " }
 call plug#end()
-

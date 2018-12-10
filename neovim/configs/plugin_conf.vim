@@ -19,19 +19,19 @@ let g:startify_fortune_use_unicode = 1
 let g:startify_session_dir = '$VIMCONFIG/recovery/session'
 
 if strftime('%M') % 3 == 0
-    let b:greeting = startify#fortune#boxed()
+  let b:greeting = startify#fortune#boxed()
 elseif strftime('%M') % 3 == 1
-    let b:greeting = b:greetings['hello']
+  let b:greeting = b:greetings['hello']
 else
-    let b:greeting = b:greetings['vim']
+  let b:greeting = b:greetings['vim']
 endif
 
 if strftime('%H') < 12
-    let b:animal = b:animals['cow']
+  let b:animal = b:animals['cow']
 elseif strftime('%H') < 18
-    let b:animal = b:animals['lion']
+  let b:animal = b:animals['lion']
 else
-    let b:animal = b:animals['moose']
+  let b:animal = b:animals['moose']
 endif
 let g:startify_custom_header = map(b:greeting + b:animal, "\"   \".v:val")
 " }
@@ -62,7 +62,7 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<Tab>" : coc#refresh()
+      \ <SID>check_back_space() ? "\<Tab>" : coc#refresh()
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -92,11 +92,11 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
 
 "************************************************************* {nermake/nermake
 call neomake#configure#automake({
-\   'TextChanged': {},
-\   'InsertLeave': {},
-\   'BufWritePost': {'delay': 0},
-\   'BufWinEnter': {},
-\ }, 500)
+      \   'TextChanged': {},
+      \   'InsertLeave': {},
+      \   'BufWritePost': {'delay': 0},
+      \   'BufWinEnter': {},
+      \ }, 500)
 
 " 
 let g:neomake_error_sign = {'text': '✘'}
