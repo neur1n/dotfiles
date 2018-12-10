@@ -47,5 +47,5 @@ augroup END
 
 augroup post
   au!
-  autocmd VimEnter * execute 'source $VIMCONFIG/configs/colorscheme.vim'
+  autocmd VimEnter * source $VIMCONFIG/configs/colorscheme.vim
 augroup END

@@ -10,44 +10,26 @@ else
   let g:python3_host_prog='/usr/bin/python3'
 endif
 
-" let g:python_host_skip_check=1
-" let g:loaded_python3_provider=1
+"*********************************************************** {Vim Specific Part
+if !has('nvim')
+  let g:python_host_skip_check=1
+  let g:loaded_python3_provider=1
+
+  if has('gui_running')
+    nnoremap <C-F9> :if &go=~#'L'<Bar>set go-=L<Bar>else<Bar>set go+=L<Bar>endif<CR>
+    nnoremap <C-F10> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
+    set guioptions-=T
+    set guioptions-=m
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=e
+  endif
+
+  set guifont=Input\ NF:h10
+  set lines=30 columns=120
+endif
+" }
 
 "******************************************* {The Common Part of Vim and Neovim
-exec 'source $VIMCONFIG/configs/common.vim'
-" }
-
-"************************************************************************** {UI
-let $LANG='en'                                           " set message language
-set langmenu=en                                             " set menu language
-let g:netrw_winsize=15                     " set explorer window width to be 30
-let g:netrw_liststyle=3                         " set explorer to be tree style
-
-if has('mouse')
-  set mouse=a
-endif
-
-" if has('syntax')
-"   syntax on
-"   set t_Co=256
-"   set background=dark
-"   if has('gui_running')
-"     colorscheme solarized
-"     let g:solarized_contrast='low'
-"   else
-"     colorscheme molokai
-"   endif
-" endif
-
-if has('syntax')
-  syntax on
-  set t_Co=256
-  set background=dark
-  colorscheme gruvbox
-  " colorscheme solarized
-endif
-" }
-
-"************************************************************* {Moduled Configs
-exec 'source $VIMCONFIG/configs/autocmd.vim'
+source $VIMCONFIG/configs/common.vim
 " }

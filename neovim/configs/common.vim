@@ -1,9 +1,9 @@
 "************************************************************* {Moduled Configs
-exec 'source $VIMCONFIG/configs/keymap.vim'
-exec 'source $VIMCONFIG/configs/abbrev.vim'
-exec 'source $VIMCONFIG/configs/plugin_list.vim'
-exec 'source $VIMCONFIG/configs/greetings.vim'
-exec 'source $VIMCONFIG/configs/plugin_conf.vim'
+source $VIMCONFIG/configs/keymap.vim
+source $VIMCONFIG/configs/abbrev.vim
+source $VIMCONFIG/configs/plugin_list.vim
+source $VIMCONFIG/configs/greetings.vim
+source $VIMCONFIG/configs/plugin_conf.vim
 " }
 
 "************************************************************************** {UI
@@ -38,7 +38,7 @@ endif
 " }
 
 "************************************************************* {Moduled Configs
-exec 'source $VIMCONFIG/configs/autocmd.vim'
+source $VIMCONFIG/configs/autocmd.vim
 " }
 
 "******************************************************************** {Encoding

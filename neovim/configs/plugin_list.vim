@@ -4,8 +4,10 @@ Plug 'itchyny/vim-gitbranch'
 Plug 'morhetz/gruvbox'
 " }
 "************************************************************************ {Misc
+if has('nvim')
+  Plug 'equalsraf/neovim-gui-shim'
+endif
 Plug 'cohama/lexima.vim'
-Plug 'equalsraf/neovim-gui-shim'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar' " {'on': 'TagbarOpenAutoClose'}
 Plug 'matze/vim-move'
