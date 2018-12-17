@@ -7,7 +7,12 @@ if has('win32')
   let g:python3_host_prog='E:/ProgramFiles/Python3/python'
 else
   let $VIMCONFIG=$HOME.'/.config/nvim'
-  let g:python3_host_prog='/usr/bin/python3'
+  if filereadable($HOME.'/miniconda3/bin/python3')
+    let $PATH=$HOME.'/miniconda3/bin/:'.$PATH
+    let g:python3_host_prog=$HOME.'/miniconda3/bin/python3'
+  else
+    let g:python3_host_prog='/usr/bin/python3'
+  endif
 endif
 
 "*********************************************************** {Vim Specific Part
