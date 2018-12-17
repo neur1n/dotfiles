@@ -1,9 +1,9 @@
 {
     "coc.preferences.diagnostic.enable": false,
-    "coc.preferences.diagnostic.errorSign": "",
-    "coc.preferences.diagnostic.warningSign": "",
+    "coc.preferences.diagnostic.errorSign": "✘",
+    "coc.preferences.diagnostic.warningSign": "",
     "coc.preferences.diagnostic.infoSign": "",
-    "coc.preferences.diagnostic.hintSign": "",
+    "coc.preferences.diagnostic.hintSign": "",
     // "coc.source.omni.filetypes": ["python"],
     "languageserver": {
         "clangd": {
