@@ -52,6 +52,34 @@ let g:gruvbox_underline=1
 let g:gruvbox_undercurl=1
 " }
 
+"************************************************************* {neomake/neomake
+call neomake#configure#automake({
+      \   'TextChanged': {},
+      \   'InsertLeave': {},
+      \   'BufWritePost': {'delay': 0},
+      \   'BufWinEnter': {},
+      \ }, 500)
+
+let g:neomake_error_sign = {'text': '✘'}
+let g:neomake_warning_sign = {'text': ''}
+let g:neomake_message_sign = {'text': ''}
+let g:neomake_info_sign = {'text': ''}
+
+" {linter
+let g:neomake_cpp_enabled_makers = ['clang', 'cpplint']
+let g:neomake_cpp_clang_exe = 'clang-7'
+let g:neomake_cpp_cpplint_exe = 'cpplint'
+
+let g:neomake_c_enabled_makers = ['clang']
+let g:neomake_c_clang_exe = 'clang-7'
+
+let g:neomake_python_enabled_makers = ['pyflakes', 'pycodestyle', 'pydocstyle']
+let g:neomake_python_pyflakes_exe = 'pyflakes'
+let g:neomake_python_pycodestyle_exe = 'pycodestyle'
+let g:neomake_python_pydocstyle_exe = 'pydocstyle'
+" }
+" }
+
 "*********************************************************** {neoclide/coc.nvim
 set completeopt=menuone,noinsert,noselect
 set hidden
@@ -70,17 +98,8 @@ nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-reference)
 nmap <leader>rn <Plug>(coc-rename)
 
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>\<CR>" : "\<CR>"
-
 " nmap <C-p> <Plug>(coc-diagnostic-prev)
 " nmap <C-n> <Plug>(coc-diagnostic-next)
-
-" highlight link CocErrorSign Error_
-" highlight link CocWarningSign Warning_
-" highlight link CocInfoSign Warning_
-" highlight link CocHintSign Warning_
 "}
 
 "************************************************************ {SirVer/ultisnips
@@ -88,35 +107,6 @@ let g:UltiSnipsExpandTrigger = '<C-s>'
 " let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsJumpForwardTrigger = '<C-f>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
-" }
-
-"************************************************************* {nermake/nermake
-call neomake#configure#automake({
-      \   'TextChanged': {},
-      \   'InsertLeave': {},
-      \   'BufWritePost': {'delay': 0},
-      \   'BufWinEnter': {},
-      \ }, 500)
-
-" 
-let g:neomake_error_sign = {'text': '✘'}
-let g:neomake_warning_sign = {'text': ''}
-let g:neomake_message_sign = {'text': ''}
-let g:neomake_info_sign = {'text': ''}
-
-" {linter
-let g:neomake_cpp_enabled_makers = ['clang', 'cpplint']
-let g:neomake_cpp_clang_exe = 'clang-7'
-let g:neomake_cpp_cpplint_exe = 'cpplint'
-
-let g:neomake_c_enabled_makers = ['clang']
-let g:neomake_c_clang_exe = 'clang-7'
-
-let g:neomake_python_enabled_makers = ['pyflakes', 'pycodestyle', 'pydocstyle']
-let g:neomake_python_pyflakes_exe = 'pyflakes'
-let g:neomake_python_pycodestyle_exe = 'pycodestyle'
-let g:neomake_python_pydocstyle_exe = 'pydocstyle'
-" }
 " }
 
 "*********************************************************** {Yggdroot/LeaderF
