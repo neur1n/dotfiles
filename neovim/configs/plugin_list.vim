@@ -8,6 +8,7 @@ if has('nvim')
   Plug 'equalsraf/neovim-gui-shim'
 endif
 Plug 'cohama/lexima.vim'
+Plug 'lilydjwg/colorizer', {'for': ['palette']}
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar' " {'on': 'TagbarOpenAutoClose'}
 Plug 'matze/vim-move'
@@ -15,6 +16,7 @@ Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 Plug 'sheerun/vim-polyglot'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
@@ -32,6 +34,7 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " }
 "********************************************************************* {The End
 " Plug 'Neur1n/statusline.vim'
+Plug 'Neur1n/runner'
 Plug 'Neur1n/zipline'
 " }
 call plug#end()

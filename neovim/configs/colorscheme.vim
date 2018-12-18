@@ -39,7 +39,7 @@ elseif g:colors_name ==# 'gruvbox'
     hi link CocHintSign CocWarningSign
   endif
 
-  hi StatusLine guifg=#002b36 guibg=#2aa198 ctermfg=234 ctermbg=36
+  " hi StatusLine guifg=#002b36 guibg=#2aa198 ctermfg=234 ctermbg=36
   hi StatusLineNC guifg=#1d2021 guibg=NONE ctermfg=234 ctermbg=NONE
 
   " hi VertSplit guifg=#586e75 guibg=NONE

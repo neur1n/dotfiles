@@ -64,8 +64,6 @@ nnoremap <leader>kf :call neur1n#general#RunKeil('-f ')<cr>
 nnoremap <leader>kd :call neur1n#general#RunKeil('-d ')<cr>
 "                                                                      Markdown
 nnoremap <leader>md :call neur1n#general#ViewMarkdown()<cr>
-"                                                                        Python
-nnoremap <leader>py :wa<cr>:call neur1n#general#RunPython()<cr>
 "                                                                             R
 nnoremap <leader>rs :wa<cr>:call neur1n#general#RunRScript()<cr>
 " }

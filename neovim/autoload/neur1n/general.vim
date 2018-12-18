@@ -105,15 +105,6 @@ function! neur1n#general#ViewMarkdown()
     execute 'silent !'.l:browser.' %'
   endif
 endfunction
-"                                                                        Python
-function! neur1n#general#RunPython()
-  if filereadable('MAINFILE')
-    let l:file = readfile('MAINFILE')
-    execute '!python3 '.l:file[0]
-  else
-    execute '!python3 %'
-  endif
-endfunction
 "                                                                             R
 function! neur1n#general#RunRScript()
   if filereadable('MAINFILE')
