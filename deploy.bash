@@ -9,8 +9,12 @@ function deploy_neovim() {
   if [[ ! -d "~/.config/nvim" ]]; then
     mkdir -p ~/.config/nvim
   fi
+  mkdir -p ./neovim/plugged
 
   ln -fns `ls -d1 $PWD/neovim/*` ~/.config/nvim/
+
+  git clone https://github.com/morhetz/gruvbox.git ./neovim/plugged/gruvbox
+  git clone https://github.com/Neur1n/zipline.git ./neovim/plugged/zipline
   echo "[dotfiles] neovim deployed"
 }
 

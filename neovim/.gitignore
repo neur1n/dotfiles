@@ -1,4 +1,2 @@
+plugged/
 recovery/
-plugged/*
-!plugged/runner/
-!plugged/zipline/

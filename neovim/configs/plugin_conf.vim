@@ -6,34 +6,38 @@ let g:rainbow_active = 1
 " }
 
 "*********************************************************** {majutsushi/tagbar
-nnoremap <leader>tb :TagbarOpenAutoClose<CR>
-let g:tagbar_iconchars = ['►', '▼'] " 
-let g:tagbar_show_linenumbers = -1
-let g:tagbar_silent = 1
-let g:tagbar_sort = 0
-"let g:tagbar_autoclose = 1
+if exists(':Tagbar')
+  nnoremap <leader>tb :TagbarOpenAutoClose<CR>
+  let g:tagbar_iconchars = ['►', '▼'] " 
+  let g:tagbar_show_linenumbers = -1
+  let g:tagbar_silent = 1
+  let g:tagbar_sort = 0
+  "let g:tagbar_autoclose = 1
+endif
 " }
 
 "********************************************************** {mhinz/vim-startify
-let g:startify_fortune_use_unicode = 1
-let g:startify_session_dir = '$VIMCONFIG/recovery/session'
+if exists('g:loaded_startify')
+  let g:startify_fortune_use_unicode = 1
+  let g:startify_session_dir = '$VIMCONFIG/recovery/session'
 
-if strftime('%M') % 3 == 0
-  let b:greeting = startify#fortune#boxed()
-elseif strftime('%M') % 3 == 1
-  let b:greeting = b:greetings['hello']
-else
-  let b:greeting = b:greetings['vim']
-endif
+  if strftime('%M') % 3 == 0
+    let b:greeting = startify#fortune#boxed()
+  elseif strftime('%M') % 3 == 1
+    let b:greeting = b:greetings['hello']
+  else
+    let b:greeting = b:greetings['vim']
+  endif
 
-if strftime('%H') < 12
-  let b:animal = b:animals['cow']
-elseif strftime('%H') < 18
-  let b:animal = b:animals['lion']
-else
-  let b:animal = b:animals['moose']
+  if strftime('%H') < 12
+    let b:animal = b:animals['cow']
+  elseif strftime('%H') < 18
+    let b:animal = b:animals['lion']
+  else
+    let b:animal = b:animals['moose']
+  endif
+  let g:startify_custom_header = map(b:greeting + b:animal, "\"   \".v:val")
 endif
-let g:startify_custom_header = map(b:greeting + b:animal, "\"   \".v:val")
 " }
 
 "************************************************************* {mileszs/ack.vim
@@ -53,53 +57,55 @@ let g:gruvbox_undercurl=1
 " }
 
 "************************************************************* {neomake/neomake
-call neomake#configure#automake({
-      \   'TextChanged': {},
-      \   'InsertLeave': {},
-      \   'BufWritePost': {'delay': 0},
-      \   'BufWinEnter': {},
-      \ }, 500)
+if exists('g:loaded_neomake')
+  call neomake#configure#automake({
+        \   'TextChanged': {},
+        \   'InsertLeave': {},
+        \   'BufWritePost': {'delay': 0},
+        \   'BufWinEnter': {},
+        \ }, 500)
 
-let g:neomake_error_sign = {'text': '✘'}
-let g:neomake_warning_sign = {'text': ''}
-let g:neomake_message_sign = {'text': ''}
-let g:neomake_info_sign = {'text': ''}
+  let g:neomake_error_sign = {'text': '✘'}
+  let g:neomake_warning_sign = {'text': ''}
+  let g:neomake_message_sign = {'text': ''}
+  let g:neomake_info_sign = {'text': ''}
 
-" {linter
-let g:neomake_cpp_enabled_makers = ['clang', 'cpplint']
-let g:neomake_cpp_clang_exe = 'clang-7'
-let g:neomake_cpp_cpplint_exe = 'cpplint'
+  let g:neomake_cpp_enabled_makers = ['clang', 'cpplint']
+  let g:neomake_cpp_clang_exe = 'clang-7'
+  let g:neomake_cpp_cpplint_exe = 'cpplint'
 
-let g:neomake_c_enabled_makers = ['clang']
-let g:neomake_c_clang_exe = 'clang-7'
+  let g:neomake_c_enabled_makers = ['clang']
+  let g:neomake_c_clang_exe = 'clang-7'
 
-let g:neomake_python_enabled_makers = ['pyflakes', 'pycodestyle', 'pydocstyle']
-let g:neomake_python_pyflakes_exe = 'pyflakes'
-let g:neomake_python_pycodestyle_exe = 'pycodestyle'
-let g:neomake_python_pydocstyle_exe = 'pydocstyle'
-" }
+  let g:neomake_python_enabled_makers = ['pyflakes', 'pycodestyle', 'pydocstyle']
+  let g:neomake_python_pyflakes_exe = 'pyflakes'
+  let g:neomake_python_pycodestyle_exe = 'pycodestyle'
+  let g:neomake_python_pydocstyle_exe = 'pydocstyle'
+endif
 " }
 
 "*********************************************************** {neoclide/coc.nvim
 set completeopt=menuone,noinsert,noselect
 set hidden
 
-function! s:check_back_space() abort
-  let a:col = col('.') - 1
-  return !a:col || getline('.')[a:col - 1]  =~# '\s'
-endfunction
+if exists('g:did_coc_loaded')
+  function! s:check_back_space() abort
+    let a:col = col('.') - 1
+    return !a:col || getline('.')[a:col - 1]  =~# '\s'
+  endfunction
 
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" : coc#refresh()
-inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<Tab>" : coc#refresh()
+  inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gr <Plug>(coc-reference)
-nmap <leader>rn <Plug>(coc-rename)
+  nmap <leader>gd <Plug>(coc-definition)
+  nmap <leader>gr <Plug>(coc-reference)
+  nmap <leader>rn <Plug>(coc-rename)
 
-" nmap <C-p> <Plug>(coc-diagnostic-prev)
-" nmap <C-n> <Plug>(coc-diagnostic-next)
+  " nmap <C-p> <Plug>(coc-diagnostic-prev)
+  " nmap <C-n> <Plug>(coc-diagnostic-next)
+endif
 "}
 
 "************************************************************ {SirVer/ultisnips

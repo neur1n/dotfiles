@@ -1,6 +1,0 @@
-[submodule "neovim/plugged/zipline"]
-	path = neovim/plugged/zipline
-	url = https://github.com/Neur1n/zipline
-[submodule "neovim/plugged/runner"]
-	path = neovim/plugged/runner
-	url = https://github.com/Neur1n/runner
