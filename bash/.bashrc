@@ -122,6 +122,7 @@ source $HOME/.bashrc_ext/bashrc_bind
 source $HOME/.bashrc_ext/bashrc_alias
 source $HOME/.bashrc_ext/bashrc_func
 source $HOME/.bashrc_ext/bashrc_export
+source $HOME/.bashrc_ext/conda_conf
 source $HOME/.bashrc_ext/gazebo_conf
 source $HOME/.bashrc_ext/ros_conf
 source $HOME/.bashrc_ext/ue_conf

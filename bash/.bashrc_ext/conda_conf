@@ -1,0 +1,8 @@
+# vim: ft=sh
+
+alias conda_env="conda info --env"
+alias conda_act="source activate"
+alias conda_deact="source deactivate"
+alias conda_rm="conda env remove -n"
+
+export PATH="/home/yy/miniconda3/bin:$PATH"
