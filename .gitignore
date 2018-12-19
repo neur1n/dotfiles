@@ -1,8 +1,2 @@
-## Ignore plugin directory managed by vimplug
-plugged/
-
-## Ignore the backup files manually made by myself
-*.bkpz
-
 .netrwhist
 *.swp
