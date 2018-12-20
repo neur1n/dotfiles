@@ -1,6 +1,3 @@
-set guicursor+=a:blinkon0
-set fillchars=vert:\|
-
 hi! link SignColumn Normal
 
 if g:colors_name ==# 'solarized'
@@ -39,8 +36,6 @@ elseif g:colors_name ==# 'gruvbox'
     hi link CocHintSign CocWarningSign
   endif
 
-  " hi StatusLine guifg=#002b36 guibg=#2aa198 ctermfg=234 ctermbg=36
-  hi StatusLineNC guifg=#1d2021 guibg=NONE ctermfg=234 ctermbg=NONE
-
-  " hi VertSplit guifg=#586e75 guibg=NONE
+  hi StatusLine ctermfg=234 ctermbg=223 guifg=#1d2021 guibg=#ebdbb2
+  hi StatusLineNC ctermfg=234 ctermbg=NONE guifg=#1d2021 guibg=NONE
 endif
