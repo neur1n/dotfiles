@@ -2,8 +2,8 @@ scriptencoding utf-8
 
 augroup comment_format
   au!
-  autocmd FileType * set fo-=ro       " turn off insertion of comment leaders
-  autocmd FileType * set fo+=j   " remove a comment leader when joining lines
+  autocmd FileType * set fo-=ro         " turn off insertion of comment leaders
+  autocmd FileType * set fo+=j     " remove a comment leader when joining lines
 augroup END
 
 augroup file_types
@@ -17,7 +17,7 @@ augroup END
 
 augroup cd_pwd
   au!
-  au BufEnter * silent! lcd %:p:h                            " auto cd to pwd
+  au BufEnter * silent! lcd %:p:h                              " auto cd to pwd
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$")
         \| exe "normal! g'\"" | endif
 augroup END
@@ -28,7 +28,7 @@ augroup scroll_off
         \ let &scrolloff=winheight(win_getid())/3
 augroup END
 
-function! SelectTemplate(mode)
+function! s:SelectTemplate(mode)
   if a:mode ==# 'ex'  " Choose by extension
     execute ':silent! 0r $VIMCONFIG/templates/skeleton.'.expand('<afile>:e')
   elseif a:mode ==# 'ft'  " Choose by file type
@@ -39,10 +39,10 @@ endfunction
 augroup templates
   au!
   autocmd BufNewFile *.* if count(['cmake'], &filetype)
-        \ |     call SelectTemplate('ft')
-        \ | else
-          \ |     call SelectTemplate('ex')
-          \ | endif
+        \|   call s:SelectTemplate('ft')
+        \| else
+        \|   call s:SelectTemplate('ex')
+        \| endif
 augroup END
 
 augroup post
