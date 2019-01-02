@@ -20,7 +20,6 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
-" Plug 'w0rp/ale'
 Plug 'wesQ3/vim-windowswap'
 Plug 'Yggdroot/LeaderF'
 " }
@@ -28,14 +27,12 @@ Plug 'Yggdroot/LeaderF'
 Plug 'Shougo/neco-vim', {'for': ['vim']}
 Plug 'neoclide/coc-neco', {'for': ['vim']}
 Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc-jedi', {'do': 'yarn install'}
 " Plug 'zxqfl/tabnine-vim'
 " }
 "********************************************************************* {The End
-" Plug 'Neur1n/statusline.vim'
 Plug 'Neur1n/runner'
 Plug 'Neur1n/zipline'
-" Plug 'itchyny/lightline.vim'
 " }
 call plug#end()

@@ -17,6 +17,7 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-reference)
 nmap <leader>rn <Plug>(coc-rename)
+imap <C-s> <Plug>(coc-snippets-expand)
 
 " nmap <C-p> <Plug>(coc-diagnostic-prev)
 " nmap <C-n> <Plug>(coc-diagnostic-next)

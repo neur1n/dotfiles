@@ -1,14 +1,14 @@
 {
-    "coc.preferences.diagnostic.enable": false,
-    "coc.preferences.diagnostic.errorSign": "✘",
-    "coc.preferences.diagnostic.warningSign": "",
-    "coc.preferences.diagnostic.infoSign": "",
-    "coc.preferences.diagnostic.hintSign": "",
-    // "coc.source.omni.filetypes": ["python"],
-    "languageserver": {
-        "clangd": {
-            "command": "clangd-7",
-            "filetypes": ["c", "cpp", "objc", "objcpp"]
-      }
+  "coc.preferences.diagnostic.enable": false,
+  "coc.preferences.diagnostic.errorSign": "✘",
+  "coc.preferences.diagnostic.warningSign": "",
+  "coc.preferences.diagnostic.infoSign": "",
+  "coc.preferences.diagnostic.hintSign": "",
+  "coc.source.ultisnips.enable": false,
+  "languageserver": {
+    "clangd": {
+      "command": "clangd-7",
+      "filetypes": ["c", "cpp", "objc", "objcpp"]
     }
+  }
 }
