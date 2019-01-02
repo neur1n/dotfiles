@@ -20,8 +20,7 @@ let g:neomake_cpp_cpplint_exe = 'cpplint'
 let g:neomake_c_enabled_makers = ['clang']
 let g:neomake_c_clang_exe = 'clang-7'
 
-let g:neomake_python_enabled_makers = ['pyflakes', 'pycodestyle', 'pydocstyle']
+let g:neomake_python_enabled_makers = ['pyflakes', 'pycodestyle']
 let g:neomake_python_pyflakes_exe = 'pyflakes'
 let g:neomake_python_pycodestyle_exe = 'pycodestyle'
-let g:neomake_python_pydocstyle_exe = 'pydocstyle'
 " }

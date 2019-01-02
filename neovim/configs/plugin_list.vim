@@ -36,5 +36,6 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " Plug 'Neur1n/statusline.vim'
 Plug 'Neur1n/runner'
 Plug 'Neur1n/zipline'
+" Plug 'itchyny/lightline.vim'
 " }
 call plug#end()

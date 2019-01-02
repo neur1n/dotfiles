@@ -2,7 +2,7 @@ scriptencoding utf-8
 
 "*********************************************************** {neoclide/coc.nvim
 set completeopt=menuone,noinsert,noselect
-set hidden
+" set hidden
 
 function! s:check_back_space() abort
   let a:col = col('.') - 1
