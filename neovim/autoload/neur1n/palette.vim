@@ -3,41 +3,41 @@ scriptencoding utf-8
 "******************************************************************* {{{Gruvbox
 " -= Dark mode =-
 let s:gruvbox = {
-      \ 'aqua':   ['#8ec07c', 108],
-      \ 'blue':   ['#83a598', 109],
-      \ 'green':  ['#b8bb26', 142],
-      \ 'orange': ['#fe8019', 208],
-      \ 'purple': ['#d3869b', 175],
-      \ 'red':    ['#fb4934', 167],
-      \ 'yellow': ['#fabd2f', 214],
-      \ 'bg0_h':  ['#1d2021', 234],
-      \ 'bg0':    ['#282828', 235],
-      \ 'bg0_s':  ['#32302f', 236],
-      \ 'fg0':    ['#fbf1c7', 229],
-      \ 'fg1':    ['#ebdbb2', 223],
-      \ 'gray':   ['#928374', 245],
+      \ 'aqua':   {'c': 108, 'g': '#8ec07c'},
+      \ 'blue':   {'c': 109, 'g': '#83a598'},
+      \ 'green':  {'c': 142, 'g': '#b8bb26'},
+      \ 'orange': {'c': 208, 'g': '#fe8019'},
+      \ 'purple': {'c': 175, 'g': '#d3869b'},
+      \ 'red':    {'c': 167, 'g': '#fb4934'},
+      \ 'yellow': {'c': 214, 'g': '#fabd2f'},
+      \ 'bg0_h':  {'c': 234, 'g': '#1d2021'},
+      \ 'bg0':    {'c': 235, 'g': '#282828'},
+      \ 'bg0_s':  {'c': 236, 'g': '#32302f'},
+      \ 'fg0':    {'c': 229, 'g': '#fbf1c7'},
+      \ 'fg1':    {'c': 223, 'g': '#ebdbb2'},
+      \ 'gray':   {'c': 245, 'g': '#928374'},
       \ }
 " }}}
 
 "***************************************************************** {{{Solarized
 " -= Dark mode =-
 let s:solarized = {
-      \ 'blue':    ['#268bd2', 32],
-      \ 'cyan':    ['#2aa198', 36],
-      \ 'green':   ['#859900', 106],
-      \ 'orange':  ['#cb4b16', 166],
-      \ 'magneta': ['#d33682', 168],
-      \ 'red':     ['#dc322f', 160],
-      \ 'violet':  ['#6c71c4', 62],
-      \ 'yellow':  ['#b58900', 136],
-      \ 'base03':  ['#002b36', 234],
-      \ 'base02':  ['#073642', 235],
-      \ 'base01':  ['#586e75', 242],
-      \ 'base00':  ['#657b83', 66],
-      \ 'base0':   ['#839496', 246],
-      \ 'base1':   ['#93a1a1', 247],
-      \ 'base2':   ['#eee8d5', 254],
-      \ 'base3':   ['#fdf6e3', 230],
+      \ 'blue':    {'c':  32, 'g': '#268bd2'},
+      \ 'cyan':    {'c':  36, 'g': '#2aa198'},
+      \ 'green':   {'c': 106, 'g': '#859900'},
+      \ 'orange':  {'c': 166, 'g': '#cb4b16'},
+      \ 'magneta': {'c': 168, 'g': '#d33682'},
+      \ 'red':     {'c': 160, 'g': '#dc322f'},
+      \ 'violet':  {'c':  62, 'g': '#6c71c4'},
+      \ 'yellow':  {'c': 136, 'g': '#b58900'},
+      \ 'base03':  {'c': 234, 'g': '#002b36'},
+      \ 'base02':  {'c': 235, 'g': '#073642'},
+      \ 'base01':  {'c': 242, 'g': '#586e75'},
+      \ 'base00':  {'c':  66, 'g': '#657b83'},
+      \ 'base0':   {'c': 246, 'g': '#839496'},
+      \ 'base1':   {'c': 247, 'g': '#93a1a1'},
+      \ 'base2':   {'c': 254, 'g': '#eee8d5'},
+      \ 'base3':   {'c': 230, 'g': '#fdf6e3'},
       \ }
 " }}}
 
@@ -77,7 +77,23 @@ function! neur1n#palette#Palette() abort
   return l:palette
 endfunction
 
-function! neur1n#palette#Highlight(group, tf, tb, gf, gb, sty) abort
+function! neur1n#palette#Highlight(group, fg, bg, sty) abort
+  if type(a:fg) == v:t_dict
+    let l:fgc = a:fg.c
+    let l:fgg = a:fg.g
+  else
+    let l:fgc = a:fg
+    let l:fgg = a:fg
+  endif
+
+  if type(a:bg) == v:t_dict
+    let l:bgc = a:bg.c
+    let l:bgg = a:bg.g
+  else
+    let l:bgc = a:bg
+    let l:bgg = a:bg
+  endif
+
   execute printf('highlight %s ctermfg=%s ctermbg=%s guifg=%s guibg=%s cterm=%s gui=%s',
-        \ a:group, a:tf, a:tb, a:gf, a:gb, a:sty, a:sty)
+        \ a:group, l:fgc, l:bgc, l:fgg, l:bgg, a:sty, a:sty)
 endfunction
