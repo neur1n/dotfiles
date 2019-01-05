@@ -3,36 +3,34 @@ call plug#begin('$VIMCONFIG/plugged')
 Plug 'itchyny/vim-gitbranch'
 Plug 'morhetz/gruvbox'
 " }
-"************************************************************************ {Misc
+"********************************************************************** {{{Misc
 if has('nvim')
   Plug 'equalsraf/neovim-gui-shim'
 endif
 Plug 'cohama/lexima.vim'
 Plug 'lilydjwg/colorizer', {'for': ['palette']}
 Plug 'luochen1990/rainbow'
-Plug 'majutsushi/tagbar' " {'on': 'TagbarOpenAutoClose'}
+Plug 'majutsushi/tagbar'
 Plug 'matze/vim-move'
 Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
-Plug 'neomake/neomake'
 Plug 'sheerun/vim-polyglot'
-Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
 Plug 'wesQ3/vim-windowswap'
 Plug 'Yggdroot/LeaderF'
-" }
-"************************************************************* {Auto-completion
+" }}}
+"*********************************************************** {{{Auto-completion
 Plug 'Shougo/neco-vim', {'for': ['vim']}
 Plug 'neoclide/coc-neco', {'for': ['vim']}
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'neoclide/coc-jedi', {'do': 'yarn install'}
-" Plug 'zxqfl/tabnine-vim'
-" }
-"********************************************************************* {The End
+" }}}
+"******************************************************************* {{{The End
+Plug 'neomake/neomake'
 Plug 'Neur1n/runner'
 Plug 'Neur1n/zipline'
-" }
+" }}}
 call plug#end()
