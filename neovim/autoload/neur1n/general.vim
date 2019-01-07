@@ -1,4 +1,4 @@
-"********************************************************************* {Editing
+"******************************************************************* Editing{{{
 "                                             Delete hidden buffers: <leader>db
 function neur1n#general#DelHiddenBuf()
   let l:tpbl=[]
@@ -29,9 +29,9 @@ function! neur1n#general#ToggleRelLnr()
     set relativenumber
   endif
 endfunction
-" }
+"}}}
 
-"**************************************************************** {Run or Build
+"************************************************************** Run or Build{{{
 "                                                                      C or C++
 function! neur1n#general#BuildC()
   if filereadable('MAINFILE')
@@ -114,4 +114,4 @@ function! neur1n#general#RunRScript()
     execute '!Rscript %'
   endif
 endfunction
-" }
+"}}}

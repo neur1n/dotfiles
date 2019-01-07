@@ -1,6 +1,6 @@
 scriptencoding utf-8
 
-"************************************************************* {neomake/neomake
+"*********************************************************** neomake/neomake{{{
 call neomake#configure#automake({
       \   'TextChanged': {},
       \   'InsertLeave': {},
@@ -23,4 +23,4 @@ let g:neomake_c_clang_exe = 'clang-7'
 let g:neomake_python_enabled_makers = ['pyflakes', 'pycodestyle']
 let g:neomake_python_pyflakes_exe = 'pyflakes'
 let g:neomake_python_pycodestyle_exe = 'pycodestyle'
-" }
+"}}}

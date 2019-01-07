@@ -2,16 +2,16 @@
 let mapleader = ' '
 let maplocalleader = ' '
 
-"********************************************************************* {General
+"******************************************************************* General{{{
 map Q <nop>
 "           Remap F1 to esc, also need to disable F1 of gnome terminal manually
 map <F1> <Esc>
 imap <F1> <Esc>
 "                                                     Split open tag definition
 nnoremap <A-]> :vsp <cr>:exec("tag ".expand("<cword>"))<cr>
-" }
+"}}}
 
-"***************************************************************** {Move Around
+"*************************************************************** Move Around{{{
 "                         Go to a line and make it one the center of the screen
 nnoremap G Gzz
 "                                   Modify the behavior of j & k in normal mode
@@ -29,9 +29,9 @@ inoremap <A-h> <Left>
 inoremap <A-l> <Right>
 inoremap <A-j> <Down>
 inoremap <A-k> <Up>
-" }
+"}}}
 
-" ******************************************************************** {Editing
+"******************************************************************* Editing{{{
 "           Insert a new line without entering insert mode (shift-enter, enter)
 nnoremap <cr> o<Esc>
 nnoremap <S-cr> O<Esc>
@@ -47,9 +47,9 @@ nnoremap <leader>db :call neur1n#general#DelHiddenBuf()<cr>
 nnoremap <leader>ro :call neur1n#general#ToggleReadOnly()<cr>
 "                                                   Toggle relative line number
 nnoremap <leader>rn :call neur1n#general#ToggleRelLnr()<cr>
-" }
+"}}}
 
-" *************************************************************** {Run or Build
+"************************************************************** Run or Build{{{
 "                                                                      C or C++
 nnoremap <leader>bc :wa<cr>:call neur1n#general#BuildC()<cr>
 nnoremap <leader>rc :wa<cr>:call neur1n#general#RunC()<cr>
@@ -62,8 +62,6 @@ nnoremap <leader>kb :call neur1n#general#RunKeil('-b ')<cr>
 nnoremap <leader>kr :call neur1n#general#RunKeil('-cr ')<cr>
 nnoremap <leader>kf :call neur1n#general#RunKeil('-f ')<cr>
 nnoremap <leader>kd :call neur1n#general#RunKeil('-d ')<cr>
-"                                                                      Markdown
-nnoremap <leader>md :call neur1n#general#ViewMarkdown()<cr>
 "                                                                             R
 nnoremap <leader>rs :wa<cr>:call neur1n#general#RunRScript()<cr>
-" }
+"}}}

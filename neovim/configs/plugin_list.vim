@@ -1,9 +1,9 @@
 call plug#begin('$VIMCONFIG/plugged')
-"******************************************************* {Load at the beginning
+"***************************************************** Load at the beginning{{{
 Plug 'itchyny/vim-gitbranch'
 Plug 'morhetz/gruvbox'
-" }
-"********************************************************************** {{{Misc
+"}}}
+"********************************************************************** Misc{{{
 if has('nvim')
   Plug 'equalsraf/neovim-gui-shim'
 endif
@@ -20,17 +20,17 @@ Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
 Plug 'wesQ3/vim-windowswap'
 Plug 'Yggdroot/LeaderF'
-" }}}
-"*********************************************************** {{{Auto-completion
+"}}}
+"*********************************************************** Auto-completion{{{
 Plug 'Shougo/neco-vim', {'for': ['vim']}
 Plug 'neoclide/coc-neco', {'for': ['vim']}
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'neoclide/coc-jedi', {'do': 'yarn install'}
-" }}}
-"******************************************************************* {{{The End
+"}}}
+"******************************************************************* The End{{{
 Plug 'neomake/neomake'
 Plug 'Neur1n/runner'
 Plug 'Neur1n/zipline'
-" }}}
+"}}}
 call plug#end()

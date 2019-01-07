@@ -17,13 +17,13 @@ Plug 'ncm2/ncm2-tagprefix'
 Plug 'ncm2/ncm2-ultisnips', {'for': ['c', 'cpp', 'go', 'python', 'tex', 'vim']}
 Plug 'ncm2/ncm2-vim', {'for': 'vim'}
 
-"************************************************* {iamcco/markdown-preview.vim
+"*********************************************** iamcco/markdown-preview.vim{{{
 let g:mkdp_refresh_slow = 1
 nmap <silent> <leader>mp <Plug>MarkdownPreview
 nmap <silent> <leader>ms <Plug>StopMarkdownPreview
-" }
+"}}}
 
-"******************************************************* {itchyny/lightline.vim
+"***************************************************** itchyny/lightline.vim{{{
 if !exists('g:lightline')
   let g:lightline = {}
 endif
@@ -80,9 +80,9 @@ let g:lightline.mode_map = {
       \ "": 'S',
       \ 't': 'TERMINAL',
       \ }
-" }
+"}}}
 
-"*************************************************************** {lervag/vimtex
+"************************************************************* lervag/vimtex{{{
 " let g:vimtex_compiler_progname = 'nvr'
 let g:vimtex_view_general_viewer = 'E:\ProgramFiles\SumatraPDF\SumatraPDF.exe'
 let g:vimtex_view_general_options
@@ -101,9 +101,9 @@ let g:vimtex_compiler_latexmk = {
       \ 'callback': 1,
       \ 'continuous': 0,
       \ }
-" }
+"}}}
 
-"***************************************************************** {ncm-2/ncm-2
+"*************************************************************** ncm-2/ncm-2{{{
 set completeopt=noinsert,menuone,noselect
 let g:ncm2_pyclang#clang_path = '/usr/bin/clang++-6.0'
 let g:ncm2_pyclang#library_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
@@ -145,9 +145,9 @@ augroup END
 imap <silent> <expr> <C-s> ncm2_ultisnips#expand_or("\<Plug>(ultisnips_expand)", 'm')
 smap <C-s> <Plug>(ultisnips_expand)
 let g:UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
-" }
+"}}}
 
-"******************************************************** {Shougo/deoplete.nvim
+"****************************************************** Shougo/deoplete.nvim{{{
 "                                                          zchee/deoplete-clang
 let g:deoplete#enable_at_startup=1
 call deoplete#custom#option({
@@ -160,9 +160,16 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
 let g:deoplete#sources#clang#libclang_path='/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
 let g:deoplete#sources#clang#clang_header='/usr/lib/llvm-6.0/lib/clang/6.0.1/include/'
-" }
+"}}}
 
-"******************************************************************** {w0rp/ale
+"********************************************************** SirVer/ultisnips{{{
+let g:UltiSnipsExpandTrigger = '<C-s>'
+" let g:UltiSnipsRemoveSelectModeMappings = 0
+let g:UltiSnipsJumpForwardTrigger = '<C-f>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-b>'
+"}}}
+
+"****************************************************************** w0rp/ale{{{
 "
 " let g:ale_lint_on_insert_leave = 1
 " let g:ale_lint_on_text_changed = 'never'
@@ -205,4 +212,4 @@ highlight link ALEErrorSign Error_
 highlight link ALEWarningSign Warning_
 highlight link ALEInfoSign Warning_
 highlight link ALEHintSign Warning_
-" }
+"}}}

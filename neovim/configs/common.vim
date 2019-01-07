@@ -1,12 +1,11 @@
-"************************************************************* {Moduled Configs
+"*********************************************************** Moduled Configs{{{
 source $VIMCONFIG/configs/keymap.vim
-source $VIMCONFIG/configs/abbrev.vim
+" source $VIMCONFIG/configs/abbrev.vim
 source $VIMCONFIG/configs/plugin_list.vim
-source $VIMCONFIG/configs/greetings.vim
 source $VIMCONFIG/configs/plugin_conf.vim
-" }
+"}}}
 
-"************************************************************************** {UI
+"************************************************************************ UI{{{
 let $LANG='en'                                           " set message language
 set langmenu=en                                             " set menu language
 let g:netrw_winsize=15                     " set explorer window width to be 30
@@ -35,13 +34,13 @@ if has('syntax')
   colorscheme gruvbox
   "colorscheme solarized
 endif
-" }
+"}}}
 
-"************************************************************* {Moduled Configs
+"*********************************************************** Moduled Configs{{{
 source $VIMCONFIG/configs/autocmd.vim
-" }
+"}}}
 
-"******************************************************************** {Encoding
+"****************************************************************** Encoding{{{
 if has('multi_byte')
   if &termencoding ==# ''
     let &termencoding = &encoding
@@ -50,9 +49,9 @@ if has('multi_byte')
   setglobal fileencoding=utf-8
   set fileencodings=utf-8,gbk,gb2312,gb18030
 endif
-" }
+"}}}
 
-"********************************************************************* {General
+"******************************************************************* General{{{
 set autoindent                                           " set auto indentation
 set backspace=indent,start                       " for vim-latex, see issue #53
 set colorcolumn=80                                          " show right margin
@@ -83,4 +82,4 @@ set splitright                                            " split on right side
 
 set backup
 set backupdir=$VIMCONFIG/recovery/backup
-" }
+"}}}

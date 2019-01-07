@@ -1,6 +1,6 @@
 scriptencoding utf-8
 
-"*********************************************************** {neoclide/coc.nvim
+"********************************************************* neoclide/coc.nvim{{{
 set completeopt=menuone,noinsert,noselect
 " set hidden
 
@@ -21,4 +21,4 @@ imap <C-s> <Plug>(coc-snippets-expand)
 
 " nmap <C-p> <Plug>(coc-diagnostic-prev)
 " nmap <C-n> <Plug>(coc-diagnostic-next)
-"}
+"}}}
