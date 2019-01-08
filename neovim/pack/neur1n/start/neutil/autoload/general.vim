@@ -1,6 +1,6 @@
 "******************************************************************* Editing{{{
 "                                             Delete hidden buffers: <leader>db
-function neur1n#general#DelHiddenBuf()
+function general#DelHiddenBuf()
   let l:tpbl=[]
   call map(range(1, tabpagenr('$')), 'extend(l:tpbl, tabpagebuflist(v:val))')
   for l:buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(l:tpbl, v:val)==-1')
@@ -8,21 +8,21 @@ function neur1n#general#DelHiddenBuf()
   endfor
 endfunction
 "                                                  Toggle read only: <leader>ro
-function neur1n#general#ToggleReadOnly()
+function general#ToggleReadOnly()
   if &readonly == 1
-    setl noreadonly
+    setlocal noreadonly
     if has('conceal')
-      setl conceallevel=2 cocu=i
+      setlocal conceallevel=2 concealcursor=i
     endif
   else
-    setl readonly
+    setlocal readonly
     if has('conceal')
-      setl conceallevel=2 cocu=cn
+      setlocal conceallevel=2 concealcursor=cn
     endif
   endif
 endfunction
 "                                       Toggle relative line number: <leader>rn
-function! neur1n#general#ToggleRelLnr()
+function! general#ToggleRelLnr()
   if(&relativenumber == 1)
     set norelativenumber
   else
@@ -33,24 +33,24 @@ endfunction
 
 "************************************************************** Run or Build{{{
 "                                                                      C or C++
-function! neur1n#general#BuildC()
+function! general#BuildC()
   if filereadable('MAINFILE')
     let l:file_id = readfile('MAINFILE')
-    if &ft ==# 'cpp'
+    if &filetype ==# 'cpp'
       execute '!g++ '.l:file_id[0].' -o '.l:file_id[1]
-    elseif &ft ==# 'c'
+    elseif &filetype ==# 'c'
       execute '!gcc '.l:file_id[0].' -o '.l:file_id[1]
     endif
   else
-    if &ft ==# 'cpp'
+    if &filetype ==# 'cpp'
       execute '!g++ '.bufname('%').' -o '.expand('%:r').'.out'
-    elseif &ft ==# 'c'
+    elseif &filetype ==# 'c'
       execute '!gcc '.bufname('%').' -o '.expand('%:r').'.out'
     endif
   endif
 endfunction
 
-function! neur1n#general#RunC()
+function! general#RunC()
   if filereadable('MAINFILE')
     let l:file_id = readfile('MAINFILE')
     execute '!./'.l:file_id[1]
@@ -59,7 +59,7 @@ function! neur1n#general#RunC()
   endif
 endfunction
 "                                                                            Go
-function! neur1n#general#RunGo()
+function! general#RunGo()
   if filereadable('MAINFILE')
     let l:file_id = readfile('MAINFILE')
     execute '!go run '.l:file_id[0]
@@ -68,11 +68,11 @@ function! neur1n#general#RunGo()
   endif
 endfunction
 "                                                                         Julia
-function! neur1n#general#RunJulia()
+function! general#RunJulia()
   execute '!julia %'
 endfunction
 "                                                                          Keil
-function! neur1n#general#RunKeil(options)
+function! general#RunKeil(options)
   let l:target = ''
 
   if !empty(glob('*.uvprojx'))
@@ -91,7 +91,7 @@ function! neur1n#general#RunKeil(options)
   endif
 endfunction
 "                                                                      Markdown
-function! neur1n#general#ViewMarkdown()
+function! general#ViewMarkdown()
   if has('unix')
     let l:browser = '/usr/bin/vivaldi'
   elseif has('win32')
@@ -106,7 +106,7 @@ function! neur1n#general#ViewMarkdown()
   endif
 endfunction
 "                                                                             R
-function! neur1n#general#RunRScript()
+function! general#RunRScript()
   if filereadable('MAINFILE')
     let l:file = readfile('MAINFILE')
     execute '!Rscript '.l:file[0]

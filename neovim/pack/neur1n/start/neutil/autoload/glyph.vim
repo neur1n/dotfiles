@@ -1,7 +1,6 @@
 scriptencoding utf-8
 
 " Must use double quotes to wrap unicode codes.
-" Ordered by their location.
 " Most of the names follow those on https://nerdfonts.com/#cheat-sheet.
 
 " Candidates:
@@ -39,7 +38,7 @@ let s:glyph = {
 \          'wspc':     ["\ue612", ''],
 \ }
 
-function! neur1n#glyph#Glyph(name, ...)
+function! glyph#Glyph(name, ...)
     if a:0 == 0
         return s:glyph[a:name][0]
     else
