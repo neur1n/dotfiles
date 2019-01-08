@@ -27,41 +27,41 @@ let s:color_map = {
 
 function! s:HiStatic() abort
   " Tabline
-  call palette#Highlight('ZTLeft', s:palette.blue, 'bg', 'bold')
-  call palette#Highlight('ZTCurTab', s:palette.orange, 'bg', 'bold')
-  execute 'highlight link ZTNotCurTab ZTLeft'
+  call palette#Highlight('NeuTLeft', s:palette.blue, 'bg', 'bold')
+  call palette#Highlight('NeuTCurTab', s:palette.orange, 'bg', 'bold')
+  execute 'highlight link NeuTNotCurTab NeuTLeft'
 
   " Inactive mode and file info.
-  call palette#Highlight('ZBufInfoU', s:palette.fgh, s:palette.bgh, 'bold')
-  call palette#Highlight('ZModifU', s:palette.purple, s:palette.bgh, 'bold')
-  call palette#Highlight('ZRulerU', s:palette.fgh, s:palette.bgh, 'NONE')
+  call palette#Highlight('NeuBufInfoU', s:palette.fgh, s:palette.bgh, 'bold')
+  call palette#Highlight('NeuModifU', s:palette.purple, s:palette.bgh, 'bold')
+  call palette#Highlight('NeuRulerU', s:palette.fgh, s:palette.bgh, 'NONE')
 
-  call palette#Highlight('ZFileInfo', s:palette.gray, s:palette.bgh, 'NONE')
+  call palette#Highlight('NeuFileInfo', s:palette.gray, s:palette.bgh, 'NONE')
 
   " Plugin dependent.
   if exists('g:loaded_gitbranch')
-    call palette#Highlight('ZVCS', s:palette.fgs, s:palette.bgh, 'bold')
+    call palette#Highlight('NeuVCS', s:palette.fgs, s:palette.bgh, 'bold')
   endif
   if exists('g:loaded_windowswap')
-    call palette#Highlight('ZSwap', s:palette.orange, s:palette.bgh, 'bold')
+    call palette#Highlight('NeuSwap', s:palette.orange, s:palette.bgh, 'bold')
   endif
   if exists(':Tagbar')
-    call palette#Highlight('ZTag', s:palette.fgh, s:palette.bgh, 'italic')
+    call palette#Highlight('NeuTag', s:palette.fgh, s:palette.bgh, 'italic')
   endif
 
   if exists('g:loaded_neomake') || exists('g:loaded_ale') || exists('g:did_coc_loaded')
-    call palette#Highlight('ZWarning', s:palette.orange, s:palette.bgh, 'bold')
-    call palette#Highlight('ZError', s:palette.red, s:palette.bgh, 'bold')
+    call palette#Highlight('NeuWarning', s:palette.orange, s:palette.bgh, 'bold')
+    call palette#Highlight('NeuError', s:palette.red, s:palette.bgh, 'bold')
   endif
 endfunction
 
 function! s:HiDynamic(mode) abort
-  call palette#Highlight('ZMode'.a:mode, s:palette.bgh, s:color_map[a:mode][0], 'bold')
-  call palette#Highlight('ZBufInfo'.a:mode, s:color_map[a:mode][1], s:palette.bgh, 'bold')
-  call palette#Highlight('ZModif'.a:mode, s:palette.red, s:palette.bgh, 'bold')
-  call palette#Highlight('ZRuler'.a:mode, s:color_map[a:mode][0], s:palette.bgh, 'NONE')
+  call palette#Highlight('NeuMode'.a:mode, s:palette.bgh, s:color_map[a:mode][0], 'bold')
+  call palette#Highlight('NeuBufInfo'.a:mode, s:color_map[a:mode][1], s:palette.bgh, 'bold')
+  call palette#Highlight('NeuModif'.a:mode, s:palette.red, s:palette.bgh, 'bold')
+  call palette#Highlight('NeuRuler'.a:mode, s:color_map[a:mode][0], s:palette.bgh, 'NONE')
 endfunction
-" }}}
+"}}}
 
 "********************************************************************** Main{{{
 function! parts#highlight#Link(...) abort
@@ -84,12 +84,12 @@ function! parts#highlight#Link(...) abort
       endif
       let s:prev_mode = l:mode
 
-      execute 'highlight link ZMode ZMode'.l:mode
-      execute 'highlight link ZBufInfo ZBufInfo'.l:mode
-      execute 'highlight link ZModif ZModif'.l:mode
-      execute 'highlight link ZRuler ZRuler'.l:mode
+      execute 'highlight link NeuMode NeuMode'.l:mode
+      execute 'highlight link NeuBufInfo NeuBufInfo'.l:mode
+      execute 'highlight link NeuModif NeuModif'.l:mode
+      execute 'highlight link NeuRuler NeuRuler'.l:mode
     endif
   endfor
   return ''
 endfunction
-" }}}
+"}}}
