@@ -24,14 +24,17 @@ function! neurun#Run() abort
   endif
 
   if l:ft ==? 'markdown'
-    call s:JobStart(neurun#cmd#markdown#Run())
+    " call s:JobStart(neurun#cmd#markdown#Run())
+    call neurun#job#Start(neurun#cmd#markdown#Run(), s:cb)
   elseif l:ft ==? 'python'
-    call s:JobStart(neurun#cmd#python#Run())
+    " call s:JobStart(neurun#cmd#python#Run())
+    call neurun#job#Start(neurun#cmd#python#Run(), s:cb)
   endif
 endfunction
 
 function! neurun#Stop() abort
-  call s:JobStop()
+  call neurun#job#Stop()
+  " call s:JobStop()
 endfunction
 "}}}
 

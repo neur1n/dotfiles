@@ -24,16 +24,17 @@ function! s:ErrCB(jobid, data, event) abort
   endif
 
   call neurun#qf#Append(l:msg)
-  " call s:ShowElapsedTime()
 
   if !neurun#action#IsInterrupted()
-    if v:shell_error == 0 && l:joined !=# ''
+    if v:shell_error == 0 && l:joined ==# ''
       call neurun#status#Set('Finished ✓', 'h')
     else
       call neurun#status#Set('Error ✘', 'e')
     endif
     call neurun#action#DoAutoCmd('Action')
   endif
+
+  call neurun#job#Timer('stop')
 endfunction
 
 function! s:ExitCB(jobid, data, event) abort
