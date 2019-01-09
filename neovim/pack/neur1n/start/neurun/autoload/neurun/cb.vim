@@ -28,17 +28,18 @@ function! s:ErrCB(jobid, data, event) abort
   if !neurun#action#IsInterrupted()
     if v:shell_error == 0 && l:joined ==# ''
       call neurun#status#Set('Finished ✓', 'h')
+      call neurun#action#DoAutoCmd('Action')
     else
       call neurun#status#Set('Error ✘', 'e')
+      call neurun#action#DoAutoCmd('Action', 1)
     endif
-    call neurun#action#DoAutoCmd('Action')
   endif
 
-  call neurun#job#Timer('stop')
 endfunction
 
 function! s:ExitCB(jobid, data, event) abort
   call neurun#qf#Append('Exited.')
+  call neurun#job#Timer('stop')
 endfunction
 
 function! s:JoinData(data) abort
