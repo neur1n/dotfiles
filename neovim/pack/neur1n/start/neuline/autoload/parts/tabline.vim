@@ -4,9 +4,9 @@ let s:tabs = {'list': [1], 'str': ''}
 let s:prev_tab = 0
 
 function! parts#tabline#Tabline() abort
-  return '%#NeuTLeft#'.'  %<%{parts#tabline#LeftPart()}'.'%='
-        \ .'%#NeuTCurTab#'.'%{parts#tabline#CurrentTab()} '
-        \ .'%#NeuTNotCurTab#'.'%{parts#tabline#NotCurrentTab()} '
+  return '%#NLTLeft#'.'  %<%{parts#tabline#LeftPart()}'.'%='
+        \ .'%#NLTCurTab#'.'%{parts#tabline#CurrentTab()} '
+        \ .'%#NLTNotCurTab#'.'%{parts#tabline#NotCurrentTab()} '
         \ .'%999X%{parts#tabline#CloseButton()} '
 endfunction
 
