@@ -1,6 +1,6 @@
 scriptencoding utf-8
 
-function! parts#whitespace#Next() abort
+function! neustl#whitespace#Next() abort
   let l:pos = searchpos('\v(\s+$)', 'cnw')
 
   if l:pos[0] == 0
@@ -10,6 +10,6 @@ function! parts#whitespace#Next() abort
   endif
 endfunction
 
-function! parts#whitespace#Trim() abort
+function! neustl#whitespace#Trim() abort
   execute '%s/\s\+$//g'
 endfunction

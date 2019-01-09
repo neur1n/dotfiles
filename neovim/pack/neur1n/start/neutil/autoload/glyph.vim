@@ -32,7 +32,7 @@ let s:glyph = {
 \          'question': ["\uf128", ''],
 \          'readonly': ["\ue0a2", ''],
 \          'stop':     ["\uf04d", ''],
-\          'vim':      ["\ue75c", ''],
+\          'vim':      ["\ue7c5", ''],
 \          'warning':  ["\uf740", ''],
 \          'win':      ["\uf17a", ''],
 \          'wspc':     ["\ue612", ''],

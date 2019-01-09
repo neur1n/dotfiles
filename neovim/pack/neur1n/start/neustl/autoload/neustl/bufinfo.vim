@@ -2,7 +2,7 @@ scriptencoding utf-8
 
 let s:funclist = ['cwd', 'fcwd', 'rcwd', 'name', 'num']
 
-function! parts#bufinfo#Info(...) abort
+function! neustl#bufinfo#Info(...) abort
   " For example, ['num', ':', 'cwd', '/', 'name'] gives '1:parts/bufinfo.vim'.
   let l:bufinfo = ''
   " let l:format = get(g:, 'zipline.bufinfo', ['num', ':', 'name'])

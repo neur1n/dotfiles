@@ -1,20 +1,10 @@
 scriptencoding utf-8
 
+let s:button = '['.glyph#Glyph('close').']'
 let s:tabs = {'list': [1], 'str': ''}
 let s:prev_tab = 0
 
-function! parts#tabline#Tabline() abort
-  return '%#NLTLeft#'.'  %<%{parts#tabline#LeftPart()}'.'%='
-        \ .'%#NLTCurTab#'.'%{parts#tabline#CurrentTab()} '
-        \ .'%#NLTNotCurTab#'.'%{parts#tabline#NotCurrentTab()} '
-        \ .'%999X%{parts#tabline#CloseButton()} '
-endfunction
-
-function! parts#tabline#LeftPart() abort
-  return get(g:, 'zipline.talleft', getcwd())
-endfunction
-
-function! parts#tabline#CurrentTab() abort
+function! neutbl#right#CurrentTab() abort
   if tabpagenr('$') == 1
     return ''
   else
@@ -22,7 +12,7 @@ function! parts#tabline#CurrentTab() abort
   endif
 endfunction
 
-function! parts#tabline#NotCurrentTab() abort
+function! neutbl#right#NotCurrentTab() abort
   let l:diff = tabpagenr('$') - len(s:tabs.list)
 
   if tabpagenr() == s:prev_tab && l:diff == 0
@@ -60,10 +50,10 @@ function! parts#tabline#NotCurrentTab() abort
   return s:tabs.str
 endfunction
 
-function! parts#tabline#CloseButton() abort
+function! neutbl#right#CloseButton() abort
   if tabpagenr('$') == 1
     return ''
   else
-    return '[]'
+    return s:button
   endif
 endfunction

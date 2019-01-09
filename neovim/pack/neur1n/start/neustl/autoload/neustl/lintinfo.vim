@@ -4,7 +4,7 @@ let s:glyph_map = {'E': '✘', 'W': '', 'H': '', 'I': ''}
 let s:type_map = {'E': 'error', 'W': 'warning', 'H': 'hint', 'I': 'information'}
 
 "******************************************************************** Counts{{{
-function! parts#lintinfo#Info(type) abort
+function! neustl#lintinfo#Info(type) abort
   let l:cnt = 0
   if exists('g:loaded_neomake')
     let l:cnt = s:NeomakeInfo(a:type)
@@ -34,7 +34,7 @@ endfunction
 "}}}
 
 "********************************************************************** Jump{{{
-function! parts#lintinfo#Jump(direction) abort
+function! neustl#lintinfo#Jump(direction) abort
   if a:direction ==# 'prev'
     try
       silent execute 'lprevious'

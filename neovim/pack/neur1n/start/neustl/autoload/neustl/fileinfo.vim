@@ -1,6 +1,6 @@
 scriptencoding utf-8
 
-function! parts#fileinfo#Info() abort
+function! neustl#fileinfo#Info() abort
   let l:ft = '%Y'
   let l:fenc = '%{&fileencoding ? &fileencoding : &encoding}'
   let l:ff = '%{&fileformat}'

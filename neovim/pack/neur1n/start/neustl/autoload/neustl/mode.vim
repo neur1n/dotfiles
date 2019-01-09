@@ -18,7 +18,7 @@ let s:mode_map = {
       \ '?':  'UNKNOWN',
       \ }
 
-function! parts#mode#Mode() abort
+function! neustl#mode#Mode() abort
   if &filetype ==# 'help'
     let l:mode = 'HELP'
   elseif &filetype ==# 'startify'

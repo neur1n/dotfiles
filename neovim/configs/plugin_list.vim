@@ -27,6 +27,6 @@ Plug 'Shougo/neco-vim', {'for': ['vim']}
 Plug 'neoclide/coc-neco', {'for': ['vim']}
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'neoclide/coc-jedi', {'do': 'yarn install'}
+" Plug 'neoclide/coc-jedi', {'do': 'yarn install'}
 "}}}
 call plug#end()
