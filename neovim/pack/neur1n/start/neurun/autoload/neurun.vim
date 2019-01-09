@@ -15,21 +15,21 @@ let s:start_stamp = 0
 "***************************************************************** {{{ Messages
 function! s:Highlight() abort
   let l:palette = palette#Palette()
-  call palette#Highlight('NeuInfo', l:palette.blue, 'bg', 'bold')
-  call palette#Highlight('NeuHint', l:palette.green, 'bg', 'bold')
-  call palette#Highlight('NeuWarning', l:palette.yellow, 'bg', 'bold')
-  call palette#Highlight('NeuError', l:palette.red, 'bg', 'bold')
+  call palette#Highlight('NRInfo', l:palette.blue, 'bg', 'bold')
+  call palette#Highlight('NRHint', l:palette.green, 'bg', 'bold')
+  call palette#Highlight('NRWarning', l:palette.yellow, 'bg', 'bold')
+  call palette#Highlight('NRError', l:palette.red, 'bg', 'bold')
 endfunction
 
 function! s:EchoMsg(type, msg) abort
   if a:type ==# 'i'
-    echohl NeuInfo
+    echohl NRInfo
   elseif a:type ==# 'h'
-    echohl NeuHint
+    echohl NRHint
   elseif a:type ==# 'w'
-    echohl NeuWarning
+    echohl NRWarning
   elseif a:type ==# 'e'
-    echohl NeuError
+    echohl NRError
   else
     echohl WarningMsg
   endif
@@ -219,13 +219,22 @@ endfunction
 
 function! neurun#ToggleQF() abort
   if s:qfopened
-    silent execute 'cclose'
+    execute 'cclose'
     let s:qfopened = 0
   else
-    silent execute 'copen'
+    execute 'copen'
     let s:qfopened = 1
   endif
 endfunction
+
+function! neurun#CloseBuffer() abort
+  if &buftype ==# 'quickfix' && winnr() != winnr('$')
+    execute 'cclose'
+    let s:qfopened = 0
+  else
+    execute 'x'
+  endif
+endf
 "}}}
 
 let &cpoptions = s:save_cpo
