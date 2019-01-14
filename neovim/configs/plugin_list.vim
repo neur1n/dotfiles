@@ -29,4 +29,9 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " Plug 'neoclide/coc-jedi', {'do': 'yarn install'}
 "}}}
+"******************************************************************* The End{{{
+Plug 'Neur1n/neutil'
+Plug 'Neur1n/neurun'
+Plug 'Neur1n/neuline'
+"}}}
 call plug#end()
