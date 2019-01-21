@@ -8,7 +8,6 @@ if has('nvim')
   Plug 'equalsraf/neovim-gui-shim'
 endif
 Plug 'cohama/lexima.vim'
-Plug 'lilydjwg/colorizer', {'for': ['palette']}
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'matze/vim-move'
