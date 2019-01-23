@@ -14,26 +14,6 @@ let g:netrw_liststyle=3                         " set explorer to be tree style
 if has('mouse')
   set mouse=a
 endif
-
-" if has('syntax')
-"   syntax on
-"   set t_Co=256
-"   set background=dark
-"   if has('gui_running')
-"     colorscheme solarized
-"     let g:solarized_contrast='low'
-"   else
-"     colorscheme molokai
-"   endif
-" endif
-
-if has('syntax')
-  syntax on
-  set t_Co=256
-  set background=dark
-  colorscheme gruvbox
-  "colorscheme solarized
-endif
 "}}}
 
 "*********************************************************** Moduled Configs{{{

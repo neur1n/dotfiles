@@ -8,4 +8,4 @@ source $VIMCONFIG/configs/plugin_conf/neomake.vim
 source $VIMCONFIG/configs/plugin_conf/rainbow.vim
 source $VIMCONFIG/configs/plugin_conf/tagbar.vim
 source $VIMCONFIG/configs/plugin_conf/vim-startify.vim
-source $VIMCONFIG/configs/plugin_conf/neuline.vim
+source $VIMCONFIG/configs/plugin_conf/neur1n.vim
