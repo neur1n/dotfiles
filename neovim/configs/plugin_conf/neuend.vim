@@ -1,15 +1,4 @@
 scriptencoding utf-8
-
-if has('syntax')
-  syntax on
-  set background=dark
-  set t_Co=256
-  set termguicolors
-  colorscheme neuclr
-endif
-
-
-"************************************************************* Neur1n/neustl{{{
 let g:neu = {
       \ 'stl': {
       \   'faster': 1,
@@ -29,4 +18,3 @@ let g:neu = {
 " endif
 " let g:neuline.section.bufinfo = ['NSbufinfo', preset#bufinfo#Info(['Num', ':', 'Rcwd', '/', 'Name'])]
 " let g:neuline.section.ruler = ['NSruler', '%5l--%L:%-2v']
-"}}}

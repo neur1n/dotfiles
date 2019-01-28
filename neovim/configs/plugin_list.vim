@@ -1,13 +1,11 @@
 call plug#begin('$VIMCONFIG/plugged')
-"***************************************************** Load at the beginning{{{
-Plug 'itchyny/vim-gitbranch'
-Plug 'morhetz/gruvbox'
+"************************************************************* The Beginning{{{
+Plug 'Neur1n/neutil'
+Plug 'Neur1n/neuclr'
 "}}}
 "********************************************************************** Misc{{{
-if has('nvim')
-  Plug 'equalsraf/neovim-gui-shim'
-endif
 Plug 'cohama/lexima.vim'
+Plug 'itchyny/vim-gitbranch'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'matze/vim-move'
@@ -29,7 +27,6 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " Plug 'neoclide/coc-jedi', {'do': 'yarn install'}
 "}}}
 "******************************************************************* The End{{{
-Plug 'Neur1n/neutil'
 Plug 'Neur1n/neurun'
 Plug 'Neur1n/neuline'
 "}}}
