@@ -24,7 +24,7 @@ let g:neomake_python_enabled_makers = ['pyflakes', 'pycodestyle']
 let g:neomake_python_pyflakes_exe = 'pyflakes'
 let g:neomake_python_pycodestyle_exe = 'pycodestyle'
 
-if g:colors_name ==# 'neuclr'
+if get(g:, 'colors_name', '') ==# 'neuclr'
   highlight link NeomakeInfoSign NeuGreen
   highlight link NeomakeHintSign NeuBlue
   highlight link NeomakeWarningSign NeuOrange

@@ -1,4 +1,5 @@
 "*********************************************************** Moduled Configs{{{
+source $VIMCONFIG/configs/autocmd.vim
 source $VIMCONFIG/configs/keymap.vim
 " source $VIMCONFIG/configs/abbrev.vim
 source $VIMCONFIG/configs/plugin_list.vim
@@ -14,10 +15,16 @@ let g:netrw_liststyle=3                         " set explorer to be tree style
 if has('mouse')
   set mouse=a
 endif
+
+if has('syntax')
+  syntax on
+  set background=dark
+  set t_Co=256
+endif
 "}}}
 
 "*********************************************************** Moduled Configs{{{
-source $VIMCONFIG/configs/autocmd.vim
+" source $VIMCONFIG/configs/autocmd.vim
 "}}}
 
 "****************************************************************** Encoding{{{

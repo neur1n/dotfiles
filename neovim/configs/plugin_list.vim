@@ -2,6 +2,7 @@ call plug#begin('$VIMCONFIG/plugged')
 "************************************************************* The Beginning{{{
 Plug 'Neur1n/neutil'
 Plug 'Neur1n/neuclr'
+" Plug 'morhetz/gruvbox'
 "}}}
 "********************************************************************** Misc{{{
 Plug 'cohama/lexima.vim'
