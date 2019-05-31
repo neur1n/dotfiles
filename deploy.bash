@@ -13,8 +13,6 @@ function deploy_neovim() {
 
   ln -fns `ls -d1 $PWD/neovim/*` ~/.config/nvim/
 
-  git clone https://github.com/morhetz/gruvbox.git ./neovim/plugged/gruvbox
-  git clone https://github.com/Neur1n/zipline.git ./neovim/plugged/zipline
   echo "[dotfiles] neovim deployed"
 }
 
@@ -47,7 +45,7 @@ function usage () {
 }
 
 #************************************************************************ {Main
-__ver__="0.0.1"
+__ver__="0.0.2"
 
 while getopts ":abnvHV" opt
 do
