@@ -1,10 +1,4 @@
-"*********************************************************** Moduled Configs{{{
-source $VIMCONFIG/configs/autocmd.vim
-source $VIMCONFIG/configs/keymap.vim
-" source $VIMCONFIG/configs/abbrev.vim
-source $VIMCONFIG/configs/plugin_list.vim
-source $VIMCONFIG/configs/plugin_conf.vim
-"}}}
+scriptencoding utf-8
 
 "************************************************************************ UI{{{
 let $LANG='en'                                           " set message language
@@ -17,14 +11,11 @@ if has('mouse')
 endif
 
 if has('syntax')
+  colorscheme neuclr
   syntax on
   set background=dark
   set t_Co=256
 endif
-"}}}
-
-"*********************************************************** Moduled Configs{{{
-" source $VIMCONFIG/configs/autocmd.vim
 "}}}
 
 "****************************************************************** Encoding{{{
@@ -69,4 +60,12 @@ set splitright                                            " split on right side
 
 set backup
 set backupdir=$VIMCONFIG/recovery/backup
+"}}}
+
+"*********************************************************** Moduled Configs{{{
+source $VIMCONFIG/configs/autocmd.vim
+source $VIMCONFIG/configs/keymap.vim
+" source $VIMCONFIG/configs/abbrev.vim
+source $VIMCONFIG/configs/plugin_list.vim
+source $VIMCONFIG/configs/plugin_conf.vim
 "}}}

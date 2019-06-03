@@ -1,5 +1,13 @@
 scriptencoding utf-8
 
+"****************************************************************** AutoCMDs{{{
+augroup cd_pwd
+  autocmd!
+  autocmd BufEnter * silent! lcd %:p:h                         " auto cd to pwd
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$")
+        \| execute "normal! g'\"" | endif
+augroup END
+
 augroup comment_format
   autocmd!
   autocmd FileType * set fo-=ro         " turn off insertion of comment leaders
@@ -15,26 +23,11 @@ augroup file_types
   autocmd BufNewFile,BufRead *.oct setf octave
 augroup END
 
-augroup cd_pwd
-  autocmd!
-  autocmd BufEnter * silent! lcd %:p:h                         " auto cd to pwd
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$")
-        \| execute "normal! g'\"" | endif
-augroup END
-
 augroup scroll_off
   autocmd!
   autocmd BufEnter,WinEnter,WinNew,VimResized *,*.*
         \ let &scrolloff=winheight(win_getid())/3
 augroup END
-
-function! s:SelectTemplate(mode)
-  if a:mode ==# 'ex'  " Choose by extension
-    execute ':silent! 0r $VIMCONFIG/templates/skeleton.'.expand('<afile>:e')
-  elseif a:mode ==# 'ft'  " Choose by file type
-    execute ':silent! 0r $VIMCONFIG/templates/skeleton.'.eval('&filetype')
-  endif
-endfunction
 
 augroup templates
   autocmd!
@@ -45,7 +38,18 @@ augroup templates
         \| endif
 augroup END
 
-" augroup post
-"   au!
-"   autocmd VimEnter * source $VIMCONFIG/configs/colorscheme.vim
-" augroup END
+augroup neuclr
+  autocmd!
+  autocmd FileType * call neuclr#neuclr#Highlight()
+augroup END
+"}}}
+
+"***************************************************************** Functions{{{
+function! s:SelectTemplate(mode)
+  if a:mode ==# 'ex'  " Choose by extension
+    execute ':silent! 0r $VIMCONFIG/templates/skeleton.'.expand('<afile>:e')
+  elseif a:mode ==# 'ft'  " Choose by file type
+    execute ':silent! 0r $VIMCONFIG/templates/skeleton.'.eval('&filetype')
+  endif
+endfunction
+"}}}
