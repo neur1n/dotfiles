@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 "                                               Replace <leader> key to <space>
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
@@ -11,7 +13,7 @@ imap <F1> <Esc>
 nnoremap <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 "}}}
 
-"*************************************************************** Move Around{{{
+"**************************************************************** Navigation{{{
 "                         Go to a line and make it one the center of the screen
 nnoremap G Gzz
 "                                   Modify the behavior of j & k in normal mode
@@ -41,6 +43,12 @@ nnoremap <leader>cl :set cursorline! nocursorline?<CR>
 nnoremap <leader>hs :set hlsearch! hlsearch?<CR>
 "                                                             Toggle spellcheck
 nnoremap <leader>sc :set spell! spelllang=en_us<CR>
+"}}}
+
+"******************************************************************** neutil{{{
+nnoremap <leader>db :call neutil#general#DelHiddenBuf()<cr>
+nnoremap <leader>ro :call neutil#general#ToggleReadOnly()<cr>
+nnoremap <leader>ln :call neutil#general#ToggleRelLnr()<cr>
 "}}}
 
 "************************************************************** Run or Build{{{
