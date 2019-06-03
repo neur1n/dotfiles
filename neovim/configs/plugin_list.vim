@@ -1,11 +1,9 @@
+scriptencoding utf-8
+
 call plug#begin('$VIMCONFIG/plugged')
-"************************************************************* The Beginning{{{
-Plug 'Neur1n/neutil'
-Plug 'Neur1n/neuclr'
-" Plug 'morhetz/gruvbox'
-"}}}
 "********************************************************************** Misc{{{
 Plug 'cohama/lexima.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
@@ -14,6 +12,7 @@ Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 Plug 'sheerun/vim-polyglot'
+" Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
@@ -24,8 +23,7 @@ Plug 'Yggdroot/LeaderF'
 Plug 'Shougo/neco-vim', {'for': ['vim']}
 Plug 'neoclide/coc-neco', {'for': ['vim']}
 Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-" Plug 'neoclide/coc-jedi', {'do': 'yarn install'}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 "}}}
 "******************************************************************* The End{{{
 Plug 'Neur1n/neurun'

@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 set nocompatible
 set fileformat=unix    " The following two make Vim create unix file by default
 set fileformats=unix,dos
@@ -15,7 +17,7 @@ else
   endif
 endif
 
-"*********************************************************** {Vim Specific Part
+"********************************************************* Vim Specific Part{{{
 if !has('nvim')
   let g:python_host_skip_check=1
   let g:loaded_python3_provider=1
@@ -33,8 +35,8 @@ if !has('nvim')
   set guifont=Input\ NF:h10
   set lines=30 columns=120
 endif
-" }
+"}}}
 
-"******************************************* {The Common Part of Vim and Neovim
+"***************************************** The Common Part of Vim and Neovim{{{
 source $VIMCONFIG/configs/common.vim
-" }
+"}}}
