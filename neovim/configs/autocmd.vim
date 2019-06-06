@@ -25,7 +25,7 @@ augroup END
 
 augroup scroll_off
   autocmd!
-  autocmd BufEnter,WinEnter,WinNew,VimResized *,*.*
+  autocmd BufEnter,BufWinLeave,WinEnter,WinNew,VimResized *,*.*
         \ let &scrolloff=winheight(win_getid())/3
 augroup END
 
