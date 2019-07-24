@@ -5,6 +5,7 @@
   "diagnostic.infoSign": "",
   "diagnostic.hintSign": "",
   "snippets.ultisnips.enable": false,
+  "python.jediEnabled": false,
   "languageserver": {
     "clangd": {
       "command": "clangd-7",
