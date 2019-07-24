@@ -2,6 +2,7 @@
 
 export ROS_WS=~/Documents/ws/ros_ws
 
+alias mkros="catkin_make -DCMAKE_EXPORT_COMPILE_COMMANDS=YES"
 alias cdros="cd $ROS_WS"
 
 source /opt/ros/kinetic/setup.bash
