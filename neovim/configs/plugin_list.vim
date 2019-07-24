@@ -3,8 +3,6 @@ scriptencoding utf-8
 call plug#begin('$VIMCONFIG/plugged')
 "********************************************************************** Misc{{{
 Plug 'cohama/lexima.vim'
-" Plug 'itchyny/lightline.vim'
-Plug 'itchyny/vim-gitbranch'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'matze/vim-move'
@@ -23,7 +21,7 @@ Plug 'Yggdroot/LeaderF'
 Plug 'Shougo/neco-vim', {'for': ['vim']}
 Plug 'neoclide/coc-neco', {'for': ['vim']}
 Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "}}}
 "******************************************************************* The End{{{
 Plug 'Neur1n/neurun'
