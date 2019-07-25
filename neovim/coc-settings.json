@@ -1,9 +1,10 @@
 {
   "diagnostic.enable": true,
   "diagnostic.errorSign": "✘",
-  "diagnostic.warningSign": "",
-  "diagnostic.infoSign": "",
   "diagnostic.hintSign": "",
+  "diagnostic.infoSign": "",
+  "diagnostic.warningSign": "",
+  "git.branchCharacter": "",
   "snippets.ultisnips.enable": false,
   "python.jediEnabled": false,
   "languageserver": {
