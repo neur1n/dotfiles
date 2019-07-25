@@ -66,41 +66,44 @@ call neutil#palette#Highlight('NStagbar', s:plt.fgh, s:plt.bgh, 'italic')
 "}}}
 
 "********************************************************************* lint {{{
-" call neutil#palette#Highlight('NSlint', s:plt.fgh, s:plt.bgh, 'bold')
 call neutil#palette#Highlight('NSlintI', s:plt.bgh, s:plt.blue, 'bold')
 call neutil#palette#Highlight('NSlintH', s:plt.bgh, s:plt.green, 'bold')
 call neutil#palette#Highlight('NSlintW', s:plt.bgh, s:plt.orange, 'bold')
 call neutil#palette#Highlight('NSlintE', s:plt.bgh, s:plt.red, 'bold')
 
 function! NeulineLint() abort
-  if exists('g:did_coc_loaded')
-    let l:info = get(b:, 'coc_diagnostic_info', {})
-
-    if empty(l:info)
-      return ''
-    endif
-
-    let l:msg = []
-    if get(l:info, 'error', 0)
-      call add(l:msg, '✘'.l:info['error'])
-      highlight link NSlint NSlintE
-    endif
-    if get(l:info, 'warning', 0)
-      call add(l:msg, ''.l:info['warning'])
-      highlight link NSlint NSlintW
-    endif
-    if get(l:info, 'hint', 0)
-      call add(l:msg, ''.l:info['hint'])
-      highlight link NSlint NSlintH
-    endif
-    if get(l:info, 'information', 0)
-      call add(l:msg, ''.l:info['information'])
-      highlight link NSlint NSlintI
-    endif
-
-    return empty(l:msg) ? '' : ' '.join(l:msg, ' ').' '
+  if !empty(get(b:, 'coc_diagnostic_info', {}))
+    return s:GatherInfo(get(b:, 'coc_diagnostic_info', {}),
+          \ {'i': 'information', 'h': 'hint', 'w': 'warning', 'e': 'error'},
+          \ '[CoC]')
+  elseif !empty(neomake#statusline#LoclistCounts())
+    return s:GatherInfo(neomake#statusline#LoclistCounts(),
+          \ {'i': 'I', 'h': 'H', 'w': 'W', 'e': 'E'}, '[Neomake]')
   else
     return ''
   endif
+endfunction
+
+function! s:GatherInfo(info, keys, tag) abort
+  let l:msg = []
+
+  if get(a:info, a:keys.e, 0)
+    call add(l:msg, '✘'.a:info[a:keys.e])
+    highlight link NSlint NSlintE
+  endif
+  if get(a:info, a:keys.w, 0)
+    call add(l:msg, ''.a:info[a:keys.w])
+    highlight link NSlint NSlintW
+  endif
+  if get(a:info, a:keys.h, 0)
+    call add(l:msg, ''.a:info[a:keys.h])
+    highlight link NSlint NSlintH
+  endif
+  if get(a:info, a:keys.i, 0)
+    call add(l:msg, ''.a:info[a:keys.i])
+    highlight link NSlint NSlintI
+  endif
+
+  return empty(l:msg) ? '' : ' '.a:tag.join(l:msg, ' ').' '
 endfunction
 "}}}
