@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 "******************************************************************* Editing{{{
 "                                             Delete hidden buffers: <leader>db
 function! neutil#general#DelHiddenBuf() abort

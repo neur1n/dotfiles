@@ -49,6 +49,8 @@ nnoremap <leader>sc :set spell! spelllang=en_us<CR>
 nnoremap <leader>db :call neutil#general#DelHiddenBuf()<cr>
 nnoremap <leader>ro :call neutil#general#ToggleReadOnly()<cr>
 nnoremap <leader>ln :call neutil#general#ToggleRelLnr()<cr>
+nnoremap <leader>qc :call neutil#qf#Clear()<cr>
+nnoremap <leader>qt :call neutil#qf#Toggle()<cr>
 "}}}
 
 "************************************************************** Run or Build{{{
