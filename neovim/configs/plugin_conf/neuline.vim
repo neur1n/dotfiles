@@ -10,17 +10,20 @@ let g:neuline = {
       \     'active': ['tagbar', 'fileinfo', 'ruler', 'lint'],
       \     'inactive': ['ruler']
       \   },
-      \ 'definition': {
-      \   'vcs': {'tag': 'NSvcs', 'def': ['NeulineVCS()']},
-      \   'windowsswap': {'tag': 'NSwindowswap', 'def': ['NeulineWindowSwap()']},
-      \   'tagbar': {'tag': 'NStagbar', 'def': ['NeulineTagbar()']},
-      \   'lint': {'tag': 'NSlint', 'def': ['NeulineLint()']},
-      \ }
+      \   'definition': {
+      \     'vcs': {'tag': 'NSvcs', 'def': ['NeulineVCS()']},
+      \     'windowsswap': {'tag': 'NSwindowswap', 'def': ['NeulineWindowSwap()']},
+      \     'tagbar': {'tag': 'NStagbar', 'def': ['NeulineTagbar()']},
+      \     'lint': {'tag': 'NSlint', 'def': ['NeulineLint()']},
+      \   }
       \ },
       \ 'tal': {
-      \   'left': ['logo', 'bufinfo'],
+      \   'left': ['logo', 'bufinfo', 'asyncrun'],
       \   'right': ['ctab', 'nctab', 'button'],
-      \ }
+      \   'definition': {
+      \     'asyncrun': {'tag': 'NTasyncrun', 'def': ['NeulineAsyncRun()']},
+      \   }
+      \ },
       \ }
 
 try
@@ -106,4 +109,35 @@ function! s:GatherInfo(info, keys, tag) abort
 
   return empty(l:msg) ? '' : ' '.a:tag.join(l:msg, ' ').' '
 endfunction
+
+"***************************************************************** asyncrun {{{
+call neutil#palette#Highlight('NTasyncrunE', s:plt.red, s:plt.grays, 'bold')
+call neutil#palette#Highlight('NTasyncrunR', s:plt.blue, s:plt.grays, 'bold')
+call neutil#palette#Highlight('NTasyncrunF', s:plt.green, s:plt.grays, 'bold')
+
+function! NeulineAsyncRun() abort
+  if exists(':AsyncRun')
+    let l:status = get(g:, 'asyncrun_status', '')
+    if l:status ==# ''
+      highlight link NTasyncrun NTasyncrunF
+      return ''
+    elseif l:status ==# 'failure'
+      highlight link NTasyncrun NTasyncrunE
+      return '[AsyncRun] Failed ✘'
+    elseif l:status ==# 'running'
+      highlight link NTasyncrun NTasyncrunR
+      return '[AsyncRun] Running '
+    elseif l:status ==# 'success'
+      highlight link NTasyncrun NTasyncrunF
+      return '[AsyncRun] Finished ✓'
+    endif
+  endif
+
+  return ''
+endfunction
+
+augroup neutal
+  autocmd User AsyncRunStart call neutal#Update() | neuline#tal#highlight#Link()
+augroup end
+"}}}
 "}}}
