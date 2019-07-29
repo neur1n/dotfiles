@@ -10,7 +10,7 @@ Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 Plug 'sheerun/vim-polyglot'
-" Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'triglav/vim-visual-increment'
@@ -24,7 +24,6 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "}}}
 "******************************************************************* The End{{{
-Plug 'Neur1n/neurun'
 Plug 'Neur1n/neuline'
 "}}}
 call plug#end()

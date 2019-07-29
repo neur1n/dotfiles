@@ -1,6 +1,7 @@
 scriptencoding utf-8
 
 source $VIMCONFIG/configs/plugin_conf/ack.vim
+source $VIMCONFIG/configs/plugin_conf/asyncrun.vim
 source $VIMCONFIG/configs/plugin_conf/coc.vim
 source $VIMCONFIG/configs/plugin_conf/leaderf.vim
 source $VIMCONFIG/configs/plugin_conf/neomake.vim
