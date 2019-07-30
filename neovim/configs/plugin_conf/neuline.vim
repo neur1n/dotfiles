@@ -109,6 +109,7 @@ function! s:GatherInfo(info, keys, tag) abort
 
   return empty(l:msg) ? '' : ' '.a:tag.join(l:msg, ' ').' '
 endfunction
+"}}}
 
 "***************************************************************** asyncrun {{{
 call neutil#palette#Highlight('NTasyncrunE', s:plt.red, s:plt.grays, 'bold')
@@ -139,5 +140,4 @@ endfunction
 augroup neutal
   autocmd User AsyncRunStart call neutal#Update() | neuline#tal#highlight#Link()
 augroup end
-"}}}
 "}}}
