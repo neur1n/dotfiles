@@ -34,10 +34,15 @@ endtry
 
 "********************************************************************** vcs {{{
 function! NeulineVCS() abort
-  if get(g:, 'coc_git_status', '') !=# ''
-    return ' '.get(g:, 'coc_git_status', '').' '
+  if winwidth(0) >= 60
+    if get(g:, 'coc_git_status', '') !=# ''
+      return ' '.get(g:, 'coc_git_status', '').' '
+    else
+      return ''
+    endif
+  else
+    return ''
   endif
-  return ''
 endfunction
 
 call neutil#palette#Highlight('NSvcs', s:plt.fgm, s:plt.graym, 'bold')
