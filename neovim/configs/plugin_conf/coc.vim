@@ -31,4 +31,6 @@ if get(g:, 'colors_name', '') ==# 'neuclr'
   highlight link CocWarningSign NeuOrange
   highlight link CocErrorSign NeuRed
 endif
+
+call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugin_conf/coc-snippets')
 "}}}
