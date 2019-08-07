@@ -4,14 +4,14 @@ scriptencoding utf-8
 nnoremap <leader>ar :call <sid>RunRule()<cr>
 nnoremap <leader>as :AsyncStop<cr>
 
+let g:asyncrun_save = 2
+
 let s:rule_map = {
       \ 'markdown': 's:RunMarkdown',
       \ 'python': 's:RunPython',
       \ }
 
 function! s:RunRule() abort
-  silent execute 'wa'
-
   if filereadable(asyncrun#get_root('%').'/makefile')
     execute 'AsyncRun -raw -cwd=<root> make'
   else
