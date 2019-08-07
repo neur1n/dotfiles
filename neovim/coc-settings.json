@@ -5,7 +5,8 @@
   "diagnostic.infoSign": "",
   "diagnostic.warningSign": "",
   "git.branchCharacter": "",
-  "snippets.ultisnips.enable": false,
+  "snippets.ultisnips.enable": true,
+  "snippets.userSnippetsDirectory": "~/.config/nvim/configs/plugin_conf/coc-snippets",
   "python.jediEnabled": false,
   "languageserver": {
     "clangd": {
