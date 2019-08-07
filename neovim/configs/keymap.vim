@@ -46,11 +46,13 @@ nnoremap <leader>sc :set spell! spelllang=en_us<CR>
 "}}}
 
 "******************************************************************** neutil{{{
-nnoremap <leader>db :call neutil#general#DelHiddenBuf()<cr>
-nnoremap <leader>ro :call neutil#general#ToggleReadOnly()<cr>
-nnoremap <leader>ln :call neutil#general#ToggleRelLnr()<cr>
-nnoremap <leader>qc :call neutil#qf#Clear()<cr>
-nnoremap <leader>qt :call neutil#qf#Toggle()<cr>
+nnoremap <leader>db :call neutil#general#DeleteHiddenBuffer()<CR>
+nnoremap <leader>ro :call neutil#general#ToggleReadOnly()<CR>
+nnoremap <leader>ln :call neutil#general#ToggleRelativeLineNumber()<CR>
+nnoremap <leader>tw :call neutil#general#TrimTrailingWhiteSpace()<CR>
+nnoremap <leader>ts :call neutil#general#ReplaceTabWithSpace()<CR>
+nnoremap <leader>qc :call neutil#qf#Clear()<CR>
+nnoremap <leader>qt :call neutil#qf#Toggle()<CR>
 "}}}
 
 "************************************************************** Run or Build{{{

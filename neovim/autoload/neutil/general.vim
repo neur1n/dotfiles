@@ -2,7 +2,7 @@ scriptencoding utf-8
 
 "******************************************************************* Editing{{{
 "                                             Delete hidden buffers: <leader>db
-function! neutil#general#DelHiddenBuf() abort
+function! neutil#general#DeleteHiddenBuffer() abort
   let l:tpbl=[]
   call map(range(1, tabpagenr('$')), 'extend(l:tpbl, tabpagebuflist(v:val))')
   for l:buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(l:tpbl, v:val)==-1')
@@ -24,12 +24,20 @@ function! neutil#general#ToggleReadOnly() abort
   endif
 endfunction
 "                                       Toggle relative line number: <leader>rn
-function! neutil#general#ToggleRelLnr() abort
+function! neutil#general#ToggleRelativeLineNumber() abort
   if(&relativenumber == 1)
     set norelativenumber
   else
     set relativenumber
   endif
+endfunction
+"                                        Trim trailing white spaces: <leader>tw
+function! neutil#general#TrimTrailingWhiteSpace() abort
+  execute '%s/\s\+$//gc'
+endfunction
+"                                      Replace hard tab with spaces: <leader>ts
+function! neutil#general#ReplaceTabWithSpace() abort
+  execute '%s/\t/  /gc'
 endfunction
 "}}}
 
