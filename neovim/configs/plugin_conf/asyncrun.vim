@@ -31,6 +31,10 @@ function! s:RunMarkdown() abort
 endfunction
 
 function! s:RunPython() abort
-  execute 'AsyncRun -raw python3 -u %'
+  if has('unix')
+    execute 'AsyncRun -raw python3 -u %'
+  elseif has('win32')
+    execute 'AsyncRun -raw python -u %'
+  endif
 endfunction
 "}}}
