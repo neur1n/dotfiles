@@ -142,7 +142,8 @@ function! NeulineAsyncRun() abort
   return ''
 endfunction
 
-augroup neutal
-  autocmd User AsyncRunStart call neutal#Update() | neuline#tal#highlight#Link()
+augroup neuline_custom
+  autocmd!
+  autocmd User AsyncRunStart call neustl#Update() | call neuline#stl#highlight#Link()
 augroup end
 "}}}
