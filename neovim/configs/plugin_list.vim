@@ -3,6 +3,7 @@ scriptencoding utf-8
 call plug#begin('$VIMCONFIG/plugged')
 "********************************************************************** Misc{{{
 Plug 'cohama/lexima.vim'
+Plug 'lervag/vimtex'
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'matze/vim-move'
