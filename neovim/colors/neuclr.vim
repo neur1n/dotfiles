@@ -65,7 +65,7 @@ call neutil#palette#Highlight('Normal', s:plt.fgm, s:plt.bgm)
 "******************************************************************* General{{{
 call neutil#palette#Highlight('ColorColumn', 'NONE', s:plt.bgs)
 call neutil#palette#Highlight('Comment', s:plt.graym, 'NONE', 'italic')
-call neutil#palette#Highlight('Cursor', 'NONE', 'NONE', 'inverse')
+call neutil#palette#Highlight('Cursor', s:plt.bgm, s:plt.fgm, 'bold')
 call neutil#palette#Highlight('Error', s:plt.red, 'bg', 'bold,inverse')
 call neutil#palette#Highlight('ErrorMsg', 'bg', s:plt.red, 'bold')
 call neutil#palette#Highlight('IncSearch', s:plt.orange, 'bg', 'inverse')

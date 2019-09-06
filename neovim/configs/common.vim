@@ -36,7 +36,7 @@ set colorcolumn=80                                          " show right margin
 set cursorline                                          " highlight current row
 set expandtab shiftwidth=2 softtabstop=2     " set <Tab> width to be 2 <space>s
 set fillchars=vert:\|
-set guicursor+=a:blinkon0
+set guicursor+=a:blinkon0-Cursor/lCursor
 set tabstop=2                                " make real <Tab> to be width of 2
 set hlsearch
 set iminsert=0 imsearch=0                                " make IME more usable
