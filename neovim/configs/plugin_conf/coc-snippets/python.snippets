@@ -4,14 +4,26 @@ for ${1:r} in range(${2:h}):
 		${5:pass}
 endsnippet
 
-snippet npa "numpy.array(...)" b
+snippet npa "var = numpy.array(...)" b
 ${1:var} = np.array(${2:list}, dtype=${3:type})
 endsnippet
 
-snippet npo "numpy.ones(...)" b
+snippet npo "var = numpy.ones(...)" b
 ${1:var} = np.ones(${2:shape}, dtype=${3:type})
 endsnippet
 
-snippet npz "numpy.zeros(...)" b
+snippet npz "var = numpy.zeros(...)" b
 ${1:var} = np.zeros(${2:shape}, dtype=${3:type})
+endsnippet
+
+snippet npa "numpy.array(...)"
+np.array(${1:list}, dtype=${2:type})
+endsnippet
+
+snippet npo "numpy.ones(...)"
+np.ones(${1:shape}, dtype=${2:type})
+endsnippet
+
+snippet npz "numpy.zeros(...)"
+np.zeros(${1:shape}, dtype=${2:type})
 endsnippet
