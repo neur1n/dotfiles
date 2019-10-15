@@ -4,13 +4,13 @@ scriptencoding utf-8
 set completeopt=menuone,noinsert,noselect
 " set hidden
 
-function! s:check_back_space() abort
-  let a:col = col('.') - 1
-  return !a:col || getline('.')[a:col - 1]  =~# '\s'
+function! s:CheckBackSpace() abort
+  let l:col = col('.') - 1
+  return !l:col || getline('.')[l:col - 1]  =~# '\s'
 endfunction
 
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" : coc#refresh()
+      \ <SID>CheckBackSpace() ? "\<Tab>" : coc#refresh()
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
