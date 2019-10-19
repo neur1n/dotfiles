@@ -7,6 +7,7 @@ nnoremap <leader>as :AsyncStop<cr>
 let g:asyncrun_save = 2
 
 let s:rule_map = {
+      \ 'html': 's:RunMarkdown',
       \ 'markdown': 's:RunMarkdown',
       \ 'python': 's:RunPython',
       \ }
