@@ -9,7 +9,6 @@
   "python.jediEnabled": false,
   "languageserver": {
     "clangd": {
-      "command": "clangd-7",
       "filetypes": ["c", "cpp", "objc", "objcpp"]
     }
   }

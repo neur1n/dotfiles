@@ -37,4 +37,10 @@ if get(g:, 'colors_name', '') ==# 'neuclr'
 endif
 
 call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugin_conf/coc-snippets')
+
+if has('unix')
+  call coc#config('languageserver.clangd.command', 'clangd-7')
+elseif has('win32')
+  call coc#config('languageserver.clangd.command', 'clangd')
+endif
 "}}}
