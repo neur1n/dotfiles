@@ -145,5 +145,8 @@ endfunction
 augroup neuline_custom
   autocmd!
   autocmd User AsyncRunStart call neustl#Update() | call neuline#stl#highlight#Link()
+  autocmd User AsyncRunStop call neustl#Update() | call neuline#stl#highlight#Link()
+  autocmd User AsyncRunStart call neutal#Update() | call neuline#tal#highlight#Link()
+  autocmd User AsyncRunStop call neutal#Update() | call neuline#tal#highlight#Link()
 augroup end
 "}}}
