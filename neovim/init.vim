@@ -6,7 +6,7 @@ set fileformats=unix,dos
 
 if has('win32')
   let $VIMCONFIG=$HOME.'/AppData/Local/nvim'
-  let g:python3_host_prog='E:/ProgramFiles/Python3/python'
+  let g:python3_host_prog='python'
 else
   let $VIMCONFIG=$HOME.'/.config/nvim'
   if filereadable($HOME.'/miniconda3/bin/python3')
