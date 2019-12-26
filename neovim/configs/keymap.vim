@@ -11,6 +11,8 @@ map <F1> <Esc>
 imap <F1> <Esc>
 "                                                     Split open tag definition
 nnoremap <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
+"                                                         Search selected texts
+vnoremap // y/\V<C-R>=escape(@", '\/')<CR><CR>
 "}}}
 
 "**************************************************************** Navigation{{{
