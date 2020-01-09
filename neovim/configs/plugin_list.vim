@@ -25,7 +25,7 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "}}}
 "******************************************************************* The End{{{
-Plug 'Neur1n/neuims'
+Plug 'Neur1n/neuims', {'on': 'IMSToggle'}
 Plug 'Neur1n/neuline'
 "}}}
 call plug#end()
