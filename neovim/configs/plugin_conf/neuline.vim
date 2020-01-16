@@ -1,5 +1,6 @@
 scriptencoding utf-8
 
+"************************************************************ Neur1n/neuline{{{
 let g:neuline = {
       \ 'stl': {
       \   'left': {
@@ -32,7 +33,7 @@ catch /^Vim\%((\a\+)\)\=:E/
   finish
 endtry
 
-"********************************************************************** vcs {{{
+"*********************************************************************** vcs{{{
 function! NeulineVCS() abort
   if winwidth(0) >= 60
     if get(g:, 'coc_git_status', '') !=# ''
@@ -48,7 +49,7 @@ endfunction
 call neutil#palette#Highlight('NSvcs', s:plt.fgm, s:plt.graym, 'bold')
 "}}}
 
-"************************************************************** windowsswap {{{
+"*************************************************************** windowsswap{{{
 function! NeulineWindowSwap() abort
   if exists('g:loaded_windowswap')
     return WindowSwap#IsCurrentWindowMarked() ? '' : ''
@@ -60,7 +61,7 @@ endfunction
 call neutil#palette#Highlight('NSwindowswap', s:plt.orange, s:plt.bgh, 'bold')
 "}}}
 
-"******************************************************************* tagbar {{{
+"******************************************************************** tagbar{{{
 function! NeulineTagbar() abort
   if exists(':Tagbar')
     let l:tag = tagbar#currenttag('%s', '', '%f')
@@ -73,7 +74,7 @@ endfunction
 call neutil#palette#Highlight('NStagbar', s:plt.fgh, s:plt.bgh, 'italic')
 "}}}
 
-"********************************************************************* lint {{{
+"********************************************************************** lint{{{
 call neutil#palette#Highlight('NSlintI', s:plt.bgh, s:plt.blue, 'bold')
 call neutil#palette#Highlight('NSlintH', s:plt.bgh, s:plt.green, 'bold')
 call neutil#palette#Highlight('NSlintW', s:plt.bgh, s:plt.orange, 'bold')
@@ -116,7 +117,7 @@ function! s:GatherInfo(info, keys, tag) abort
 endfunction
 "}}}
 
-"***************************************************************** asyncrun {{{
+"****************************************************************** asyncrun{{{
 call neutil#palette#Highlight('NTasyncrunE', s:plt.red, s:plt.grays, 'bold')
 call neutil#palette#Highlight('NTasyncrunR', s:plt.blue, s:plt.grays, 'bold')
 call neutil#palette#Highlight('NTasyncrunF', s:plt.green, s:plt.grays, 'bold')
@@ -149,4 +150,5 @@ augroup neuline_custom
   autocmd User AsyncRunStart call neutal#Update() | call neuline#tal#highlight#Link()
   autocmd User AsyncRunStop call neutal#Update() | call neuline#tal#highlight#Link()
 augroup end
+"}}}
 "}}}
