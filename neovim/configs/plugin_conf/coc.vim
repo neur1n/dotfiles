@@ -2,7 +2,6 @@ scriptencoding utf-8
 
 "********************************************************* neoclide/coc.nvim{{{
 set completeopt=menuone,noinsert,noselect
-" set hidden
 
 function! s:CheckBackSpace() abort
   let l:col = col('.') - 1
@@ -36,11 +35,23 @@ if get(g:, 'colors_name', '') ==# 'neuclr'
   highlight link CocErrorSign NeuRed
 endif
 
-call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugin_conf/coc-snippets')
-
 if has('unix')
   call coc#config('languageserver.clangd.command', 'clangd-7')
 elseif has('win32')
   call coc#config('languageserver.clangd.command', 'clangd')
 endif
+
+"***************************************************** neoclide/coc-snippets{{{
+call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugin_conf/coc-snippets')
+"}}}
+"**************************************************** fannheyward/coc-texlab{{{
+" if has('unix')
+"   call coc#config('latex.forwardSearch.executable', 'okular')
+" elseif has('win32')
+"   call coc#config('latex.forwardSearch.executable', 'SumatraPDF')
+" endif
+
+" nnoremap <silent> <leader>ll :execute 'CocCommand latex.Build'<CR>
+" nnoremap <silent> <leader>lv :execute 'CocCommand latex.ForwardSearch'<CR>
+"}}}
 "}}}
