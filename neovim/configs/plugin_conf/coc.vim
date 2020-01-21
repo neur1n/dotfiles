@@ -45,13 +45,15 @@ endif
 call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugin_conf/coc-snippets')
 "}}}
 "**************************************************** fannheyward/coc-texlab{{{
-" if has('unix')
-"   call coc#config('latex.forwardSearch.executable', 'okular')
-" elseif has('win32')
-"   call coc#config('latex.forwardSearch.executable', 'SumatraPDF')
-" endif
+if has('unix')
+  call coc#config('latex.forwardSearch.executable', 'okular')
+  call coc#config('latex.forwardSearch.args', ['--unique', 'file:%p#src:%l%f'])
+elseif has('win32')
+  call coc#config('latex.forwardSearch.executable', 'SumatraPDF')
+  call coc#config('latex.forwardSearch.args', ['-reuse-instance', '%p', '-forward-search', '%f', '%l'])
+endif
 
-" nnoremap <silent> <leader>ll :execute 'CocCommand latex.Build'<CR>
-" nnoremap <silent> <leader>lv :execute 'CocCommand latex.ForwardSearch'<CR>
+nnoremap <silent> <leader>ll :execute 'CocCommand latex.Build'<CR>
+nnoremap <silent> <leader>lv :execute 'CocCommand latex.ForwardSearch'<CR>
 "}}}
 "}}}

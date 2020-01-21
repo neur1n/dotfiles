@@ -11,5 +11,16 @@
     "clangd": {
       "filetypes": ["c", "cpp", "objc", "objcpp"]
     }
-  }
+  },
+  "latex.build.executable": "latexmk",
+  "latex.build.args": [
+    "-file-line-error",
+    "-interaction=nonstopmode",
+    "-outdir=build",
+    "-pdf",
+    "-shell-escape",
+    "-synctex=1",
+    "-verbose"
+  ],
+  "latex.build.onSave": true
 }
