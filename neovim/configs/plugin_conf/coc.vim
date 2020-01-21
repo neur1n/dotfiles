@@ -41,6 +41,8 @@ elseif has('win32')
   call coc#config('languageserver.clangd.command', 'clangd')
 endif
 
+call coc#add_extension('coc-calc', 'coc-git', 'coc-spell-checker', 'coc-word')
+
 "***************************************************** neoclide/coc-snippets{{{
 call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugin_conf/coc-snippets')
 "}}}
