@@ -20,9 +20,10 @@ let g:neuline = {
       \ },
       \ 'tal': {
       \   'left': ['logo', 'bufinfo', 'asyncrun'],
-      \   'right': ['ctab', 'nctab', 'button'],
+      \   'right': ['neuims', 'ctab', 'nctab', 'button'],
       \   'definition': {
       \     'asyncrun': {'tag': 'NTasyncrun', 'def': ['NeulineAsyncRun()']},
+      \     'neuims': {'tag': 'NTneuims', 'def': ['NeulineNeuIMS()']},
       \   }
       \ },
       \ }
@@ -130,13 +131,13 @@ function! NeulineAsyncRun() abort
       return ''
     elseif l:status ==# 'failure'
       highlight link NTasyncrun NTasyncrunE
-      return '[AsyncRun] Failed ✘'
+      return '[AsyncRun] ✘'
     elseif l:status ==# 'running'
       highlight link NTasyncrun NTasyncrunR
-      return '[AsyncRun] Running '
+      return '[AsyncRun] '
     elseif l:status ==# 'success'
       highlight link NTasyncrun NTasyncrunF
-      return '[AsyncRun] Finished ✓'
+      return '[AsyncRun] ✓'
     endif
   endif
 
@@ -150,5 +151,24 @@ augroup neuline_custom
   autocmd User AsyncRunStart call neutal#Update() | call neuline#tal#highlight#Link()
   autocmd User AsyncRunStop call neutal#Update() | call neuline#tal#highlight#Link()
 augroup end
+"}}}
+"******************************************************************** neuims{{{
+call neutil#palette#Highlight('NTneuims', s:plt.yellow, s:plt.grays, 'bold')
+
+function! NeulineNeuIMS() abort
+  if winwidth(0) >= 60
+    if exists('g:neuims')
+      if g:neuims.status == 1
+        return ' '.g:neuims.im.' '
+      else
+        return ''
+      endif
+    else
+      return ''
+    endif
+  else
+    return ''
+  endif
+endfunction
 "}}}
 "}}}
