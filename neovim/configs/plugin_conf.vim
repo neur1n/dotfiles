@@ -8,7 +8,8 @@ source $VIMCONFIG/configs/plugin_conf/neomake.vim
 source $VIMCONFIG/configs/plugin_conf/polyglot.vim
 source $VIMCONFIG/configs/plugin_conf/rainbow.vim
 source $VIMCONFIG/configs/plugin_conf/startify.vim
-source $VIMCONFIG/configs/plugin_conf/tagbar.vim
+" source $VIMCONFIG/configs/plugin_conf/tagbar.vim
 " source $VIMCONFIG/configs/plugin_conf/vimtex.vim
+source $VIMCONFIG/configs/plugin_conf/vista.vim
 source $VIMCONFIG/configs/plugin_conf/neuims.vim
 source $VIMCONFIG/configs/plugin_conf/neuline.vim

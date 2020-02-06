@@ -14,7 +14,7 @@ let g:neuline = {
       \   'definition': {
       \     'vcs': {'tag': 'NSvcs', 'def': ['NeulineVCS()']},
       \     'windowsswap': {'tag': 'NSwindowswap', 'def': ['NeulineWindowSwap()']},
-      \     'tagbar': {'tag': 'NStagbar', 'def': ['NeulineTagbar()']},
+      \     'tagbar': {'tag': 'NStag', 'def': ['NeulineTag()']},
       \     'lint': {'tag': 'NSlint', 'def': ['NeulineLint()']},
       \   }
       \ },
@@ -62,17 +62,20 @@ endfunction
 call neutil#palette#Highlight('NSwindowswap', s:plt.orange, s:plt.bgh, 'bold')
 "}}}
 
-"******************************************************************** tagbar{{{
-function! NeulineTagbar() abort
+"*********************************************************************** tag{{{
+function! NeulineTag() abort
   if exists(':Tagbar')
     let l:tag = tagbar#currenttag('%s', '', '%f')
+    return l:tag ==# '' ? '' : l:tag.' '
+  elseif exists(':Vista')
+    let l:tag = get(b:, 'vista_nearest_method_or_function', '')
     return l:tag ==# '' ? '' : l:tag.' '
   else
     return ''
   endif
 endfunction
 
-call neutil#palette#Highlight('NStagbar', s:plt.fgh, s:plt.bgh, 'italic')
+call neutil#palette#Highlight('NStag', s:plt.fgh, s:plt.bgh, 'italic')
 "}}}
 
 "********************************************************************** lint{{{

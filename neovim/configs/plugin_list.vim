@@ -4,8 +4,9 @@ call plug#begin('$VIMCONFIG/plugged')
 "********************************************************************** Misc{{{
 Plug 'cohama/lexima.vim'
 " Plug 'lervag/vimtex'
+Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 Plug 'matze/vim-move'
 Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
