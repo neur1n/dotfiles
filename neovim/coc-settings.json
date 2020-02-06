@@ -1,4 +1,11 @@
 {
+  "cSpell.enabledLanguageIds": [
+    "html",
+    "latex",
+    "markdown",
+    "plaintext",
+    "text",
+  ],
   "diagnostic.enable": true,
   "diagnostic.errorSign": "✘",
   "diagnostic.hintSign": "",
