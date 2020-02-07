@@ -2,6 +2,9 @@ scriptencoding utf-8
 
 function! neutil#qf#Clear() abort
   call setqflist([], 'r')
+  let l:winid = win_getid()
+  execute 'botright copen'
+  call win_gotoid(l:winid)
 endfunction
 
 function! neutil#qf#Toggle() abort
