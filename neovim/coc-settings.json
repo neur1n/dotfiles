@@ -1,4 +1,57 @@
 {
+  "diagnostic.enable": true,
+  "diagnostic.errorSign": "✘",
+  "diagnostic.hintSign": "",
+  "diagnostic.infoSign": "",
+  "diagnostic.warningSign": "",
+  "languageserver": {
+    "clangd": {
+      "command": "clangd",
+      "args": ["--background-index"],
+      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".git/", ".hg/"],
+      "filetypes": ["c", "cpp", "objc", "objcpp"]
+    }
+  },
+  // coc-diagnostic
+  "diagnostic-languageserver.filetypes": {
+    "html": "tidy",
+    "vim": "vint"
+  },
+  "diagnostic-languageserver.linters": {
+    "tidy": {
+      "command": "tidy",
+      "args": ["-e", "-q"],
+      "rootPatterns": [".git/"],
+      "isStderr": "true",
+      "debounce": 100,
+      "offsetLine": 0,
+      "offsetColumn": 0,
+      "sourceName": "tidy",
+      "formatLines": 1,
+      "formatPattern": [
+        "^.*?(\\d+).*?(\\d+)\\s+-\\s+([^:]+):\\s+(.*)$",
+        {
+          "line": 1,
+          "column": 2,
+          "endLine": 1,
+          "endColumn": 2,
+          "message": [4],
+          "security": 3
+        }
+      ],
+      "securities": {
+        "Error": "error",
+        "Warning": "warning"
+      }
+    }
+  },
+  // coc-git
+  "git.branchCharacter": "",
+  // coc-python
+  "python.jediEnabled": false,
+  // coc-snippets
+  "snippets.ultisnips.enable": true,
+  // coc-spell-checker
   "cSpell.enabledLanguageIds": [
     "html",
     "latex",
@@ -6,19 +59,7 @@
     "plaintext",
     "text",
   ],
-  "diagnostic.enable": true,
-  "diagnostic.errorSign": "✘",
-  "diagnostic.hintSign": "",
-  "diagnostic.infoSign": "",
-  "diagnostic.warningSign": "",
-  "git.branchCharacter": "",
-  "snippets.ultisnips.enable": true,
-  "python.jediEnabled": false,
-  "languageserver": {
-    "clangd": {
-      "filetypes": ["c", "cpp", "objc", "objcpp"]
-    }
-  },
+  // coc-texlab
   "latex.build.executable": "latexmk",
   "latex.build.args": [
     "-file-line-error",

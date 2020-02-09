@@ -28,6 +28,9 @@ nmap <silent> <C-c> <Plug>(coc-cursors-position)
 nmap <silent> <C-d> <Plug>(coc-cursors-word)
 xmap <silent> <C-d> <Plug>(coc-cursors-range)
 
+vmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
+
 if get(g:, 'colors_name', '') ==# 'neuclr'
   highlight link CocInfoSign NeuBlue
   highlight link CocHintSign NeuGreen
@@ -41,7 +44,8 @@ elseif has('win32')
   call coc#config('languageserver.clangd.command', 'clangd')
 endif
 
-call coc#add_extension('coc-calc', 'coc-git', 'coc-spell-checker', 'coc-word')
+call coc#add_extension('coc-diagnostic', 'coc-git', 'coc-json', 'coc-snippets',
+      \ 'coc-spell-checker', 'coc-word')
 
 "***************************************************** neoclide/coc-snippets{{{
 call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugin_conf/coc-snippets')

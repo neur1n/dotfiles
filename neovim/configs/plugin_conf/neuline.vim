@@ -89,9 +89,11 @@ function! NeulineLint() abort
     return s:GatherInfo(get(b:, 'coc_diagnostic_info', {}),
           \ {'i': 'information', 'h': 'hint', 'w': 'warning', 'e': 'error'},
           \ '[CoC]')
-  elseif !empty(neomake#statusline#LoclistCounts())
-    return s:GatherInfo(neomake#statusline#LoclistCounts(),
-          \ {'i': 'I', 'h': 'H', 'w': 'W', 'e': 'E'}, '[Neomake]')
+  elseif exists('*neomake#statusline#LoclistCounts()')
+    if !empty(neomake#statusline#LoclistCounts())
+      return s:GatherInfo(neomake#statusline#LoclistCounts(),
+            \ {'i': 'I', 'h': 'H', 'w': 'W', 'e': 'E'}, '[Neomake]')
+    endif
   else
     return ''
   endif
