@@ -17,34 +17,6 @@
     "html": "tidy",
     "vim": "vint"
   },
-  "diagnostic-languageserver.linters": {
-    "tidy": {
-      "command": "tidy",
-      "args": ["-e", "-q"],
-      "rootPatterns": [".git/"],
-      "isStderr": "true",
-      "debounce": 100,
-      "offsetLine": 0,
-      "offsetColumn": 0,
-      "sourceName": "tidy",
-      "formatLines": 1,
-      "formatPattern": [
-        "^.*?(\\d+).*?(\\d+)\\s+-\\s+([^:]+):\\s+(.*)$",
-        {
-          "line": 1,
-          "column": 2,
-          "endLine": 1,
-          "endColumn": 2,
-          "message": [4],
-          "security": 3
-        }
-      ],
-      "securities": {
-        "Error": "error",
-        "Warning": "warning"
-      }
-    }
-  },
   // coc-git
   "git.branchCharacter": "",
   // coc-python
