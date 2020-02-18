@@ -1,3 +1,3 @@
 Plug 'lervag/vimtex'
-Plug 'majutsushu/tagbar'
+Plug 'majutsushi/tagbar'
 Plug 'neomake/neomake'
