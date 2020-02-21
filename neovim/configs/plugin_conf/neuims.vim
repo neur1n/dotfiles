@@ -11,4 +11,6 @@ if has('unix')
         \ },
         \ }
 endif
+
+nnoremap <silent> <leader>it :call neuims#Toggle()<CR>
 "}}}
