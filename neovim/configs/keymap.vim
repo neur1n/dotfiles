@@ -37,8 +37,8 @@ inoremap <A-k> <Up>
 
 "******************************************************************* Editing{{{
 "           Insert a new line without entering insert mode (shift-enter, enter)
-nnoremap <CR> o<Esc>
-nnoremap <S-CR> O<Esc>
+nnoremap <expr> <CR> &buftype ==# 'quickfix' ? '<CR>' : 'o<Esc>'
+nnoremap <expr> <S-CR> &buftype ==# 'quickfix' ? '<S-CR>' : 'O<Esc>'
 "                                              Toggle current line highlighting
 nnoremap <leader>cl :set cursorline! nocursorline?<CR>
 "                                                    Toggle search highlighting
