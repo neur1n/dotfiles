@@ -18,16 +18,6 @@ let s:run_rule_map = {
       \ 'typescript': 's:RunTypeScript',
       \ }
 
-function! s:RunRule() abort
-  if filereadable(asyncrun#get_root('%').'/makefile')
-    execute 'AsyncRun -raw -cwd=<root> make'
-  else
-    if !empty(get(s:run_rule_map, &filetype, ''))
-      call s:DefaultRunRule()
-    endif
-  endif
-endfunction
-
 "------------------------------------------------------------- Build rules
 function! s:BuildRule() abort
   if filereadable(asyncrun#get_root('%').'/makefile')
