@@ -10,6 +10,15 @@
       "args": ["--background-index"],
       "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".git/", ".hg/"],
       "filetypes": ["c", "cpp", "objc", "objcpp"]
+    },
+    "flow": {
+      "command": "flow",
+      "args": ["lsp"],
+      "filetypes": ["javascript", "javascriptreact"],
+      "initializationOptions": {},
+      "requireRootPattern": true,
+      "settings": {},
+      "rootPatterns": [".flowconfig", ".git/"]
     }
   },
   // coc-diagnostic
