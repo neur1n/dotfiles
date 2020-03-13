@@ -45,11 +45,11 @@ augroup END
 "}}}
 
 "***************************************************************** Functions{{{
-function! s:SelectTemplate(mode)
+function! s:SelectTemplate(mode) abort
   if a:mode ==# 'ex'  " Choose by extension
-    execute ':silent! 0r $VIMCONFIG/templates/skeleton.'.expand('<afile>:e')
+    silent! execute 'keepalt 0r $VIMCONFIG/templates/skeleton.'.expand('<afile>:e')
   elseif a:mode ==# 'ft'  " Choose by file type
-    execute ':silent! 0r $VIMCONFIG/templates/skeleton.'.eval('&filetype')
+    silent! execute 'keepalt 0r $VIMCONFIG/templates/skeleton.'.eval('&filetype')
   endif
 endfunction
 "}}}
