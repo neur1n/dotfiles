@@ -57,7 +57,7 @@ set wildignorecase
 set tags+=../tags
 
 set splitright                                            " split on right side
-" set splitbelow                                                 " split on below
+set splitbelow                                                 " split on below
 
 set backup
 set backupdir=$VIMCONFIG/recovery/backup
