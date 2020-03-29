@@ -1,3 +1,3 @@
 scriptencoding utf-8
 
-autocmd BufNewFile,BufRead *.json setlocal filetype=jsonc
+autocmd BufNewFile,BufRead *.jsonc setlocal filetype=jsonc
