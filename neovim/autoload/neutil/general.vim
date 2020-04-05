@@ -6,7 +6,7 @@ function! neutil#general#DeleteHiddenBuffer() abort
   let l:tpbl=[]
   call map(range(1, tabpagenr('$')), 'extend(l:tpbl, tabpagebuflist(v:val))')
   for l:buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(l:tpbl, v:val)==-1')
-    silent execute 'bdelet' l:buf
+    silent! execute 'bwipeout '.l:buf
   endfor
 endfunction
 "                                                  Toggle read only: <leader>ro
