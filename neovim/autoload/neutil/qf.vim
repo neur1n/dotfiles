@@ -2,27 +2,25 @@ scriptencoding utf-8
 
 function! neutil#qf#Clear() abort
   call setqflist([], 'r')
-  let l:winid = win_getid()
   execute 'botright copen'
-  call win_gotoid(l:winid)
+  execute 'wincmd p'
 endfunction
 
 function! neutil#qf#Toggle() abort
-  if !exists('s:qf_opened')
-    let l:winid = win_getid()
-    execute 'botright copen'
-    call win_gotoid(l:winid)
-    let s:qf_opened = 1
-    return
-  endif
-
-  if s:qf_opened
+  if s:IsOpened()
     execute 'cclose'
-    let s:qf_opened = 0
   else
-    let l:winid = win_getid()
     execute 'botright copen'
-    call win_gotoid(l:winid)
-    let s:qf_opened = 1
+    execute 'wincmd p'
   endif
+endfunction
+
+
+function! s:IsOpened() abort
+  for l:nr in range(1, winnr('$'))
+    if getwinvar(l:nr, '&filetype') ==# 'qf'
+      return 1
+    endif
+  endfor
+  return 0
 endfunction
