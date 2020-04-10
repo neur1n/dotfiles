@@ -15,7 +15,6 @@ function! neutil#qf#Toggle() abort
   endif
 endfunction
 
-
 function! s:IsOpened() abort
   for l:nr in range(1, winnr('$'))
     if getwinvar(l:nr, '&filetype') ==# 'qf'
