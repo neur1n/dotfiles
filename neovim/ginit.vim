@@ -1,3 +1,8 @@
+" Font candidates:
+"   FantasqueSansMono NF
+"   ShureTechMono NF
+"   VictorMono NF
+
 if has('win32')
   let s:cmd = 'wmic path Win32_VideoController get CurrentHorizontalResolution'
 elseif has('unix')
@@ -5,9 +10,9 @@ elseif has('unix')
 endif
 
 if matchstr(system(s:cmd), '[0-9]\+') == 2560
-  execute 'GuiFont! FantasqueSansMono\ NF:h12'
+  execute 'GuiFont! VictorMono\ NF:h12'
 else
-  execute 'GuiFont! FantasqueSansMono\ NF:h10'
+  execute 'GuiFont! VictorMono\ NF:h10'
 endif
 
 execute 'GuiTabline 0'
