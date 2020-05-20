@@ -66,6 +66,6 @@ set backupdir=$VIMCONFIG/recovery/backup
 "*********************************************************** Moduled Configs{{{
 source $VIMCONFIG/configs/autocmd.vim
 source $VIMCONFIG/configs/keymap.vim
-source $VIMCONFIG/configs/plugin_list.vim
-source $VIMCONFIG/configs/plugin_conf.vim
+source $VIMCONFIG/configs/pluglist.vim
+source $VIMCONFIG/configs/plugconf.vim
 "}}}

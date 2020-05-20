@@ -42,7 +42,7 @@ call coc#add_extension('coc-diagnostic', 'coc-git', 'coc-json', 'coc-snippets',
       \ 'coc-spell-checker', 'coc-word')
 
 "***************************************************** neoclide/coc-snippets{{{
-call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugin_conf/coc-snippets')
+call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugconf/coc-snippets')
 "}}}
 "**************************************************** fannheyward/coc-texlab{{{
 if has('unix')
