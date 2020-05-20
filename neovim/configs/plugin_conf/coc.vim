@@ -38,12 +38,6 @@ if get(g:, 'colors_name', '') ==# 'neuclr'
   highlight link CocErrorSign NeuRed
 endif
 
-if has('unix')
-  call coc#config('languageserver.clangd.command', 'clangd-7')
-elseif has('win32')
-  call coc#config('languageserver.clangd.command', 'clangd')
-endif
-
 call coc#add_extension('coc-diagnostic', 'coc-git', 'coc-json', 'coc-snippets',
       \ 'coc-spell-checker', 'coc-word')
 
