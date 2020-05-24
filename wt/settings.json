@@ -16,10 +16,11 @@
         {
             // Put settings here that you want to apply to all profiles
             "colorScheme": "MaterialOcean",
-            "cursorShape": "filledBox",
+            "cursorShape": "vintage",
             "fontFace": "CaskaydiaCove NF",
             "useAcrylic": true,
-            "acrylicOpacity": 0.8
+            "acrylicOpacity": 0.8,
+            "experimental.retroTerminalEffect": false
         },
         "list":
         [
@@ -29,7 +30,7 @@
                 "hidden": false,
                 "name": "PowerShell Core",
                 "commandline": "pwsh.exe",
-                "icon": "D:\\ProgramFiles\\PowerShell\\7\\assets\\Powershell_av_colors.ico",
+                "icon": "%PWSHHOME%\\assets\\Powershell_av_colors.ico",
                 "startingDirectory": "."
             },
             {
