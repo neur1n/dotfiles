@@ -124,7 +124,7 @@ endfunction
 "}}}
 
 "****************************************************************** asyncrun{{{
-call neutil#palette#Highlight('NTasyncrun', s:plt.grays, s:plt.grays, 'bold')
+" call neutil#palette#Highlight('NTasyncrun', s:plt.grays, s:plt.grays, 'bold')
 call neutil#palette#Highlight('NTasyncrunE', s:plt.red, s:plt.grays, 'bold')
 call neutil#palette#Highlight('NTasyncrunR', s:plt.blue, s:plt.grays, 'bold')
 call neutil#palette#Highlight('NTasyncrunF', s:plt.green, s:plt.grays, 'bold')
