@@ -21,59 +21,37 @@ function Load-Module ($name) {
 
 #================================================================= posh-git {{{
 Load-Module 'posh-git'
+# $GitPromptSettings.DefaultPromptPrefix.Text = '`n╭─[I] '
+# $GitPromptSettings.DefaultPromptBeforeSuffix.Text = '`n╰─'
 #}}}
 
 #=============================================================== PSReadLine {{{
 Load-Module 'PSReadLine'
+
+$script:ViMode = '[I] '
+$script:ViColor = [ConsoleColor]::Green
+
+function OnViModeChange {
+  if ($args[0] -eq 'Command') {
+    $script:ViMode = '[N] '
+    $script:ViColor = [ConsoleColor]::Red
+  } else {
+    $script:ViMode = '[I] '
+    $script:ViColor = [ConsoleColor]::Green
+  }
+  [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
+}
+
 Set-PSReadLineOption -EditMode Vi
+Set-PSReadLineOption -ExtraPromptLineCount 2
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-Set-PSReadLineOption -ViModeIndicator Prompt
-
-# function Bind-Key ($binding, $keys) {
-#   Set-PSReadLineKeyHandler -Chord $binding -ViMode Command -ScriptBlock {
-#     Add-Type -AssemblyName System.Windows.Forms
-#     # [System.Windows.Forms.SendKeys]::SendWait($keys)
-#     Write-Host "[System.Windows.Forms.SendKeys]::SendWait($keys)"
-#   }
-# }
-
-# Bind-Key 'Ctrl+b,s' '%+{-}'
-# Bind-Key 'Ctrl+w,v' '%+{=}'
-# Bind-Key 'Ctrl+w,h' '%{LEFT}'
-# Bind-Key 'Ctrl+w,j' '%{DOWN}'
-# Bind-Key 'Ctrl+w,k' '%{UP}'
-# Bind-Key 'Ctrl+w,l' '%{RIGHT}'
-
-Set-PSReadLineKeyHandler -Chord 'Ctrl+w,s' -ViMode Command -ScriptBlock {
-  Add-Type -AssemblyName System.Windows.Forms
-  [System.Windows.Forms.SendKeys]::SendWait('%+{-}')
-}
-
-Set-PSReadLineKeyHandler -Chord 'Ctrl+w,v' -ViMode Command -ScriptBlock {
-  Add-Type -AssemblyName System.Windows.Forms
-  [System.Windows.Forms.SendKeys]::SendWait('%+{=}')
-}
-
-Set-PSReadLineKeyHandler -Chord 'Ctrl+w,h' -ViMode Command -ScriptBlock {
-  Add-Type -AssemblyName System.Windows.Forms
-  [System.Windows.Forms.SendKeys]::SendWait('%{LEFT}')
-}
-
-Set-PSReadLineKeyHandler -Chord 'Ctrl+w,j' -ViMode Command -ScriptBlock {
-  Add-Type -AssemblyName System.Windows.Forms
-  [System.Windows.Forms.SendKeys]::SendWait('%{DOWN}')
-}
-
-Set-PSReadLineKeyHandler -Chord 'Ctrl+w,k' -ViMode Command -ScriptBlock {
-  Add-Type -AssemblyName System.Windows.Forms
-  [System.Windows.Forms.SendKeys]::SendWait('%{UP}')
-}
-
-Set-PSReadLineKeyHandler -Chord 'Ctrl+w,l' -ViMode Command -ScriptBlock {
-  Add-Type -AssemblyName System.Windows.Forms
-  [System.Windows.Forms.SendKeys]::SendWait('%{RIGHT}')
-}
-#}}}
+Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
 
 # Prompt ==================================================================={{{
+function Prompt {
+  $Prompt = Write-Prompt "`n┌$script:ViMode" -ForegroundColor $script:ViColor
+  $Prompt += & $GitPromptScriptBlock
+  $Prompt += Write-Prompt "`n└>" -ForegroundColor $script:ViColor
+  if ($Prompt) { "$Prompt " } else { " " }
+}
 #}}}
