@@ -102,21 +102,21 @@ endfunction
 function! s:GatherInfo(info, keys, tag) abort
   let l:msg = []
 
-  if get(a:info, a:keys.e, 0)
-    call add(l:msg, '✘'.a:info[a:keys.e])
-    highlight link NSlint NSlintE
-  endif
-  if get(a:info, a:keys.w, 0)
-    call add(l:msg, ''.a:info[a:keys.w])
-    highlight link NSlint NSlintW
+  if get(a:info, a:keys.i, 0)
+    call add(l:msg, ''.a:info[a:keys.i])
+    highlight link NSlint NSlintI
   endif
   if get(a:info, a:keys.h, 0)
     call add(l:msg, ''.a:info[a:keys.h])
     highlight link NSlint NSlintH
   endif
-  if get(a:info, a:keys.i, 0)
-    call add(l:msg, ''.a:info[a:keys.i])
-    highlight link NSlint NSlintI
+  if get(a:info, a:keys.w, 0)
+    call add(l:msg, ''.a:info[a:keys.w])
+    highlight link NSlint NSlintW
+  endif
+  if get(a:info, a:keys.e, 0)
+    call add(l:msg, '✘'.a:info[a:keys.e])
+    highlight link NSlint NSlintE
   endif
 
   return empty(l:msg) ? '' : ' '.a:tag.join(l:msg, ' ').' '
