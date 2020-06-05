@@ -18,6 +18,7 @@
             "colorScheme": "MaterialOcean",
             "cursorShape": "vintage",
             "fontFace": "CaskaydiaCove NF",
+            "historySize": 9001,
             "useAcrylic": true,
             "acrylicOpacity": 0.8,
             "experimental.retroTerminalEffect": false
