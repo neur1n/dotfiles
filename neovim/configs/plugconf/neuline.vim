@@ -47,7 +47,7 @@ function! NeulineVCS() abort
   endif
 endfunction
 
-call neutil#palette#Highlight('NSvcs', s:plt.fgm, s:plt.graym, 'bold')
+call neutil#palette#Highlight('NSvcs', s:plt.fgm, s:plt.graym)
 "}}}
 
 "*************************************************************** windowsswap{{{
@@ -59,7 +59,7 @@ function! NeulineWindowSwap() abort
   endif
 endfunction
 
-call neutil#palette#Highlight('NSwindowswap', s:plt.orange, s:plt.bgh, 'bold')
+call neutil#palette#Highlight('NSwindowswap', s:plt.orange, s:plt.bgh)
 "}}}
 
 "*********************************************************************** tag{{{
@@ -79,10 +79,10 @@ call neutil#palette#Highlight('NStag', s:plt.fgh, s:plt.bgh, 'italic')
 "}}}
 
 "********************************************************************** lint{{{
-call neutil#palette#Highlight('NSlintI', s:plt.bgh, s:plt.blue, 'bold')
-call neutil#palette#Highlight('NSlintH', s:plt.bgh, s:plt.green, 'bold')
-call neutil#palette#Highlight('NSlintW', s:plt.bgh, s:plt.orange, 'bold')
-call neutil#palette#Highlight('NSlintE', s:plt.bgh, s:plt.red, 'bold')
+call neutil#palette#Highlight('NSlintI', s:plt.bgh, s:plt.blue)
+call neutil#palette#Highlight('NSlintH', s:plt.bgh, s:plt.green)
+call neutil#palette#Highlight('NSlintW', s:plt.bgh, s:plt.orange)
+call neutil#palette#Highlight('NSlintE', s:plt.bgh, s:plt.red)
 
 function! NeulineLint() abort
   if !empty(get(b:, 'coc_diagnostic_info', {}))
@@ -124,10 +124,11 @@ endfunction
 "}}}
 
 "****************************************************************** asyncrun{{{
-" call neutil#palette#Highlight('NTasyncrun', s:plt.grays, s:plt.grays, 'bold')
-call neutil#palette#Highlight('NTasyncrunE', s:plt.red, s:plt.grays, 'bold')
-call neutil#palette#Highlight('NTasyncrunR', s:plt.blue, s:plt.grays, 'bold')
-call neutil#palette#Highlight('NTasyncrunF', s:plt.green, s:plt.grays, 'bold')
+call neutil#palette#Highlight('NTasyncrun', s:plt.grays, s:plt.grays)
+highlight clear NTasyncrun  " Don't know why but it works.
+call neutil#palette#Highlight('NTasyncrunE', s:plt.red, s:plt.grays)
+call neutil#palette#Highlight('NTasyncrunR', s:plt.blue, s:plt.grays)
+call neutil#palette#Highlight('NTasyncrunF', s:plt.green, s:plt.grays)
 
 function! NeulineAsyncRun() abort
   if exists(':AsyncRun')
@@ -159,7 +160,7 @@ augroup neuline_custom
 augroup end
 "}}}
 "******************************************************************** neuims{{{
-call neutil#palette#Highlight('NTneuims', s:plt.yellow, s:plt.grays, 'bold')
+call neutil#palette#Highlight('NTneuims', s:plt.yellow, s:plt.grays)
 
 function! NeulineNeuIMS() abort
   if winwidth(0) >= 60
