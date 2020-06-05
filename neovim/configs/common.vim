@@ -33,6 +33,8 @@ endif
 "******************************************************************* General{{{
 set autoindent                                           " set auto indentation
 set backspace=indent,start                       " for vim-latex, see issue #53
+set backup
+set backupdir=$VIMCONFIG/recovery/backup
 set colorcolumn=80                                          " show right margin
 set cursorline                                          " highlight current row
 set expandtab shiftwidth=2 softtabstop=2     " set <Tab> width to be 2 <space>s
@@ -52,15 +54,11 @@ set relativenumber                                       " relative line number
 set sessionoptions-=folds                 " do not create folds when sessioning
 set showcmd                                                 " show pressed keys
 set signcolumn=yes
+set splitright                                            " split on right side
+set splitbelow                                                 " split on below
 set wildmenu                                 " show possible matches when <Tab>
 set wildignorecase
 set tags+=../tags
-
-set splitright                                            " split on right side
-set splitbelow                                                 " split on below
-
-set backup
-set backupdir=$VIMCONFIG/recovery/backup
 "}}}
 
 "*********************************************************** Moduled Configs{{{
