@@ -21,18 +21,18 @@
     "latex",
     "markdown",
     "plaintext",
-    "text",
+    "text"
   ],
   // coc-texlab
-  "latex.build.executable": "latexmk",
+  "latex.build.executable": "xelatex",
   "latex.build.args": [
     "-file-line-error",
     "-interaction=nonstopmode",
-    "-outdir=build",
-    "-pdf",
+    "-output-directory=build",
     "-shell-escape",
     "-synctex=1",
-    "-verbose"
+    "%f"
   ],
-  "latex.build.onSave": true
+  "latex.build.onSave": true,
+  "latex.build.outputDirectory": "./build"
 }
