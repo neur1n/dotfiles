@@ -1,5 +1,5 @@
 #==================================================================== START {{{
-if ((Get-ExecutionPolicy) -ne 'RemoteSigned') {
+if ($IsWindows -and (Get-ExecutionPolicy) -ne 'RemoteSigned') {
   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
 }
 
