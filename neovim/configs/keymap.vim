@@ -13,6 +13,8 @@ imap <F1> <Esc>
 nnoremap <A-]> :vsp<CR>:exec("tag ".expand("<cword>"))<CR>
 "                                                         Search selected texts
 vnoremap // y/\V<C-R>=escape(@", '\/')<CR><CR>
+"                                                            Exit terminal mode
+tnoremap <Esc> <C-\><C-n>
 "}}}
 
 "**************************************************************** Navigation{{{
