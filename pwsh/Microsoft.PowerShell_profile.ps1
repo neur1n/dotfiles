@@ -48,7 +48,48 @@ Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
 
 # Custom ==================================================================={{{
-function New-CMake-Config ($opt) {
+function Set-MSVC-Envs($export = 1, $arch = $null) {
+  if ($export -ne 0) {
+    $export = 1
+  }
+
+  $cmdlet = $null
+  if ($arch -eq 32) {
+    $cmdlet = "vcvars32.bat & set"
+  } elseif ($arch -eq 64) {
+    $cmdlet = "vcvars64.bat & set"
+  } elseif ($null -ne $arch) {
+    Write-Host "[Set-Build-Envs] Please provide arch as 32 or 64."
+    return
+  }
+
+  Write-Host "--------------------------------------------------"
+  Write-Host "Configuring for arch:"$arch
+  Write-Host "Exporting compile commands:"$export
+  Write-Host "--------------------------------------------------"
+
+  if ($null -ne $cmdlet) {
+    # $path = [System.Environment]::GetEnvironmentVariable('PATH', 'User')
+    # $path = ($path.Split(';') | Where-Object { $_ -NotMatch ".*MinGW.*" }) -join ';'
+    # [System.Environment]::SetEnvironmentVariable('PATH', $path, 'User')
+
+    cmd /c $cmdlet |
+    Select-String '^([^=]*)=(.*)$' | ForEach-Object {
+      $key = $_.Matches[0].Groups[1].Value
+      $value = $_.Matches[0].Groups[2].Value
+      Set-Item Env:$key $value
+    }
+  }
+
+  if ($export -eq 0) {
+    cmake .. -G Ninja
+  } else {
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja
+    Copy-Item -Force compile_commands.json -Destination ..
+  }
+}
+
+function New-CMake-Config() {
   $content =
 @'
 @echo off
