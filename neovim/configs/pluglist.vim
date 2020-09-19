@@ -8,7 +8,7 @@ Plug 'luochen1990/rainbow'
 Plug 'matze/vim-move'
 Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -17,6 +17,7 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'Yggdroot/LeaderF'
 "}}}
 "*********************************************************** Auto-completion{{{
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'Shougo/neco-vim', {'for': ['vim']}
 Plug 'neoclide/coc-neco', {'for': ['vim']}
 Plug 'honza/vim-snippets'

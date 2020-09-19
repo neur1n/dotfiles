@@ -4,6 +4,8 @@
   "diagnostic.hintSign": "",
   "diagnostic.infoSign": "",
   "diagnostic.warningSign": "",
+  // coc-clangd
+  "clangd.semanticHighlighting": true,
   // coc-diagnostic
   "diagnostic-languageserver.filetypes": {
     "html": "tidy",
