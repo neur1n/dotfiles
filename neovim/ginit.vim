@@ -1,6 +1,7 @@
 " Font candidates:
-"   CaskaydiaCove NF
-"   FantasqueSansMono NF
+"   CaskaydiaCove\ NF
+"   FantasqueSansMono\ NF
+"   GohuFont\ NF
 
 if has('win32')
   let s:cmd = 'wmic path Win32_VideoController get CurrentHorizontalResolution'
@@ -9,9 +10,9 @@ elseif has('unix')
 endif
 
 if matchstr(system(s:cmd), '[0-9]\+') == 2560
-  execute 'GuiFont! CaskaydiaCove\ NF:h12'
+  execute 'GuiFont! GohuFont\ NF:h12'
 else
-  execute 'GuiFont! CaskaydiaCove\ NF:h10'
+  execute 'GuiFont! GohuFont\ NF:h10'
 endif
 
 execute 'GuiTabline 0'

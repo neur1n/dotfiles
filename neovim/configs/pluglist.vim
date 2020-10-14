@@ -24,6 +24,7 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "}}}
 "******************************************************************* The End{{{
+Plug 'D:/Workspaces/vim_ws/liter.vim'
 Plug 'Neur1n/neuims', {'on': 'IMSToggle'}
 Plug 'Neur1n/neuline'
 "}}}
