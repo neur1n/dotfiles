@@ -15,6 +15,7 @@ inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
+nmap <leader>rf <Plug>(coc-refactor)
 nmap <leader>rn <Plug>(coc-rename)
 
 nmap <leader>fh <Plug>(coc-float-hide)
