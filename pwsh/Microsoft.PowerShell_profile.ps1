@@ -85,7 +85,9 @@ function Set-MSVC-Envs($export = 1, $arch = $null) {
     cmake .. -G Ninja
   } else {
     cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja
-    Copy-Item -Force compile_commands.json -Destination ..
+    if (Test-Path compile_commands.json) {
+      Copy-Item -Force compile_commands.json -Destination ..
+    }
   }
 }
 
