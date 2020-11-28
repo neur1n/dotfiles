@@ -16,11 +16,13 @@
         {
             // Put settings here that you want to apply to all profiles
             "colorScheme": "MaterialOcean",
+            "cursorColor": "#d75f5f",
             "cursorShape": "vintage",
             "fontFace": "CaskaydiaCove NF",
             "historySize": 9001,
             "useAcrylic": true,
-            "acrylicOpacity": 0.8,
+            "acrylicOpacity": 0.5,
+            "tabColor": "#ffaf00",
             "experimental.retroTerminalEffect": false
         },
         "list":
