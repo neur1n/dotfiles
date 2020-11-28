@@ -18,7 +18,6 @@ tnoremap <Esc> <C-\><C-n>
 "}}}
 
 "**************************************************************** Navigation{{{
-cnoremap W w
 "                         Go to a line and make it one the center of the screen
 nnoremap G Gzz
 "                                   Modify the behavior of j & k in normal mode
