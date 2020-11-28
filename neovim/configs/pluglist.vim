@@ -8,7 +8,6 @@ Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 Plug 'matze/vim-move'
 Plug 'mhinz/vim-startify'
-Plug 'mileszs/ack.vim', {'on': 'Ack!'}
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
