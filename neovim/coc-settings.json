@@ -13,8 +13,6 @@
   },
   // coc-git
   "git.branchCharacter": "",
-  // coc-python
-  "python.jediEnabled": false,
   // coc-snippets
   "snippets.ultisnips.enable": true,
   // coc-spell-checker
