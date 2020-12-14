@@ -40,8 +40,9 @@ if get(g:, 'colors_name', '') ==# 'neuclr'
   highlight link CocErrorSign NeuRed
 endif
 
-call coc#add_extension('coc-diagnostic', 'coc-git', 'coc-json', 'coc-snippets',
-      \ 'coc-spell-checker', 'coc-word')
+let g:coc_global_extensions = [
+      \ 'coc-diagnostic', 'coc-git', 'coc-json', 'coc-snippets',
+      \ 'coc-spell-checker', 'coc-word']
 
 "***************************************************** neoclide/coc-snippets{{{
 call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugconf/coc-snippets')
