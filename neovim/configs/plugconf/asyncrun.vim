@@ -20,7 +20,7 @@ let s:run_rule_map = {
 
 "------------------------------------------------------------- Build rules
 function! s:BuildRule() abort
-  if filereadable(asyncrun#get_root('%').'/makefile')
+  if filereadable(asyncrun#get_root('%').'/makefile') && executable('make')
     execute 'AsyncRun -raw -cwd=<root> make'
   else
     if !empty(get(s:build_rule_map, &filetype, ''))
@@ -40,7 +40,7 @@ endfunction
 
 "--------------------------------------------------------------- Run rules
 function! s:RunRule() abort
-  if filereadable(asyncrun#get_root('%').'/makefile')
+  if filereadable(asyncrun#get_root('%').'/makefile') && executable('make')
     execute 'AsyncRun -raw -cwd=<root> make'
   else
     if !empty(get(s:run_rule_map, &filetype, ''))
