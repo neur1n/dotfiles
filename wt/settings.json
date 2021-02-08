@@ -33,7 +33,7 @@
                 "hidden": false,
                 "name": "PowerShell Core",
                 "commandline": "pwsh.exe",
-                "icon": "%PWSHHOME%\\assets\\Powershell_av_colors.ico",
+                "icon": "⚡",
                 "startingDirectory": "."
             },
             {

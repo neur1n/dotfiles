@@ -50,7 +50,7 @@ set laststatus=2                           " show statusline even only 1 window
 set linespace=0                                         " set line spacing to 0
 set noshowmode
 set number                                                   " show line number
-set relativenumber                                       " relative line number
+" set relativenumber                                       " relative line number
 set sessionoptions-=folds                 " do not create folds when sessioning
 set showcmd                                                 " show pressed keys
 set signcolumn=yes
