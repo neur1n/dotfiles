@@ -28,18 +28,35 @@ Invoke-Module 'posh-git'
 #=============================================================== PSReadLine {{{
 Invoke-Module 'PSReadLine'
 
-$script:vimode = '[I] '
+$script:emoji = @('😀', '😃', '😄', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃',
+  '😉', '😊', '😇', '🥰', '😍', '🤩', '😘', '😗', '☺️ ', '☺ ', '😚', '😙', '😋',
+  '😛', '😜', '🤪', '😝', '🤑', '🤗', '🤭', '🤫', '🤔', '🤐', '🤨', '😐', '😑',
+  '😶', '😶', '😶', '😏', '😒', '🙄', '😬', '😮', '🤥', '😌', '😔', '😪', '🤤',
+  '😴', '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '🥵', '🥶', '🥴', '😵', '😵', '🤯',
+  '🤠', '🥳', '😎', '🤓', '🧐', '😕', '😟', '🙁', '😮', '😯', '😲', '😳', '🥺',
+  '😦', '😧', '😨', '😰', '😥', '😢', '😭', '😱', '😖', '😣', '😞', '😓', '😩',
+  '😫', '🥱', '😤', '😡', '😠', '🤬', '😈', '👿', '💀', '💩', '🤡', '👹', '👺',
+  '👻', '👽', '👾', '🤖', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾',
+  '🙈', '🙉', '🙊')
+
+$script:index = Get-Random -Maximum $script:emoji.Count
+$script:indicator = ''
+$script:vimode = $script:emoji[$script:index]
 $script:vicolor = [ConsoleColor]::Green
 
 function OnViModeChange {
+  $script:index = Get-Random -Maximum $script:emoji.Count
+
   if ($args[0] -eq 'Command') {
-    $script:vimode = '[N] '
     $script:vicolor = [ConsoleColor]::Red
   } else {
-    $script:vimode = '[I] '
     $script:vicolor = [ConsoleColor]::Green
   }
+
+  $script:vimode = $script:emoji[$script:index]
+
   [Microsoft.PowerShell.PSConsoleReadLine]::InvokePrompt()
+  $PSStyle.Reset
 }
 
 Set-PSReadLineOption -EditMode Vi
@@ -132,9 +149,10 @@ if %export% == 1 (
 
 # Prompt ==================================================================={{{
 function Prompt {
-  $Prompt = Write-Prompt "`n┌$script:vimode" -ForegroundColor $script:vicolor
+  $Prompt = Write-Prompt "`n"
   $Prompt += & $GitPromptScriptBlock
-  $Prompt += Write-Prompt "`n└>" -ForegroundColor $script:vicolor
+  $Prompt += Write-Prompt "`n $script:vimode" -BackgroundColor $script:vicolor
+  $Prompt += Write-Prompt "$script:indicator" -ForegroundColor $script:vicolor
   if ($Prompt) { "$Prompt " } else { " " }
 }
 #}}}
