@@ -20,7 +20,7 @@ let g:lightline.inactive = {
       \ }
 
 let g:lightline.tabline = {
-      \ 'left': [['path']],
+      \ 'left': [['path', 'asyncrun']],
       \ 'right': [['ctab', 'nctab', 'close']]
       \ }
 
@@ -39,6 +39,7 @@ let g:lightline.component = {
       \ 'filename_ia': '%#LBufInfoIA# [%n]%t ',
       \ 'lineinfo_ia': '%#LLineInfoIA#%4l/%L:%-3v',
       \ 'path': '%#LPath#%{getcwd()}',
+      \ 'asyncrun': '%#LAsyncRun#%{LightlineAsyncRun()}',
       \ 'ctab': '%#LCurrentTab#%{LightlineCurrentTabs()}',
       \ 'nctab': '%#LNonCurrentTab#%{LightlineNonCurrentTabs()}',
       \ 'close': '%#LCloseButton#%999X%{LightlineCloseButton()}',
@@ -57,6 +58,7 @@ let g:lightline.component_type = {
       \ 'fileinfo': 'raw',
       \ 'filename_ia': 'raw',
       \ 'lineinfo_ia': 'raw',
+      \ 'asyncrun': 'raw',
       \ }
 
 let g:lightline.separator = {'left': '', 'right': ''}
@@ -140,6 +142,12 @@ call neutil#palette#Highlight('LLintW', s:plt.bgh, s:plt.orange)
 call neutil#palette#Highlight('LLintE', s:plt.bgh, s:plt.red   )
 
 call neutil#palette#Highlight('LPath', s:plt.bgh, s:plt.grays)
+
+call neutil#palette#Highlight('LAsyncRunR', s:plt.blue, s:plt.grays)
+call neutil#palette#Highlight('LAsyncRunI', s:plt.yellow, s:plt.grays)
+call neutil#palette#Highlight('LAsyncRunF', s:plt.green, s:plt.grays)
+call neutil#palette#Highlight('LAsyncRunE', s:plt.red, s:plt.grays)
+
 call neutil#palette#Highlight('LCloseButton', s:plt.fgs, s:plt.red, 'bold')
 call neutil#palette#Highlight('LCurrentTab', s:plt.orange, s:plt.grays, 'bold')
 call neutil#palette#Highlight('LNonCurrentTab', s:plt.bgh, s:plt.grays)
@@ -262,6 +270,49 @@ function! LightlineVCS() abort
 endfunction
 "}}}
 
+"********************************************************* LightlineAsyncRun{{{
+let s:interrupted = v:false
+
+function! LightlineAsyncRun() abort
+  if exists(':AsyncRun')
+    let l:status = get(g:, 'asyncrun_status', '')
+    if l:status ==# 'running'
+      let s:interrupted = v:false
+      highlight link LAsyncRun LAsyncRunR
+      return ''
+    elseif l:status ==# 'success'
+      if s:interrupted
+        let s:interrupted = v:false
+        highlight link LAsyncRun LAsyncRunI
+        return ''
+      else
+        let s:interrupted = v:false
+        highlight link LAsyncRun LAsyncRunF
+        return '✓'
+      endif
+    elseif l:status ==# 'failure'
+      if s:interrupted
+        highlight link LAsyncRun LAsyncRunI
+        return ''
+      else
+        let s:interrupted = v:false
+        highlight link LAsyncRun LAsyncRunE
+        return '✘'
+      endif
+    endif
+  endif
+
+  return ''
+endfunction
+
+augroup lightline_custom
+  autocmd!
+  autocmd User AsyncRunStart call lightline#update()
+  autocmd User AsyncRunStop call lightline#update()
+  autocmd User AsyncRunInterrupt let s:interrupted = v:true | call lightline#update()
+augroup END
+"}}}
+
 "****************************************************** LightlineCurrentTabs{{{
 let s:tabs = {'list': [1], 'str': ''}
 let s:prev_tab = 0
@@ -314,6 +365,7 @@ function! LightlineNonCurrentTabs() abort
 
   return s:tabs.str
 endfunction
+"}}}
 
 "****************************************************** LightlineCloseButton{{{
 function! LightlineCloseButton() abort
