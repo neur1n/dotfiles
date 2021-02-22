@@ -52,6 +52,7 @@ let s:animals = {
       \           ],
       \ }
 
+let g:startify_custom_header_center = 1
 let g:startify_fortune_use_unicode = 1
 let g:startify_session_dir = '$VIMCONFIG/recovery/session'
 

@@ -8,14 +8,18 @@ let g:neuline = {
       \     'inactive': ['bufinfo', 'modif', 'windowsswap']
       \   },
       \   'right': {
-      \     'active': ['tagbar', 'fileinfo', 'ruler', 'lint'],
+      \     'active': ['tagbar', 'fileinfo', 'ruler', 'linti', 'linth', 'lintw', 'linte'],
       \     'inactive': ['ruler']
       \   },
       \   'definition': {
+      \     'bufinfo': {'tag': 'NSbufinfo', 'def': neuline#part#bufinfo#_(['[', 'Num', ']', 'Name'])},
       \     'vcs': {'tag': 'NSvcs', 'def': ['NeulineVCS()']},
       \     'windowsswap': {'tag': 'NSwindowswap', 'def': ['NeulineWindowSwap()']},
       \     'tagbar': {'tag': 'NStag', 'def': ['NeulineTag()']},
-      \     'lint': {'tag': 'NSlint', 'def': ['NeulineLint()']},
+      \     'linti': {'tag': 'NSlintI', 'def': ['NeulineLint("information", "")']},
+      \     'linth': {'tag': 'NSlintH', 'def': ['NeulineLint("hint", "")']},
+      \     'lintw': {'tag': 'NSlintW', 'def': ['NeulineLint("warning", "")']},
+      \     'linte': {'tag': 'NSlintE', 'def': ['NeulineLint("error", " ✘")']},
       \   }
       \ },
       \ 'tal': {
@@ -24,7 +28,8 @@ let g:neuline = {
       \   'definition': {
       \     'asyncrun': {'tag': 'NTasyncrun', 'def': ['NeulineAsyncRun()']},
       \     'neuims': {'tag': 'NTneuims', 'def': ['NeulineNeuIMS()']},
-      \   }
+      \     'button': {'tag': 'NTbutton', 'def': ['NeulineCloseButton()']},
+      \   },
       \ },
       \ }
 
@@ -33,6 +38,12 @@ try
 catch /^Vim\%((\a\+)\)\=:E/
   finish
 endtry
+
+call neutil#palette#Highlight('NSbufinfoN', s:plt.bgh, s:plt.cyan)
+call neutil#palette#Highlight('NSbufinfoI', s:plt.bgh, s:plt.blue)
+call neutil#palette#Highlight('NSbufinfoV', s:plt.bgh, s:plt.orange)
+call neutil#palette#Highlight('NSbufinfoR', s:plt.bgh, s:plt.blue)
+call neutil#palette#Highlight('NSbufinfoC', s:plt.bgh, s:plt.cyan)
 
 "*********************************************************************** vcs{{{
 function! NeulineVCS() abort
@@ -84,67 +95,73 @@ call neutil#palette#Highlight('NSlintH', s:plt.bgh, s:plt.green)
 call neutil#palette#Highlight('NSlintW', s:plt.bgh, s:plt.orange)
 call neutil#palette#Highlight('NSlintE', s:plt.bgh, s:plt.red)
 
-function! NeulineLint() abort
-  if !empty(get(b:, 'coc_diagnostic_info', {}))
-    return s:GatherInfo(get(b:, 'coc_diagnostic_info', {}),
-          \ {'i': 'information', 'h': 'hint', 'w': 'warning', 'e': 'error'},
-          \ '[CoC]')
-  elseif exists('*neomake#statusline#LoclistCounts()')
-    if !empty(neomake#statusline#LoclistCounts())
-      return s:GatherInfo(neomake#statusline#LoclistCounts(),
-            \ {'i': 'I', 'h': 'H', 'w': 'W', 'e': 'E'}, '[Neomake]')
+function! NeulineLint(type, symbol) abort
+  let l:lint_info = get(b:, 'coc_diagnostic_info', {})
+
+  if !empty(l:lint_info)
+    let l:count = get(l:lint_info, a:type, 0)
+
+    if l:count > 0
+      return printf(' %s %d ', a:symbol, l:count)
     endif
-  else
-    return ''
-  endif
-endfunction
-
-function! s:GatherInfo(info, keys, tag) abort
-  let l:msg = []
-
-  if get(a:info, a:keys.i, 0)
-    call add(l:msg, ''.a:info[a:keys.i])
-    highlight link NSlint NSlintI
-  endif
-  if get(a:info, a:keys.h, 0)
-    call add(l:msg, ''.a:info[a:keys.h])
-    highlight link NSlint NSlintH
-  endif
-  if get(a:info, a:keys.w, 0)
-    call add(l:msg, ''.a:info[a:keys.w])
-    highlight link NSlint NSlintW
-  endif
-  if get(a:info, a:keys.e, 0)
-    call add(l:msg, '✘'.a:info[a:keys.e])
-    highlight link NSlint NSlintE
   endif
 
-  return empty(l:msg) ? '' : ' '.a:tag.join(l:msg, ' ').' '
+  return ''
 endfunction
 "}}}
 
 "****************************************************************** asyncrun{{{
 call neutil#palette#Highlight('NTasyncrun', s:plt.grays, s:plt.grays)
-highlight clear NTasyncrun  " Don't know why but it works.
-call neutil#palette#Highlight('NTasyncrunE', s:plt.red, s:plt.grays)
 call neutil#palette#Highlight('NTasyncrunR', s:plt.blue, s:plt.grays)
+call neutil#palette#Highlight('NTasyncrunI', s:plt.yellow, s:plt.grays)
 call neutil#palette#Highlight('NTasyncrunF', s:plt.green, s:plt.grays)
+call neutil#palette#Highlight('NTasyncrunE', s:plt.red, s:plt.grays)
+
+let s:run_once = v:true
+let s:interrupted = v:false
 
 function! NeulineAsyncRun() abort
   if exists(':AsyncRun')
     let l:status = get(g:, 'asyncrun_status', '')
-    if l:status ==# ''
-      highlight link NTasyncrun NTasyncrunF
-      return ''
-    elseif l:status ==# 'failure'
-      highlight link NTasyncrun NTasyncrunE
-      return '[AsyncRun] ✘'
-    elseif l:status ==# 'running'
-      highlight link NTasyncrun NTasyncrunR
-      return '[AsyncRun] '
+    if l:status ==# 'running'
+      if s:run_once
+        let s:run_once = v:false
+        highlight clear NTasyncRun
+      endif
+
+      let s:interrupted = v:false
+
+      highlight link NTasyncRun NTasyncrunR
+      return ''
     elseif l:status ==# 'success'
-      highlight link NTasyncrun NTasyncrunF
-      return '[AsyncRun] ✓'
+      if s:run_once
+        let s:run_once = v:false
+        highlight clear NTasyncRun
+      endif
+
+      if s:interrupted
+        let s:interrupted = v:false
+        highlight link NTasyncRun NTasyncRunI
+        return ''
+      else
+        let s:interrupted = v:false
+        highlight link NTasyncRun NTasyncRunF
+        return '✓'
+      endif
+    elseif l:status ==# 'failure'
+      if s:run_once
+        let s:run_once = v:false
+        highlight clear NTasyncRun
+      endif
+
+      if s:interrupted
+        highlight link NTasyncRun NTasyncRunI
+        return ''
+      else
+        let s:interrupted = v:false
+        highlight link NTasyncRun NTasyncRunE
+        return '✘'
+      endif
     endif
   endif
 
@@ -153,12 +170,12 @@ endfunction
 
 augroup neuline_custom
   autocmd!
-  autocmd User AsyncRunStart call neustl#Update() | call neuline#stl#highlight#Link()
-  autocmd User AsyncRunStop call neustl#Update() | call neuline#stl#highlight#Link()
-  autocmd User AsyncRunStart call neutal#Update() | call neuline#tal#highlight#Link()
-  autocmd User AsyncRunStop call neutal#Update() | call neuline#tal#highlight#Link()
-augroup end
+  autocmd User AsyncRunStart call neustl#Update() | call neutal#Update()
+  autocmd User AsyncRunStop call neustl#Update() | call neutal#Update()
+  autocmd User AsyncRunInterrupt let s:interrupted = v:true
+augroup END
 "}}}
+
 "******************************************************************** neuims{{{
 call neutil#palette#Highlight('NTneuims', s:plt.yellow, s:plt.grays)
 
@@ -175,6 +192,18 @@ function! NeulineNeuIMS() abort
     endif
   else
     return ''
+  endif
+endfunction
+"}}}
+
+"************************************************************** close button{{{
+call neutil#palette#Highlight('NTbutton', s:plt.fgs, s:plt.red, 'bold')
+
+function! NeulineCloseButton() abort
+  if tabpagenr('$') == 1
+    return ''
+  else
+    return '  '
   endif
 endfunction
 "}}}
