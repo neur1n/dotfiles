@@ -24,8 +24,8 @@
     "text"
   ],
   // coc-texlab
-  "latex.build.executable": "xelatex",
-  "latex.build.args": [
+  "texlab.build.executable": "xelatex",
+  "texlab.build.args": [
     "-file-line-error",
     "-interaction=nonstopmode",
     "-output-directory=build",
@@ -33,6 +33,6 @@
     "-synctex=1",
     "%f"
   ],
-  "latex.build.onSave": true,
-  "latex.build.outputDirectory": "./build"
+  "texlab.auxDirectory": "aux",
+  "texlab.build.onSave": true
 }
