@@ -9,4 +9,7 @@
 
 ;******************************************************** emacs-lsp/lsp-mode{{{
 (add-hook 'prog-mode-hook #'lsp)
+
+(with-eval-after-load 'lsp-mode
+   (define-key lsp-mode-map (kbd "<tab>") #'company-indent-or-complete-common))
 ;}}}
