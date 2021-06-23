@@ -34,8 +34,8 @@ vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 
 if get(g:, 'colors_name', '') ==# 'neuclr'
-  highlight link CocInfoSign NeuBlue
-  highlight link CocHintSign NeuGreen
+  highlight link CocInfoSign NeuGreen
+  highlight link CocHintSign NeuBlue
   highlight link CocWarningSign NeuOrange
   highlight link CocErrorSign NeuRed
 endif
