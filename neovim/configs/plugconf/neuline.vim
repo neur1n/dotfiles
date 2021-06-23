@@ -19,7 +19,7 @@ let g:neuline = {
       \     'linti': {'tag': 'NSlintI', 'def': ['NeulineLint("information", "")']},
       \     'linth': {'tag': 'NSlintH', 'def': ['NeulineLint("hint", "")']},
       \     'lintw': {'tag': 'NSlintW', 'def': ['NeulineLint("warning", "")']},
-      \     'linte': {'tag': 'NSlintE', 'def': ['NeulineLint("error", " ✘")']},
+      \     'linte': {'tag': 'NSlintE', 'def': ['NeulineLint("error", "✘")']},
       \   }
       \ },
       \ 'tal': {
@@ -28,7 +28,7 @@ let g:neuline = {
       \   'definition': {
       \     'asyncrun': {'tag': 'NTasyncrun', 'def': ['NeulineAsyncRun()']},
       \     'neuims': {'tag': 'NTneuims', 'def': ['NeulineNeuIMS()']},
-      \     'button': {'tag': 'NTbutton', 'def': ['NeulineCloseButton()']},
+      \     'button': {'tag': 'NTbutton', 'def': ['%999X', 'NeulineCloseButton()']},
       \   },
       \ },
       \ }
@@ -90,8 +90,8 @@ call neutil#palette#Highlight('NStag', s:plt.fgh, s:plt.bgh, 'italic')
 "}}}
 
 "********************************************************************** lint{{{
-call neutil#palette#Highlight('NSlintI', s:plt.bgh, s:plt.blue)
-call neutil#palette#Highlight('NSlintH', s:plt.bgh, s:plt.green)
+call neutil#palette#Highlight('NSlintI', s:plt.bgh, s:plt.green)
+call neutil#palette#Highlight('NSlintH', s:plt.bgh, s:plt.blue)
 call neutil#palette#Highlight('NSlintW', s:plt.bgh, s:plt.orange)
 call neutil#palette#Highlight('NSlintE', s:plt.bgh, s:plt.red)
 
