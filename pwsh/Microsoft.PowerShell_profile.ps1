@@ -5,7 +5,7 @@ if ($IsWindows -and (Get-ExecutionPolicy) -ne 'RemoteSigned') {
 
 function DEBUG {
   [CmdletBinding()]
-  param ([Parameter(Mandatory=$false)] $param)
+  param ([Parameter(ValueFromRemainingArguments=$true)] [String[]] $param)
   Write-Host '[DEBUG]' $param
 }
 
@@ -65,25 +65,36 @@ Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
 
 #=================================================================== Custom {{{
-function Set-MSVC-Envs($export = 1, $arch = $null) {
-  if ($export -ne 0) {
-    $export = 1
-  }
+function Start-CMake {
+  [CmdletBinding()]
+  Param (
+    [Parameter()] [Int] $BuildArchitecture = 0,
+    [Parameter()] [Bool] $ExportCompileCommands = $true,
+    [Parameter(ValueFromRemainingArguments=$true)] [String[]] $Extra
+  )
 
   $cmdlet = $null
-  if ($arch -eq 32) {
+  if ($BuildArchitecture -eq 32) {
     $cmdlet = "vcvars32.bat & set"
-  } elseif ($arch -eq 64) {
+  } elseif ($BuildArchitecture -eq 64) {
     $cmdlet = "vcvars64.bat & set"
-  } elseif ($null -ne $arch) {
-    Write-Host "[Set-Build-Envs] Please provide arch as 32 or 64."
+  } elseif ($null -ne $cmdlet) {
+    Write-Host "[Start-CMake] Please specify build architecture as 32 or 64."
     return
   }
 
-  Write-Host "--------------------------------------------------"
-  Write-Host "Configuring for arch:"$arch
-  Write-Host "Exporting compile commands:"$export
-  Write-Host "--------------------------------------------------"
+  $command = $null
+  if ($ExportCompileCommands -eq $false) {
+    $command = "cmake .. -G Ninja " + $Extra
+  } else {
+    $command = "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja " + $Extra
+  }
+
+  $msg = "Running command ($BuildArchitecture-bit): $command"
+  $line = "-" * $msg.Length
+  Write-Host $line
+  Write-Host $msg
+  Write-Host $line
 
   if ($null -ne $cmdlet) {
     # $path = [System.Environment]::GetEnvironmentVariable('PATH', 'User')
@@ -98,52 +109,10 @@ function Set-MSVC-Envs($export = 1, $arch = $null) {
     }
   }
 
-  if ($export -eq 0) {
-    cmake .. -G Ninja
-  } else {
-    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja
-    if (Test-Path compile_commands.json) {
-      Copy-Item -Force compile_commands.json -Destination ..
-    }
+  Invoke-Expression $command
+  if (($ExportCompileCommands -eq $true) -and (Test-Path compile_commands.json)) {
+    Copy-Item -Force compile_commands.json -Destination ..
   }
-}
-
-function New-CMake-Config() {
-  $content =
-@'
-@echo off
-
-if "%1" == "" (set export=1)
-if "%1" == "0" (set export=0) else (set export=1)
-
-if "%2" == "" (
-  set arch=NULL
-) else (
-  if "%2" == "32" (set arch=32) else (set arch=64)
-)
-
-echo -----------------------------
-echo Configuring for: %arch%
-echo Exporting compile commands: %export%
-echo -----------------------------
-
-if %arch% == 32 (call vcvars32.bat)
-if %arch% == 64 (call vcvars64.bat)
-
-set CC=cl
-set CXX=cl
-
-if %export% == 0 (cmake .. -G Ninja)
-if %export% == 1 (
-  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja
-  xcopy /y compile_commands.json ..\compile_commands.json
-)
-'@
-
-  if (-Not (Test-Path config.bat)) {
-    New-Item config.bat
-  }
-  Set-Content config.bat $content
 }
 #}}}
 
