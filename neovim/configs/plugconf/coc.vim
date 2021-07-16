@@ -44,19 +44,57 @@ let g:coc_global_extensions = [
       \ 'coc-diagnostic', 'coc-git', 'coc-json', 'coc-snippets',
       \ 'coc-spell-checker', 'coc-word']
 
+"********************************************************** lsp highlighting{{{
+" Ordered according to https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
+highlight! link CocSem_namespace Identifier
+highlight! link CocSem_class Structure
+highlight! link CocSem_enum Type
+highlight! link CocSem_interface Type
+highlight! link CocSem_struct Structure
+highlight! link CocSem_typeParameter Type
+highlight! link CocSem_type Type
+
+highlight! link CocSem_parameter Identifier
+highlight! link CocSem_variable Identifier
+highlight! link CocSem_property Identifier
+
+highlight! link CocSem_enumConstant Constant
+highlight! link CocSem_enumMember Constant
+highlight! link CocSem_event Identifier
+
+highlight! link CocSem_function Function
+highlight! link CocSem_method Function
+
+highlight! link CocSem_macro Macro
+
+highlight! link CocSem_label Label
+
+highlight! link CocSem_comment Comment
+
+highlight! link CocSem_string String
+
+highlight! link CocSem_keyword Keyword
+
+highlight! link CocSem_number Number
+
+highlight! link CocSem_regexp String
+
+highlight! link CocSem_operator Operator
+"}}}
+
 "***************************************************** neoclide/coc-snippets{{{
 call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugconf/coc-snippets')
 "}}}
 "**************************************************** fannheyward/coc-texlab{{{
 if has('unix')
-  call coc#config('latex.forwardSearch.executable', 'okular')
-  call coc#config('latex.forwardSearch.args', ['--unique', 'file:%p#src:%l%f'])
+  call coc#config('texlab.forwardSearch.executable', 'okular')
+  call coc#config('texlab.forwardSearch.args', ['--unique', 'file:%p#src:%l%f'])
 elseif has('win32')
-  call coc#config('latex.forwardSearch.executable', 'SumatraPDF')
-  call coc#config('latex.forwardSearch.args', ['-reuse-instance', '%p', '-forward-search', '%f', '%l'])
+  call coc#config('texlab.forwardSearch.executable', 'SumatraPDF')
+  call coc#config('texlab.forwardSearch.args', ['-reuse-instance', '%p', '-forward-search', '%f', '%l'])
 endif
 
-nnoremap <silent> <leader>ll :execute 'CocCommand latex.Build'<CR>
-nnoremap <silent> <leader>lv :execute 'CocCommand latex.ForwardSearch'<CR>
+nnoremap <silent> <leader>ll :execute 'CocCommand texlab.Build'<CR>
+nnoremap <silent> <leader>lv :execute 'CocCommand texlab.ForwardSearch'<CR>
 "}}}
 "}}}
