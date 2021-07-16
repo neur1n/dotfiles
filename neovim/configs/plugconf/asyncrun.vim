@@ -55,7 +55,7 @@ function! s:DefaultRunRule() abort
 endfunction
 
 function! s:RunMarkdown() abort
-  execute 'AsyncRun vivaldi % &'
+  execute 'AsyncRun vivaldi %:p'
 endfunction
 
 function! s:RunPython() abort
