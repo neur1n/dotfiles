@@ -70,7 +70,7 @@ function Start-CMake {
   Param (
     [Parameter()] [Int] $BuildArchitecture = 0,
     [Parameter()] [Bool] $ExportCompileCommands = $true,
-    [Parameter(ValueFromRemainingArguments=$true)] [String[]] $Extra
+    [Parameter(ValueFromRemainingArguments=$true)] [String[]] $Remaining
   )
 
   $cmdlet = $null
@@ -85,9 +85,9 @@ function Start-CMake {
 
   $command = $null
   if ($ExportCompileCommands -eq $false) {
-    $command = "cmake .. -G Ninja " + $Extra
+    $command = "cmake .. -G Ninja " + $Remaining
   } else {
-    $command = "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja " + $Extra
+    $command = "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja " + $Remaining
   }
 
   $msg = "Running command ($BuildArchitecture-bit): $command"
