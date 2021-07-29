@@ -73,43 +73,43 @@ function Start-CMake {
     [Parameter(ValueFromRemainingArguments=$true)] [String[]] $Remaining
   )
 
-  $cmdlet = $null
+  $local:cmdlet = $null
   if ($BuildArchitecture -eq 32) {
-    $cmdlet = "vcvars32.bat & set"
+    $local:cmdlet = "vcvars32.bat & set"
   } elseif ($BuildArchitecture -eq 64) {
-    $cmdlet = "vcvars64.bat & set"
-  } elseif ($null -ne $cmdlet) {
+    $local:cmdlet = "vcvars64.bat & set"
+  } elseif ($null -ne $local:cmdlet) {
     Write-Host "[Start-CMake] Please specify build architecture as 32 or 64."
     return
   }
 
-  $command = $null
+  $local:command = $null
   if ($ExportCompileCommands -eq $false) {
-    $command = "cmake .. -G Ninja " + $Remaining
+    $local:command = "cmake .. -G Ninja " + $Remaining
   } else {
-    $command = "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja " + $Remaining
+    $local:command = "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja " + $Remaining
   }
 
-  $msg = "Running command ($BuildArchitecture-bit): $command"
+  $msg = "Running command ($BuildArchitecture-bit): $local:command"
   $line = "-" * $msg.Length
   Write-Host $line
   Write-Host $msg
   Write-Host $line
 
-  if ($null -ne $cmdlet) {
+  if ($null -ne $local:cmdlet) {
     # $path = [System.Environment]::GetEnvironmentVariable('PATH', 'User')
     # $path = ($path.Split(';') | Where-Object { $_ -NotMatch ".*MinGW.*" }) -join ';'
     # [System.Environment]::SetEnvironmentVariable('PATH', $path, 'User')
 
-    cmd /c $cmdlet |
+    cmd /c $local:cmdlet |
     Select-String '^([^=]*)=(.*)$' | ForEach-Object {
-      $key = $_.Matches[0].Groups[1].Value
-      $value = $_.Matches[0].Groups[2].Value
-      Set-Item Env:$key $value
+      $local:key = $_.Matches[0].Groups[1].Value
+      $local:value = $_.Matches[0].Groups[2].Value
+      Set-Item Env:$local:key $local:value
     }
   }
 
-  Invoke-Expression $command
+  Invoke-Expression $local:command
   if (($ExportCompileCommands -eq $true) -and (Test-Path compile_commands.json)) {
     Copy-Item -Force compile_commands.json -Destination ..
   }
