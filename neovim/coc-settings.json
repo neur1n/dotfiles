@@ -3,36 +3,5 @@
   "diagnostic.errorSign": "✘",
   "diagnostic.hintSign": "",
   "diagnostic.infoSign": "",
-  "diagnostic.warningSign": "",
-  // coc-clangd
-  "clangd.semanticHighlighting": true,
-  // coc-diagnostic
-  "diagnostic-languageserver.filetypes": {
-    "html": "tidy",
-    "vim": "vint"
-  },
-  // coc-git
-  "git.branchCharacter": "",
-  // coc-snippets
-  "snippets.ultisnips.enable": true,
-  // coc-spell-checker
-  "cSpell.enabledLanguageIds": [
-    "html",
-    "latex",
-    "markdown",
-    "plaintext",
-    "text"
-  ],
-  // coc-texlab
-  "texlab.build.executable": "xelatex",
-  "texlab.build.args": [
-    "-file-line-error",
-    "-interaction=nonstopmode",
-    "-output-directory=build",
-    "-shell-escape",
-    "-synctex=1",
-    "%f"
-  ],
-  "texlab.auxDirectory": "aux",
-  "texlab.build.onSave": true
+  "diagnostic.warningSign": ""
 }

@@ -82,10 +82,36 @@ highlight! link CocSem_regexp String
 highlight! link CocSem_operator Operator
 "}}}
 
+"***************************************************** iamcco/coc-diagnostic{{{
+call coc#config('diagnostic-languageserver.filetypes', {'html': 'tidy', 'vim': 'vint'})
+"}}}
+"********************************************************** neoclide/coc-git{{{
+call coc#config('git.branchCharacter', '')
+"}}}
+"********************************************* coc-extensions/coc-powershell{{{
+call coc#config('powershell.powerShellExePath', 'pwsh')
+call coc#config('powershell.integratedConsole.showOnStartup', v:false)
+"}}}
 "***************************************************** neoclide/coc-snippets{{{
+call coc#config('snippets.ultisnips.enable', v:true)
 call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugconf/coc-snippets')
 "}}}
+"************************************************** iamcco/coc-spell-checker{{{
+call coc#config('cSpell.enabledLanguageIds', ['html', 'latex', 'markdown', 'plaintext', 'text'])
+"}}}
 "**************************************************** fannheyward/coc-texlab{{{
+call coc#config('texlab.auxDirectory', 'aux')
+call coc#config('texlab.build.onSave', v:true)
+call coc#config('texlab.build.executable', 'xelatex')
+call coc#config('texlab.build.args', [
+      \ '-file-line-error',
+      \ '-interaction=nonstopmode',
+      \ '-output-directory=build',
+      \ '-shell-escape',
+      \ '-synctex=1',
+      \ '%f'
+      \ ])
+
 if has('unix')
   call coc#config('texlab.forwardSearch.executable', 'okular')
   call coc#config('texlab.forwardSearch.args', ['--unique', 'file:%p#src:%l%f'])
