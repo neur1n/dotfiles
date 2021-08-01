@@ -33,17 +33,35 @@ let g:neuline = {
       \ },
       \ }
 
-try
-  let s:plt = neutil#palette#Palette()
-catch /^Vim\%((\a\+)\)\=:E/
-  finish
-endtry
+"************************************************************** highlighting{{{
+ if g:loaded_neucs
+   let s:plt = neucs#GetPalette()
 
-call neutil#palette#Highlight('NSbufinfoN', s:plt.bgh, s:plt.cyan)
-call neutil#palette#Highlight('NSbufinfoI', s:plt.bgh, s:plt.blue)
-call neutil#palette#Highlight('NSbufinfoV', s:plt.bgh, s:plt.orange)
-call neutil#palette#Highlight('NSbufinfoR', s:plt.bgh, s:plt.blue)
-call neutil#palette#Highlight('NSbufinfoC', s:plt.bgh, s:plt.cyan)
+   call neuline#palette#Highlight('NSbufinfoN', s:plt.bgh, s:plt.cyan)
+   call neuline#palette#Highlight('NSbufinfoI', s:plt.bgh, s:plt.blue)
+   call neuline#palette#Highlight('NSbufinfoV', s:plt.bgh, s:plt.orange)
+   call neuline#palette#Highlight('NSbufinfoR', s:plt.bgh, s:plt.blue)
+   call neuline#palette#Highlight('NSbufinfoC', s:plt.bgh, s:plt.cyan)
+
+   call neuline#palette#Highlight('NSvcs', s:plt.fgm, s:plt.graym)
+   call neuline#palette#Highlight('NSwindowswap', s:plt.orange, s:plt.bgh)
+   call neuline#palette#Highlight('NStag', s:plt.fgh, s:plt.bgh, 'italic')
+
+   call neuline#palette#Highlight('NSlintI', s:plt.bgh, s:plt.green)
+   call neuline#palette#Highlight('NSlintH', s:plt.bgh, s:plt.blue)
+   call neuline#palette#Highlight('NSlintW', s:plt.bgh, s:plt.orange)
+   call neuline#palette#Highlight('NSlintE', s:plt.bgh, s:plt.red)
+
+   call neuline#palette#Highlight('NTasyncrun', s:plt.grays, s:plt.grays)
+   call neuline#palette#Highlight('NTasyncrunR', s:plt.blue, s:plt.grays)
+   call neuline#palette#Highlight('NTasyncrunI', s:plt.yellow, s:plt.grays)
+   call neuline#palette#Highlight('NTasyncrunF', s:plt.green, s:plt.grays)
+   call neuline#palette#Highlight('NTasyncrunE', s:plt.red, s:plt.grays)
+
+   call neuline#palette#Highlight('NTneuims', s:plt.yellow, s:plt.grays)
+   call neuline#palette#Highlight('NTbutton', s:plt.fgs, s:plt.red, 'bold')
+ endif
+" }}}
 
 "*********************************************************************** vcs{{{
 function! NeulineVCS() abort
@@ -57,8 +75,6 @@ function! NeulineVCS() abort
     return ''
   endif
 endfunction
-
-call neutil#palette#Highlight('NSvcs', s:plt.fgm, s:plt.graym)
 "}}}
 
 "*************************************************************** windowsswap{{{
@@ -69,8 +85,6 @@ function! NeulineWindowSwap() abort
     return ''
   endif
 endfunction
-
-call neutil#palette#Highlight('NSwindowswap', s:plt.orange, s:plt.bgh)
 "}}}
 
 "*********************************************************************** tag{{{
@@ -85,16 +99,9 @@ function! NeulineTag() abort
     return ''
   endif
 endfunction
-
-call neutil#palette#Highlight('NStag', s:plt.fgh, s:plt.bgh, 'italic')
 "}}}
 
 "********************************************************************** lint{{{
-call neutil#palette#Highlight('NSlintI', s:plt.bgh, s:plt.green)
-call neutil#palette#Highlight('NSlintH', s:plt.bgh, s:plt.blue)
-call neutil#palette#Highlight('NSlintW', s:plt.bgh, s:plt.orange)
-call neutil#palette#Highlight('NSlintE', s:plt.bgh, s:plt.red)
-
 function! NeulineLint(type, symbol) abort
   let l:lint_info = get(b:, 'coc_diagnostic_info', {})
 
@@ -111,12 +118,6 @@ endfunction
 "}}}
 
 "****************************************************************** asyncrun{{{
-call neutil#palette#Highlight('NTasyncrun', s:plt.grays, s:plt.grays)
-call neutil#palette#Highlight('NTasyncrunR', s:plt.blue, s:plt.grays)
-call neutil#palette#Highlight('NTasyncrunI', s:plt.yellow, s:plt.grays)
-call neutil#palette#Highlight('NTasyncrunF', s:plt.green, s:plt.grays)
-call neutil#palette#Highlight('NTasyncrunE', s:plt.red, s:plt.grays)
-
 let s:run_once = v:true
 let s:interrupted = v:false
 
@@ -177,8 +178,6 @@ augroup END
 "}}}
 
 "******************************************************************** neuims{{{
-call neutil#palette#Highlight('NTneuims', s:plt.yellow, s:plt.grays)
-
 function! NeulineNeuIMS() abort
   if winwidth(0) >= 60
     if exists('g:neuims')
@@ -197,8 +196,6 @@ endfunction
 "}}}
 
 "************************************************************** close button{{{
-call neutil#palette#Highlight('NTbutton', s:plt.fgs, s:plt.red, 'bold')
-
 function! NeulineCloseButton() abort
   if tabpagenr('$') == 1
     return ''

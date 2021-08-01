@@ -1,6 +1,9 @@
 scriptencoding utf-8
 
 call plug#begin('$VIMCONFIG/plugged')
+"********************************************************************* First{{{
+Plug 'Neur1n/neucs.vim'
+"}}}
 "********************************************************************** Misc{{{
 Plug 'cohama/lexima.vim'
 Plug 'liuchengxu/vim-clap', {'do': {-> clap#installer#force_download()}}
@@ -15,14 +18,12 @@ Plug 'triglav/vim-visual-increment'
 Plug 'wesQ3/vim-windowswap'
 "}}}
 "*********************************************************** Auto-completion{{{
-Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'Shougo/neco-vim', {'for': ['vim']}
 Plug 'neoclide/coc-neco', {'for': ['vim']}
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "}}}
-"******************************************************************* The End{{{
-" Plug 'D:/Workspaces/vim_ws/liter.vim'
+"********************************************************************** Last{{{
 Plug 'Neur1n/neuims', {'on': 'IMSToggle'}
 Plug 'Neur1n/neuline'
 "}}}

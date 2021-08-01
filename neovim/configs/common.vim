@@ -10,23 +10,13 @@ let g:netrw_winsize=30                     " set explorer window width to be 30
 if has('mouse')
   set mouse=a
 endif
-
-if has('syntax')
-  colorscheme neuclr
-  syntax on
-  set background=dark
-  set t_Co=256
-endif
 "}}}
 
 "****************************************************************** Encoding{{{
 if has('multi_byte')
-  " if &termencoding ==# ''  " 2020-01-03: termencoding seems to be deprecated.
-  "   let &termencoding = &encoding
-  " endif
   set encoding=utf-8
-  setglobal fileencoding=utf-8
   set fileencodings=utf-8,gbk,gb2312,gb18030
+  setglobal fileencoding=utf-8
 endif
 "}}}
 
@@ -65,5 +55,5 @@ set tags+=../tags
 source $VIMCONFIG/configs/autocmd.vim
 source $VIMCONFIG/configs/keymap.vim
 source $VIMCONFIG/configs/pluglist.vim
-source $VIMCONFIG/configs/plugconf.vim
+" source $VIMCONFIG/configs/plugconf-first.vim
 "}}}

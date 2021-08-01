@@ -37,11 +37,6 @@ augroup templates
         \|   call s:SelectTemplate('ex')
         \| endif
 augroup END
-
-augroup neuclr
-  autocmd!
-  autocmd FileType * call neuclr#neuclr#Highlight()
-augroup END
 "}}}
 
 "***************************************************************** Functions{{{

@@ -33,11 +33,11 @@ xmap <silent> <C-d> <Plug>(coc-cursors-range)
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 
-if get(g:, 'colors_name', '') ==# 'neuclr'
-  highlight link CocInfoSign NeuGreen
-  highlight link CocHintSign NeuBlue
-  highlight link CocWarningSign NeuOrange
-  highlight link CocErrorSign NeuRed
+if g:loaded_neucs
+  highlight! link CocInfoSign NeuGreen
+  highlight! link CocHintSign NeuBlue
+  highlight! link CocWarningSign NeuOrange
+  highlight! link CocErrorSign NeuRed
 endif
 
 let g:coc_global_extensions = [
@@ -94,7 +94,7 @@ call coc#config('powershell.integratedConsole.showOnStartup', v:false)
 "}}}
 "***************************************************** neoclide/coc-snippets{{{
 call coc#config('snippets.ultisnips.enable', v:true)
-call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugconf/coc-snippets')
+call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/after/plugin/plugconf/coc-snippets')
 "}}}
 "************************************************** iamcco/coc-spell-checker{{{
 call coc#config('cSpell.enabledLanguageIds', ['html', 'latex', 'markdown', 'plaintext', 'text'])
