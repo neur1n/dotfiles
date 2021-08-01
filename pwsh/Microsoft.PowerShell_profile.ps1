@@ -90,11 +90,11 @@ function Start-CMake {
     $local:command = "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja " + $Remaining
   }
 
-  $msg = "Running command ($BuildArchitecture-bit): $local:command"
-  $line = "-" * $msg.Length
-  Write-Host $line
-  Write-Host $msg
-  Write-Host $line
+  $local:msg = "Running command ($BuildArchitecture-bit): $local:command"
+  $local:line = "-" * 80
+  Write-Host $local:line
+  Write-Host $local:msg
+  Write-Host $local:line
 
   if ($null -ne $local:cmdlet) {
     # $path = [System.Environment]::GetEnvironmentVariable('PATH', 'User')
