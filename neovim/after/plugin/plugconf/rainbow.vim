@@ -1,9 +1,6 @@
 scriptencoding utf-8
 
 "******************************************************* luochen1990/rainbow{{{
-nnoremap <leader>rb :RainbowToggle<CR>
-let g:rainbow_active = 1
-
 if g:loaded_neucs
   let s:plt = neucs#GetPalette()
   let g:rainbow_conf = {

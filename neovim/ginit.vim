@@ -3,9 +3,8 @@ let s:fonts = [
       \ {'name': 'CaskaydiaCove',     'size': 12},
       \ {'name': 'FantasqueSansMono', 'size': 13},
       \ {'name': 'GohuFont',          'size': 12},
-      \ {'name': 'ProFontWindows',    'size': 13},
       \ ]
-let s:index = strftime('%H') % len(s:fonts)
+let s:index = strftime('%M') % len(s:fonts)
 
 " if has('win32')
 "   let s:cmd = 'wmic path Win32_VideoController get CurrentHorizontalResolution'

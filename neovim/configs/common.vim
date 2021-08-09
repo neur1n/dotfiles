@@ -55,5 +55,5 @@ set tags+=../tags
 source $VIMCONFIG/configs/autocmd.vim
 source $VIMCONFIG/configs/keymap.vim
 source $VIMCONFIG/configs/pluglist.vim
-" source $VIMCONFIG/configs/plugconf-first.vim
+source $VIMCONFIG/configs/plugconf.vim
 "}}}
