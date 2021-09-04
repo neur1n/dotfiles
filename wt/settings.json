@@ -4,16 +4,20 @@
     "defaultProfile": "{90cbdc15-f4fe-49d2-a245-ec066b70845f}",
     "initialCols": 110,
     "initialRows": 30,
+    "useAcrylicInTabRow": true,
     "profiles":
     {
         "defaults":
         {
-            "acrylicOpacity": 0.5,
+            "acrylicOpacity": 0.8,
             "colorScheme": "MaterialOcean",
             "cursorColor": "#D75F5F",
             "cursorShape": "vintage",
             "experimental.retroTerminalEffect": false,
-            "fontFace": "CaskaydiaCove NF",
+            "font":
+            {
+                "face": "CaskaydiaCove NF"
+            },
             "historySize": 9001,
             "tabColor": "#FFAF00",
             "useAcrylic": true
