@@ -3,6 +3,7 @@ let s:fonts = [
       \ {'name': 'CaskaydiaCove',     'size': 12},
       \ {'name': 'FantasqueSansMono', 'size': 13},
       \ {'name': 'GohuFont',          'size': 12},
+      \ {'name': 'Input',             'size': 12},
       \ ]
 let s:index = strftime('%M') % len(s:fonts)
 
