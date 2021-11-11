@@ -1,15 +1,15 @@
 {
+    "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [],
+    "copyFormatting": "none",
     "defaultProfile": "{90cbdc15-f4fe-49d2-a245-ec066b70845f}",
     "initialCols": 110,
     "initialRows": 30,
-    "useAcrylicInTabRow": true,
     "profiles":
     {
         "defaults":
         {
-            "acrylicOpacity": 0.8,
             "colorScheme": "MaterialOcean",
             "cursorColor": "#D75F5F",
             "cursorShape": "vintage",
@@ -19,6 +19,7 @@
                 "face": "CaskaydiaCove NF"
             },
             "historySize": 9001,
+            "opacity": 80,
             "tabColor": "#FFAF00",
             "useAcrylic": true
         },
@@ -61,10 +62,16 @@
                 "startingDirectory": "."
             },
             {
-                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "guid": "{8f9497d3-e20e-591e-bf8b-692516cd72d2}",
                 "hidden": false,
-                "name": "Ubuntu-20.04",
-                "source": "Windows.Terminal.Wsl"
+                "name": "Developer Command Prompt for VS 2019",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{c7cfae0d-54ee-5e3d-95e3-40099d194e96}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2019",
+                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },
@@ -300,5 +307,6 @@
             "white": "#C0C0C0",
             "yellow": "#808000"
         }
-    ]
+    ],
+    "useAcrylicInTabRow": true
 }
