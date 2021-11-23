@@ -1,9 +1,13 @@
 " NOTE: Please check dotfiles/font folder for available fonts.
 let s:fonts = [
+      \ {'name': 'Anonymice',         'size': 13},
       \ {'name': 'CaskaydiaCove',     'size': 12},
       \ {'name': 'FantasqueSansMono', 'size': 13},
+      \ {'name': 'FiraCode',          'size': 11},
       \ {'name': 'GohuFont',          'size': 12},
-      \ {'name': 'Input',             'size': 12},
+      \ {'name': 'Input',             'size': 10.5},
+      \ {'name': 'ProggyCleanTT',     'size': 16},
+      \ {'name': 'SpaceMono',         'size': 11},
       \ ]
 let s:index = strftime('%M') % len(s:fonts)
 
