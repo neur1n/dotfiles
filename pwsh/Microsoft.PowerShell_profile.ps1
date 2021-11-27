@@ -1,53 +1,53 @@
 #==================================================================== START {{{
-if ($IsWindows -and (Get-ExecutionPolicy) -ne 'RemoteSigned') {
+if ($IsWindows -and (Get-ExecutionPolicy) -ne "RemoteSigned") {
   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
 }
 
 function DEBUG {
   [CmdletBinding()]
   param ([Parameter(ValueFromRemainingArguments=$true)] [String[]] $param)
-  Write-Host '[DEBUG]' $param
+  Write-Host "[DEBUG]" $param
 }
 
 function Invoke-Module ($name) {
   if (Get-Module -ListAvailable -Name $name) {
     Import-Module $name
   } else {
-    Write-Host 'Installing missinged module ' $name '...'
+    Write-Host "Installing missinged module " $name "..."
     Install-Module $name -Scope CurrentUser -AllowPrerelease -Force
   }
 }
 #}}}
 
 #================================================================= posh-git {{{
-Invoke-Module 'posh-git'
-# $GitPromptSettings.DefaultPromptPrefix.Text = '`n╭─[I] '
-# $GitPromptSettings.DefaultPromptBeforeSuffix.Text = '`n╰─'
+Invoke-Module "posh-git"
+# $GitPromptSettings.DefaultPromptPrefix.Text = "`n╭─[I] "
+# $GitPromptSettings.DefaultPromptBeforeSuffix.Text = "`n╰─"
 #}}}
 
 #=============================================================== PSReadLine {{{
-Invoke-Module 'PSReadLine'
+Invoke-Module "PSReadLine"
 
-$script:emoji = @('😀', '😃', '😄', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃',
-  '😉', '😊', '😇', '🥰', '😍', '🤩', '😘', '😗', '😚', '😙', '😋', '😛', '😜',
-  '🤪', '😝', '🤑', '🤗', '🤭', '🤫', '🤔', '🤐', '🤨', '😐', '😑', '😶', '😶',
-  '😶', '😏', '😒', '🙄', '😬', '😮', '🤥', '😌', '😔', '😪', '🤤', '😴', '😷',
-  '🤒', '🤕', '🤢', '🤮', '🤧', '🥵', '🥶', '🥴', '😵', '😵', '🤯', '🤠', '🥳',
-  '😎', '🤓', '🧐', '😕', '😟', '🙁', '😮', '😯', '😲', '😳', '🥺', '😦', '😧',
-  '😨', '😰', '😥', '😢', '😭', '😱', '😖', '😣', '😞', '😓', '😩', '😫', '🥱',
-  '😤', '😡', '😠', '🤬', '😈', '👿', '💀', '💩', '🤡', '👹', '👺', '👻', '👽',
-  '👾', '🤖', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾', '🙈', '🙉',
-  '🙊')
+$script:emoji = @("😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃",
+  "😉", "😊", "😇", "🥰", "😍", "🤩", "😘", "😗", "😚", "😙", "😋", "😛", "😜",
+  "🤪", "😝", "🤑", "🤗", "🤭", "🤫", "🤔", "🤐", "🤨", "😐", "😑", "😶", "😶",
+  "😶", "😏", "😒", "🙄", "😬", "😮", "🤥", "😌", "😔", "😪", "🤤", "😴", "😷",
+  "🤒", "🤕", "🤢", "🤮", "🤧", "🥵", "🥶", "🥴", "😵", "😵", "🤯", "🤠", "🥳",
+  "😎", "🤓", "🧐", "😕", "😟", "🙁", "😮", "😯", "😲", "😳", "🥺", "😦", "😧",
+  "😨", "😰", "😥", "😢", "😭", "😱", "😖", "😣", "😞", "😓", "😩", "😫", "🥱",
+  "😤", "😡", "😠", "🤬", "😈", "👿", "💀", "💩", "🤡", "👹", "👺", "👻", "👽",
+  "👾", "🤖", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾", "🙈", "🙉",
+  "🙊")
 
 $script:index = Get-Random -Maximum $script:emoji.Count
-$script:indicator = ''
+$script:indicator = ""
 $script:vimode = $script:emoji[$script:index]
 $script:vicolor = [ConsoleColor]::Green
 
 function OnViModeChange {
   $script:index = Get-Random -Maximum $script:emoji.Count
 
-  if ($args[0] -eq 'Command') {
+  if ($args[0] -eq "Command") {
     $script:vicolor = [ConsoleColor]::Red
   } else {
     $script:vicolor = [ConsoleColor]::Green
@@ -65,6 +65,22 @@ Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
 
 #=================================================================== Custom {{{
+function Remove-Submodule {
+  [CmdletBinding()]
+  param (
+    [Parameter(Mandatory = $true)] [String] $Name
+  )
+
+  if (-Not (Get-Command -Name git)) {
+    Write-Error "[Remove-Submodule] Git does not exist, please install it."
+  }
+
+  Move-Item $Name ($Name + "_tmp")
+  git submodule deinit -f -- $Name
+  Remove-Item -Recurse -Force (".git/modules/" + $Name)
+  git rm --cached $Name
+}
+
 function Start-CMake {
   [CmdletBinding()]
   Param (
@@ -79,7 +95,7 @@ function Start-CMake {
   } elseif ($BuildArchitecture -eq 64) {
     $local:cmdlet = "vcvars64.bat & set"
   } elseif ($null -ne $local:cmdlet) {
-    Write-Host "[Start-CMake] Please specify build architecture as 32 or 64."
+    Write-Error "[Start-CMake] Please specify build architecture as 32 or 64."
     return
   }
 
@@ -97,12 +113,9 @@ function Start-CMake {
   Write-Host $local:line
 
   if ($null -ne $local:cmdlet) {
-    # $path = [System.Environment]::GetEnvironmentVariable('PATH', 'User')
-    # $path = ($path.Split(';') | Where-Object { $_ -NotMatch ".*MinGW.*" }) -join ';'
-    # [System.Environment]::SetEnvironmentVariable('PATH', $path, 'User')
 
     cmd /c $local:cmdlet |
-    Select-String '^([^=]*)=(.*)$' | ForEach-Object {
+    Select-String "^([^=]*)=(.*)$" | ForEach-Object {
       $local:key = $_.Matches[0].Groups[1].Value
       $local:value = $_.Matches[0].Groups[2].Value
       Set-Item Env:$local:key $local:value
