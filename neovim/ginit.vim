@@ -5,7 +5,7 @@ let s:fonts = [
       \ {'name': 'FantasqueSansMono', 'size': 13},
       \ {'name': 'FiraCode',          'size': 11},
       \ {'name': 'GohuFont',          'size': 12},
-      \ {'name': 'Input',             'size': 10.5},
+      \ {'name': 'Input',             'size': 12},
       \ {'name': 'ProggyCleanTT',     'size': 16},
       \ {'name': 'SpaceMono',         'size': 11},
       \ ]
