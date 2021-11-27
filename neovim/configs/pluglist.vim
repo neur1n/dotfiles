@@ -6,10 +6,12 @@ Plug 'Neur1n/neucs.vim'
 "}}}
 "********************************************************************** Misc{{{
 Plug 'cohama/lexima.vim'
+Plug 'justinmk/vim-sneak'
 Plug 'liuchengxu/vim-clap', {'do': {-> clap#installer#force_download()}}
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 Plug 'matze/vim-move'
+Plug 'mg979/vim-visual-multi'
 Plug 'mhinz/vim-startify'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'tpope/vim-commentary'

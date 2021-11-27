@@ -26,10 +26,6 @@ imap <C-s> <Plug>(coc-snippets-expand)
 nmap <C-p> <Plug>(coc-diagnostic-prev)
 nmap <C-n> <Plug>(coc-diagnostic-next)
 
-nmap <silent> <C-c> <Plug>(coc-cursors-position)
-nmap <silent> <C-d> <Plug>(coc-cursors-word)
-xmap <silent> <C-d> <Plug>(coc-cursors-range)
-
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 
