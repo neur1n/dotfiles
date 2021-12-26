@@ -8,6 +8,7 @@ nnoremap <leader>as :AsyncStop<cr>
 let g:asyncrun_save = 2
 
 let s:build_rule_map = {
+      \ 'markdown': 's:BuildMarkdown',
       \ 'typescript': 's:BuildTypeScript',
       \ }
 
@@ -18,7 +19,7 @@ let s:run_rule_map = {
       \ 'typescript': 's:RunTypeScript',
       \ }
 
-"------------------------------------------------------------- Build rules
+"--------------------------------------------------------------- Build rules{{{
 function! s:BuildRule() abort
   if filereadable(asyncrun#get_root('%').'/makefile') && executable('make')
     execute 'AsyncRun -raw -cwd=<root> make'
@@ -34,11 +35,16 @@ function! s:DefaultBuildRule() abort
   call l:Func()
 endfunction
 
+function! s:BuildMarkdown() abort
+  execute 'AsyncRun pandoc % -t pdf --pdf-engine=xelatex -o '.expand('%:r').'.pdf'
+endfunction
+
 function! s:BuildTypeScript() abort
   execute 'AsyncRun npm run build'
 endfunction
+"}}}
 
-"--------------------------------------------------------------- Run rules
+"----------------------------------------------------------------- Run rules{{{
 function! s:RunRule() abort
   if filereadable(asyncrun#get_root('%').'/makefile') && executable('make')
     execute 'AsyncRun -raw -cwd=<root> make'
@@ -69,4 +75,5 @@ endfunction
 function! s:RunTypeScript() abort
   execute 'AsyncRun npm run tsc'
 endfunction
+"}}}
 "}}}

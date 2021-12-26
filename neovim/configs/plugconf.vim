@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 source $VIMCONFIG/configs/plugconf/neucs.vim
-source $VIMCONFIG/configs/plugconf/asyncrun.vim
+source $VIMCONFIG/configs/plugconf/asynctasks.vim
 source $VIMCONFIG/configs/plugconf/clap.vim
 source $VIMCONFIG/configs/plugconf/coc.vim
 source $VIMCONFIG/configs/plugconf/lexima.vim
