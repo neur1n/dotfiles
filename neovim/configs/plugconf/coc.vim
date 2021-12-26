@@ -13,18 +13,19 @@ inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" :
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
-nmap <leader>fc <Plug>(coc-fix-current)
+nmap <leader>gD <Plug>(coc-declaration)
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
 nmap <leader>rf <Plug>(coc-refactor)
 nmap <leader>rn <Plug>(coc-rename)
 
+nmap <leader>fc <Plug>(coc-fix-current)
 nmap <leader>fh <Plug>(coc-float-hide)
 nmap <leader>fj <Plug>(coc-float-jump)
 
-imap <C-s> <Plug>(coc-snippets-expand)
 nmap <C-p> <Plug>(coc-diagnostic-prev)
 nmap <C-n> <Plug>(coc-diagnostic-next)
+imap <C-s> <Plug>(coc-snippets-expand)
 
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
@@ -40,7 +41,7 @@ let g:coc_global_extensions = [
       \ 'coc-diagnostic', 'coc-git', 'coc-json', 'coc-snippets',
       \ 'coc-spell-checker', 'coc-word']
 
-"********************************************************** lsp highlighting{{{
+"---------------------------------------------------------- lsp highlighting{{{
 " Ordered according to https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
 highlight! link CocSem_namespace Identifier
 highlight! link CocSem_class Structure
@@ -78,27 +79,27 @@ highlight! link CocSem_regexp String
 highlight! link CocSem_operator Operator
 "}}}
 
-"***************************************************** iamcco/coc-diagnostic{{{
+"----------------------------------------------------- iamcco/coc-diagnostic{{{
 call coc#config('diagnostic-languageserver.filetypes', {'html': 'tidy', 'vim': 'vint'})
 "}}}
-"************************************************** iamcco/coc-spell-checker{{{
+"-------------------------------------------------- iamcco/coc-spell-checker{{{
 call coc#config('cSpell.allowCompoundWords', v:true)
 "}}}
-"********************************************************** neoclide/coc-git{{{
+"---------------------------------------------------------- neoclide/coc-git{{{
 call coc#config('git.branchCharacter', '')
 "}}}
-"********************************************* coc-extensions/coc-powershell{{{
+"--------------------------------------------- coc-extensions/coc-powershell{{{
 call coc#config('powershell.powerShellExePath', 'pwsh')
 call coc#config('powershell.integratedConsole.showOnStartup', v:false)
 "}}}
-"***************************************************** neoclide/coc-snippets{{{
+"----------------------------------------------------- neoclide/coc-snippets{{{
 call coc#config('snippets.ultisnips.enable', v:true)
 call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugconf/coc-snippets')
 "}}}
-"************************************************** iamcco/coc-spell-checker{{{
+"-------------------------------------------------- iamcco/coc-spell-checker{{{
 call coc#config('cSpell.enabledLanguageIds', ['html', 'latex', 'markdown', 'plaintext', 'tex', 'text'])
 "}}}
-"**************************************************** fannheyward/coc-texlab{{{
+"---------------------------------------------------- fannheyward/coc-texlab{{{
 call coc#config('texlab.auxDirectory', 'build')
 call coc#config('texlab.build.onSave', v:true)
 call coc#config('texlab.build.executable', 'xelatex')
