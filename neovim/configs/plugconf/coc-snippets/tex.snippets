@@ -1,17 +1,17 @@
-snippet angle "angle brackets"
-\\langle ${1} \\rangle ${2}
+snippet nang "angle brackets"
+\\langle ${1:${VISUAL}} \\rangle ${2:${VISUAL}}}
 endsnippet
 
-snippet dq "double quote"
-\`\`${1}''${2}
+snippet ndquo "double quote"
+\`\`${1:${VISUAL}}''${2:${VISUAL}}
 endsnippet
 
-snippet sq "single quote"
-\`${1}'${2}
+snippet nsquo "single quote"
+\`${1:${VISUAL}}'${2:${VISUAL}}
 endsnippet
 
-snippet textbox "a text box"
-\begin{textbox}{\textit{${1:TEXT}}}
-${2:VISUAL}
+snippet ntbox "a text box"
+\begin{textbox}{\textit{${1:${VISUAL}}}}
+${2:${VISUAL}}
 \end{textbox}
 endsnippet
