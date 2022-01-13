@@ -5,16 +5,16 @@ ${2}************************************************************ ${1} */
 endsnippet
 
 snippet ncla "class" b
-class ${1}Impl;
-
-class ${1:${`!p snip.rv = snip.basename`}}
+class ${1:`!p snip.rv = snip.basename`}
 {
 public:
   ${1}();
+
   ~${1}();
 
 private:
-  ${1}Impl *m_impl;
+  class Impl;
+  Impl *m_impl;
 };  // class ${1}
 endsnippet
 
@@ -62,7 +62,7 @@ endsnippet
 snippet nsingleton "singleton class" b
 class ${1}Impl;
 
-class ${1:${`!p snip.rv = snip.basename`}}
+class ${1:`!p snip.rv = snip.basename`}
 {
 public:
   static ${1}& Instace();
@@ -71,8 +71,10 @@ public:
 
 private:
   ${1}();
+
   ~${1}();
 
-  ${1}Impl *m_impl;
+  class Impl;
+  Impl *m_impl;
 };  // class ${1}
 endsnippet
