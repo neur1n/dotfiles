@@ -13,22 +13,26 @@ inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" :
 inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
-nmap <leader>gD <Plug>(coc-declaration)
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gr <Plug>(coc-references)
-nmap <leader>rf <Plug>(coc-refactor)
-nmap <leader>rn <Plug>(coc-rename)
+nmap <silent> <leader>gD <Plug>(coc-declaration)
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> <leader>gt <Plug>(coc-type-definition)
+nmap <silent> <leader>rf <Plug>(coc-refactor)
+nmap <silent> <leader>rn <Plug>(coc-rename)
 
-nmap <leader>fc <Plug>(coc-fix-current)
-nmap <leader>fh <Plug>(coc-float-hide)
-nmap <leader>fj <Plug>(coc-float-jump)
+nmap <silent> <leader>fc <Plug>(coc-fix-current)
+nmap <silent> <leader>fh <Plug>(coc-float-hide)
+nmap <silent> <leader>fj <Plug>(coc-float-jump)
 
-nmap <C-p> <Plug>(coc-diagnostic-prev)
-nmap <C-n> <Plug>(coc-diagnostic-next)
-imap <C-s> <Plug>(coc-snippets-expand)
+nmap <silent> <C-p> <Plug>(coc-diagnostic-prev)
+nmap <silent> <C-n> <Plug>(coc-diagnostic-next)
+imap <silent> <C-s> <Plug>(coc-snippets-expand)
 
-vmap <leader>a <Plug>(coc-codeaction-selected)
-nmap <leader>a <Plug>(coc-codeaction-selected)
+vmap <silent> <leader>a <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>a <Plug>(coc-codeaction-selected)
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " if g:loaded_neucs
 "   highlight! link CocInfoSign NeuGreen
@@ -88,6 +92,9 @@ call coc#config('cSpell.allowCompoundWords', v:true)
 "---------------------------------------------------------- neoclide/coc-git{{{
 call coc#config('git.branchCharacter', '')
 "}}}
+"---------------------------------------------------- neoclide/coc-highlight{{{
+call coc#config('highlight.filetypes', ['*'])
+"}}}
 "--------------------------------------------- coc-extensions/coc-powershell{{{
 call coc#config('powershell.powerShellExePath', 'pwsh')
 call coc#config('powershell.integratedConsole.showOnStartup', v:false)
@@ -98,6 +105,9 @@ call coc#config('snippets.userSnippetsDirectory', $VIMCONFIG.'/configs/plugconf/
 "}}}
 "-------------------------------------------------- iamcco/coc-spell-checker{{{
 call coc#config('cSpell.enabledLanguageIds', ['html', 'latex', 'markdown', 'plaintext', 'tex', 'text'])
+"}}}
+"------------------------------------------------- xiyaowong/coc-sumneko-lua{{{
+call coc#config('sumneko-lua.enableNvimLuaDev', v:true)
 "}}}
 "---------------------------------------------------- fannheyward/coc-texlab{{{
 call coc#config('texlab.auxDirectory', 'build')
