@@ -14,6 +14,6 @@ let g:vista_sidebar_width = 50
 
 augroup vista
   autocmd!
-  autocmd FileType c,cpp let g:vista_default_executive = 'coc'
+  autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 augroup end
 "}}}

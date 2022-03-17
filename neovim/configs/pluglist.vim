@@ -13,6 +13,7 @@ Plug 'luochen1990/rainbow'
 Plug 'matze/vim-move'
 Plug 'mg979/vim-visual-multi'
 Plug 'mhinz/vim-startify'
+Plug 'rcarriga/nvim-notify'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
 Plug 'tpope/vim-commentary'
@@ -28,6 +29,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "}}}
 "********************************************************************** Last{{{
 Plug 'Neur1n/neuims', {'on': 'IMSToggle'}
-Plug 'Neur1n/neuline'
+Plug 'Neur1n/noline.nvim'
 "}}}
 call plug#end()
