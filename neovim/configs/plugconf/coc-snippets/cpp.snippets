@@ -14,6 +14,7 @@ public:
 
 private:
   class Impl;
+
   Impl *m_impl;
 };  // class ${1}
 endsnippet
@@ -60,21 +61,21 @@ typedef struct _${1}_
 endsnippet
 
 snippet nsingleton "singleton class" b
-class ${1}Impl;
-
 class ${1:`!p snip.rv = snip.basename`}
 {
 public:
-  static ${1}& Instace();
   ${1}(${1} const&) = delete;
   void operator=(${1} const&) = delete;
 
+  static ${1}& Instance();
+
 private:
+  class Impl;
+
   ${1}();
 
   ~${1}();
 
-  class Impl;
   Impl *m_impl;
 };  // class ${1}
 endsnippet
