@@ -50,10 +50,3 @@ set wildmenu                                 " show possible matches when <Tab>
 set wildignorecase
 set tags+=../tags
 "}}}
-
-"*********************************************************** Moduled Configs{{{
-source $VIMCONFIG/configs/autocmd.vim
-source $VIMCONFIG/configs/keymap.vim
-source $VIMCONFIG/configs/pluglist.vim
-source $VIMCONFIG/configs/plugconf.vim
-"}}}

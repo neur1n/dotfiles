@@ -40,3 +40,10 @@ endif
 "***************************************** The Common Part of Vim and Neovim{{{
 source $VIMCONFIG/configs/common.vim
 "}}}
+
+"*********************************************************** Moduled Configs{{{
+source $VIMCONFIG/configs/autocmd.vim
+source $VIMCONFIG/configs/keymap.vim
+source $VIMCONFIG/configs/pluglist.vim
+source $VIMCONFIG/configs/plugconf.vim
+"}}}
