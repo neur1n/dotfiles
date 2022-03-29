@@ -34,55 +34,13 @@ nmap <silent> <leader>a <Plug>(coc-codeaction-selected)
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" if g:loaded_neucs
-"   highlight! link CocInfoSign NeuGreen
-"   highlight! link CocHintSign NeuBlue
-"   highlight! link CocWarningSign NeuOrange
-"   highlight! link CocErrorSign NeuRed
-" endif
-
 let g:coc_global_extensions = [
       \ 'coc-diagnostic', 'coc-git', 'coc-json', 'coc-snippets',
       \ 'coc-spell-checker', 'coc-word']
 
-"---------------------------------------------------------- lsp highlighting{{{
-" Ordered according to https://code.visualstudio.com/api/language-extensions/semantic-highlight-guide
-highlight! link CocSem_namespace Identifier
-highlight! link CocSem_class Structure
-highlight! link CocSem_enum Type
-highlight! link CocSem_interface Type
-highlight! link CocSem_struct Structure
-highlight! link CocSem_typeParameter Type
-highlight! link CocSem_type Type
-
-highlight! link CocSem_parameter Identifier
-highlight! link CocSem_variable Identifier
-highlight! link CocSem_property Identifier
-
-highlight! link CocSem_enumConstant Constant
-highlight! link CocSem_enumMember Constant
-highlight! link CocSem_event Identifier
-
-highlight! link CocSem_function Function
-highlight! link CocSem_method Function
-
-highlight! link CocSem_macro Macro
-
-highlight! link CocSem_label Label
-
-highlight! link CocSem_comment Comment
-
-highlight! link CocSem_string String
-
-highlight! link CocSem_keyword Keyword
-
-highlight! link CocSem_number Number
-
-highlight! link CocSem_regexp String
-
-highlight! link CocSem_operator Operator
+"--------------------------------------------------------- clangd/coc-clangd{{{
+call coc#config('clangd.path', 'clangd')
 "}}}
-
 "----------------------------------------------------- iamcco/coc-diagnostic{{{
 call coc#config('diagnostic-languageserver.filetypes', {'html': 'tidy', 'vim': 'vint'})
 "}}}
@@ -93,7 +51,7 @@ call coc#config('cSpell.allowCompoundWords', v:true)
 call coc#config('git.branchCharacter', '')
 "}}}
 "---------------------------------------------------- neoclide/coc-highlight{{{
-call coc#config('highlight.filetypes', ['*'])
+call coc#config('colors.filetypes', ['*'])
 "}}}
 "--------------------------------------------- coc-extensions/coc-powershell{{{
 call coc#config('powershell.powerShellExePath', 'pwsh')
