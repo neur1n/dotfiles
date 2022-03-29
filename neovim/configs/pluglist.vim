@@ -13,6 +13,7 @@ Plug 'luochen1990/rainbow'
 Plug 'matze/vim-move'
 Plug 'mg979/vim-visual-multi'
 Plug 'mhinz/vim-startify'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'rcarriga/nvim-notify'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'skywind3000/asynctasks.vim'
