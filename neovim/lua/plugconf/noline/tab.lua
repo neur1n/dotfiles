@@ -8,7 +8,7 @@ local Component = require("noline.utility.component")
 function M.current(l_decor, r_decor)
   local expr = ""
   local text = ""
-  local limit = vim.o.columns / 3
+  local limit = vim.o.columns / 2
 
   text = File.full_path()
 

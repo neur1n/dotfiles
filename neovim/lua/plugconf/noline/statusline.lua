@@ -53,11 +53,9 @@ function M.render_c()
     Highlight.create("NModeC", colors[color], palette.bgh, "bold")
 
     color = math.random(#colors)
+    Highlight.create("NNameD",  colors[color], palette.bgh)
     Highlight.create("NName",  colors[color], palette.bgh, "inverse")
-    Highlight.create("NNameL",  colors[color], palette.bgh)
-    Highlight.link("NNameR", "NNameL")
-
-    Highlight.create("NEdit",  palette.red, palette.bgh)
+    Highlight.link("NEdit", "NName")
 
     Highlight.create("NTag",  palette.fgm, palette.bgh, "bold")
 
@@ -67,9 +65,8 @@ function M.render_c()
     Highlight.create("NDiagI", palette.green, palette.bgh)
 
     color = math.random(#colors)
+    Highlight.create("NFileInfoD", colors[color], palette.bgh)
     Highlight.create("NFileInfo",  colors[color], palette.bgh, "inverse")
-    Highlight.create("NFileInfoL", colors[color], palette.bgh)
-    Highlight.link("NFileInfoR", "NFileInfoL")
 
     color = math.random(#colors)
     Highlight.create("NRuler", colors[color], palette.bgh)
@@ -90,7 +87,7 @@ function M.render_nc()
     color = math.random(#colors)
     Highlight.create("NName_nc",  colors[color], palette.bgh)
 
-    Highlight.create("NEdit",  palette.red, palette.bgh)
+    Highlight.create("NEdit_nc",  palette.red, palette.bgh)
 
     Highlight.create("NTag",  palette.fgm, palette.bgh, "bold")
 
@@ -130,15 +127,15 @@ function M.setup_c()
   expr = expr .. Component.create(Mode.get(" "), "NMode")
   expr = expr .. Component.create(Edit.paste("P", decor["sep"]), "NMode")
   expr = expr .. Component.create(Edit.spell("S", decor["sep"]), "NMode")
+  expr = expr .. Component.create(" ", "NMode")
 
-  expr = expr .. Component.create({" ", decor["left"]}, "NNameL")
+  expr = expr .. Component.create(decor["left"], "NNameD")
   expr = expr .. Component.create({Buffer.number(), decor["sep"], File.name()}, "NName")
-  expr = expr .. Component.create(decor["right"], "NNameR")
-
   expr = expr .. Component.create({
     Edit.modified(glyph.md, " "),
     Edit.modifiable(glyph.ma, " "),
     Edit.readonly(glyph.ro, " ")}, "NEdit")
+  expr = expr .. Component.create(decor["right"], "NNameD")
 
   expr = expr .. Component.create(Diagnosis.info("coc", "error",       glyph.e, " "), "NDiagE")
   expr = expr .. Component.create(Diagnosis.info("coc", "warning",     glyph.w, " "), "NDiagW")
@@ -147,15 +144,15 @@ function M.setup_c()
 
   expr = expr .. "%="
 
-  expr = expr .. Component.create(Tag.get("", " "), "NTag")
+  expr = expr .. Component.create(Tag.get(""), "NTag")
 
   expr = expr .. "%="
 
-  expr = expr .. Component.create(VCS.get("coc", "שׂ"), "NVcs")
+  expr = expr .. Component.create(VCS.get("coc", "שׂ "), "NVcs")
 
-  expr = expr .. Component.create({" ", decor["left"]}, "NFileInfoL")
+  expr = expr .. Component.create({" ", decor["left"]}, "NFileInfoD")
   expr = expr .. Component.create({File.encoding(), decor["sep"], File.format()}, "NFileInfo")
-  expr = expr .. Component.create({decor["right"], " "}, "NFileInfoR")
+  expr = expr .. Component.create({decor["right"], " "}, "NFileInfoD")
 
   expr = expr .. Component.create({
     Buffer.line(4), decor["sep"],
@@ -181,7 +178,7 @@ function M.setup_nc()
   expr = expr .. Component.create({
     Edit.modified(glyph.md, " "),
     Edit.modifiable(glyph.ma, " "),
-    Edit.readonly(glyph.ro, " ")}, "NEdit")
+    Edit.readonly(glyph.ro, " ")}, "NEdit_nc")
 
   expr = expr .. Component.create(Diagnosis.info("coc", "error",       glyph.e, " "), "NDiagE")
   expr = expr .. Component.create(Diagnosis.info("coc", "warning",     glyph.w, " "), "NDiagW")
@@ -190,11 +187,11 @@ function M.setup_nc()
 
   expr = expr .. "%="
 
-  expr = expr .. Component.create(Tag.get("", " "), "NTag")
+  expr = expr .. Component.create(Tag.get(""), "NTag")
 
   expr = expr .. "%="
 
-  expr = expr .. Component.create({VCS.get("coc", "שׂ"), " "}, "NVcs")
+  expr = expr .. Component.create({VCS.get("coc", "שׂ "), "", " "}, "NVcs")
 
   expr = expr .. Component.create({File.encoding("", decor["sep"]), File.format(), " "}, "NFileInfo_nc")
 
