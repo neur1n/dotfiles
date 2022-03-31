@@ -8,7 +8,11 @@ local Component = require("noline.utility.component")
 function M.current(l_decor, r_decor)
   local expr = ""
   local text = ""
-  local limit = vim.o.columns / 2
+  local limit = vim.o.columns
+
+  if #api.nvim_list_tabpages() > 1 then
+    limit = vim.o.columns / 2
+  end
 
   text = File.full_path()
 
