@@ -62,7 +62,31 @@ function OnViModeChange {
 Set-PSReadLineOption -EditMode Vi
 Set-PSReadLineOption -ExtraPromptLineCount 2
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $Function:OnViModeChange
+
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+Set-PSReadLineKeyHandler -Key Ctrl+Spacebar -Function MenuComplete
+Set-PSReadLineKeyHandler -Key Ctrl+z -Function Undo
+
+Set-PSReadLineKeyHandler -Key RightArrow `
+                         -BriefDescription ForwardCharAndAcceptNextSuggestionWord `
+                         -LongDescription "Move cursor one character to the right in the current editing line and accept the next word in suggestion when it's at the end of current editing line" `
+                         -ScriptBlock {
+  param($key, $arg)
+
+  $line = $null
+  $cursor = $null
+  [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+  if ($cursor -lt $line.Length) {
+    [Microsoft.PowerShell.PSConsoleReadLine]::ForwardChar($key, $arg)
+  } else {
+    [Microsoft.PowerShell.PSConsoleReadLine]::AcceptNextSuggestionWord($key, $arg)
+  }
+}
+#}}}
 
 #=================================================================== Custom {{{
 function Remove-Submodule {
@@ -137,4 +161,8 @@ function Prompt {
   $Prompt += Write-Prompt "$script:indicator" -ForegroundColor $script:vicolor
   if ($Prompt) { "$Prompt " } else { " " }
 }
+#}}}
+
+#==================================================================== z.lua {{{
+Invoke-Expression (&{(lua $PSScriptRoot"/z.lua" --init powershell) -join "`n"})
 #}}}
