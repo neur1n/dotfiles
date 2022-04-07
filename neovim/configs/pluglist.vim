@@ -11,6 +11,7 @@ Plug 'liuchengxu/vim-clap', {'do': {-> clap#installer#force_download()}}
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
 Plug 'matze/vim-move'
+Plug 'mfussenegger/nvim-dap'
 Plug 'mg979/vim-visual-multi'
 Plug 'mhinz/vim-startify'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
