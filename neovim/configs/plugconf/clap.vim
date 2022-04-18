@@ -3,7 +3,7 @@ scriptencoding utf-8
 "******************************************************* liuchengxu/vim-clap{{{
 nnoremap <Leader>cb :Clap buffers<CR>
 nnoremap <Leader>ce :Clap filer<CR>
-nnoremap <Leader>cf :Clap files<CR>
+nnoremap <Leader>cf :Clap files ++finder=fd --hidden --type f<CR>
 nnoremap <Leader>cr :Clap grep<CR>
 nnoremap <Leader>cm :Clap grep2<CR>
 nnoremap <Leader>cw :Clap grep ++query=<cword><CR>
