@@ -49,7 +49,7 @@ local prev_mode = ""
 local curr_mode = ""
 
 function M.highlight()
-  for i = 1, api.nvim_win_get_number("$") do
+  for i = 1, #api.nvim_list_wins() do
     if i == api.nvim_win_get_number(0) then
       curr_mode = link_map[api.nvim_get_mode().mode]
 
