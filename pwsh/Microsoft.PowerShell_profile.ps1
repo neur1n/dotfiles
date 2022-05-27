@@ -1,53 +1,69 @@
 #==================================================================== START {{{
-if ($IsWindows -and (Get-ExecutionPolicy) -ne "RemoteSigned") {
+if ($IsWindows -and (Get-ExecutionPolicy) -ne 'RemoteSigned') {
   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Confirm
 }
 
 function DEBUG {
   [CmdletBinding()]
   param ([Parameter(ValueFromRemainingArguments=$true)] [String[]] $param)
-  Write-Host "[DEBUG]" $param
+  Write-Host '[DEBUG]' $param
 }
 
 function Invoke-Module ($name) {
   if (Get-Module -ListAvailable -Name $name) {
     Import-Module $name
   } else {
-    Write-Host "Installing missinged module " $name "..."
+    Write-Host 'Installing missinged module ' $name '...'
     Install-Module $name -Scope CurrentUser -AllowPrerelease -Force
+  }
+}
+
+function Add-To-Path ($dir) {
+  # $local:pwd = Split-Path -Path (Get-Item $PSCommandPath).Target
+
+  # Get-ChildItem -Path ($local:pwd + '/' + $dir) | ForEach-Object -Process {
+  #   $env:PATH += ';' + $_.FullName
+  # }
+
+  Get-ChildItem -Path $dir | ForEach-Object -Process {
+    $env:PATH += ';' + $_.FullName
   }
 }
 #}}}
 
+#========================================================= Additional Paths {{{
+Add-To-Path ((Split-Path -Path (Get-Item $PSCommandPath).Target) + '/../bin/*/win')
+#}}}
+
 #================================================================= posh-git {{{
-Invoke-Module "posh-git"
-# $GitPromptSettings.DefaultPromptPrefix.Text = "`n╭─[I] "
-# $GitPromptSettings.DefaultPromptBeforeSuffix.Text = "`n╰─"
+Invoke-Module 'posh-git'
+# $GitPromptSettings.DefaultPromptPrefix.Text = '`n╭─[I] '
+# $GitPromptSettings.DefaultPromptBeforeSuffix.Text = '`n╰─'
 #}}}
 
 #=============================================================== PSReadLine {{{
-Invoke-Module "PSReadLine"
+Invoke-Module 'PSReadLine'
 
-$script:emoji = @("😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃",
-  "😉", "😊", "😇", "🥰", "😍", "🤩", "😘", "😗", "😚", "😙", "😋", "😛", "😜",
-  "🤪", "😝", "🤑", "🤗", "🤭", "🤫", "🤔", "🤐", "🤨", "😐", "😑", "😶", "😶",
-  "😶", "😏", "😒", "🙄", "😬", "😮", "🤥", "😌", "😔", "😪", "🤤", "😴", "😷",
-  "🤒", "🤕", "🤢", "🤮", "🤧", "🥵", "🥶", "🥴", "😵", "😵", "🤯", "🤠", "🥳",
-  "😎", "🤓", "🧐", "😕", "😟", "🙁", "😮", "😯", "😲", "😳", "🥺", "😦", "😧",
-  "😨", "😰", "😥", "😢", "😭", "😱", "😖", "😣", "😞", "😓", "😩", "😫", "🥱",
-  "😤", "😡", "😠", "🤬", "😈", "👿", "💀", "💩", "🤡", "👹", "👺", "👻", "👽",
-  "👾", "🤖", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾", "🙈", "🙉",
-  "🙊")
+$script:emoji = @('😀', '😃', '😄', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃',
+  '😉', '😊', '😇', '🥰', '😍', '🤩', '😘', '😗', '😚', '😙', '😋', '😛', '😜',
+  '🤪', '😝', '🤑', '🤗', '🤭', '🤫', '🤔', '🤐', '🤨', '😐', '😑', '😶', '😶',
+  '😶', '😏', '😒', '🙄', '😬', '😮', '🤥', '😌', '😔', '😪', '🤤', '😴', '😷',
+  '🤒', '🤕', '🤢', '🤮', '🤧', '🥵', '🥶', '🥴', '😵', '😵', '🤯', '🤠', '🥳',
+  '😎', '🤓', '🧐', '😕', '😟', '🙁', '😮', '😯', '😲', '😳', '🥺', '😦', '😧',
+  '😨', '😰', '😥', '😢', '😭', '😱', '😖', '😣', '😞', '😓', '😩', '😫', '🥱',
+  '😤', '😡', '😠', '🤬', '😈', '👿', '💀', '💩', '🤡', '👹', '👺', '👻', '👽',
+  '👾', '🤖', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾', '🙈', '🙉',
+  '🙊')
 
 $script:index = Get-Random -Maximum $script:emoji.Count
-$script:indicator = ""
+$script:indicator = ''
 $script:vimode = $script:emoji[$script:index]
 $script:vicolor = [ConsoleColor]::Green
 
 function OnViModeChange {
   $script:index = Get-Random -Maximum $script:emoji.Count
 
-  if ($args[0] -eq "Command") {
+  if ($args[0] -eq 'Command') {
     $script:vicolor = [ConsoleColor]::Red
   } else {
     $script:vicolor = [ConsoleColor]::Green
@@ -89,65 +105,90 @@ Set-PSReadLineKeyHandler -Key RightArrow `
 #}}}
 
 #=================================================================== Custom {{{
+function Enter-VSDevMode {
+  [CmdletBinding()]
+  param (
+    [Parameter()] [Int] $Arch = 64
+  )
+
+  $local:comntools = [System.Environment]::GetEnvironmentVariable(
+    $(Get-ChildItem -Name -Path Env: | Select-String -Pattern 'COMNTOOLS'))
+
+  Import-Module $($local:comntools + '/Microsoft.VisualStudio.DevShell.dll')
+
+  Enter-VsDevShell -VsInstanceId 32e62fb6 -DevCmdArguments "-arch=x$Arch -no_logo" -SkipAutomaticLocation
+
+  Write-Host "VSDevMode (x$Arch) entered."
+}
+
 function Remove-Submodule {
   [CmdletBinding()]
   param (
     [Parameter(Mandatory = $true)] [String] $Name
   )
 
-  if (-Not (Get-Command -Name git)) {
-    Write-Error "[Remove-Submodule] Git does not exist, please install it."
+  if (-not (Get-Command -Name git)) {
+    Write-Error '[Remove-Submodule] Git does not exist, please install it.'
   }
 
-  Move-Item $Name ($Name + "_tmp")
+  Move-Item $Name ($Name + '_tmp')
   git submodule deinit -f -- $Name
-  Remove-Item -Recurse -Force (".git/modules/" + $Name)
+  Remove-Item -Recurse -Force ('.git/modules/' + $Name)
   git rm --cached $Name
+}
+
+function Set-C-Compiler {
+  [CmdletBinding()]
+  Param (
+    [Parameter()] [String] $Compiler = 'clang'
+  )
+
+  $local:c = $null
+  $local:cxx = $null
+
+  if ($Compiler -eq 'clang') {
+    $local:c = 'clang'
+    $local:cxx = 'clang++'
+  } elseif ($Compiler -eq 'msvc') {
+    $local:c = 'cl'
+    $local:cxx = 'cl'
+    Enter-VSDevMode
+  } else {
+    Write-Error $("Invalid compiler specified: {0}." -f $Compiler)
+    return
+  }
+
+  [System.Environment]::SetEnvironmentVariable('CC', $local:c)
+  [System.Environment]::SetEnvironmentVariable('CXX', $local:cxx)
+
+  Write-Host 'Compilers specified as:'
+  Write-Host 'CC:  ' $local:c
+  Write-Host 'CXX: ' $local:cxx
 }
 
 function Start-CMake {
   [CmdletBinding()]
   Param (
-    [Parameter()] [Int] $BuildArchitecture = 0,
-    [Parameter()] [Bool] $ExportCompileCommands = $true,
+    [Parameter()] [Int] $Arch = 64,
+    [Parameter()] [Bool] $Export = $true,
     [Parameter(ValueFromRemainingArguments=$true)] [String[]] $Remaining
   )
 
-  $local:cmdlet = $null
-  if ($BuildArchitecture -eq 32) {
-    $local:cmdlet = "vcvars32.bat & set"
-  } elseif ($BuildArchitecture -eq 64) {
-    $local:cmdlet = "vcvars64.bat & set"
-  } elseif ($null -ne $local:cmdlet) {
-    Write-Error "[Start-CMake] Please specify build architecture as 32 or 64."
-    return
-  }
-
   $local:command = $null
-  if ($ExportCompileCommands -eq $false) {
-    $local:command = "cmake .. -G Ninja " + $Remaining
+  if ($Export -eq $false) {
+    $local:command = 'cmake .. -G Ninja ' + $Remaining
   } else {
-    $local:command = "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja " + $Remaining
+    $local:command = 'cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. -G Ninja ' + $Remaining
   }
 
-  $local:msg = "Running command ($BuildArchitecture-bit): $local:command"
-  $local:line = "-" * 80
+  $local:msg = "Running command ($Arch bit): $local:command"
+  $local:line = '-' * 80
   Write-Host $local:line
   Write-Host $local:msg
   Write-Host $local:line
 
-  if ($null -ne $local:cmdlet) {
-
-    cmd /c $local:cmdlet |
-    Select-String "^([^=]*)=(.*)$" | ForEach-Object {
-      $local:key = $_.Matches[0].Groups[1].Value
-      $local:value = $_.Matches[0].Groups[2].Value
-      Set-Item Env:$local:key $local:value
-    }
-  }
-
   Invoke-Expression $local:command
-  if (($ExportCompileCommands -eq $true) -and (Test-Path compile_commands.json)) {
+  if (($Export -eq $true) -and (Test-Path compile_commands.json)) {
     Copy-Item -Force compile_commands.json -Destination ..
   }
 }
@@ -164,5 +205,5 @@ function Prompt {
 #}}}
 
 #==================================================================== z.lua {{{
-Invoke-Expression (&{(lua $PSScriptRoot"/z.lua" --init powershell) -join "`n"})
+Invoke-Expression (&{(luajit $PSScriptRoot'/z.lua' --init powershell) -join "`n"})
 #}}}
