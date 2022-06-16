@@ -1,0 +1,79 @@
+snippet nbox "comment box" b
+/${2}************************************************************ ${1} *
+${3}
+${2}************************************************************ ${1} */
+endsnippet
+
+snippet ncla "class" b
+class ${1:`!p snip.rv = snip.basename`}
+{
+public:
+  ${1}();
+
+  ~${1}();
+
+private:
+  class Impl;
+
+  Impl* m_impl;
+};  // class ${1}
+endsnippet
+
+snippet nfor "for loop" b
+for (${1:size_t} ${2:i} = ${3:0}; ${2} ${4:<} ${5:bound}; ${6:++}${2})
+{
+  ${7}
+}
+endsnippet
+
+snippet nmain "program entry" b
+int main(int argc, char** argv)
+{
+  ${1}
+
+  return 0;
+}
+endsnippet
+
+snippet nns "namespace" b
+namespace ${1}
+{
+  ${2}
+}  // namespace ${1}
+endsnippet
+
+snippet nsec "code section" b
+//${2}************************************************************ ${1:${`!p snip.rv = snip.basename`}}{{{
+//}}}
+endsnippet
+
+snippet nstruct "struct" b
+typedef struct _${1}_
+{
+  _${1}_()
+	{
+	}
+
+  ${2}
+} ${1};
+endsnippet
+
+snippet nsingleton "singleton class" b
+class ${1:`!p snip.rv = snip.basename`}
+{
+public:
+  ${1}(${1} const&) = delete;
+  void operator=(${1} const&) = delete;
+
+  static ${1}& Instance();
+
+private:
+  class Impl;
+
+  ${1}();
+
+  ~${1}();
+
+  Impl* m_impl;
+};  // class ${1}
+endsnippet

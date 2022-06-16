@@ -30,49 +30,50 @@ local colors = {
 function M.render_c()
   if not State.stl_initialized then
     local color = ""
+    local bg = palette.bgm
 
     math.randomseed(os.time())
 
     color = math.random(#colors)
-    Highlight.create("NStart", colors[color], palette.bgh)
-    Highlight.create("NEnd"  , colors[color], palette.bgh)
+    Highlight.create("NStart", colors[color], bg)
+    Highlight.create("NEnd"  , colors[color], bg)
 
     color = math.random(#colors)
-    Highlight.create("NModeN", colors[color], palette.bgh, "bold")
+    Highlight.create("NModeN", colors[color], bg, "bold")
 
     color = math.random(#colors)
-    Highlight.create("NModeV", colors[color], palette.bgh, "bold")
+    Highlight.create("NModeV", colors[color], bg, "bold")
 
     color = math.random(#colors)
-    Highlight.create("NModeI", colors[color], palette.bgh, "bold")
+    Highlight.create("NModeI", colors[color], bg, "bold")
 
     color = math.random(#colors)
-    Highlight.create("NModeR", colors[color], palette.bgh, "bold")
+    Highlight.create("NModeR", colors[color], bg, "bold")
 
     color = math.random(#colors)
-    Highlight.create("NModeC", colors[color], palette.bgh, "bold")
+    Highlight.create("NModeC", colors[color], bg, "bold")
 
     color = math.random(#colors)
-    Highlight.create("NNameD",  colors[color], palette.bgh)
-    Highlight.create("NName",  colors[color], palette.bgh, "inverse")
+    Highlight.create("NNameD",  colors[color], bg)
+    Highlight.create("NName",  colors[color], bg, "inverse")
     Highlight.link("NEdit", "NName")
 
-    Highlight.create("NTag",  palette.fgm, palette.bgh, "bold")
+    Highlight.create("NTag",  palette.fgm, bg, "bold")
 
-    Highlight.create("NDiagE", palette.red, palette.bgh)
-    Highlight.create("NDiagW", palette.yellow, palette.bgh)
-    Highlight.create("NDiagH", palette.blue, palette.bgh)
-    Highlight.create("NDiagI", palette.green, palette.bgh)
-
-    color = math.random(#colors)
-    Highlight.create("NFileInfoD", colors[color], palette.bgh)
-    Highlight.create("NFileInfo",  colors[color], palette.bgh, "inverse")
+    Highlight.create("NDiagE", palette.red, bg)
+    Highlight.create("NDiagW", palette.yellow, bg)
+    Highlight.create("NDiagH", palette.blue, bg)
+    Highlight.create("NDiagI", palette.green, bg)
 
     color = math.random(#colors)
-    Highlight.create("NRuler", colors[color], palette.bgh)
+    Highlight.create("NFileInfoD", colors[color], bg)
+    Highlight.create("NFileInfo",  colors[color], bg, "inverse")
 
     color = math.random(#colors)
-    Highlight.create("NVcs", colors[color], palette.bgh)
+    Highlight.create("NRuler", colors[color], bg)
+
+    color = math.random(#colors)
+    Highlight.create("NVcs", colors[color], bg)
   end
 
   Mode.highlight()
@@ -81,29 +82,30 @@ end
 function M.render_nc()
   if not State.stl_initialized then
     local color = ""
+    local bg = palette.bgm
 
     math.randomseed(os.time())
 
     color = math.random(#colors)
-    Highlight.create("NName_nc",  colors[color], palette.bgh)
+    Highlight.create("NName_nc",  colors[color], bg)
 
-    Highlight.create("NEdit_nc",  palette.red, palette.bgh)
+    Highlight.create("NEdit_nc",  palette.red, bg)
 
-    Highlight.create("NTag",  palette.fgm, palette.bgh, "bold")
+    Highlight.create("NTag",  palette.fgm, bg, "bold")
 
-    Highlight.create("NDiagE", palette.red, palette.bgh)
-    Highlight.create("NDiagW", palette.yellow, palette.bgh)
-    Highlight.create("NDiagH", palette.blue, palette.bgh)
-    Highlight.create("NDiagI", palette.green, palette.bgh)
-
-    color = math.random(#colors)
-    Highlight.create("NFileInfo_nc",  colors[color], palette.bgh)
+    Highlight.create("NDiagE", palette.red, bg)
+    Highlight.create("NDiagW", palette.yellow, bg)
+    Highlight.create("NDiagH", palette.blue, bg)
+    Highlight.create("NDiagI", palette.green, bg)
 
     color = math.random(#colors)
-    Highlight.create("NRuler", colors[color], palette.bgh)
+    Highlight.create("NFileInfo_nc",  colors[color], bg)
 
     color = math.random(#colors)
-    Highlight.create("NVcs", colors[color], palette.bgh)
+    Highlight.create("NRuler", colors[color], bg)
+
+    color = math.random(#colors)
+    Highlight.create("NVcs", colors[color], bg)
   end
 end
 
@@ -142,7 +144,7 @@ function M.setup_c()
   expr = expr .. Component.create(Diagnosis.info("coc", "hint",        glyph.h, " "), "NDiagH")
   expr = expr .. Component.create(Diagnosis.info("coc", "information", glyph.i, " "), "NDiagI")
 
-  expr = expr .. "%="
+  expr = expr .. "%=%<"
 
   expr = expr .. Component.create(Tag.get(""), "NTag")
 
@@ -169,7 +171,6 @@ function M.setup_nc()
 
   local expr = ""
 
-  expr = expr .. Component.create(Mode.get(" "), "NMode")
   expr = expr .. Component.create(Edit.paste("P", decor["sep"]), "NMode")
   expr = expr .. Component.create(Edit.spell("S", decor["sep"]), "NMode")
 
@@ -185,7 +186,7 @@ function M.setup_nc()
   expr = expr .. Component.create(Diagnosis.info("coc", "hint",        glyph.h, " "), "NDiagH")
   expr = expr .. Component.create(Diagnosis.info("coc", "information", glyph.i, " "), "NDiagI")
 
-  expr = expr .. "%="
+  expr = expr .. "%=%<"
 
   expr = expr .. Component.create(Tag.get(""), "NTag")
 
@@ -204,25 +205,6 @@ function M.setup_nc()
 end
 
 function M.update()
-  -- local count = vim.fn.winnr("$")
-
-  -- if count == 1 then
-  --   api.nvim_win_set_option(0, "statusline",
-  --     "%{%v:lua.require'plugconf.noline.statusline'.setup_c()%}")
-  -- else
-  --   for i = 1, count do
-  --     if vim.fn.win_gettype() == "" then
-  --       if i == api.nvim_win_get_number(0) then
-  --         api.nvim_win_set_option(vim.fn.win_getid(i), "statusline",
-  --           "%{%v:lua.require'plugconf.noline.statusline'.setup_c()%}")
-  --       else
-  --         api.nvim_win_set_option(vim.fn.win_getid(i), "statusline",
-  --           "%{%v:lua.require'plugconf.noline.statusline'.setup_nc()%}")
-  --       end
-  --     end
-  --   end
-  -- end
-
   for number, handle in pairs(api.nvim_tabpage_list_wins(0)) do
     if vim.fn.win_gettype() == "" then
       if number == api.nvim_win_get_number(0) then
@@ -236,6 +218,15 @@ function M.update()
   end
 
   State.stl_initialized = true
+end
+
+function M.redraw()
+  palette = Palette.get()
+  State.stl_initialized = false
+
+  M.render_c()
+  M.render_nc()
+  M.update()
 end
 
 return M

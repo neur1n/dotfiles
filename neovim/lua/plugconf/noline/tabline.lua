@@ -26,16 +26,17 @@ local colors = {
 function M.render()
   if not State.tal_initialized then
     local color = ""
+    local bg = palette.bgm
 
     math.randomseed(os.time())
 
     color = math.random(#colors)
-    Highlight.create("NTab", colors[color], palette.bgh, "bold,inverse")
-    Highlight.create("NTabL", colors[color], palette.bgh, "bold")
+    Highlight.create("NTab", colors[color], bg, "bold,inverse")
+    Highlight.create("NTabL", colors[color], bg, "bold")
     Highlight.link("NTabR", "NTabL")
 
     color = math.random(#colors)
-    Highlight.create("NTab_nc", colors[color], palette.bgh)
+    Highlight.create("NTab_nc", colors[color], bg)
 
     Highlight.create("NClose", palette.red, palette.fgs, "bold,inverse")
   end
@@ -61,6 +62,15 @@ end
 
 function M.update()
   api.nvim_set_option("tabline", "%{%v:lua.require'plugconf.noline.tabline'.setup()%}")
+  State.tal_initialized = true
+end
+
+function M.redraw()
+  palette = Palette.get()
+  State.tal_initialized = false
+
+  M.render()
+  M.update()
 end
 
 return M

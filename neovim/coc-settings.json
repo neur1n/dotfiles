@@ -4,5 +4,29 @@
   "diagnostic.warningSign": "",
   "diagnostic.hintSign": "",
   "diagnostic.infoSign": "",
+
+  "diagnostic.floatConfig": {
+    "border": true,
+    "rounded":true,
+    "borderhighlight": "WildMenu"
+  },
+
+  "hover.floatConfig": {
+    "border": true,
+    "rounded":true,
+    "borderhighlight": "WildMenu"
+  },
+
+  "signature.floatConfig": {
+    "border": true,
+    "rounded":true,
+    "borderhighlight": "WildMenu"
+  },
+
+  "suggest.floatConfig": {
+    "border": true,
+    "borderhighlight": "WildMenu"
+  },
+
   "semanticTokens.filetypes": ["*"]
 }

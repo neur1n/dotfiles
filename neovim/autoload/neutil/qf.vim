@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 function! neutil#qf#Clear() abort
-  call setqflist([], 'r')
+  call setqflist([], 'f')
   execute 'botright copen'
   execute 'wincmd p'
 endfunction
@@ -18,8 +18,9 @@ endfunction
 function! s:IsOpened() abort
   for l:nr in range(1, winnr('$'))
     if getwinvar(l:nr, '&filetype') ==# 'qf'
-      return 1
+      return v:true
     endif
   endfor
-  return 0
+
+  return v:false
 endfunction
