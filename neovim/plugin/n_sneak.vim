@@ -9,12 +9,8 @@ let g:loaded_n_sneak = v:true
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map s <Plug>Sneak_s
-map S <Plug>Sneak_S
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
+map gs <Plug>Sneak_s
+map gS <Plug>Sneak_S
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
