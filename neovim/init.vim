@@ -56,6 +56,7 @@ Plug 'cohama/lexima.vim'
 Plug 'dstein64/vim-startuptime'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
+Plug 'LhKipp/nvim-nu', {'do': ':TSInstall nu', 'for': 'nu'}
 Plug 'liuchengxu/vim-clap', {'do': {-> clap#installer#force_download()}}
 Plug 'liuchengxu/vista.vim'
 Plug 'luochen1990/rainbow'
@@ -74,8 +75,8 @@ Plug 'triglav/vim-visual-increment'
 Plug 'wesQ3/vim-windowswap'
 "}}}
 "*********************************************************** Auto-completion{{{
-Plug 'Shougo/neco-vim', {'for': ['vim']}
-Plug 'neoclide/coc-neco', {'for': ['vim']}
+Plug 'Shougo/neco-vim', {'for': 'vim'}
+Plug 'neoclide/coc-neco', {'for': 'vim'}
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "}}}
