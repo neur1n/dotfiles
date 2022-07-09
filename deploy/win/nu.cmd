@@ -1,7 +1,12 @@
 @echo off
 
-MKLINK /J %APPDATA%\nushell\module %CD%\..\..\nu\module
-MKLINK /J %APPDATA%\nushell\script %CD%\..\..\nu\script
+SET src=%~dp0.
+SET dst=%APPDATA%\nushell
 
-MKLINK %APPDATA%\nushell\config.nu %CD%\..\..\nu\config.nu
-MKLINK %APPDATA%\nushell\env.nu %CD%\..\..\nu\env.nu
+MKLINK /J %dst%\module %src%\..\..\nu\module
+MKLINK /J %dst%\script %src%\..\..\nu\script
+
+MKLINK %dst%\config.nu %src%\..\..\nu\config.nu
+MKLINK %dst%\env.nu %src%\..\..\nu\env.nu
+
+START %dst%

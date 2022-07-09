@@ -1,14 +1,17 @@
 @echo off
 
-FOR /F %%d IN ('DIR /B /A:D %CD%\..\..\neovim\*') DO (
-  MKLINK /J %LOCALAPPDATA%\nvim\%%d %CD%\..\..\neovim\%%d
+SET src=%~dp0.
+SET dst=%LOCALAPPDATA%\nvim
+
+FOR /F %%d IN ('DIR /B /A:D %src%\..\..\neovim\*') DO (
+  MKLINK /J %dst%\%%d %src%\..\..\neovim\%%d
 )
 
-FOR /F %%f IN ('DIR /B /A-D %CD%\..\..\neovim\*') DO (
-  MKLINK %LOCALAPPDATA%\nvim\%%f %CD%\..\..\neovim\%%f
+FOR /F %%f IN ('DIR /B /A-D %src%\..\..\neovim\*') DO (
+  MKLINK %dst%\%%f %src%\..\..\neovim\%%f
 )
 
-MKDIR %LOCALAPPDATA%\nvim\recovery\backup
-MKDIR %LOCALAPPDATA%\nvim\recovery\session
+MKDIR %dst%\recovery\backup
+MKDIR %dst%\recovery\session
 
-START %LOCALAPPDATA%\nvim
+START %dst%
