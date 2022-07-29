@@ -6,8 +6,8 @@ export def run-cmake [
 ] {
   let fa = (if $arch == 32 {"-m32"} else {"-m64"})
   let fb = (if $build == "Debug" {"Debug"} else {"Release"})
-  let fc = (if $compiler == "msvc" {"cl"} else {"clang"})
-  let fcxx = (if $compiler == "msvc" {"cl"} else {"clang++"})
+  let fc = (if $compiler == "msvc" {"cl"} else if $compiler == "gcc" {"gcc"} else {"clang"})
+  let fcxx = (if $compiler == "msvc" {"cl"} else if $compiler == "gcc" {"g++"} else {"clang++"})
 
   let cmd = $"cmake ($src) -G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=1"
   let cmd = $cmd + $" -DCMAKE_C_FLAGS=($fa)"
