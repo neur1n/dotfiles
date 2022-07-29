@@ -66,7 +66,7 @@ call neutil#hl#Create('Normal'      , s:plt.fgm, s:plt.bgm)
 call neutil#hl#Create('NormalNC'    , s:plt.fgm, s:plt.bgs)
 
 call neutil#hl#Create('ColorColumn' , 'NONE', s:plt.bgs)
-call neutil#hl#Create('Cursor'      , 'NONE', 'NONE', 'inverse')
+call neutil#hl#Create('Cursor'      , 'NONE', 'NONE', 'reverse')
 call neutil#hl#Link(  'lCursor'     , 'Cursor')
 call neutil#hl#Link(  'CursorIM'    , 'Cursor')
 call neutil#hl#Link(  'CursorColumn', 'ColorColumn')
