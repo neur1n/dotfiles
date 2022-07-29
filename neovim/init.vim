@@ -42,8 +42,8 @@ set tabstop=2                                " make real <Tab> to be width of 2
 set wildmenu                                " show possible matches using <Tab>
 set wildignorecase
 
-set pumblend=20
-set winblend=20
+" set pumblend=20
+" set winblend=20
 
 let mapleader = "-"                                   " set <Leader> to <minus>
 let maplocalleader = "-"
@@ -59,12 +59,12 @@ Plug 'justinmk/vim-sneak'
 Plug 'LhKipp/nvim-nu', {'do': ':TSInstall nu', 'for': 'nu'}
 Plug 'liuchengxu/vim-clap', {'do': {-> clap#installer#force_download()}}
 Plug 'liuchengxu/vista.vim'
-Plug 'luochen1990/rainbow'
 Plug 'matze/vim-move'
 Plug 'mfussenegger/nvim-dap'
 Plug 'mg979/vim-visual-multi'
 Plug 'mhinz/vim-startify'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'p00f/nvim-ts-rainbow'
 " Plug 'rcarriga/nvim-dap-ui'
 Plug 'rcarriga/nvim-notify'
 Plug 'skywind3000/asyncrun.vim'
