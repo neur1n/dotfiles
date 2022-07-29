@@ -10,10 +10,15 @@ let s:save_cpo = &cpoptions
 set cpoptions&vim
 
 lua << EOF
-require"nvim-treesitter.configs".setup {
+require("nvim-treesitter.configs").setup {
+  ensure_installed = {"c", "python"},
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
+  },
+  rainbow = {
+    enable = true,
+    loaded = true
   }
 }
 EOF
