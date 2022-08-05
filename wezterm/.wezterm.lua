@@ -40,7 +40,7 @@ return {
   window_close_confirmation = "NeverPrompt",
   keys = {
     {key = "l", mods = "CTRL|SHIFT", action = Wezterm.action.ShowLauncher},
-    {key = "_", mods = "CTRL|SHIFT", action = Wezterm.action.SplitPane {direction = "Down"}},
-    {key = "+", mods = "CTRL|SHIFT", action = Wezterm.action.SplitPane {direction = "Right"}},
+    {key = "_", mods = "ALT|SHIFT", action = Wezterm.action.SplitPane {direction = "Down"}},
+    {key = "+", mods = "ALT|SHIFT", action = Wezterm.action.SplitPane {direction = "Right"}},
   },
 }
