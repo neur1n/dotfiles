@@ -52,7 +52,6 @@ let $VIMCONF = stdpath('config')
 
 call plug#begin('$VIMCONF/plugged')
 "********************************************************************** Misc{{{
-Plug 'cohama/lexima.vim'
 Plug 'dstein64/vim-startuptime'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'

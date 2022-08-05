@@ -9,8 +9,6 @@ let g:loaded_n_coc = v:true
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-set completeopt=menuone,noinsert,noselect
-
 function! s:CheckBackSpace() abort
   let l:col = col('.') - 1
   return !l:col || getline('.')[l:col - 1]  =~# '\s'
@@ -24,10 +22,13 @@ function! s:ShowDocumentation() abort
   endif
 endfunction
 
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" :
-      \ <SID>CheckBackSpace() ? "\<Tab>" : coc#refresh()
-inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-inoremap <silent><expr> <CR> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) : <SID>CheckBackSpace() ? "\<TAB>" : coc#refresh()
+
+inoremap <expr> <S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+inoremap <silent><expr> <CR>
+      \ coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
 
 nnoremap <silent> K :call <SID>ShowDocumentation()<CR>
 
@@ -39,13 +40,13 @@ nmap <silent> <Leader>gt <Plug>(coc-type-definition)
 nmap <silent> <Leader>rf <Plug>(coc-refactor)
 nmap <silent> <Leader>rn <Plug>(coc-rename)
 
+nmap <silent> <Leader>fm <Plug>(coc-format)
 nmap <silent> <Leader>fx <Plug>(coc-fix-current)
 nmap <silent> <Leader>fh <Plug>(coc-float-hide)
 nmap <silent> <Leader>fj <Plug>(coc-float-jump)
 
 nmap <silent> <C-p> <Plug>(coc-diagnostic-prev)
 nmap <silent> <C-n> <Plug>(coc-diagnostic-next)
-imap <silent> <C-s> <Plug>(coc-snippets-expand)
 
 vmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
 nmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
@@ -53,7 +54,7 @@ nmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 let g:coc_global_extensions = [
-      \ 'coc-diagnostic', 'coc-git', 'coc-json', 'coc-snippets',
+      \ 'coc-diagnostic', 'coc-git', 'coc-json', 'coc-pairs', 'coc-snippets',
       \ 'coc-spell-checker', 'coc-word']
 
 "--------------------------------------------------------- clangd/coc-clangd{{{
@@ -119,6 +120,9 @@ function! s:SetColors() abort
     call neutil#hl#Link('CocWarningSign', 'NeuOrange')
     call neutil#hl#Link('CocErrorSign'  , 'NeuRed')
   endif
+
+  call neutil#hl#Link('CocMenuSel', 'PMenuSel')
+  call neutil#hl#Link('CocPumMenu', 'PMenu')
 endfunction
 
 augroup n_coc

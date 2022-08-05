@@ -1,4 +1,6 @@
 {
+  "coc.preferences.formatOnType": true,
+
   "diagnostic.enable": true,
   "diagnostic.errorSign": "",
   "diagnostic.warningSign": "",
@@ -27,6 +29,8 @@
     "border": true,
     "borderhighlight": "WildMenu"
   },
+
+  "suggest.noselect": true,
 
   "semanticTokens.filetypes": ["*"]
 }
