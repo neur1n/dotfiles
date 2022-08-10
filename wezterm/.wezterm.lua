@@ -38,7 +38,17 @@ return {
   },
   tab_bar_at_bottom = true,
   window_close_confirmation = "NeverPrompt",
+  window_padding = {
+    up = 0,
+    bottom = 0,
+    left = 0,
+    right = 0,
+  },
   keys = {
+    {key = "UpArrow", mods = "ALT", action = Wezterm.action.ActivatePaneDirection("Up")},
+    {key = "DownArrow", mods = "ALT", action = Wezterm.action.ActivatePaneDirection("Down")},
+    {key = "LeftArrow", mods = "ALT", action = Wezterm.action.ActivatePaneDirection("Left")},
+    {key = "RightArrow", mods = "ALT", action = Wezterm.action.ActivatePaneDirection("Right")},
     {key = "l", mods = "CTRL|SHIFT", action = Wezterm.action.ShowLauncher},
     {key = "_", mods = "ALT|SHIFT", action = Wezterm.action.SplitPane {direction = "Down"}},
     {key = "+", mods = "ALT|SHIFT", action = Wezterm.action.SplitPane {direction = "Right"}},
