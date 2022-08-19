@@ -1,6 +1,11 @@
 local Colorschemes = require("colorschemes")
 local Wezterm = require("wezterm")
 
+Wezterm.on("update-right-status", function(window, pane)
+  local date = Wezterm.strftime("%a %Y-%m-%d %H:%M ")
+  window:set_right_status(date)
+end)
+
 local fonts = {
 {["name"] = "Anonymice NF"        , ["size"] = 13},
 {["name"] = "CaskaydiaCove NF"    , ["size"] = 12},
@@ -39,7 +44,7 @@ return {
   tab_bar_at_bottom = true,
   window_close_confirmation = "NeverPrompt",
   window_padding = {
-    up = 0,
+    top = 0,
     bottom = 0,
     left = 0,
     right = 0,
