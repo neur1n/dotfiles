@@ -31,6 +31,7 @@ set iminsert=0 imsearch=0
 set incsearch
 set laststatus=2                           " show statusline even only 1 window
 set linespace=0
+set modeline
 set noshowmode
 set number
 set sessionoptions-=folds                 " do not create folds when sessioning
