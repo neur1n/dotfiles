@@ -1,0 +1,7 @@
+snippet nmlspc "vim modeline using spc" b
+`!v printf(&cms, printf(' vim:set et sw=%d sts=%d ts=%d:', &sw, &sts, &ts))`
+endsnippet
+
+snippet nmltab "vim modeline using tab" b
+`!v printf(&cms, printf(' vim:set noet sw=%d ts=%d:', &sw, &ts))`
+endsnippet
