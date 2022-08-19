@@ -178,144 +178,144 @@ let default_theme = {
 
 # The default config record. This is where much of your global configuration is setup.
 let-env config = {
-  filesize_metric: false
-  table_mode: rounded # basic, compact, compact_double, light, thin, with_love, rounded, reinforced, heavy, none, other
-  use_ls_colors: true
-  rm_always_trash: false
+  buffer_editor: "nvim" # command that will be used to edit the current line buffer with ctr+e
   color_config: $default_theme
-  use_grid_icons: true
-  footer_mode: "25" # always, never, number_of_rows, auto
-  quick_completions: true  # set this to false to prevent auto-selecting completions when only one remains
-  partial_completions: true  # set this to false to prevent partial filling of the prompt
-  completion_algorithm: "fuzzy"  # prefix, fuzzy
-  animate_prompt: true # redraw the prompt every second
-  float_precision: 2
-  buffer_editor: "nvim-qt" # command that will be used to edit the current line buffer with ctr+e
-  use_ansi_coloring: true
+  completion_algorithm: "fuzzy"
+  disable_table_indexes: false
+  edit_mode: vi
   filesize_format: "auto" # b, kb, kib, mb, mib, gb, gib, tb, tib, pb, pib, eb, eib, zb, zib, auto
-  edit_mode: vi # emacs, vi
-  max_history_size: 10000 # Session has to be reloaded for this to take effect
-  sync_history_on_enter: false # Enable to share the history between multiple sessions, else you have to close the session to persist history to file
+  filesize_metric: false
+  float_precision: 5
+  footer_mode: "25" # always, never, number_of_rows, auto
+  max_history_size: 10000
+  partial_completions: true
+  quick_completions: true
+  rm_always_trash: false
   shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
-  disable_table_indexes: false # set to true to remove the index column from tables
+  show_banner: false
+  sync_history_on_enter: false
+  table_mode: rounded
+  use_ansi_coloring: true
+  use_grid_icons: true
+  use_ls_colors: true
   menus: [
-      # Configuration for default nushell menus
-      # Note the lack of souce parameter
-      {
-        name: completion_menu
-        only_buffer_difference: false
-        marker: "| "
-        type: {
-            layout: columnar
-            columns: 4
-            col_width: 20   # Optional value. If missing all the screen width is used to calculate column width
-            col_padding: 2
-        }
-        style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
-        }
+    # Configuration for default nushell menus
+    # Note the lack of souce parameter
+    {
+      name: completion_menu
+      only_buffer_difference: false
+      marker: "| "
+      type: {
+          layout: columnar
+          columns: 4
+          col_width: 20   # Optional value. If missing all the screen width is used to calculate column width
+          col_padding: 2
       }
-      {
-        name: history_menu
-        only_buffer_difference: true
-        marker: "? "
-        type: {
-            layout: list
-            page_size: 10
-        }
-        style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
-        }
+      style: {
+          text: green
+          selected_text: green_reverse
+          description_text: yellow
       }
-      {
-        name: help_menu
-        only_buffer_difference: true
-        marker: "? "
-        type: {
-            layout: description
-            columns: 4
-            col_width: 20   # Optional value. If missing all the screen width is used to calculate column width
-            col_padding: 2
-            selection_rows: 4
-            description_rows: 10
-        }
-        style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
-        }
+    }
+    {
+      name: history_menu
+      only_buffer_difference: true
+      marker: "? "
+      type: {
+          layout: list
+          page_size: 10
       }
-      # Example of extra menus created using a nushell source
-      # Use the source field to create a list of records that populates
-      # the menu
-      {
-        name: commands_menu
-        only_buffer_difference: false
-        marker: "# "
-        type: {
-            layout: columnar
-            columns: 4
-            col_width: 20
-            col_padding: 2
-        }
-        style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
-        }
-        source: { |buffer, position|
-            $nu.scope.commands
-            | where command =~ $buffer
-            | each { |it| {value: $it.command description: $it.usage} }
-        }
+      style: {
+          text: green
+          selected_text: green_reverse
+          description_text: yellow
       }
-      {
-        name: vars_menu
-        only_buffer_difference: true
-        marker: "# "
-        type: {
-            layout: list
-            page_size: 10
-        }
-        style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
-        }
-        source: { |buffer, position|
-            $nu.scope.vars
-            | where name =~ $buffer
-            | sort-by name
-            | each { |it| {value: $it.name description: $it.type} }
-        }
+    }
+    {
+      name: help_menu
+      only_buffer_difference: true
+      marker: "? "
+      type: {
+          layout: description
+          columns: 4
+          col_width: 20   # Optional value. If missing all the screen width is used to calculate column width
+          col_padding: 2
+          selection_rows: 4
+          description_rows: 10
       }
-      {
-        name: commands_with_description
-        only_buffer_difference: true
-        marker: "# "
-        type: {
-            layout: description
-            columns: 4
-            col_width: 20
-            col_padding: 2
-            selection_rows: 4
-            description_rows: 10
-        }
-        style: {
-            text: green
-            selected_text: green_reverse
-            description_text: yellow
-        }
-        source: { |buffer, position|
-            $nu.scope.commands
-            | where command =~ $buffer
-            | each { |it| {value: $it.command description: $it.usage} }
-        }
+      style: {
+          text: green
+          selected_text: green_reverse
+          description_text: yellow
       }
+    }
+    # Example of extra menus created using a nushell source
+    # Use the source field to create a list of records that populates
+    # the menu
+    {
+      name: commands_menu
+      only_buffer_difference: false
+      marker: "# "
+      type: {
+          layout: columnar
+          columns: 4
+          col_width: 20
+          col_padding: 2
+      }
+      style: {
+          text: green
+          selected_text: green_reverse
+          description_text: yellow
+      }
+      source: { |buffer, position|
+          $nu.scope.commands
+          | where command =~ $buffer
+          | each { |it| {value: $it.command description: $it.usage} }
+      }
+    }
+    {
+      name: vars_menu
+      only_buffer_difference: true
+      marker: "# "
+      type: {
+          layout: list
+          page_size: 10
+      }
+      style: {
+          text: green
+          selected_text: green_reverse
+          description_text: yellow
+      }
+      source: { |buffer, position|
+          $nu.scope.vars
+          | where name =~ $buffer
+          | sort-by name
+          | each { |it| {value: $it.name description: $it.type} }
+      }
+    }
+    {
+      name: commands_with_description
+      only_buffer_difference: true
+      marker: "# "
+      type: {
+          layout: description
+          columns: 4
+          col_width: 20
+          col_padding: 2
+          selection_rows: 4
+          description_rows: 10
+      }
+      style: {
+          text: green
+          selected_text: green_reverse
+          description_text: yellow
+      }
+      source: { |buffer, position|
+          $nu.scope.commands
+          | where command =~ $buffer
+          | each { |it| {value: $it.command description: $it.usage} }
+      }
+    }
   ]
   keybindings: [
     {
