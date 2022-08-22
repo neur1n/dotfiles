@@ -53,11 +53,11 @@ def left-prompt [] {
 def right-prompt [] {
   let git = (panache-git styled)
 
-  let timestamp = ([
-      (date now | date format "%Y-%m-%d %H:%M:%S")
-  ] | str collect)
+  # let timestamp = ([
+  #     (date now | date format "%Y-%m-%d %H:%M:%S")
+  # ] | str collect)
 
-  let prompt = $"($git) ($timestamp)"
+  let prompt = $"($git)"
 
   $prompt
 }
