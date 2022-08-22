@@ -30,7 +30,7 @@
     "borderhighlight": "WildMenu"
   },
 
-  "suggest.noselect": true,
+  "suggest.noselect": false,
 
   "semanticTokens.filetypes": ["*"]
 }
