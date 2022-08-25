@@ -35,11 +35,11 @@
                 "startingDirectory": "."
             },
             {
-                "commandline": "pwsh.exe",
-                "guid": "{90cbdc15-f4fe-49d2-a245-ec066b70845f}",
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "icon": "https://raw.githubusercontent.com/PowerShell/PowerShell/master/assets/Powershell_avatar.ico",
                 "name": "PowerShell Core",
+                "source": "Windows.Terminal.PowershellCore",
                 "startingDirectory": "."
             },
             {
