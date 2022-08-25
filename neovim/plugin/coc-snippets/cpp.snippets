@@ -17,7 +17,7 @@ private:
 endsnippet
 
 snippet nlog "n_log from neu.h" b
-n_log('${1:D}', nullptr, "", "${2}", ${3});
+n_log('${1:D}', "", "${2}", ${3});
 endsnippet
 
 snippet nnamespace "namespace" b
@@ -31,8 +31,8 @@ snippet nsingleton "singleton class" b
 class ${1:`!p snip.rv = snip.basename`}
 {
 public:
-	$1($1 const&) = delete;
-	void operator=($1 const&) = delete;
+	$1(const $1&) = delete;
+	$1& operator=(const $1&) = delete;
 
 	static $1& Instance();
 
@@ -48,7 +48,7 @@ private:
 endsnippet
 
 snippet nstruct "struct" b
-tyepdef struct _${1}_
+typedef struct _${1}_
 {
 	_$1_() {
 	}

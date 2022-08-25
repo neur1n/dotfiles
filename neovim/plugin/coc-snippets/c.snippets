@@ -16,7 +16,7 @@ for (${1:size_t} ${2:i} = ${3:0}; ${2} ${4:<} ${5:bound}; ${6:++}${2}) {
 endsnippet
 
 snippet nguard "header include guard" b
-#ifndef _${1:`!p snip.rv = snip.basename.upper() + "_H"`}_
+#ifndef ${1:_`!p snip.rv = snip.basename.upper() + "_H"`_}
 #define $1
 
 ${0}
@@ -25,7 +25,7 @@ ${0}
 endsnippet
 
 snippet nlog "n_log from neu.h" b
-n_log('${1:D}', NULL, "", "${2}", ${3});
+n_log('${1:D}', "", "${2}", ${3});
 endsnippet
 
 snippet nmain "program entry" b
