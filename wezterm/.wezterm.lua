@@ -23,7 +23,7 @@ local fonts = {
 local font = fonts[math.random(#fonts)]
 
 return {
-  color_scheme = Colorschemes.get(),
+  colors = Colorschemes.get(),
   default_cwd = ".",
   default_prog = {"nu", ""},
   enable_scroll_bar = true,
