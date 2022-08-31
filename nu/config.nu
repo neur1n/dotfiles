@@ -191,9 +191,9 @@ let-env config = {
   partial_completions: true
   quick_completions: true
   rm_always_trash: false
-  shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
+  shell_integration: false # enables terminal markers and a workaround to arrow keys stop working issue
   show_banner: false
-  sync_history_on_enter: false
+  sync_history_on_enter: true
   table_mode: rounded
   use_ansi_coloring: true
   use_grid_icons: true
