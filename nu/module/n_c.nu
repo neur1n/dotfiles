@@ -65,7 +65,7 @@ export def run-cmake [
         if $arch == "32" {
           "-DCMAKE_CXX_FLAGS=-m32"
         } else if $arch == "64" {
-          "-DCMAKE_C_FLAGS=-m64 -DCMAKE_CXX_FLAGS=-m64"
+          "-DCMAKE_CXX_FLAGS=-m64"
         } else {
           ""
         }
