@@ -58,7 +58,7 @@ let g:coc_global_extensions = [
       \ 'coc-spell-checker', 'coc-word']
 
 "--------------------------------------------------------- clangd/coc-clangd{{{
-call coc#config('clangd.arguments', ['--clang-tidy'])
+call coc#config('clangd.arguments', ['--clang-tidy', '--header-insertion=never'])
 call coc#config('clangd.inlayHints.enable', v:false)
 call coc#config('clangd.path', 'clangd')
 "}}}
