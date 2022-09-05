@@ -1,9 +1,11 @@
 {
   "diagnostic.enable": true,
+
   "diagnostic.errorSign": "",
   "diagnostic.warningSign": "",
   "diagnostic.hintSign": "",
   "diagnostic.infoSign": "",
+
   "diagnostic.floatConfig": {
     "border": true,
     "rounded": true,
@@ -23,7 +25,8 @@
     "border": true,
     "borderhighlight": "WildMenu"
   },
-  "suggest.noselect": false,
+
+  "suggest.noselect": true,
 
   "semanticTokens.filetypes": ["*"]
 }
