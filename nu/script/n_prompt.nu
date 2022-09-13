@@ -44,8 +44,9 @@ def left-prompt [] {
   let sep3 = $"(n_hl render $c_sep3)(n_hl clear)"
   let who = $"(n_hl render $c_who)(n_os os-logo) (n_os hostname)" 
   let pwd = $"(n_hl render $c_pwd)($env.PWD)(n_hl clear)" 
+  let git = (panache-git styled)
 
-  let prompt = $"($sep1)($who)($sep2)($pwd)($sep3)(n_hl clear)"
+  let prompt = $"($sep1)($who)($sep2)($pwd)($sep3)($git)(n_hl clear)"
 
   $prompt
 }
@@ -91,7 +92,7 @@ def vi-normal-indicator [] {
 }
 
 let-env PROMPT_COMMAND = {left-prompt}
-let-env PROMPT_COMMAND_RIGHT = {right-prompt}
+let-env PROMPT_COMMAND_RIGHT = {""}
 
 let-env PROMPT_INDICATOR = {""}
 let-env PROMPT_INDICATOR_VI_INSERT = {vi-insert-indicator}
