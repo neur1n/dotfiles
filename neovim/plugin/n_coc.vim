@@ -87,6 +87,8 @@ call coc#config('cSpell.enabledLanguageIds', ['html', 'latex', 'markdown', 'plai
 "}}}
 "------------------------------------------------- xiyaowong/coc-sumneko-lua{{{
 call coc#config('sumneko-lua.enableNvimLuaDev', v:true)
+call coc#config('Lua.telemetry.enable', v:false)
+call coc#config('Lua.workspace.checkThirdParty', v:false)
 "}}}
 "---------------------------------------------------- fannheyward/coc-texlab{{{
 call coc#config('texlab.auxDirectory', 'build')

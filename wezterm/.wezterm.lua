@@ -7,6 +7,7 @@ Wezterm.on("update-right-status", function(window, pane)
 end)
 
 local fonts = {
+{["name"] = "3270Narrow NFM"       , ["size"] = 14},
 {["name"] = "Anonymice NF"         , ["size"] = 13},
 {["name"] = "CaskaydiaCove NF Mono", ["size"] = 12},
 {["name"] = "DaddyTimeMono NF"     , ["size"] = 12},
@@ -17,7 +18,7 @@ local fonts = {
 {["name"] = "Input NF"             , ["size"] = 12},
 {["name"] = "JetBrainsMono NF"     , ["size"] = 11},
 {["name"] = "Monofur NF"           , ["size"] = 13},
-{["name"] = "ProFontWindows NF"    , ["size"] = 14},
+{["name"] = "ProFontWindows NF"    , ["size"] = 12},
 {["name"] = "ProggyCleanTT NF"     , ["size"] = 16},
 {["name"] = "SauceCodePro NF"      , ["size"] = 11},
 {["name"] = "SpaceMono NF"         , ["size"] = 11},
@@ -32,6 +33,7 @@ return {
   enable_scroll_bar = true,
   font = Wezterm.font(font["name"]),
   font_size = font["size"],
+  harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
   initial_cols = 120,
   initial_rows = 30,
   launch_menu = {

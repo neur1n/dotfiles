@@ -10,7 +10,7 @@ let s:save_cpo = &cpoptions
 set cpoptions&vim
 
 nnoremap <Leader>cb :Clap buffers<CR>
-nnoremap <Leader>cc :Clap commands<CR>
+nnoremap <Leader>cc :Clap command<CR>
 nnoremap <Leader>ce :Clap filer<CR>
 nnoremap <Leader>cf :Clap files ++finder=fd --hidden --type f<CR>
 nnoremap <Leader>cr :Clap grep<CR>

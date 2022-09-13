@@ -1,5 +1,6 @@
 " NOTE: Please check dotfiles/font folder for available fonts.
 let s:fonts = [
+      \ {'name': '3270Narrow NFM'       , 'size': 14},
       \ {'name': 'Anonymice NF'         , 'size': 13},
       \ {'name': 'CaskaydiaCove NF Mono', 'size': 12},
       \ {'name': 'DaddyTimeMono NF'     , 'size': 12},
