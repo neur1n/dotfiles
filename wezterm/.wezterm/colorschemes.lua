@@ -5,8 +5,8 @@ local schemes = {
   {
     foreground    = "#fafafa",
     background    = "#16161d",
-    cursor_fg     = "#4f86f7",
-    cursor_bg     = "#fafafa",
+    cursor_fg     = "#fafafa",
+    cursor_bg     = "#4f86f7",
     cursor_border = "#fafafa",
     selection_fg  = "#16161d",
     selection_bg  = "#e2be7d",
@@ -35,8 +35,8 @@ local schemes = {
   {
     foreground    = "#ebdbb2",
     background    = "#282828",
-    cursor_fg     = "#4f86f7",
-    cursor_bg     = "#ebdbb2",
+    cursor_fg     = "#ebdbb2",
+    cursor_bg     = "#4f86f7",
     cursor_border = "#ebdbb2",
     selection_fg  = "#282828",
     selection_bg  = "#e2be7d",
@@ -65,8 +65,8 @@ local schemes = {
   {
     foreground    = "#d2d4de",
     background    = "#161822",
-    cursor_fg     = "#4f86f7",
-    cursor_bg     = "#d2d4de",
+    cursor_fg     = "#d2d4de",
+    cursor_bg     = "#4f86f7",
     cursor_border = "#d2d4de",
     selection_fg  = "#161822",
     selection_bg  = "#e2be7d",
@@ -95,8 +95,8 @@ local schemes = {
   {
     foreground    = "#abb2bf",
     background    = "#282c34",
-    cursor_fg     = "#4f86f7",
-    cursor_bg     = "#abb2bf",
+    cursor_fg     = "#abb2bf",
+    cursor_bg     = "#4f86f7",
     cursor_border = "#abb2bf",
     selection_fg  = "#282c34",
     selection_bg  = "#e2be7d",
