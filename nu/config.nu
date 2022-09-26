@@ -386,6 +386,16 @@ let-env config = {
   ]
 }
 
-#==================================================================== source{{{
-source n_import.nu
-# source}}}
+#================================================================= Customize{{{
+use n_util.nu
+let-env Path = (n_util append-path (ls $"($env.NUCONF)/../bin/*/*").name)
+
+source-env n_prompt.nu
+
+alias dev-c = use n_c.nu
+alias c-cmake = n_c run-cmake
+alias c-init = n_c init-workspace
+
+zoxide init nushell --hook prompt | save ~/.zoxide.nu
+source ~/.zoxide.nu
+# Customize}}}

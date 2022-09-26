@@ -1,5 +1,8 @@
+use n_os.nu
+
+
 export def append-path [paths: path] {
-  if (sys).host.name == "Windows" {
+  if (n_os is-windows) {
     let-env Path = ($env.Path | append $paths)
     $env.Path
   } else {
@@ -9,7 +12,7 @@ export def append-path [paths: path] {
 }
 
 export def insert-path [paths: path] {
-  if (sys).host.name == "Windows" {
+  if (n_os is-windows) {
     let-env Path = ($env.Path | prepend $paths)
     $env.Path
   } else {

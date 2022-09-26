@@ -28,6 +28,6 @@ let-env NU_PLUGIN_DIRS = [
   ($nu.config-path | path dirname | path join 'plugin')
 ]
 
-#======================================================================= let{{{
+#================================================================= Customize{{{
 let-env NUCONF = ($nu.config-path | path expand | path dirname)
-# let}}}
+# Customize}}}

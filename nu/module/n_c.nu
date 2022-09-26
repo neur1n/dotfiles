@@ -14,8 +14,7 @@ export def run-cmake [
     --build    (-b): string = "",   # Pass to -DCMAKE_BUILD_TYPE
     --arch     (-a): string = "",   # Specifying architecture
     --src      (-s): string = "..", # Pass to cmake -S
-    ...rest        : string
-] {
+    ...rest        : string] {
   let fc_c = (
       if $compiler == "msvc" {
         "-DCMAKE_C_COMPILER=cl"

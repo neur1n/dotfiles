@@ -1,100 +1,156 @@
+use n_emo.nu
 use n_os.nu
 use n_hl.nu
+use n_plt.nu
 use n_util.nu
-source panache-git.nu
-source n_colorscheme.nu
+use panache-git.nu
 
-#==================================================================== colors{{{
-let _c_1 = [$n_r , $n_o , $n_y , $n_g , $n_b , $n_c , $n_p]
-let _c_2 = [$n_rr, $n_or, $n_yr, $n_gr, $n_br, $n_cr, $n_pr]
-# colors}}}
 
-#==================================================================== emojis{{{
-let _emoji = [
-  '😀', '😃', '😄', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃', '😉', '😊', '😇',
-  '🥰', '😍', '🤩', '😘', '😗', '😚', '😙', '😋', '😛', '😜', '🤪', '😝', '🤑',
-  '🤗', '🤭', '🤫', '🤔', '🤐', '🤨', '😐', '😑', '😶', '😶', '😶', '😏', '😒',
-  '🙄', '😬', '😮', '🤥', '😌', '😔', '😪', '🤤', '😴', '😷', '🤒', '🤕', '🤢',
-  '🤮', '🤧', '🥵', '🥶', '🥴', '😵', '😵', '🤯', '🤠', '🥳', '😎', '🤓', '🧐',
-  '😕', '😟', '🙁', '😮', '😯', '😲', '😳', '🥺', '😦', '😧', '😨', '😰', '😥',
-  '😢', '😭', '😱', '😖', '😣', '😞', '😓', '😩', '😫', '🥱', '😤', '😡', '😠',
-  '🤬', '😈', '👿', '💀', '💩', '🤡', '👹', '👺', '👻', '👽', '👾', '🤖', '😺',
-  '😸', '😹', '😻', '😼', '😽', '🙀', '😿', '😾', '🙈', '🙉', '🙊'
-]
-# emojis}}}
+let palette = (n_plt get-palette)
+let rainbow = (n_plt get-rainbow $palette)
 
-#======================================================================= git{{{
-use panache-plumbing *
-# git}}}
+let cs = {
+  logo: ($rainbow | get (n_util random-index $rainbow)),
+  path: ($rainbow | get (n_util random-index $rainbow)),
+  time: ($rainbow | get (n_util random-index $rainbow)),
+  indi: ($rainbow | get (n_util random-index $rainbow))
+}
+
+let gstatus = (panache-git repo-structured)
+
+def show-logo [] {
+  let sep = (n_hl create "" $cs.logo)
+  let logo = (n_hl create (n_os os-logo) $palette.bgh $cs.logo)
+
+  $"(n_hl render $sep)(n_hl render $logo)"
+}
+
+def show-path [] {
+  let lsep = (n_hl create "" $cs.path $cs.logo)
+  let path = (n_hl create $env.PWD $palette.bgh $cs.path)
+  let rsep = (
+      if $gstatus.in_git_repo {
+        (n_hl create "" $cs.path $palette.graym)
+      } else {
+        (n_hl create "" $cs.path)
+      })
+
+  $"(n_hl render $lsep)(n_hl render $path)(n_hl render $rsep)"
+}
+
+def show-git [] {
+  if (not $gstatus.in_git_repo) {
+    ""
+  } else {
+
+    let r = ""  # rev count
+
+    let acnt = $gstatus.commits_ahead
+    let r = (if ($acnt > 0) {$"($r) ($acnt)"} else {$r})
+
+
+    let bcnt = $gstatus.commits_behind
+    let r = (if ($bcnt > 0) {$"($r) ($bcnt)"} else {$r})
+
+    let has_remote = $gstatus.tracking_upstream_branch
+    let b = $"⎇  ($gstatus.branch_name)"
+    let b = (if ($has_remote && ($acnt == 0) && ($bcnt == 0)) {$"($b)"} else {$b})
+
+    let s = ""  # staged
+
+    let s = (
+        if ($gstatus.staging_added_count > 0) {
+          $"$s ($gstatus.staging_added_count)"
+        } else {
+          $s
+        })
+
+    let s = (
+        if ($gstatus.staging_modified_count > 0) {
+          $"$s ($gstatus.staging_modified_count)"
+        } else {
+          $s
+        })
+
+    let s = (
+        if ($gstatus.staging_deleted_count > 0) {
+          $"$s ($gstatus.staging_deleted_count)"
+        } else {
+          $s
+        })
+
+    let l = ""  # local
+
+    let l = (
+        if ($gstatus.untracked_count > 0) {
+          $"($l) ($gstatus.untracked_count)"
+        } else {
+          $l
+        })
+
+    let l = (
+        if ($gstatus.worktree_modified_count > 0) {
+          $"($l) ($gstatus.worktree_modified_count)"
+        } else {
+          $l
+        })
+
+    let l = (
+        if ($gstatus.worktree_deleted_count > 0) {
+          $"($l) ($gstatus.worktree_deleted_count)"
+        } else {
+          $l
+        })
+
+    let name = (n_hl create $b $palette.bgh $palette.graym)
+    let revc = (n_hl create $r $palette.bgh $palette.graym)
+    let staged = (n_hl create $s $palette.green $palette.graym)
+    let local = (n_hl create $l $palette.red $palette.graym)
+    let rsep = (n_hl create "" $palette.graym)
+
+    $"(n_hl render $name)(n_hl render $revc)(n_hl render $staged)(n_hl render $local)(n_hl render $rsep)"
+  }
+}
+
+def show-timestamp [] {
+  let lsep = (n_hl create "\n" $cs.time)
+  let ts = (n_hl create (date now | date format "%H:%M:%S") $palette.bgh $cs.time)
+
+  $"(n_hl render $lsep)(n_hl render $ts)"
+}
+
+def show-indicator [mode: string] {
+  let sym = (if ($mode == "i") {" "} else {" "})
+
+  let lsep = (n_hl create "" $cs.indi $cs.time)
+  let emo = (n_hl create (n_emo get-emoji) "n" $cs.indi)
+  let rsep = (n_hl create $sym $cs.indi)
+
+  $"(n_hl render $lsep)(n_hl render $emo)(n_hl render $rsep)"
+}
 
 def left-prompt [] {
-  let i1 = (n_util random-index $_c_1)
-  let i2 = (n_util random-index $_c_1)
-  let c1 = ($_c_1 | get $i1)
-  let c2 = ($_c_1 | get $i2)
-
-  let c_sep1 = $c1
-  let c_sep2 = (n_hl combine $c1 $c2)
-  let c_sep3 = $c2
-  let c_who = (n_hl combine $n_bgh $c1)
-  let c_pwd = (n_hl combine $n_bgh $c2)
-
-  let sep1 = $"(n_hl render $c_sep1)"
-  let sep2 = $"(n_hl render $c_sep2)"
-  let sep3 = $"(n_hl render $c_sep3)(n_hl clear)"
-  let who = $"(n_hl render $c_who)(n_os os-logo) (n_os hostname)" 
-  let pwd = $"(n_hl render $c_pwd)($env.PWD)(n_hl clear)" 
-  let git = (panache-git styled)
-
-  let prompt = $"($sep1)($who)($sep2)($pwd)($sep3)($git)(n_hl clear)"
-
-  $prompt
+  $"(show-logo)(show-path)(show-git)"
 }
 
 def right-prompt [] {
-  let git = (panache-git styled)
+  let timestamp = ([
+      (date now | date format "%Y-%m-%d %H:%M:%S")
+  ] | str collect)
 
-  # let timestamp = ([
-  #     (date now | date format "%Y-%m-%d %H:%M:%S")
-  # ] | str collect)
-
-  let prompt = $"($git)"
+  let prompt = $"($timestamp)"
 
   $prompt
 }
 
-def vi-insert-indicator [] {
-  let i = (n_util random-index $_c_1)
-  let c_sep = ($_c_1 | get $i)
-  let c_emo = (n_hl reverse $c_sep)
-
-  let sep1 = $"(n_hl render $c_sep)"
-  let emo = $"(n_hl render $c_emo)($_emoji | get (n_util random-index $_emoji))(n_hl clear)"
-  let sep2 = $"(n_hl render $c_sep)(n_hl clear)"
-
-  let indicator = $" (char newline)($sep1)($emo)($sep2) "
-
-  $indicator
-}
-
-def vi-normal-indicator [] {
-  let i = (n_util random-index $_c_1)
-  let c_sep = ($_c_1 | get $i)
-  let c_emo = (n_hl reverse $c_sep)
-
-  let sep1 = $"(n_hl render $c_sep)"
-  let emo = $"(n_hl render $c_emo)($_emoji | get (n_util random-index $_emoji))(n_hl clear)"
-  let sep2 = $"(n_hl render $c_sep)(n_hl clear)"
-
-  let indicator = $" (char newline)($sep1)($emo)($sep2) "
-
-  $indicator
+def indicator [mode: string] {
+  $"(show-timestamp)(show-indicator $mode)"
 }
 
 let-env PROMPT_COMMAND = {left-prompt}
 let-env PROMPT_COMMAND_RIGHT = {""}
 
 let-env PROMPT_INDICATOR = {""}
-let-env PROMPT_INDICATOR_VI_INSERT = {vi-insert-indicator}
-let-env PROMPT_INDICATOR_VI_NORMAL = {vi-normal-indicator}
+let-env PROMPT_INDICATOR_VI_INSERT = {indicator "i"}
+let-env PROMPT_INDICATOR_VI_NORMAL = {indicator "n"}
 let-env PROMPT_MULTILINE_INDICATOR = {" \n::: "}
