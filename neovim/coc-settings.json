@@ -1,10 +1,10 @@
 {
   "diagnostic.enable": true,
 
-  "diagnostic.errorSign": "",
-  "diagnostic.warningSign": "",
-  "diagnostic.hintSign": "",
-  "diagnostic.infoSign": "",
+  "diagnostic.errorSign": "🔥",
+  "diagnostic.warningSign": "⚡",
+  "diagnostic.hintSign": "💡",
+  "diagnostic.infoSign": "🔎",
 
   "diagnostic.floatConfig": {
     "border": true,
@@ -26,7 +26,7 @@
     "borderhighlight": "WildMenu"
   },
 
-  "suggest.noselect": true,
+  "semanticTokens.enable": true,
 
-  "semanticTokens.filetypes": ["*"]
+  "suggest.noselect": true
 }
