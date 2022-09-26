@@ -16,8 +16,6 @@ let cs = {
   indi: ($rainbow | get (n_util random-index $rainbow))
 }
 
-let gstatus = (panache-git repo-structured)
-
 def show-logo [] {
   let sep = (n_hl create "" $cs.logo)
   let logo = (n_hl create (n_os os-logo) $palette.bgh $cs.logo)
@@ -26,6 +24,8 @@ def show-logo [] {
 }
 
 def show-path [] {
+  let gstatus = (panache-git repo-structured)
+
   let lsep = (n_hl create "" $cs.path $cs.logo)
   let path = (n_hl create $env.PWD $palette.bgh $cs.path)
   let rsep = (
@@ -39,6 +39,8 @@ def show-path [] {
 }
 
 def show-git [] {
+  let gstatus = (panache-git repo-structured)
+
   if (not $gstatus.in_git_repo) {
     ""
   } else {
