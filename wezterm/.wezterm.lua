@@ -29,7 +29,7 @@ local font = fonts[math.random(#fonts)]
 return {
   colors = Colorschemes.get(),
   default_cwd = ".",
-  default_prog = {"nu", ""},
+  default_prog = {"nu"},
   enable_scroll_bar = true,
   font = Wezterm.font(font["name"]),
   font_size = font["size"],
@@ -37,6 +37,10 @@ return {
   initial_cols = 120,
   initial_rows = 30,
   launch_menu = {
+    {
+      label = "Elvish",
+      args = {"elvish"}
+    },
     {
       label = "Nu Shell",
       args = {"nu"}
@@ -46,6 +50,7 @@ return {
       args = {"pwsh"}
     },
   },
+  line_height = 1.0,
   tab_bar_at_bottom = true,
   window_close_confirmation = "NeverPrompt",
   window_padding = {
