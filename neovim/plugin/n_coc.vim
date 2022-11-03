@@ -59,7 +59,6 @@ let g:coc_global_extensions = [
 
 "--------------------------------------------------------- clangd/coc-clangd{{{
 call coc#config('clangd.arguments', ['--clang-tidy', '--header-insertion=never'])
-call coc#config('clangd.inlayHints.enable', v:false)
 call coc#config('clangd.path', 'clangd')
 "}}}
 "----------------------------------------------------- iamcco/coc-diagnostic{{{

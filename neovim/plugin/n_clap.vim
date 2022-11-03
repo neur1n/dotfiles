@@ -13,11 +13,15 @@ nnoremap <Leader>cb :Clap buffers<CR>
 nnoremap <Leader>cc :Clap command<CR>
 nnoremap <Leader>ce :Clap filer<CR>
 nnoremap <Leader>cf :Clap files ++finder=fd --hidden --type f<CR>
-nnoremap <Leader>cr :Clap grep<CR>
-nnoremap <Leader>cm :Clap grep2<CR>
-nnoremap <Leader>cw :Clap grep ++query=<cword><CR>
+nnoremap <Leader>cm :Clap grep<CR>
+nnoremap <Leader>cr :Clap live_grep<CR>
+nnoremap <Leader>cw :Clap live_grep ++query=<cword><CR>
 nnoremap <Leader>ch :Clap history<CR>
 nnoremap <Leader>ct :Clap tags<CR>
+
+if !executable('ctags')
+  let g:clap_provider_tags_force_vista=1
+endif
 
 let g:clap_enable_debug = 1
 let g:clap_layout = {'relative': 'editor'}

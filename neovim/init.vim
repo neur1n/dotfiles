@@ -32,6 +32,7 @@ set incsearch
 set laststatus=2                           " show statusline even only 1 window
 set linespace=0
 set modeline
+set mousemodel=popup
 set noshowmode
 set number
 set sessionoptions-=folds                 " do not create folds when sessioning
@@ -54,6 +55,7 @@ let $VIMCONF = stdpath('config')
 call plug#begin('$VIMCONF/plugged')
 "********************************************************************** Misc{{{
 Plug 'dstein64/vim-startuptime'
+Plug 'gpanders/editorconfig.nvim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'LhKipp/nvim-nu', {'do': ':TSInstall nu', 'for': 'nu'}
@@ -64,6 +66,7 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'mg979/vim-visual-multi'
 Plug 'mhinz/vim-startify'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 Plug 'p00f/nvim-ts-rainbow'
 " Plug 'rcarriga/nvim-dap-ui'
 Plug 'rcarriga/nvim-notify'

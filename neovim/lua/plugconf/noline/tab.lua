@@ -8,7 +8,7 @@ local Component = require("noline.utility.component")
 function M.current(l_decor, r_decor)
   local expr = ""
   local text = ""
-  local limit = vim.o.columns
+  local limit = tonumber(vim.o.columns)
 
   if #api.nvim_list_tabpages() > 1 then
     limit = vim.o.columns / 2
@@ -16,7 +16,7 @@ function M.current(l_decor, r_decor)
 
   text = File.full_path()
 
-  if api.nvim_buf_get_name(0) == ""or  api.nvim_strwidth(text) >= limit then
+  if api.nvim_buf_get_name(0) == "" or api.nvim_strwidth(text) >= limit then
     text = File.full_dir()
 
     if api.nvim_strwidth(text) >= limit then

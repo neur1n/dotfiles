@@ -6,6 +6,12 @@
   "diagnostic.hintSign": "💡",
   "diagnostic.infoSign": "🔎",
 
+  "inlayHint.enable": false,
+
+  "semanticTokens.enable": true,
+
+  "suggest.noselect": true,
+
   "diagnostic.floatConfig": {
     "border": true,
     "rounded": true,
@@ -24,9 +30,5 @@
   "suggest.floatConfig": {
     "border": true,
     "borderhighlight": "WildMenu"
-  },
-
-  "semanticTokens.enable": true,
-
-  "suggest.noselect": true
+  }
 }

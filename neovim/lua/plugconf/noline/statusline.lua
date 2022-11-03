@@ -14,7 +14,6 @@ local Diagnosis = require("plugconf.noline.diagnosis")
 local Mode = require("plugconf.noline.mode")
 local Palette = require("plugconf.noline.palette")
 local Tag = require("plugconf.noline.tag")
-local VCS = require("plugconf.noline.vcs")
 
 local palette = Palette.get()
 local colors = {
@@ -29,7 +28,7 @@ local colors = {
 
 function M.render_c()
   if not State.stl_initialized then
-    local color = ""
+    local color = 0
     local bg = palette.bgm
 
     math.randomseed(os.time())
@@ -71,9 +70,6 @@ function M.render_c()
 
     color = math.random(#colors)
     Highlight.create("NRuler", colors[color], bg)
-
-    color = math.random(#colors)
-    Highlight.create("NVcs", colors[color], bg)
   end
 
   Mode.highlight()
@@ -81,7 +77,7 @@ end
 
 function M.render_nc()
   if not State.stl_initialized then
-    local color = ""
+    local color = 0
     local bg = palette.bgm
 
     math.randomseed(os.time())
@@ -103,15 +99,12 @@ function M.render_nc()
 
     color = math.random(#colors)
     Highlight.create("NRuler", colors[color], bg)
-
-    color = math.random(#colors)
-    Highlight.create("NVcs", colors[color], bg)
   end
 end
 
 local glyphs = {
   ["c"] = {["md"] = "", ["ma"] = "", ["ro"] = "", ["e"] = "", ["w"] = "", ["h"] = "", ["i"] = ""},
-  ["nc"] = {["md"] = "", ["ma"] = "", ["ro"] = "", ["e"] = "", ["w"] = "", ["h"] = "ﬤ", ["i"] = ""},
+  ["nc"] = {["md"] = "", ["ma"] = "", ["ro"] = "", ["e"] = "", ["w"] = "𥉉", ["h"] = "ﬤ", ["i"] = ""},
 }
 
 local decor = Decorator.get()
@@ -150,10 +143,8 @@ function M.setup_c()
 
   expr = expr .. "%="
 
-  expr = expr .. Component.create(VCS.get("coc", "שׂ "), "NVcs")
-
   expr = expr .. Component.create({" ", decor["left"]}, "NFileInfoD")
-  expr = expr .. Component.create({File.encoding(), decor["sep"], File.format()}, "NFileInfo")
+  expr = expr .. Component.create({vim.o.filetype, decor["sep"], File.encoding(), decor["sep"], File.format()}, "NFileInfo")
   expr = expr .. Component.create({decor["right"], " "}, "NFileInfoD")
 
   expr = expr .. Component.create({
@@ -192,9 +183,7 @@ function M.setup_nc()
 
   expr = expr .. "%="
 
-  expr = expr .. Component.create({VCS.get("coc", "שׂ "), "", " "}, "NVcs")
-
-  expr = expr .. Component.create({File.encoding("", decor["sep"]), File.format(), " "}, "NFileInfo_nc")
+  expr = expr .. Component.create({vim.o.filetype, File.encoding(decor["sep"], decor["sep"]), File.format(), " "}, "NFileInfo_nc")
 
   expr = expr .. Component.create({
     Buffer.line(4), decor["sep"],

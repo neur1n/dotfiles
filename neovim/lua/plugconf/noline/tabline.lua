@@ -11,6 +11,7 @@ local State = require("plugconf.noline.state")
 local Decorator = require("plugconf.noline.decorator")
 local Palette = require("plugconf.noline.palette")
 local Tab = require("plugconf.noline.tab")
+local VCS = require("plugconf.noline.vcs")
 
 local palette = Palette.get()
 local colors = {
@@ -25,7 +26,7 @@ local colors = {
 
 function M.render()
   if not State.tal_initialized then
-    local color = ""
+    local color = 0
     local bg = palette.bgm
 
     math.randomseed(os.time())
@@ -37,6 +38,9 @@ function M.render()
 
     color = math.random(#colors)
     Highlight.create("NTab_nc", colors[color], bg)
+
+    color = math.random(#colors)
+    Highlight.create("NVcs", colors[color], bg)
 
     Highlight.create("NClose", palette.red, palette.fgs, "bold,inverse")
   end
@@ -54,6 +58,8 @@ function M.setup()
   expr = expr .. Component.create(Tab.not_current(decor["sep"], " ", " "), "NTab_nc")
 
   expr = expr .. "%="
+
+  expr = expr .. Component.create({VCS.get("coc", "שׂ "), "", " "}, "NVcs")
 
   expr = expr .. Component.create(Tabline.button("", " ", " "), "NClose")
 
