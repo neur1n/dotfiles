@@ -24,6 +24,11 @@ fd \- find entries in the filesystem
 .B fd
 is a simple, fast and user-friendly alternative to
 .BR find (1).
+.P
+By default
+.B fd
+uses regular expressions for the pattern. However, this can be changed to use simple glob patterns
+with the '\-\-glob' option.
 .SH OPTIONS
 .TP
 .B \-H, \-\-hidden
@@ -53,7 +58,7 @@ The global fd ignore file (usually
 The flag can be overridden with '--ignore'.
 .TP
 .B \-u, \-\-unrestricted
-Alias for '--no-ignore'. Can be repeated; '-uu' is an alias for '--no-ignore --hidden'.
+Perform an unrestricted search, including ignored and hidden files. This is an alias for '--hidden --no-ignore'.
 .TP
 .B \-\-no\-ignore\-vcs
 Show search results from files and directories that would otherwise be ignored by gitignore files
@@ -336,6 +341,9 @@ Note that all subsequent positional arguments are considered to be arguments to 
 It is therefore recommended to place the \-x/\-\-exec option last. Alternatively, you can supply
 a ';' argument to end the argument list and continue with more fd options.
 Most shells require ';' to be escaped: '\\;'.
+This option can be specified multiple times, in which case all commands are run for each
+file found, in the order they are provided. In that case, you must supply a ';' argument for
+all but the last commands.
 
 The following placeholders are substituted before the command is executed:
 .RS
@@ -389,6 +397,9 @@ basename without file extension
 
 If no placeholder is present, an implicit "{}" at the end is assumed.
 
+Like \-\-exec, this can be used multiple times, in which case each command will be run in
+the order given.
+
 Examples:
 
   - Find all test_*.py files and open them in your favorite editor:
@@ -405,7 +416,8 @@ Examples:
 .BI "\-\-batch-size " size
 Maximum number of arguments to pass to the command given with -X. If the number of results is
 greater than the given size, the command given with -X is run again with remaining arguments. A
-batch size of zero means there is no limit.
+batch size of zero means there is no limit (default), but note that batching might still happen
+due to OS restrictions on the maximum length of command lines.
 .SH PATTERN SYNTAX
 The regular expression syntax used by fd is documented here:
 
@@ -443,11 +455,7 @@ $ fd -e py
 .TP
 .RI "Open all search results with vim:"
 $ fd pattern -X vim
-.TP
-.BI "\-\-batch\-size " size
-Pass at most
-.I size
-arguments to each call to the command given with -X.
-.TP
+.SH BUGS
+Bugs can be reported on GitHub: https://github.com/sharkdp/fd/issues
 .SH SEE ALSO
 .BR find (1)
