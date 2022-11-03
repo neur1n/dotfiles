@@ -11,6 +11,10 @@ export def append-path [paths: path] {
   }
 }
 
+export def fzf-nvim [] {
+  nvim (fzf | str trim)
+}
+
 export def insert-path [paths: path] {
   if (n_os is-windows) {
     let-env Path = ($env.Path | prepend $paths)
@@ -39,5 +43,13 @@ export def same-file [file1: path, file2: path, echo: bool = false] {
   } else {
     echo [[file, md5, sha256]; [$file1, $md5_1, $sha256_1], [$file2, $md5_2, $sha256_2]]
     false
+  }
+}
+
+export def softlink [src: path, dst: path] {
+  if (n_os is-windows) {
+    MKLINK /J $dst $src
+  } else {
+    ln -s $src $dst
   }
 }

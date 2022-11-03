@@ -44,7 +44,6 @@ def show-git [] {
   if (not $gstatus.in_git_repo) {
     ""
   } else {
-
     let r = ""  # rev count
 
     let acnt = $gstatus.commits_ahead
@@ -55,28 +54,28 @@ def show-git [] {
     let r = (if ($bcnt > 0) {$"($r) ($bcnt)"} else {$r})
 
     let has_remote = $gstatus.tracking_upstream_branch
-    let b = $"⎇  ($gstatus.branch_name)"
+    let b = $"($gstatus.branch_name)"
     let b = (if ($has_remote && ($acnt == 0) && ($bcnt == 0)) {$"($b)"} else {$b})
 
     let s = ""  # staged
 
     let s = (
         if ($gstatus.staging_added_count > 0) {
-          $"$s ($gstatus.staging_added_count)"
+          $"($s) ($gstatus.staging_added_count)"
         } else {
           $s
         })
 
     let s = (
         if ($gstatus.staging_modified_count > 0) {
-          $"$s ($gstatus.staging_modified_count)"
+          $"($s) ($gstatus.staging_modified_count)"
         } else {
           $s
         })
 
     let s = (
         if ($gstatus.staging_deleted_count > 0) {
-          $"$s ($gstatus.staging_deleted_count)"
+          $"($s) ($gstatus.staging_deleted_count)"
         } else {
           $s
         })
