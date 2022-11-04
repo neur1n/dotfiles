@@ -20,7 +20,7 @@ let s:schemes = {
       \   'cyan':    {'c':  79, 'g': '#69d0a5'},
       \   'blue':    {'c':  67, 'g': '#5991ae'},
       \   'purple':  {'c': 175, 'g': '#d37ba2'},
-      \   'special': {'c':  69, 'g': '#4f86f7'}
+      \   'special': {'c':  69, 'g': '#e2be7d'}
       \ },
       \ 'gruvbox': {
       \   'bgh':     {'c': 234, 'g': '#1d2021'},
@@ -39,7 +39,7 @@ let s:schemes = {
       \   'cyan':    {'c': 108, 'g': '#8ec07c'},
       \   'blue':    {'c': 108, 'g': '#83a598'},
       \   'purple':  {'c': 175, 'g': '#d3869b'},
-      \   'special': {'c':  69, 'g': '#4f86f7'}
+      \   'special': {'c':  69, 'g': '#e2be7d'}
       \ },
       \ 'iceberg': {
       \   'bgh':     {'c': 233, 'g': '#0f1117'},
@@ -58,28 +58,28 @@ let s:schemes = {
       \   'cyan':    {'c': 109, 'g': '#89b8c2'},
       \   'blue':    {'c': 110, 'g': '#84a0c6'},
       \   'purple':  {'c': 140, 'g': '#a093c7'},
-      \   'special': {'c':  69, 'g': '#4f86f7'}
+      \   'special': {'c':  69, 'g': '#e2be7d'}
       \ },
-      \ 'onedark': {
-      \   'bgh':     {'c': 235, 'g': '#24272e'},
-      \   'bgm':     {'c': 236, 'g': '#282c34'},
-      \   'bgs':     {'c': 238, 'g': '#3a3f4b'},
-      \   'fgh':     {'c': 247, 'g': '#969faf'},
-      \   'fgm':     {'c': 249, 'g': '#abb2bf'},
-      \   'fgs':     {'c': 250, 'g': '#b3b9c5'},
-      \   'grayh':   {'c': 240, 'g': '#525964'},
-      \   'graym':   {'c': 242, 'g': '#5c6370'},
-      \   'grays':   {'c': 243, 'g': '#697180'},
-      \   'red':     {'c': 203, 'g': '#ef596f'},
-      \   'orange':  {'c': 173, 'g': '#d19a66'},
-      \   'yellow':  {'c': 180, 'g': '#e5c07b'},
-      \   'green':   {'c': 114, 'g': '#89ca78'},
-      \   'cyan':    {'c':  38, 'g': '#2bbac5'},
-      \   'blue':    {'c':  75, 'g': '#61afef'},
-      \   'purple':  {'c': 170, 'g': '#d55fde'},
-      \   'special': {'c': 180, 'g': '#e2be7d'}
       \ }
-      \ }
+" \ 'onedark': {
+" \   'bgh':     {'c': 235, 'g': '#24272e'},
+" \   'bgm':     {'c': 236, 'g': '#282c34'},
+" \   'bgs':     {'c': 238, 'g': '#3a3f4b'},
+" \   'fgh':     {'c': 247, 'g': '#969faf'},
+" \   'fgm':     {'c': 249, 'g': '#abb2bf'},
+" \   'fgs':     {'c': 250, 'g': '#b3b9c5'},
+" \   'grayh':   {'c': 240, 'g': '#525964'},
+" \   'graym':   {'c': 242, 'g': '#5c6370'},
+" \   'grays':   {'c': 243, 'g': '#697180'},
+" \   'red':     {'c': 203, 'g': '#ef596f'},
+" \   'orange':  {'c': 173, 'g': '#d19a66'},
+" \   'yellow':  {'c': 180, 'g': '#e5c07b'},
+" \   'green':   {'c': 114, 'g': '#89ca78'},
+" \   'cyan':    {'c':  38, 'g': '#2bbac5'},
+" \   'blue':    {'c':  75, 'g': '#61afef'},
+" \   'purple':  {'c': 170, 'g': '#d55fde'},
+" \   'special': {'c': 180, 'g': '#e2be7d'}
+" \ }
 
 function! neutil#plt#CurrentScheme() abort
   return s:current
