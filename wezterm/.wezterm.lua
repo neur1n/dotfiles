@@ -2,7 +2,7 @@ local Colorschemes = require("colorschemes")
 local Wezterm = require("wezterm")
 
 Wezterm.on("update-right-status", function(window, pane)
-  local date = Wezterm.strftime("%a %Y-%m-%d %H:%M ")
+  local date = Wezterm.strftime("%a %Y-%m-%d %H:%M:%S ")
   window:set_right_status(date)
 end)
 
