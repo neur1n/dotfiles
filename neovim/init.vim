@@ -41,6 +41,7 @@ set signcolumn=yes
 set splitright                                            " split on right side
 set splitbelow                                                 " split on below
 set tabstop=2                                " make real <Tab> to be width of 2
+set termguicolors
 set wildmenu                                " show possible matches using <Tab>
 set wildignorecase
 

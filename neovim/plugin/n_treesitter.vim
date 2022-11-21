@@ -21,6 +21,10 @@ require("nvim-treesitter.configs").setup {
     loaded = true
   }
 }
+
+vim.api.nvim_set_hl(0, "@text.danger", {link = "Error"})
+vim.api.nvim_set_hl(0, "@text.note", {link = "Note"})
+vim.api.nvim_set_hl(0, "@text.warning", {link = "Todo"})
 EOF
 
 let &cpoptions = s:save_cpo
