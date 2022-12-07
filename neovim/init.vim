@@ -55,15 +55,15 @@ let $VIMCONF = stdpath('config')
 
 call plug#begin('$VIMCONF/plugged')
 "********************************************************************** Misc{{{
-Plug 'dstein64/vim-startuptime'
+" Plug 'dstein64/vim-startuptime'
+Plug 'ggandor/leap.nvim'
 Plug 'gpanders/editorconfig.nvim'
 Plug 'junegunn/vim-easy-align'
-Plug 'justinmk/vim-sneak'
 Plug 'LhKipp/nvim-nu', {'do': ':TSInstall nu', 'for': 'nu'}
 Plug 'liuchengxu/vim-clap', {'do': {-> clap#installer#force_download()}}
 Plug 'liuchengxu/vista.vim'
 Plug 'matze/vim-move'
-Plug 'mfussenegger/nvim-dap'
+" Plug 'mfussenegger/nvim-dap'
 Plug 'mg979/vim-visual-multi'
 Plug 'mhinz/vim-startify'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

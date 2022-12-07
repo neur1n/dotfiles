@@ -42,7 +42,7 @@ export def-env activate [
         }
 
 
-        let new_prompt = if (has-env 'PROMPT_COMMAND_RIGHT') {
+        let new_prompt = if (has-env 'PROMPT_COMMAND') {
             if ($old_prompt_command | describe) == 'block' {
                 { $'($virtual_prompt)(do $old_prompt_command)' }
             } else {
@@ -74,8 +74,8 @@ export def-env deactivate [] {
     hide-env CONDA_DEFAULT_ENV
     hide-env CONDA_OLD_PATH
 
-    let-env PROMPT_COMMAND = if $env.CONDA_OLD_PROMPT_COMMAND == $nothing {
-        $env.PROMPT_COMMAND
+    let-env PROMPT_COMMAND_RIGHT = if $env.CONDA_OLD_PROMPT_COMMAND == $nothing {
+        $env.PROMPT_COMMAND_RIGHT
     } else {
         $env.CONDA_OLD_PROMPT_COMMAND
     }

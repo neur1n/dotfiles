@@ -10,6 +10,8 @@ let s:save_cpo = &cpoptions
 set cpoptions&vim
 
 lua << EOF
+-- require("nvim-treesitter.install").prefer_git = false
+
 require("nvim-treesitter.configs").setup {
   ensure_installed = {"c", "python"},
   highlight = {
