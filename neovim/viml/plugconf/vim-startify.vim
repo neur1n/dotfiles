@@ -1,14 +1,5 @@
 scriptencoding utf-8
 
-if exists('g:loaded_n_startify')
-  finish
-endif
-
-let g:loaded_n_startify = v:true
-
-let s:save_cpo = &cpoptions
-set cpoptions&vim
-
 let s:greetings = {
       \ 'buckleup': [
       \               ['███████╗  ██╗   ██╗  ██████╗  ██╗   ██╗ ██╗       ████████╗     ██╗   ██╗ ███████╗  ██╗',
@@ -111,6 +102,3 @@ else
   let s:animal = s:animals['moose']
 endif
 let g:startify_custom_header = map(s:greeting + s:animal, "\"   \".v:val")
-
-let &cpoptions = s:save_cpo
-unlet s:save_cpo

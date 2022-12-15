@@ -1,14 +1,5 @@
 scriptencoding utf-8
 
-if exists('g:loaded_n_autocmd')
-  finish
-endif
-
-let g:loaded_n_autocmd = v:true
-
-let s:save_cpo = &cpoptions
-set cpoptions&vim
-
 augroup n_autocmd
   autocmd!
 "************************************************************ auto cd to pwd{{{
@@ -24,6 +15,3 @@ augroup n_autocmd
   autocmd BufNewFile * silent! execute 'keepalt read $VIMCONF/template/skeleton.'.expand('<afile>:e') | 1delete | normal gg'
 "}}}
 augroup END
-
-let &cpoptions = s:save_cpo
-unlet s:save_cpo

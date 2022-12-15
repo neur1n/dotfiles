@@ -22,6 +22,56 @@ function! neutil#buf#ToggleReadOnly() abort
   endif
 endfunction
 
+let s:root_patterns = ['.git', '.hg', '.root', '.svn', 'package.json']
+function! neutil#buf#RootDirectory() abort
+  let l:matcher = {}
+
+  function! l:matcher.has(path, pattern) abort
+    return !empty(globpath(escape(a:path, '?*[]'), a:pattern, v:true))
+  endfunction
+
+  function! l:matcher.is(path, pattern) abort
+    return fnamemodify(a:path, ':t') ==# a:pattern
+  endfunction
+
+  function! l:matcher.sub(path, pattern) abort
+    let l:parent = fnamemodify(a:path, ':h')
+
+    while v:true
+      let l:current = fnamemodify(l:parent, ':t')
+      if l:current ==# a:pattern | return v:true | endif
+
+      let [l:current, l:parent] = [l:parent, fnamemodify(l:parent, ':h')]
+      if l:current ==# l:parent | break | endif
+    endwhile
+
+    return v:false
+  endfunction
+
+  let l:cwd = getcwd()
+
+  while v:true
+    for l:pattern in s:root_patterns
+      if l:matcher.is(l:cwd, l:pattern)
+        return fnamemodify(l:cwd, ':h')
+      endif
+
+      if l:matcher.has(l:cwd, l:pattern)
+        return l:cwd
+      endif
+
+      if l:matcher.sub(l:cwd, l:pattern)
+        return fnamemodify(l:cwd, ':h')
+      endif
+    endfor
+
+    let [l:current, l:cwd] = [l:cwd, fnamemodify(l:cwd, ':h')]
+    if l:current ==# l:cwd | break | endif
+  endwhile
+
+  return getcwd()
+endfunction
+
 function! neutil#buf#ToggleRelativeLineNumber() abort
   if(&relativenumber == 1)
     set norelativenumber
@@ -37,89 +87,3 @@ endfunction
 function! neutil#buf#TabToSpace() abort
   silent! execute '%s/\t/  /g'
 endfunction
-
-" TODO: move to neurun
-""************************************************************** Run or Build{{{
-""                                                                      C or C++
-"function! general#BuildC() abort
-"  if filereadable('MAINFILE')
-"    let l:file_id = readfile('MAINFILE')
-"    if &filetype ==# 'cpp'
-"      execute '!g++ '.l:file_id[0].' -o '.l:file_id[1]
-"    elseif &filetype ==# 'c'
-"      execute '!gcc '.l:file_id[0].' -o '.l:file_id[1]
-"    endif
-"  else
-"    if &filetype ==# 'cpp'
-"      execute '!g++ '.bufname('%').' -o '.expand('%:r').'.out'
-"    elseif &filetype ==# 'c'
-"      execute '!gcc '.bufname('%').' -o '.expand('%:r').'.out'
-"    endif
-"  endif
-"endfunction
-
-"function! general#RunC() abort
-"  if filereadable('MAINFILE')
-"    let l:file_id = readfile('MAINFILE')
-"    execute '!./'.l:file_id[1]
-"  else
-"    execute '!./'.expand('%:r').'.out'
-"  endif
-"endfunction
-""                                                                            Go
-"function! general#RunGo() abort
-"  if filereadable('MAINFILE')
-"    let l:file_id = readfile('MAINFILE')
-"    execute '!go run '.l:file_id[0]
-"  else
-"    execute '!go run %'
-"  endif
-"endfunction
-""                                                                         Julia
-"function! general#RunJulia() abort
-"  execute '!julia %'
-"endfunction
-""                                                                          Keil
-"function! general#RunKeil(options) abort
-"  let l:target = ''
-
-"  if !empty(glob('*.uvprojx'))
-"    let l:target =  glob('*.uvprojx')
-"  elseif !empty(glob('../../*.uvprojx'))
-"    let l:target =  glob('../../*.uvprojx')
-"  endif
-
-"  if !empty(l:target)
-"    execute 'wa'
-"    execute ':silent !uv4 '.a:options.l:target.' -o "\%TEMP\%/log.txt"'
-"    execute ':sp $TEMP/log.txt'
-"    execute 'normal! Gzz'
-"  else
-"    echo 'Target not found!'
-"  endif
-"endfunction
-""                                                                      Markdown
-"function! general#ViewMarkdown() abort
-"  if has('unix')
-"    let l:browser = '/usr/bin/vivaldi'
-"  elseif has('win32')
-"    let l:browser = 'E:/ProgramFiles/Opera/launcher.exe'
-"  endif
-
-"  let l:html = expand('%:r').'.html'
-"  if filereadable(l:html)
-"    execute 'silent !'.l:browser.' '.l:html
-"  else
-"    execute 'silent !'.l:browser.' %'
-"  endif
-"endfunction
-""                                                                             R
-"function! general#RunRScript() abort
-"  if filereadable('MAINFILE')
-"    let l:file = readfile('MAINFILE')
-"    execute '!Rscript '.l:file[0]
-"  else
-"    execute '!Rscript %'
-"  endif
-"endfunction
-""}}}

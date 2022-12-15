@@ -1,14 +1,5 @@
 scriptencoding utf-8
 
-if exists('g:loaded_n_coc')
-  finish
-endif
-
-let g:loaded_n_coc = v:true
-
-let s:save_cpo = &cpoptions
-set cpoptions&vim
-
 function! s:CheckBackSpace() abort
   let l:col = col('.') - 1
   return !l:col || getline('.')[l:col - 1]  =~# '\s'
@@ -79,7 +70,7 @@ call coc#config('powershell.integratedConsole.showOnStartup', v:false)
 "}}}
 "----------------------------------------------------- neoclide/coc-snippets{{{
 call coc#config('snippets.ultisnips.enable', v:true)
-call coc#config('snippets.userSnippetsDirectory', $VIMCONF.'/plugin/coc-snippets')
+call coc#config('snippets.userSnippetsDirectory', $VIMCONF.'/viml/coc-snippets')
 "}}}
 "-------------------------------------------------- iamcco/coc-spell-checker{{{
 call coc#config('cSpell.enabledLanguageIds', ['html', 'latex', 'markdown', 'plaintext', 'tex', 'text'])
@@ -131,6 +122,3 @@ augroup n_coc
   autocmd!
   autocmd ColorScheme neucs call <SID>SetColors()
 augroup END
-
-let &cpoptions = s:save_cpo
-unlet s:save_cpo

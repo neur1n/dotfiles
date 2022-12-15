@@ -1,14 +1,5 @@
 scriptencoding utf-8
 
-if exists('g:loaded_n_notify')
-  finish
-endif
-
-let g:loaded_n_notify = v:true
-
-let s:save_cpo = &cpoptions
-set cpoptions&vim
-
 lua require'plugconf.notify'.setup()
 
 augroup notify
@@ -18,6 +9,3 @@ augroup notify
   autocmd User AsyncRunStop lua require'plugconf.notify'.re_notify('AsyncRun', 'Stopped', 'info')
   autocmd User AsyncRunInterrupt lua require'plugconf.notify'.re_notify('AsyncRun', 'Interruptted', 'warning')
 augroup END
-
-let &cpoptions = s:save_cpo
-unlet s:save_cpo

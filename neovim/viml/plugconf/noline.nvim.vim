@@ -1,14 +1,5 @@
 scriptencoding utf-8
 
-if exists('g:loaded_n_noline')
-  finish
-endif
-
-let g:loaded_n_noline = v:true
-
-let s:save_cpo = &cpoptions
-set cpoptions&vim
-
 set showtabline=2
 
 function! s:Redraw() abort
@@ -26,6 +17,3 @@ augroup noline
   " autocmd WinEnter * lua require'plugconf.noline.winbar'.update()
   autocmd ColorScheme neucs call <SID>Redraw()
 augroup END
-
-let &cpoptions = s:save_cpo
-unlet s:save_cpo

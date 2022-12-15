@@ -45,47 +45,16 @@ set termguicolors
 set wildmenu                                " show possible matches using <Tab>
 set wildignorecase
 
-" set pumblend=20
-" set winblend=20
+set pumblend=20
+set winblend=20
 
 let mapleader = "-"                                   " set <Leader> to <minus>
 let maplocalleader = "-"
 
+"******************************************************************* Modules{{{
 let $VIMCONF = stdpath('config')
 
-call plug#begin('$VIMCONF/plugged')
-"********************************************************************** Misc{{{
-" Plug 'dstein64/vim-startuptime'
-Plug 'ggandor/leap.nvim'
-Plug 'gpanders/editorconfig.nvim'
-Plug 'junegunn/vim-easy-align'
-Plug 'LhKipp/nvim-nu', {'do': ':TSInstall nu', 'for': 'nu'}
-Plug 'liuchengxu/vim-clap', {'do': {-> clap#installer#force_download()}}
-Plug 'liuchengxu/vista.vim'
-Plug 'matze/vim-move'
-" Plug 'mfussenegger/nvim-dap'
-Plug 'mg979/vim-visual-multi'
-Plug 'mhinz/vim-startify'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
-Plug 'p00f/nvim-ts-rainbow'
-" Plug 'rcarriga/nvim-dap-ui'
-Plug 'rcarriga/nvim-notify'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'skywind3000/asynctasks.vim'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'triglav/vim-visual-increment'
-Plug 'wesQ3/vim-windowswap'
-"}}}
-"*********************************************************** Auto-completion{{{
-Plug 'Shougo/neco-vim', {'for': 'vim'}
-Plug 'neoclide/coc-neco', {'for': 'vim'}
-Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"}}}
-"********************************************************************** Last{{{
-Plug 'Neur1n/neuims', {'on': 'IMSToggle'}
-Plug 'Neur1n/noline.nvim'
-"}}}
-call plug#end()
+for s:file in glob('$VIMCONF/viml/*.vim', v:false, v:true)
+  execute 'source ' . s:file
+endfor
+" Modules}}}

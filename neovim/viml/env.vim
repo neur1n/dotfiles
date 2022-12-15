@@ -1,14 +1,5 @@
 scriptencoding utf-8
 
-if exists('g:loaded_n_env')
-  finish
-endif
-
-let g:loaded_n_env = v:true
-
-let s:save_cpo = &cpoptions
-set cpoptions&vim
-
 let g:is_mac = has('mac')
 let g:is_unix = has('unix')
 let g:is_win = has('win32')
@@ -30,6 +21,3 @@ endif
 unlet s:cwd
 
 set backupdir=$VIMCONF/recovery/backup
-
-let &cpoptions = s:save_cpo
-unlet s:save_cpo
