@@ -7,4 +7,4 @@ nnoremap <leader>pr :AsyncTask project-run<CR>
 nnoremap <leader>fb :AsyncTask file-build<CR>
 nnoremap <leader>fr :AsyncTask file-run<CR>
 
-let g:asynctasks_extra_config = ['$VIMCONF.viml/asynctasks.ini']
+let g:asynctasks_extra_config = [$VIMCONF.'/viml/plugconf/asynctasks.ini']
