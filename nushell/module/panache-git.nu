@@ -27,7 +27,7 @@ export def current-dir [] {
   let current_dir = ($env.PWD)
 
   let current_dir_relative_to_home = (
-    do --ignore-errors { $current_dir | path relative-to $nu.home-path } | str collect
+    do --ignore-errors { $current_dir | path relative-to $nu.home-path } | str join
   )
 
   let in_sub_dir_of_home = ($current_dir_relative_to_home | is-empty | nope)
@@ -85,7 +85,7 @@ export def repo-structured [] {
   let tracking_upstream_branch = (if $in_git_repo {
     $status
     | where ($it | str starts-with '# branch.upstream')
-    | str collect
+    | str join
     | is-empty
     | nope
   } else {
@@ -95,7 +95,7 @@ export def repo-structured [] {
   let upstream_exists_on_remote = (if $in_git_repo {
     $status
     | where ($it | str starts-with '# branch.ab')
-    | str collect
+    | str join
     | is-empty
     | nope
   } else {
@@ -131,8 +131,8 @@ export def repo-structured [] {
 
   let has_staging_or_worktree_changes = (if $in_git_repo {
     $status
-    | where ($it | str starts-with '1') || ($it | str starts-with '2')
-    | str collect
+    | where ($it | str starts-with '1') or ($it | str starts-with '2')
+    | str join
     | is-empty
     | nope
   } else {
@@ -142,7 +142,7 @@ export def repo-structured [] {
   let has_untracked_files = (if $in_git_repo {
     $status
     | where ($it | str starts-with '?')
-    | str collect
+    | str join
     | is-empty
     | nope
   } else {
@@ -152,7 +152,7 @@ export def repo-structured [] {
   let has_unresolved_merge_conflicts = (if $in_git_repo {
     $status
     | where ($it | str starts-with 'u')
-    | str collect
+    | str join
     | is-empty
     | nope
   } else {
@@ -161,7 +161,7 @@ export def repo-structured [] {
 
   let staging_worktree_table = (if $has_staging_or_worktree_changes {
     $status
-    | where ($it | str starts-with '1') || ($it | str starts-with '2')
+    | where ($it | str starts-with '1') or ($it | str starts-with '2')
     | split column ' '
     | get column2
     | split column '' staging worktree --collapse-empty
@@ -251,31 +251,31 @@ export def repo-styled [] {
   let is_local_only = ($status.tracking_upstream_branch != true)
 
   let upstream_deleted = (
-    $status.tracking_upstream_branch &&
+    $status.tracking_upstream_branch and
     $status.upstream_exists_on_remote != true
   )
 
   let is_up_to_date = (
-    $status.upstream_exists_on_remote &&
-    $status.commits_ahead == 0 &&
+    $status.upstream_exists_on_remote and
+    $status.commits_ahead == 0 and
     $status.commits_behind == 0
   )
 
   let is_ahead = (
-    $status.upstream_exists_on_remote &&
-    $status.commits_ahead > 0 &&
+    $status.upstream_exists_on_remote and
+    $status.commits_ahead > 0 and
     $status.commits_behind == 0
   )
 
   let is_behind = (
-    $status.upstream_exists_on_remote &&
-    $status.commits_ahead == 0 &&
+    $status.upstream_exists_on_remote and
+    $status.commits_ahead == 0 and
     $status.commits_behind > 0
   )
 
   let is_ahead_and_behind = (
-    $status.upstream_exists_on_remote &&
-    $status.commits_ahead > 0 &&
+    $status.upstream_exists_on_remote and
+    $status.commits_ahead > 0 and
     $status.commits_behind > 0
   )
 
@@ -283,7 +283,7 @@ export def repo-styled [] {
     (if $status.on_named_branch {
       $status.branch_name
     } else {
-      ['(' $status.commit_hash '...)'] | str collect
+      ['(' $status.commit_hash '...)'] | str join
     })
   } else {
     ''
@@ -310,15 +310,15 @@ export def repo-styled [] {
   })
 
   let has_staging_changes = (
-    $status.staging_added_count > 0 ||
-    $status.staging_modified_count > 0 ||
+    $status.staging_added_count > 0 or
+    $status.staging_modified_count > 0 or
     $status.staging_deleted_count > 0
   )
 
   let has_worktree_changes = (
-    $status.untracked_count > 0 ||
-    $status.worktree_modified_count > 0 ||
-    $status.worktree_deleted_count > 0 ||
+    $status.untracked_count > 0 or
+    $status.worktree_modified_count > 0 or
+    $status.worktree_deleted_count > 0 or
     $status.merge_conflict_count > 0
   )
 
@@ -342,7 +342,7 @@ export def repo-styled [] {
     ''
   })
 
-  let delimiter = (if ($has_staging_changes && $has_worktree_changes) {
+  let delimiter = (if ($has_staging_changes and $has_worktree_changes) {
     ('|' | bright-yellow)
   } else {
     ''

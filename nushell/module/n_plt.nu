@@ -4,7 +4,7 @@ use n_util.nu
 export def get-palette [name?: string] {
   let s = ((special) | get (n_util random-index (special)))
 
-  if ($name == null) || (palettes | transpose k | find $name | is-empty) {
+  if ($name == null) or (palettes | transpose k | find $name | is-empty) {
     let tbl = (palettes | transpose k v)
     let idx = (n_util random-index $tbl.k)
     (($tbl.v | get $idx) | update special $s)

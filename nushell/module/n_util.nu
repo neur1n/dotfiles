@@ -35,7 +35,7 @@ export def same-file [file1: path, file2: path, echo: bool = false] {
   let sha256_1 = (open $file1 | hash sha256)
   let sha256_2 = (open $file2 | hash sha256)
 
-  if ($md5_1 == $md5_2 && $sha256_1 == $sha256_2) {
+  if ($md5_1 == $md5_2 and $sha256_1 == $sha256_2) {
     if ($echo) {
       echo [[file, md5, sha256]; [$file1, $md5_1, $sha256_1], [$file2, $md5_2, $sha256_2]]
     }
