@@ -7,6 +7,11 @@ augroup n_autocmd
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$")
         \| execute "normal! g'\"" | endif
 "}}}
+"*************************************** relative line number in visual mode{{{
+  autocmd ModeChanged [vV\x16]*:* let &l:relativenumber = mode() =~# '^[vV\x16]'
+  autocmd ModeChanged *:[vV\x16]* let &l:relativenumber = mode() =~# '^[vV\x16]'
+  autocmd WinEnter,WinLeave * let &l:relativenumber = mode() =~# '^[vV\x16]'
+"}}}
 "***************************************************************** scrolloff{{{
   autocmd WinEnter,VimResized * execute "setlocal scrolloff=".winheight(win_getid())/3
 "}}}

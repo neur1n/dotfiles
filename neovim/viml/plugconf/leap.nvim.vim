@@ -1,4 +1,6 @@
 scriptencoding utf-8
 
-nnoremap f <Plug>(leap-forward-to)
-nnoremap F <Plug>(leap-backward-to)
+lua << EOF
+vim.keymap.set({'n', 'o', 'x'}, 't', '<Plug>(leap-forward-to)')
+vim.keymap.set({'n', 'o', 'x'}, 'T', '<Plug>(leap-backward-to)')
+EOF

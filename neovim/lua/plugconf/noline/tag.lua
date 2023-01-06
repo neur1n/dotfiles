@@ -5,9 +5,7 @@ local Component = require("noline.utility.component")
 function M.get(symbol, l_decor, r_decor)
   local expr = ""
 
-  if vim.b.vista_nearest_method_or_function ~= nil then
-    expr = vim.b.vista_nearest_method_or_function
-  elseif vim.b.coc_current_function ~= nil then
+  if vim.b.coc_current_function ~= nil then
     expr = vim.b.coc_current_function
   end
 

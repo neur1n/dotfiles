@@ -1,4 +1,6 @@
 {
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+
   "diagnostic.enable": true,
 
   "diagnostic.errorSign": "🔥",
