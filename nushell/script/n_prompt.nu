@@ -54,7 +54,7 @@ def show-git [] {
     let r = (if ($bcnt > 0) {$"($r) ($bcnt)"} else {$r})
 
     let has_remote = $gstatus.tracking_upstream_branch
-    let b = $"($gstatus.branch_name)"
+    let b = (if $gstatus.on_named_branch {$"($gstatus.branch_name)"} else {$"($gstatus.commit_hash)"})
     let b = (if ($has_remote and ($acnt == 0) and ($bcnt == 0)) {$"($b)"} else {$b})
 
     let s = ""  # staged
