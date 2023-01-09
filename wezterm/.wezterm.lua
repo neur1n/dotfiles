@@ -7,22 +7,21 @@ Wezterm.on("update-right-status", function(window, pane)
 end)
 
 local fonts = {
-  {["name"] = "3270Narrow NFM"       , ["size"] = 14},
-  {["name"] = "Anonymice NF"         , ["size"] = 13},
-  {["name"] = "CaskaydiaCove NF Mono", ["size"] = 12},
-  {["name"] = "DaddyTimeMono NF"     , ["size"] = 12},
-  {["name"] = "FantasqueSansMono NF" , ["size"] = 13},
-  {["name"] = "FiraCode NF"          , ["size"] = 11},
-  {["name"] = "GohuFont NF"          , ["size"] = 12},
-  {["name"] = "Hurmit NF"            , ["size"] = 11},
-  {["name"] = "Input NF"             , ["size"] = 12},
-  {["name"] = "JetBrainsMono NF"     , ["size"] = 11},
-  {["name"] = "Monofur NF"           , ["size"] = 13},
-  {["name"] = "ProFontWindows NF"    , ["size"] = 13},
-  {["name"] = "ProggyCleanTT NF"     , ["size"] = 16},
-  {["name"] = "SauceCodePro NF"      , ["size"] = 11},
-  {["name"] = "SpaceMono NF"         , ["size"] = 11},
-  {["name"] = "VictorMono NF"        , ["size"] = 12},
+  {["name"] = "3270SemiCondensed NFM"   , ["size"] = 14},
+  {["name"] = "agave NFM"               , ["size"] = 13},
+  {["name"] = "BigBlue_TerminalPlus NFM", ["size"] = 10},
+  {["name"] = "CaskaydiaCove NF Mono"   , ["size"] = 12},
+  {["name"] = "DaddyTimeMono NFM"       , ["size"] = 12},
+  {["name"] = "FantasqueSansMono NFM"   , ["size"] = 13},
+  {["name"] = "FiraCode NFM"            , ["size"] = 11},
+  {["name"] = "GohuFont NFM"            , ["size"] = 12},
+  {["name"] = "Hurmit NFM"              , ["size"] = 11},
+  {["name"] = "Input NF"                , ["size"] = 12},
+  {["name"] = "JetBrainsMono NFM"       , ["size"] = 11},
+  {["name"] = "Monofur NFM"             , ["size"] = 13},
+  {["name"] = "ProFontWindows NFM"      , ["size"] = 13},
+  {["name"] = "ProggyCleanTT NFM"       , ["size"] = 16},
+  {["name"] = "SpaceMono NFM"           , ["size"] = 12},
 }
 local font = fonts[math.random(#fonts)]
 
