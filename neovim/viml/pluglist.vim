@@ -9,7 +9,7 @@ let s:plugins = [
       \ {'author': 'gpanders'       , 'repo': 'editorconfig.nvim'   , 'opt': {}},
       \ {'author': 'ggandor'        , 'repo': 'leap.nvim'           , 'opt': {}},
       \ {'author': 'ggandor'        , 'repo': 'leap.nvim'           , 'opt': {}},
-      \ {'author': 'LhKipp'         , 'repo': 'nvim-nu'             , 'opt': {'do': ':TSInstall nu', 'for': 'nu'}},
+      \ {'author': 'LhKipp'         , 'repo': 'nvim-nu'             , 'opt': {'do': ':TSInstall nu'}},
       \ {'author': 'nvim-treesitter', 'repo': 'nvim-treesitter'     , 'opt': {'do': ':TSUpdate'}},
       \ {'author': 'p00f'           , 'repo': 'nvim-ts-rainbow'     , 'opt': {}},
       \ {'author': 'nvim-treesitter', 'repo': 'playground'          , 'opt': {}},
