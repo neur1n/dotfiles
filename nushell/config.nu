@@ -285,7 +285,7 @@ let-env config = {
   # buffer_editor: "emacs" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
   use_ansi_coloring: true
   edit_mode: vi # emacs, vi
-  shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
+  shell_integration: false # enables terminal markers and a workaround to arrow keys stop working issue
   show_banner: false # true or false to enable or disable the banner
   render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
 
@@ -533,17 +533,12 @@ use conda.nu
 use n_c.nu
 use n_util.nu
 source n_prompt.nu
-
-let-env Path = (n_util append-path (ls $"($env.NUCONF)/../bin/*/*").name)
-
-alias dev-c = use n_c.nu
-alias c-cmake = n_c run-cmake
-alias c-init = n_c init-workspace
+source ~/.zoxide.nu
 
 alias btm = btm -b
 
-alias fnvim = n_util fzf-nvim
+alias c-cmake = n_c run-cmake
+alias c-init = n_c init-workspace
 
-# zoxide init nushell --hook prompt | save ~/.zoxide.nu
-# source ~/.zoxide.nu
+alias fnvim = n_util fzf-nvim
 # Customize}}}

@@ -30,4 +30,22 @@ let-env NU_PLUGIN_DIRS = [
 
 #================================================================= Customize{{{
 let-env NUCONF = ($nu.config-path | path expand | path dirname)
+
+let-env Path = (
+  if "Path" in $env {
+    $env.Path | append (ls $"($env.NUCONF)/../bin/*/*").name
+  } else {
+    $env.PATH | append (ls $"($env.NUCONF)/../bin/*/*").name
+  }
+)
+
+let-env PATH = (
+  if "Path" in $env {
+    $env.Path | append (ls $"($env.NUCONF)/../bin/*/*").name
+  } else {
+    $env.PATH | append (ls $"($env.NUCONF)/../bin/*/*").name
+  }
+)
+
+zoxide init nushell | save ~/.zoxide.nu
 # Customize}}}
