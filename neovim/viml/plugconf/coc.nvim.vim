@@ -23,6 +23,9 @@ inoremap <silent><expr> <CR>
 
 nnoremap <silent> K :call <SID>ShowDocumentation()<CR>
 
+vmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
+nmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
+
 nmap <silent> <Leader>gD <Plug>(coc-declaration)
 nmap <silent> <Leader>gd <Plug>(coc-definition)
 nmap <silent> <Leader>gi <Plug>(coc-implementation)
@@ -39,8 +42,8 @@ nmap <silent> <Leader>fj <Plug>(coc-float-jump)
 nmap <silent> <C-p> <Plug>(coc-diagnostic-prev)
 nmap <silent> <C-n> <Plug>(coc-diagnostic-next)
 
-vmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
-nmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
+nmap [d <Plug>(coc-git-prevchunk)
+nmap ]d <Plug>(coc-git-nextchunk)
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
