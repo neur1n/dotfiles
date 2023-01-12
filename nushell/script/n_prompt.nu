@@ -13,6 +13,7 @@ let cs = {
   logo: ($rainbow | get (n_util random-index $rainbow)),
   path: ($rainbow | get (n_util random-index $rainbow)),
   time: ($rainbow | get (n_util random-index $rainbow)),
+  venv: ($rainbow | get (n_util random-index $rainbow)),
   indi: ($rainbow | get (n_util random-index $rainbow))
 }
 
@@ -120,14 +121,21 @@ def show-timestamp [] {
   $"(n_hl render $lsep)(n_hl render $ts)"
 }
 
-def show-indicator [mode: string] {
+def show-venv [mode: string] {
   let sym = (if ($mode == "i") {" "} else {" "})
 
-  let lsep = (n_hl create "" $cs.indi $cs.time)
-  let emo = (n_hl create (n_emo get-emoji) "n" $cs.indi)
-  let rsep = (n_hl create $sym $cs.indi)
+  let name = (
+    if (not "CONDA_CURR" in $env) or ($env.CONDA_CURR == null) {
+      ""
+    } else {
+      $env.CONDA_CURR
+    })
 
-  $"(n_hl render $lsep)(n_hl render $emo)(n_hl render $rsep)"
+  let lsep = (n_hl create "" $cs.venv $cs.time)
+  let venv = (n_hl create $"(n_emo get-emoji)($name)" $palette.bgh $cs.venv)
+  let rsep = (n_hl create $sym $cs.venv)
+
+  $"(n_hl render $lsep)(n_hl render $venv)(n_hl render $rsep)"
 }
 
 def left-prompt [] {
@@ -145,7 +153,7 @@ def right-prompt [] {
 }
 
 def indicator [mode: string] {
-  $"(show-timestamp)(show-indicator $mode)"
+  $"(show-timestamp)(show-venv $mode)"
 }
 
 let-env PROMPT_COMMAND = {left-prompt}

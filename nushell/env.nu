@@ -33,17 +33,17 @@ let-env NUCONF = ($nu.config-path | path expand | path dirname)
 
 let-env Path = (
   if "Path" in $env {
-    $env.Path | split row (char esep) | append (ls $"($env.NUCONF)/../bin/*/*").name
+    $env.Path | split row (char esep) | prepend (ls $"($env.NUCONF)/../bin/*/*").name
   } else {
-    ""
+    $env.PATH | split row (char esep) | prepend (ls $"($env.NUCONF)/../bin/*/*").name
   }
 )
 
 let-env PATH = (
-  if "PATH" in $env {
-    $env.PATH | split row (char esep) | append (ls $"($env.NUCONF)/../bin/*/*").name
+  if "Path" in $env {
+    $env.Path | split row (char esep) | prepend (ls $"($env.NUCONF)/../bin/*/*").name
   } else {
-    ""
+    $env.PATH | split row (char esep) | prepend (ls $"($env.NUCONF)/../bin/*/*").name
   }
 )
 
