@@ -26,7 +26,7 @@ export def-env activate [name: string] {
   }
 
   let new_path = (
-    if "Path" in $env {
+    if (n_os is-windows) {
       update-path-windows ($env.CONDA_ENVS | get $name)
     } else {
       update-path-linux ($env.CONDA_ENVS | get $name)
@@ -48,7 +48,10 @@ def update-path-linux [env_path: path] {
     ([$env_path, "bin"] | path join)
   ]
 
-  return {PATH: ($env.PATH | prepend $env_path)}
+  return {
+    Path: ($env.PATH | prepend $env_path),
+    PATH: ($env.PATH | prepend $env_path)
+  }
 }
 
 def update-path-windows [env_path: path] {
@@ -57,5 +60,8 @@ def update-path-windows [env_path: path] {
     ([$env_path, "Scripts"] | path join),
   ]
 
-  return {Path: ($env.Path | prepend $env_path)}
+  return {
+    Path: ($env.Path | prepend $env_path),
+    PATH: ($env.Path | prepend $env_path),
+  }
 }
