@@ -72,8 +72,10 @@ call coc#config('powershell.powerShellExePath', 'pwsh')
 call coc#config('powershell.integratedConsole.showOnStartup', v:false)
 "}}}
 "----------------------------------------------------- neoclide/coc-snippets{{{
-call coc#config('snippets.ultisnips.enable', v:true)
-call coc#config('snippets.userSnippetsDirectory', $VIMCONF.'/viml/plugconf/coc-snippets')
+call coc#config('snippets.snipmate.enable', v:true)
+call coc#config('snippets.ultisnips.enable', v:false)
+:set runtimepath+=$VIMCONF/viml/plugconf
+let g:snipMate = {'override': 1}
 "}}}
 "-------------------------------------------------- iamcco/coc-spell-checker{{{
 call coc#config('cSpell.enabledLanguageIds', ['html', 'latex', 'markdown', 'plaintext', 'tex', 'text'])

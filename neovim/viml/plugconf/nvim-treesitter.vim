@@ -9,10 +9,6 @@ require("nvim-treesitter.configs").setup {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
-  rainbow = {
-    enable = true,
-    loaded = true
-  }
 }
 
 vim.api.nvim_set_hl(0, "@text.danger", {link = "Error"})

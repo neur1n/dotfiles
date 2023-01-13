@@ -11,7 +11,6 @@ let s:plugins = [
       \ {'author': 'ggandor'        , 'repo': 'leap.nvim'           , 'opt': {}},
       \ {'author': 'LhKipp'         , 'repo': 'nvim-nu'             , 'opt': {'do': ':TSInstall nu'}},
       \ {'author': 'nvim-treesitter', 'repo': 'nvim-treesitter'     , 'opt': {'do': ':TSUpdate'}},
-      \ {'author': 'p00f'           , 'repo': 'nvim-ts-rainbow'     , 'opt': {}},
       \ {'author': 'nvim-treesitter', 'repo': 'playground'          , 'opt': {}},
       \ {'author': 'nvim-lua'       , 'repo': 'plenary.nvim'        , 'opt': {}},
       \ {'author': 'nvim-telescope' , 'repo': 'telescope.nvim'      , 'opt': {'branch': '0.1.x'}},
@@ -27,7 +26,6 @@ let s:plugins = [
       \ {'author': 'neoclide'       , 'repo': 'coc.nvim'            , 'opt': {'branch': 'release'}},
       \ {'author': 'neoclide'       , 'repo': 'coc-neco'            , 'opt': {'for': 'vim'}},
       \ {'author': 'Shougo'         , 'repo': 'neco-vim'            , 'opt': {'for': 'vim'}},
-      \ {'author': 'honza'          , 'repo': 'vim-snippets'        , 'opt': {}},
       "\ LAST
       \ {'author': 'Neur1n'         , 'repo': 'neuims'              , 'opt': {'on': 'IMSToggle'}},
       \ {'author': 'Neur1n'         , 'repo': 'noline.nvim'         , 'opt': {}},

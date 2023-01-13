@@ -1,0 +1,40 @@
+extends c
+
+snippet class "generic class"
+	class ${1:`expand('%:r')`}
+	{
+	public:
+		$1();
+
+		~$1();
+
+	private:
+		class Impl;
+
+		Impl* m_impl;
+	};  // class $1
+
+snippet namespace "namespace"
+	namespace $1
+	{
+	$0
+	}  // namespace $1
+
+snippet singleton "singleton class"
+	class ${1:`expand('%:r')`}
+	{
+	public:
+		$1(const $1&) = delete;
+		$1& operator=(const $1&) = delete;
+
+		static $1& Instance();
+
+	private:
+		class Impl;
+
+		$1();
+
+		~$1();
+
+		Impl *m_impl;
+	};  // class $1
