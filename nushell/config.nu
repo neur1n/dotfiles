@@ -535,8 +535,6 @@ use n_util.nu
 source n_prompt.nu
 source ~/.zoxide.nu
 
-n_conda activate base
-
 alias btm = btm -b
 
 alias c-cmake = n_c run-cmake

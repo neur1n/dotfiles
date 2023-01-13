@@ -55,9 +55,6 @@ def update-path-windows [env_path: path] {
   let env_path = [
     $env_path,
     ([$env_path, "Scripts"] | path join),
-    ([$env_path, "Library", "bin"] | path join)
-    ([$env_path, "Library", "mingw-w64"] | path join)
-    ([$env_path, "Library", "usr", "bin"] | path join)
   ]
 
   return {Path: ($env.Path | prepend $env_path)}
