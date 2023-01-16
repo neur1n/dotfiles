@@ -46,6 +46,5 @@ snippet struct "struct"
 		$0
 	} $1;
 
-snippet log "xlog from x.h"
-	x_log('${1:d}', {$2:NULL}, "$3"$4);
-	$0
+snippet xlog "x_log from x.h"
+	x_log('${1:d}', ${2:NULL}, "$3"$4);$0
