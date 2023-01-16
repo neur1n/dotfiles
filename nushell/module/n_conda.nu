@@ -4,9 +4,9 @@ use n_os.nu
 export-env {
   let info = (mamba info --envs --json | from json)
 
-  let-env CONDA_BASE_PATH = (if (n_os is-windows) {$env.Path} else {$env.PATH})
-
   let-env CONDA_ROOT = $info.root_prefix
+
+  let-env CONDA_BASE_PATH = (if (n_os is-windows) {$env.Path} else {$env.PATH})
 
   let-env CONDA_ENVS = ($info.envs | reduce -f {} {|it, acc|
       if $it == $info.root_prefix {
