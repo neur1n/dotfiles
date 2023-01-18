@@ -21,7 +21,7 @@ local fonts = {
   {["name"] = "Monofur NFM"             , ["size"] = 13},
   {["name"] = "ProFontWindows NFM"      , ["size"] = 13},
   {["name"] = "ProggyCleanTT NFM"       , ["size"] = 16},
-  {["name"] = "SpaceMono NFM"           , ["size"] = 12},
+  {["name"] = "SpaceMono NFM"           , ["size"] = 11},
 }
 local font = fonts[math.random(#fonts)]
 
@@ -36,10 +36,6 @@ return {
   initial_cols = 120,
   initial_rows = 30,
   launch_menu = {
-    {
-      label = "Elvish",
-      args = {"elvish"}
-    },
     {
       label = "Nu Shell",
       args = {"nu"}
