@@ -12,7 +12,7 @@ let s:fonts = [
       \ {'name': 'Input NF'                , 'size': 12},
       \ {'name': 'JetBrainsMono NFM'       , 'size': 11},
       \ {'name': 'Monofur NFM'             , 'size': 13},
-      \ {'name': 'ProFontWindows NFM'      , 'size': 14},
+      \ {'name': 'ProFontWindows NFM'      , 'size': 13},
       \ {'name': 'ProggyCleanTT NFM'       , 'size': 16},
       \ {'name': 'SpaceMono NFM'           , 'size': 11},
       \ ]

@@ -1,0 +1,11 @@
+snippet date "YYYY-MM-DD"
+	`strftime('%Y-%m-%d')`
+
+snippet datetime "YYYY-MM-DD hh:mm"
+	`strftime('%Y-%m-%d %H:%M')`
+
+snippet time "hh:mm"
+	`strftime('%H:%M')`
+
+snippet modeline "Vim modeline"
+	`':set '. (&expandtab ? printf('et sw=%i ts=%i', &sw, &ts) : printf('noet sts=%i sw=%i ts=%i', &sts, &sw, &ts)) . (&tw ? ' tw='. &tw : '') . ':'`
