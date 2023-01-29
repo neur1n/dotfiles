@@ -16,7 +16,7 @@
             "experimental.retroTerminalEffect": false,
             "font":
             {
-                "face": "Input NF",
+                "face": "CaskaydiaCove NFM",
                 "size": 12
             },
             "historySize": 9001,
