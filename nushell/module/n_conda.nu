@@ -2,7 +2,14 @@ use n_os.nu
 
 
 export-env {
-  let info = (mamba info --envs --json | from json)
+  let info = (
+      if not (which mamba | is-empty) {
+          (mamba info --envs --json | from json)
+      } else if not (which conda | is-empty) {
+          (conda info --envs --json | from json)
+      } else {
+          ('{"root_prefix": "", "envs": ""}' | from json)
+      })
 
   let-env CONDA_ROOT = $info.root_prefix
 
@@ -19,6 +26,11 @@ export-env {
 }
 
 export def-env activate [name: string] {
+  if ($env.CONDA_ROOT | is-empty) {
+    echo "Neither Conda nor Mamba is valid."
+    return
+  }
+
   if not $name in $env.CONDA_ENVS {
     echo $"Environment ($name) is invalid. Available:"
     echo $env.CONDA_ENVS
@@ -36,6 +48,11 @@ export def-env activate [name: string] {
 }
 
 export def-env deactivate [] {
+  if ($env.CONDA_ROOT | is-empty) {
+    echo "Neither Conda nor Mamba is valid."
+    return
+  }
+
   let path = if "Path" in (env).name { "Path" } else { "PATH" }
   let-env $path = $env.CONDA_BASE_PATH
   
