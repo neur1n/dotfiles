@@ -17,7 +17,7 @@
 
 
 # An opinionated Git prompt for Nushell, styled after posh-git
-export def panache-git [] {
+export def panache-prompt [] {
   let prompt = ($'(current-dir) (repo-styled)' | str trim)
   $'($prompt)> '
 }

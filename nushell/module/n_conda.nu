@@ -1,19 +1,16 @@
-use n_os.nu
-
-
 export-env {
+  let-env CONDA_BASE_PATH = (if ((sys).host.name == "Windows") {$env.Path} else {$env.PATH})
+
   let info = (
       if not (which mamba | is-empty) {
-          (mamba info --envs --json | from json)
+        (mamba info --envs --json | from json)
       } else if not (which conda | is-empty) {
-          (conda info --envs --json | from json)
+        (conda info --envs --json | from json)
       } else {
-          ('{"root_prefix": "", "envs": ""}' | from json)
+        ('{"root_prefix": "", "envs": ""}' | from json)
       })
 
   let-env CONDA_ROOT = $info.root_prefix
-
-  let-env CONDA_BASE_PATH = (if (n_os is-windows) {$env.Path} else {$env.PATH})
 
   let-env CONDA_ENVS = ($info.envs | reduce -f {} {|it, acc|
       if $it == $info.root_prefix {
@@ -38,7 +35,7 @@ export def-env activate [name: string] {
   }
 
   let new_path = (
-    if (n_os is-windows) {
+    if ((sys).host.name == "Windows") {
       update-path-windows ($env.CONDA_ENVS | get $name)
     } else {
       update-path-linux ($env.CONDA_ENVS | get $name)
@@ -53,10 +50,9 @@ export def-env deactivate [] {
     return
   }
 
-  let path = if "Path" in (env).name { "Path" } else { "PATH" }
-  let-env $path = $env.CONDA_BASE_PATH
-  
   let-env CONDA_CURR = null
+
+  load-env {Path: $env.CONDA_BASE_PATH, PATH: $env.CONDA_BASE_PATH}
 }
 
 def update-path-linux [env_path: path] {
@@ -79,6 +75,6 @@ def update-path-windows [env_path: path] {
 
   return {
     Path: ($env.Path | prepend $env_path),
-    PATH: ($env.Path | prepend $env_path),
+    PATH: ($env.Path | prepend $env_path)
   }
 }

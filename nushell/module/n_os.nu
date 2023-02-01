@@ -16,10 +16,10 @@ export def is-windows [] {
 
 export def os-logo [] {
   if is-apple {
-    "\uf179"
+    "\u{f179}"
   } else if is-linux {
-    "\uf17c"
+    "\u{f17c}"
   } else if is-windows {
-    "\uf17a"
+    "\u{f17a}"
   }
 }
