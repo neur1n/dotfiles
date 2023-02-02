@@ -75,8 +75,9 @@ let s:animals = {
       \           ],
       \ }
 
-let g:startify_custom_header_center = 1
-let g:startify_fortune_use_unicode = 1
+let g:startify_custom_header_center = v:true
+let g:startify_fortune_use_unicode = v:true
+let g:startify_disable_at_vimenter = v:true
 
 if exists('$VIMCONF')
   let g:startify_session_dir = $VIMCONF.'/recovery/session'

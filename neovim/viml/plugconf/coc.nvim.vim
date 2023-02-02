@@ -1,5 +1,7 @@
 scriptencoding utf-8
 
+let g:coc_start_at_startup = v:false
+
 function! s:CheckBackSpace() abort
   let l:col = col('.') - 1
   return !l:col || getline('.')[l:col - 1]  =~# '\s'
@@ -126,4 +128,5 @@ endfunction
 augroup n_coc
   autocmd!
   autocmd ColorScheme neucs call <SID>SetColors()
+  autocmd BufRead * CocStart
 augroup END
