@@ -20,11 +20,9 @@ export-env {
         ((ls $"($env.MSVS_ROOT)/VC/Tools/MSVC/*").name.0 | str replace -a '\\' '/')
       })
 
-  let-env MSVS_MSDK_ROOT = (REG QUERY 'HKLM\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' /v "InstallationFolder" | str replace '(.|\n)+REG_SZ\s+(.+)' "$2")
-  let-env MSVS_MSDK_ROOT = ($env.MSVS_MSDK_ROOT | str replace -a '\\' '/')
+  let-env MSVS_MSDK_ROOT = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' InstallationFolder | get value | str replace -a '"' '' | str replace -a '\\\\' '/')
 
-  let-env MSVS_MSDK_VER = (REG QUERY 'HKLM\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' /v "ProductVersion" | str replace '(.|\n)+REG_SZ\s+(.+)' "$2")
-  let-env MSVS_MSDK_VER = $"($env.MSVS_MSDK_VER).0"
+  let-env MSVS_MSDK_VER = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' ProductVersion | get value | str replace -a '"' '') + ".0"
 
   let-env MSVS_INCLUDE_PATH = ([
     $"($env.MSVS_ROOT)/Include/($env.MSVS_MSDK_VER)/cppwinrt/winrt",
@@ -125,6 +123,13 @@ export def-env activate [
     INCLUDE: $env.MSVS_INCLUDE_PATH,
     LIB: $lib_path
   }
+
+  hide-env MSVS_BASE_PATH
+  hide-env MSVS_ROOT
+  hide-env MSVS_MSVC_ROOT
+  hide-env MSVS_MSDK_ROOT
+  hide-env MSVS_MSDK_VER
+  hide-env MSVS_INCLUDE_PATH
 }
 
 export def-env deactivate [] {
@@ -137,4 +142,7 @@ export def-env deactivate [] {
     Path: $env.MSVS_BASE_PATH,
     PATH: $env.MSVS_BASE_PATH
   }
+
+  hide-env INCLUDE
+  hide-env LIB
 }
