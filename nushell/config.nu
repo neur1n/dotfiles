@@ -535,7 +535,6 @@ let-env config = {
 
 #================================================================= Customize{{{
 use n_c.nu
-use n_conda.nu
 use n_util.nu
 source n_prompt.nu
 source ~/.zoxide.nu
@@ -544,9 +543,6 @@ alias btm = btm -b
 
 alias c-cmake = n_c run-cmake
 alias c-init = n_c init-workspace
-
-alias c-act = n_conda activate
-alias c-deact = n_conda deactivate
 
 alias fnvim = n_util fzf-nvim
 
