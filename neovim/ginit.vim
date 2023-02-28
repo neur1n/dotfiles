@@ -11,6 +11,7 @@ let s:fonts = [
       \ {'name': 'Hurmit NFM'              , 'size': 11},
       \ {'name': 'Input NFM'               , 'size': 12},
       \ {'name': 'JetBrainsMono NFM'       , 'size': 11},
+      \ {'name': 'Monocraft Nerd Font'     , 'size': 10},
       \ {'name': 'Monofur NFM'             , 'size': 13},
       \ {'name': 'OpenDyslexicMono NFM'    , 'size':  9},
       \ {'name': 'ProFontWindows NFM'      , 'size': 13},
