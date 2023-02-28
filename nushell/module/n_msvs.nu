@@ -20,9 +20,9 @@ export-env {
         ((ls $"($env.MSVS_ROOT)/VC/Tools/MSVC/*").name.0 | str replace -a '\\' '/')
       })
 
-  let-env MSVS_MSDK_ROOT = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' InstallationFolder | get value | str replace -a '"' '' | str replace -a '\\\\' '/')
+  let-env MSVS_MSDK_ROOT = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' InstallationFolder | get value)
 
-  let-env MSVS_MSDK_VER = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' ProductVersion | get value | str replace -a '"' '') + ".0"
+  let-env MSVS_MSDK_VER = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' ProductVersion | get value) + ".0"
 
   let-env MSVS_INCLUDE_PATH = ([
     $"($env.MSVS_ROOT)/Include/($env.MSVS_MSDK_VER)/cppwinrt/winrt",
@@ -82,6 +82,7 @@ export def-env activate [
     $"($env.MSVS_ROOT)/Common7/Tools/devinit",
     $"($env.MSVS_ROOT)/MSBuild/Current/bin",
     $"($env.MSVS_ROOT)/MSBuild/Current/bin/Roslyn",
+    $"($env.MSVS_ROOT)/Team Tools/DiagnosticsHub/Collector",
     $"($env.MSVS_ROOT)/Team Tools/Performance Tools",
     $"($env.MSVS_MSVC_ROOT)/bin/Host($fh)/($ft)",
     $"($env.MSVS_MSDK_ROOT)bin/($ft)",

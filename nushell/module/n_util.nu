@@ -25,6 +25,10 @@ export def insert-path [paths: path] {
   }
 }
 
+export def pid [name: string] {
+  (ps | where name =~ $name | get pid | get 0)
+}
+
 export def random-index [data: any] {
   (random integer ..(($data | length) - 1))
 }
