@@ -6,10 +6,10 @@ local Tabline = require("noline.source.tabline")
 local Component = require("noline.utility.component")
 local Highlight = require("noline.utility.highlight")
 
-
 local State = require("plugconf.noline.state")
 local Decorator = require("plugconf.noline.decorator")
 local Palette = require("plugconf.noline.palette")
+local Runner = require("plugconf.noline.runner")
 local Tab = require("plugconf.noline.tab")
 local VCS = require("plugconf.noline.vcs")
 
@@ -28,6 +28,12 @@ function M.render()
   if not State.tal_initialized then
     local color = 0
     local bg = palette.bgm
+
+    Highlight.create("NRunner")
+    Highlight.link("NRunnerR", "NeuBlueBold")
+    Highlight.link("NRunnerS", "NeuGreenBold")
+    Highlight.link("NRunnerI", "NeuYellowBold")
+    Highlight.link("NRunnerF", "NeuRedBold")
 
     math.randomseed(os.time())
 
@@ -56,6 +62,10 @@ function M.setup()
   expr = expr .. Component.create(decor["right"], "NTabR")
 
   expr = expr .. Component.create(Tab.not_current(decor["sep"], " ", " "), "NTab_nc")
+
+  expr = expr .. "%="
+
+  expr = expr .. Component.create(Runner.status(), "NRunner")
 
   expr = expr .. "%="
 

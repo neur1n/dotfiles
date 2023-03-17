@@ -16,4 +16,6 @@ augroup noline
   autocmd BufEnter * lua require('plugconf.noline.tabline').update()
   " autocmd WinEnter * lua require'plugconf.noline.winbar'.update()
   autocmd ColorScheme neucs call <SID>Redraw()
+
+  autocmd User AsyncRunInterrupt lua require('plugconf.noline.runner').interrupt()
 augroup END
