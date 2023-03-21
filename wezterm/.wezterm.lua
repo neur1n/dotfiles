@@ -40,12 +40,12 @@ return {
   initial_rows = 30,
   launch_menu = {
     {
-      label = "Nu Shell",
+      label = "Nushell",
       args = {"nu"}
     },
     {
-      label = "Poweshell Core",
-      args = {"pwsh"}
+      label = "WSL",
+      args = {"wsl"}
     },
   },
   line_height = 1.0,
