@@ -539,8 +539,6 @@ use n_util.nu
 source n_prompt.nu
 source ~/.zoxide.nu
 
-alias btm = btm -b
-
 alias c-cmake = n_c run-cmake
 alias c-init = n_c init-workspace
 
