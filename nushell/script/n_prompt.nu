@@ -156,10 +156,10 @@ def indicator [mode: string] {
   $"(show-timestamp)(show-venv $mode)"
 }
 
-let-env PROMPT_COMMAND = {left-prompt}
-let-env PROMPT_COMMAND_RIGHT = {""}
+let-env PROMPT_COMMAND = {|| left-prompt}
+let-env PROMPT_COMMAND_RIGHT = {|| ""}
 
-let-env PROMPT_INDICATOR = {""}
-let-env PROMPT_INDICATOR_VI_INSERT = {indicator "i"}
-let-env PROMPT_INDICATOR_VI_NORMAL = {indicator "n"}
-let-env PROMPT_MULTILINE_INDICATOR = {" \n::: "}
+let-env PROMPT_INDICATOR = {|| ""}
+let-env PROMPT_INDICATOR_VI_INSERT = {|| indicator "i"}
+let-env PROMPT_INDICATOR_VI_NORMAL = {|| indicator "n"}
+let-env PROMPT_MULTILINE_INDICATOR = {|| " \n::: "}
