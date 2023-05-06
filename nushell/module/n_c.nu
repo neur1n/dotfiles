@@ -12,7 +12,7 @@ export def init-workspace [...rest: string] {
 export def run-cmake [
     --build    (-b): string = "",   # Pass to -DCMAKE_BUILD_TYPE
     --compiler (-c): string = "",   # Pass to -DCMAKE_C(XX)_COMPILER
-    --arch     (-a): string = "",   # Specifying architecture
+    --arch     (-a): int    = 64,   # Specifying architecture
     --src      (-s): string = "..", # Pass to cmake -S
     ...rest        : string] {
   let args = [
@@ -45,9 +45,9 @@ export def run-cmake [
 
   let args = (
       if not ($tmp == "msvc") {
-        if $arch == "32" {
+        if $arch == 32 {
           ($args | append "-DCMAKE_C_FLAGS=-m32" | append "-DCMAKE_CXX_FLAGS=-m32")
-        } else if $arch == "64" {
+        } else if $arch == 64 {
           ($args | append "-DCMAKE_C_FLAGS=-m64" | append "-DCMAKE_CXX_FLAGS=-m64")
         } else {
           $args
