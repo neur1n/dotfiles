@@ -15,15 +15,15 @@ local fonts = {
   {["name"] = "FiraCode Nerd Font Mono Ret"   , ["size"] = 11},
   {["name"] = "GohuFont uni-11 Nerd Font Mono", ["size"] = 12},
   {["name"] = "GohuFont uni-14 Nerd Font Mono", ["size"] = 12},
-  {["name"] = "Hurmit  Nerd Font Mono"        , ["size"] = 11},
-  {["name"] = "Input NFM"                     , ["size"] = 12},
+  {["name"] = "Hurmit Nerd Font Mono"         , ["size"] = 11},
+  {["name"] = "Input Nerd Font Mono"          , ["size"] = 12},
   {["name"] = "JetBrainsMono NFM"             , ["size"] = 11},
   {["name"] = "Maple Mono NF"                 , ["size"] = 11},
   {["name"] = "Monocraft Nerd Font"           , ["size"] = 10},
   {["name"] = "Monofur Nerd Font Mono"        , ["size"] = 13},
   {["name"] = "OpenDyslexicM Nerd Font Mono"  , ["size"] =  9},
   {["name"] = "ProFontWindows Nerd Font Mono" , ["size"] = 13},
-  {["name"] = "ProggyCleanTTSZ Nerd Font Mono", ["size"] = 16},
+  {["name"] = "ProggyCleanSZ Nerd Font Mono"  , ["size"] = 16},
   {["name"] = "SpaceMono Nerd Font Mono"      , ["size"] = 11},
 }
 local font = fonts[math.random(#fonts)]
