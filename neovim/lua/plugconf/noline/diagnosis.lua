@@ -7,7 +7,7 @@ function M.info(source, type, symbol, l_decor, r_decor)
     local count = vim.b.coc_diagnostic_info[type]
 
     if count > 0 then
-      return Component.decorate(symbol .. " " .. count, l_decor, r_decor)
+      return Component.decorate(symbol .. count, l_decor, r_decor)
     end
   end
 

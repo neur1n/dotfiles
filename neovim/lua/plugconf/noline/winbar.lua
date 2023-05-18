@@ -28,7 +28,7 @@ function M.setup_c()
 
   expr = expr .. "%=%<"
 
-  expr = expr .. Component.create(Tag.get(""), "NTag")
+  expr = expr .. Component.create(Tag.get("📦"), "NTag")
 
   expr = expr .. "%="
 
@@ -40,7 +40,7 @@ function M.setup_nc()
 
   expr = expr .. "%=%<"
 
-  expr = expr .. Component.create(Tag.get(""), "NTag_nc")
+  expr = expr .. Component.create(Tag.get("📦"), "NTag_nc")
 
   expr = expr .. "%="
 

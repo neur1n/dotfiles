@@ -102,18 +102,14 @@ function M.render_nc()
   end
 end
 
-local glyphs = {
-  ["c"] = {["md"] = "", ["ma"] = "", ["ro"] = "", ["e"] = "", ["w"] = "", ["h"] = "", ["i"] = ""},
-  ["nc"] = {["md"] = "", ["ma"] = "", ["ro"] = "", ["e"] = "", ["w"] = "𥉉", ["h"] = "ﬤ", ["i"] = ""},
-}
-
 local decor = Decorator.get()
-local glyph = {}
+local glyph = {
+  ["md"] = "", ["ma"] = "", ["ro"] = "󰌾",
+  ["e"] = "🔥", ["w"] = "⚡", ["h"] = "💡", ["i"] = "🔎"
+}
 
 function M.setup_c()
   Mode.highlight()
-
-  glyph = glyphs.c
 
   local expr = ""
 
@@ -139,7 +135,7 @@ function M.setup_c()
 
   expr = expr .. "%=%<"
 
-  expr = expr .. Component.create(Tag.get(""), "NTag")
+  expr = expr .. Component.create(Tag.get("📦"), "NTag")
 
   expr = expr .. "%="
 
@@ -158,8 +154,6 @@ function M.setup_c()
 end
 
 function M.setup_nc()
-  glyph = glyphs.nc
-
   local expr = ""
 
   expr = expr .. Component.create(Edit.paste("P", decor["sep"]), "NMode")
@@ -179,7 +173,7 @@ function M.setup_nc()
 
   expr = expr .. "%=%<"
 
-  expr = expr .. Component.create(Tag.get(""), "NTag")
+  expr = expr .. Component.create(Tag.get("📦"), "NTag")
 
   expr = expr .. "%="
 

@@ -10,7 +10,7 @@ function M.get(symbol, l_decor, r_decor)
   end
 
   if expr ~= "" and type(symbol) == "string" then
-    expr = Component.decorate(symbol .. " " .. expr, l_decor, r_decor)
+    expr = Component.decorate(symbol .. expr, l_decor, r_decor)
   end
 
   return expr

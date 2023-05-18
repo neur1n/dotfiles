@@ -69,7 +69,7 @@ function M.setup()
 
   expr = expr .. "%="
 
-  expr = expr .. Component.create({VCS.get("coc", "שׂ "), "", " "}, "NVcs")
+  expr = expr .. Component.create({VCS.get("coc", ""), "", " "}, "NVcs")
 
   expr = expr .. Component.create(Tabline.button("", " ", " "), "NClose")
 

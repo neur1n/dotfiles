@@ -18,24 +18,24 @@ function M.status()
       if status == "running" then
         interrupted = false
         Highlight.link("NRunner", "NRunnerR")
-        msg = ""
+        msg = "🤔"
       elseif status == "success" then
         if interrupted then
           Highlight.link("NRunner", "NRunnerI")
-          msg = ""
+          msg = "😑"
         else
           interrupted = false
           Highlight.link("NRunner", "NRunnerS")
-          msg = ""
+          msg = "😎"
         end
       elseif status == "failure" then
         if interrupted then
           Highlight.link("NRunner", "NRunnerI")
-          msg = ""
+          msg = "😑"
         else
           interrupted = false
           Highlight.link("NRunner", "NRunnerF")
-          msg = ""
+          msg = "🤯"
         end
       end
     end
