@@ -18,7 +18,7 @@ let cs = {
 }
 
 def show-logo [] {
-  let sep = (n_hl create "" $cs.logo $palette.bgm)
+  let sep = (n_hl create "" $cs.logo)
   let logo = (n_hl create (n_os os-logo) $palette.bgh $cs.logo)
 
   $"(n_hl render $sep)(n_hl render $logo)"
@@ -33,7 +33,7 @@ def show-path [] {
       if $gstatus.in_git_repo {
         (n_hl create "" $cs.path $palette.graym)
       } else {
-        (n_hl create "" $cs.path $palette.bgm)
+        (n_hl create "" $cs.path)
       })
 
   $"(n_hl render $lsep)(n_hl render $path)(n_hl render $rsep)"
@@ -108,14 +108,14 @@ def show-git [] {
     let revc = (n_hl create $r $palette.bgh $palette.graym)
     let staged = (n_hl create $s $palette.green $palette.graym)
     let local = (n_hl create $l $palette.red $palette.graym)
-    let rsep = (n_hl create "" $palette.graym $palette.bgm)
+    let rsep = (n_hl create "" $palette.graym)
 
     $"(n_hl render $name)(n_hl render $revc)(n_hl render $staged)(n_hl render $local)(n_hl render $rsep)"
   }
 }
 
 def show-timestamp [] {
-  let lsep = (n_hl create "\n" $cs.time $palette.bgm)
+  let lsep = (n_hl create "\n" $cs.time)
   let ts = (n_hl create (date now | date format "%H:%M:%S") $palette.bgh $cs.time)
 
   $"(n_hl render $lsep)(n_hl render $ts)"
@@ -133,7 +133,7 @@ def show-venv [mode: string] {
 
   let lsep = (n_hl create "" $cs.venv $cs.time)
   let venv = (n_hl create $"(n_emo get-emoji)($name)" $palette.bgh $cs.venv)
-  let rsep = (n_hl create $sym $cs.venv $palette.bgm)
+  let rsep = (n_hl create $sym $cs.venv)
 
   $"(n_hl render $lsep)(n_hl render $venv)(n_hl render $rsep)"
 }
