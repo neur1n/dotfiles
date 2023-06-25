@@ -1,0 +1,20 @@
+set autoindent
+set backspace=indent,start
+set cursorline
+set hlsearch
+set incsearch
+set number
+set scrolloff=10
+set vsvimcaret=50
+
+nnoremap <C-O> :vsc View.NavigateBackward<CR>
+nnoremap <C-I> :vsc View.NavigateForward<CR>
+
+nnoremap <C-p> :vsc View.PreviousError<CR>
+nnoremap <C-n> :vsc View.NextError<CR>
+
+nnoremap gcc :vsc Edit.ToggleComment<CR>
+
+nnoremap gD :vsc Edit.GoToDeclaration<CR>
+nnoremap gd :vsc Edit.GoToDefinition<CR>
+nnoremap gr :vsc Edit.GoToReference<CR>
