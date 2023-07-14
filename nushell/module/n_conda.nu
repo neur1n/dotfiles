@@ -28,7 +28,7 @@ export def-env activate [name: string] {
     return
   }
 
-  if not $name in $env.CONDA_ENVS {
+  if not ($name in $env.CONDA_ENVS) {
     echo $"Environment ($name) is invalid. Available:"
     echo $env.CONDA_ENVS
     return
