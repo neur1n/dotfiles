@@ -1,8 +1,8 @@
-use n_os.nu
+use n_sys.nu
 
 
 export def append-path [paths: path] {
-  if (n_os is-windows) {
+  if (n_sys is-windows) {
     let-env Path = ($env.Path | append $paths)
     $env.Path
   } else {
@@ -16,7 +16,7 @@ export def fzf-nvim [] {
 }
 
 export def insert-path [paths: path] {
-  if (n_os is-windows) {
+  if (n_sys is-windows) {
     let-env Path = ($env.Path | prepend $paths)
     $env.Path
   } else {
@@ -51,7 +51,7 @@ export def same-file [file1: path, file2: path, echo: bool = false] {
 }
 
 export def softlink [src: path, dst: path] {
-  if (n_os is-windows) {
+  if (n_sys is-windows) {
     MKLINK /J $dst $src
   } else {
     ln -s $src $dst

@@ -1,5 +1,9 @@
-export def hostname [] {
-  (sys).host.hostname
+export def ip [] {
+  if (is-windows) {
+    (ipconfig | find "IPv4 Address").0 | str replace ".*\\b((\\d{1,3}\\.){3}\\d{1,3})" "$1"
+  } else {
+    (hostname -I | awk "{print $1}")
+  }
 }
 
 export def is-apple [] {

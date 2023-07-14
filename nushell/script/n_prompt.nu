@@ -1,5 +1,5 @@
 use n_emo.nu
-use n_os.nu
+use n_sys.nu
 use n_hl.nu
 use n_plt.nu
 use n_util.nu
@@ -10,24 +10,34 @@ let palette = (n_plt get-palette)
 let rainbow = (n_plt get-rainbow $palette)
 
 let cs = {
-  logo: ($rainbow | get (n_util random-index $rainbow)),
+  sess: ($rainbow | get (n_util random-index $rainbow)),
   path: ($rainbow | get (n_util random-index $rainbow)),
   time: ($rainbow | get (n_util random-index $rainbow)),
   venv: ($rainbow | get (n_util random-index $rainbow)),
   indi: ($rainbow | get (n_util random-index $rainbow))
 }
 
-def show-logo [] {
-  let sep = (n_hl create "" $cs.logo)
-  let logo = (n_hl create (n_os os-logo) $palette.bgh $cs.logo)
+def show-session [] {
+  let sep = (n_hl create "" $cs.sess)
 
-  $"(n_hl render $sep)(n_hl render $logo)"
+  let logo = (n_sys os-logo)
+  let user = (
+      if (n_sys is-windows) {
+        $env.USERNAME
+      } else {
+        (whoami)
+      })
+  let addr = (n_sys ip)
+
+  let sess = (n_hl create $"($logo) ($user)@($addr)" $palette.bgh $cs.sess)
+
+  $"(n_hl render $sep)(n_hl render $sess)"
 }
 
 def show-path [] {
   let gstatus = (panache-git repo-structured)
 
-  let lsep = (n_hl create "" $cs.path $cs.logo)
+  let lsep = (n_hl create "" $cs.path $cs.sess)
   let path = (n_hl create $env.PWD $palette.bgh $cs.path)
   let rsep = (
       if $gstatus.in_git_repo {
@@ -139,7 +149,7 @@ def show-venv [mode: string] {
 }
 
 def left-prompt [] {
-  $"(show-logo)(show-path)(show-git)"
+  $"(show-session)(show-path)(show-git)"
 }
 
 def right-prompt [] {
