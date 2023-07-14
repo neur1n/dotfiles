@@ -29,7 +29,7 @@ def show-session [] {
       })
   let addr = (n_sys ip)
 
-  let sess = (n_hl create $"($logo) ($user)@($addr)" $palette.bgh $cs.sess)
+  let sess = (n_hl create $"($user)($logo)($addr)" $palette.bgh $cs.sess)
 
   $"(n_hl render $sep)(n_hl render $sess)"
 }
