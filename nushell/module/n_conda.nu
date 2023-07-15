@@ -24,13 +24,13 @@ export-env {
 
 export def-env activate [name: string] {
   if ($env.CONDA_ROOT | is-empty) {
-    echo "Neither Conda nor Mamba is valid."
+    print "Neither Conda nor Mamba is valid."
     return
   }
 
   if not ($name in $env.CONDA_ENVS) {
-    echo $"Environment ($name) is invalid. Available:"
-    echo $env.CONDA_ENVS
+    print $"Environment ($name) is invalid. Available:"
+    print $env.CONDA_ENVS
     return
   }
 
@@ -46,7 +46,7 @@ export def-env activate [name: string] {
 
 export def-env deactivate [] {
   if ($env.CONDA_ROOT | is-empty) {
-    echo "Neither Conda nor Mamba is valid."
+    print "Neither Conda nor Mamba is valid."
     return
   }
 

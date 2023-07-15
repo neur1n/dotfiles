@@ -60,6 +60,6 @@ export def run-cmake [
 
   if ("compile_commands.json" | path exists) {
     cp "compile_commands.json" $src
-    echo $"compile_commands.json copied to ($src | path expand)"
+    print $"compile_commands.json copied to ($src | path expand)"
   }
 }

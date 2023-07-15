@@ -41,7 +41,7 @@ export def-env activate [
     --sdk    (-s): string = "latest"  # Version of Windows SDK, must be "latest" or a valid version string
   ] {
   if (($env.MSVS_ROOT | is-empty) or ($env.MSVS_MSVC_ROOT | is-empty)) {
-    echo "Either Microsoft Visual Studio or MSVC is valid."
+    print "Either Microsoft Visual Studio or MSVC is valid."
     return
   }
 
@@ -55,19 +55,19 @@ export def-env activate [
       })
 
   if (($fh != "x64") and ($fh != "x86")) {
-    echo $"Wrong host architecture specified: ($fh)."
+    print $"Wrong host architecture specified: ($fh)."
     help n_msvc activate
     return
   }
 
   if (($ft != "x64") and ($ft != "x86")) {
-    echo $"Wrong target architecture specified: ($ft)."
+    print $"Wrong target architecture specified: ($ft)."
     help n_msvc activate
     return
   }
 
   if not ($"($env.MSVS_MSDK_ROOT)bin/($fs)" | path exists) {
-    echo $"Invalid Windows SDK version specified: ($fs)."
+    print $"Invalid Windows SDK version specified: ($fs)."
     return
   }
 
@@ -135,7 +135,7 @@ export def-env activate [
 
 export def-env deactivate [] {
   if (($env.MSVS_ROOT | is-empty) or ($env.MSVS_MSVC_ROOT | is-empty)) {
-    echo "Either Microsoft Visual Studio or MSVC is valid."
+    print "Either Microsoft Visual Studio or MSVC is valid."
     return
   }
 
