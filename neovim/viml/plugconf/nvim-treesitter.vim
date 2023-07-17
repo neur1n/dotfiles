@@ -4,7 +4,7 @@ lua << EOF
 -- require("nvim-treesitter.install").prefer_git = false
 
 require("nvim-treesitter.configs").setup {
-  ensure_installed = {"c", "python"},
+  ensure_installed = {"c", "nu", "python"},
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
