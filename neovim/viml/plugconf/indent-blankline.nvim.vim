@@ -1,5 +1,8 @@
 scriptencoding utf-8
 
+set list
+set listchars=tab:⇥\ ,trail:·,nbsp:␣,extends:»,precedes:«
+
 lua << EOF
 require("indent_blankline").setup{
   enabled = false,
