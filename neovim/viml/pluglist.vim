@@ -10,6 +10,7 @@ let s:plugins = [
       \ {'author': 'LhKipp'         , 'repo': 'nvim-nu'              , 'opt': {}},
       \ {'author': 'kylechui'       , 'repo': 'nvim-surround'        , 'opt': {}},
       \ {'author': 'nvim-treesitter', 'repo': 'nvim-treesitter'      , 'opt': {'do': ':TSUpdate'}},
+      \ {'author': 'nguyenvukhang'  , 'repo': '/nvim-toggler'        , 'opt': {}},
       \ {'author': 'nvim-treesitter', 'repo': 'playground'           , 'opt': {}},
       \ {'author': 'nvim-lua'       , 'repo': 'plenary.nvim'         , 'opt': {}},
       \ {'author': 'nvim-telescope' , 'repo': 'telescope.nvim'       , 'opt': {'branch': '0.1.x'}},
@@ -18,7 +19,6 @@ let s:plugins = [
       \ {'author': 'junegunn'       , 'repo': 'vim-easy-align'       , 'opt': {}},
       \ {'author': 'lukas-reineke'  , 'repo': 'indent-blankline.nvim', 'opt': {}},
       \ {'author': 'matze'          , 'repo': 'vim-move'             , 'opt': {}},
-      \ {'author': 'triglav'        , 'repo': 'vim-visual-increment' , 'opt': {}},
       \ {'author': 'mg979'          , 'repo': 'vim-visual-multi'     , 'opt': {}},
       \ {'author': 'wesQ3'          , 'repo': 'vim-windowswap'       , 'opt': {}},
       "\ COMPLETION

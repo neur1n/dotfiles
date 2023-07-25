@@ -7,7 +7,7 @@ snippet assert "assert statement"
 snippet class "class"
 	class ${1:`substitute(expand('%:r:h'), '\%(^\|_\)\(.\)', '\U\1', 'g')`}(${2:object}):
 		def __init__(self, ${3:args}):
-			super().__init__(${4:args})
+			super($1, self).__init__(${4:args})
 			$0
 
 snippet fprint "formatted print"
