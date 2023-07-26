@@ -50,7 +50,7 @@ return {
   },
   line_height = 1.0,
   tab_bar_at_bottom = true,
-  window_close_confirmation = "NeverPrompt",
+  window_close_confirmation = "AlwaysPrompt",
   window_padding = {
     top = 0,
     bottom = 0,
