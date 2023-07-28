@@ -20,6 +20,7 @@ let s:plugins = [
       \ {'author': 'matze'          , 'repo': 'vim-move'             , 'opt': {}},
       \ {'author': 'mg979'          , 'repo': 'vim-visual-multi'     , 'opt': {}},
       \ {'author': 'wesQ3'          , 'repo': 'vim-windowswap'       , 'opt': {}},
+      \ {'author': 'liuchengxu'     , 'repo': 'vista.vim'            , 'opt': {}},
       "\ COMPLETION
       \ {'author': 'neoclide'       , 'repo': 'coc.nvim'            , 'opt': {'branch': 'release'}},
       \ {'author': 'neoclide'       , 'repo': 'coc-neco'            , 'opt': {'for': 'vim'}},
