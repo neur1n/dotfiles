@@ -24,6 +24,7 @@ inoremap <silent><expr> <CR>
       \ coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
 
 nnoremap <silent> K :call <SID>ShowDocumentation()<CR>
+nnoremap <silent> <Leader>st :CocList outline<CR>
 
 vmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
 nmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
