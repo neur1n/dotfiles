@@ -7,7 +7,7 @@ let s:plugins = [
       \ {'author': 'skywind3000'    , 'repo': 'asyncrun.vim'         , 'opt': {}},
       \ {'author': 'skywind3000'    , 'repo': 'asynctasks.vim'       , 'opt': {}},
       \ {'author': 'numToStr'       , 'repo': 'Comment.nvim'         , 'opt': {}},
-      \ {'author': 'ggandor'        , 'repo': 'leap.nvim'            , 'opt': {}},
+      \ {'author': 'folke'          , 'repo': 'flash.nvim'           , 'opt': {}},
       \ {'author': 'LhKipp'         , 'repo': 'nvim-nu'              , 'opt': {}},
       \ {'author': 'kylechui'       , 'repo': 'nvim-surround'        , 'opt': {}},
       \ {'author': 'nvim-treesitter', 'repo': 'nvim-treesitter'      , 'opt': {'do': ':TSUpdate'}},
