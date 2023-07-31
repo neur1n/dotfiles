@@ -11,5 +11,3 @@ nnoremap <Leader>sg <Cmd>lua require('telescope.builtin').live_grep()<CR>
 nnoremap <Leader>sh <Cmd>lua require('telescope.builtin').oldfiles()<CR>
 nnoremap <Leader>sr <Cmd>lua require('telescope.builtin').find_files({cwd=vim.fn['neutil#buf#RootDirectory']()})<CR>
 nnoremap <Leader>ss <Cmd>lua require('telescope.builtin').search_history()<CR>
-
-" nnoremap <Leader>st <Cmd>Telescope coc document_symbols<CR>
