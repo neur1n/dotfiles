@@ -12,7 +12,11 @@ export def append-path [paths: path] {
 }
 
 export def fzf-nvim [] {
-  nvim (fzf | str trim)
+  let file = (fzf | str trim)
+
+  if not ($file | is-empty) {
+    nvim  $file
+  }
 }
 
 export def insert-path [paths: path] {
