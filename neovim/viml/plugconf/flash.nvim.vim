@@ -8,4 +8,7 @@ require("flash").setup({
     char = {jump_labels = true},
   },
 })
+
+vim.keymap.set({"n", "x", "o"}, "t", "<Cmd>lua require('plugconf.flash').HopWord(true)<CR>")
+vim.keymap.set({"n", "x", "o"}, "T", "<Cmd>lua require('plugconf.flash').HopWord(false)<CR>")
 EOF
