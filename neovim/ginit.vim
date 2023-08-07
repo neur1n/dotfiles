@@ -27,7 +27,7 @@ elseif has('unix')
   let s:cmd = 'xdpyinfo | grep dimensions'
 endif
 
-if matchstr(system(s:cmd), '[0-9]\+') == 2560
+if matchstr(system(s:cmd), '[0-9]\+') >= 2560
   execute printf('GuiFont! %s:h%d', s:fonts[s:index]['name'], s:fonts[s:index]['size'])
 else
   execute printf('GuiFont! %s:h%d', s:fonts[s:index]['name'], s:fonts[s:index]['size'] - 2)
