@@ -2,6 +2,8 @@ local M = {}
 
 local Wezterm = require("wezterm")
 
+local Prompt = require("n_prompt")
+
 local map = {
   {key = "UpArrow", mods = "ALT", action = Wezterm.action.ActivatePaneDirection("Up")},
   {key = "DownArrow", mods = "ALT", action = Wezterm.action.ActivatePaneDirection("Down")},

@@ -1,19 +1,22 @@
 local Wezterm = require("wezterm")
 
-local Colorscheme = require("colorscheme")
-local Font = require("font")
-local Launcher= require("launcher")
-local Keymap= require("keymap")
+local Color = require("n_color")
+local Font = require("n_font")
+local Keymap= require("n_keymap")
+local Launcher= require("n_launcher")
 
 Wezterm.on("update-right-status", function(window, pane)
+  local workspace = "[" .. window:active_workspace() .. "] "
   local date = Wezterm.strftime("%a %Y-%m-%d %H:%M ")
-  window:set_right_status(date)
+  window:set_right_status(workspace .. date)
 end)
 
 local font = Font.get()
 
-return {
-  colors = Colorscheme.get(),
+local config = {}
+
+config = {
+  colors = Color.get(),
   default_cwd = ".",
   default_prog = {"nu"},
   enable_scroll_bar = true,
@@ -34,3 +37,5 @@ return {
     right = 0,
   },
 }
+
+return config
