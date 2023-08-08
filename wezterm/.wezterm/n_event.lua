@@ -50,7 +50,7 @@ end
 
 local function invoke(window, pane, event)
   local patterns = {
-    "(ssh%d+)%s*(%d*)",
+    "([^%s]+)%s*(%d*)",
   }
 
   for _, p in pairs(patterns) do
