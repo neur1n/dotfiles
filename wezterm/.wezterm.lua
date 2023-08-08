@@ -5,17 +5,14 @@ local Font = require("n_font")
 local Keymap= require("n_keymap")
 local Launcher= require("n_launcher")
 
-Wezterm.on("update-right-status", function(window, pane)
-  local workspace = "[" .. window:active_workspace() .. "] "
+Wezterm.on("update-right-status", function(window, _)
   local date = Wezterm.strftime("%a %Y-%m-%d %H:%M ")
-  window:set_right_status(workspace .. date)
+  window:set_right_status(date)
 end)
 
 local font = Font.get()
 
-local config = {}
-
-config = {
+local config = {
   colors = Color.get(),
   default_cwd = ".",
   default_prog = {"nu"},

@@ -1,6 +1,6 @@
-local M = {}
-
 local Wezterm = require("wezterm")
+
+local M = {}
 
 function M.set(text, callback)
   return Wezterm.action.PromptInputLine{
