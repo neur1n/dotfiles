@@ -5,65 +5,70 @@ local Prompt = require("n_prompt")
 
 local M = {}
 
-local function load_event(path, limit)
+local function load(path)
   local f = io.open(path,"r")
 
   if f == nil then
     return {}
   end
 
+  local json = Wezterm.json_parse((f:read("a")))
+  f:close()
+
   local event = {}
-  local count = 0
 
-  for line in f:lines() do
-    if limit > 0 and count >= limit then
-      break
-    end
-    count = count + 1
-
-    local lhs, rhs = string.match(line, "^(.-)%s+(%d+)$")
-    if lhs ~= nil then
-      rhs = rhs ~= nil and rhs or 0
-    end
-    event[count] = {lhs, rhs}
+  for _, e in pairs(json.event) do
+    local cmd, ms = next(e)
+    table.insert(event, {[cmd] = ms})
   end
 
   return event
 end
 
-local function run(window, _, event, split)
-  local path = string.format("%s/.wezterm/%s.event", Wezterm.config_dir, event)
-  local event = load_event(path, -1)
+local function invoke(window, pane, name, new, split)
+  local path = string.format("%s/.wezterm/%s.json", Wezterm.config_dir, name)
+  local event = load(path)
 
   if #event ~= 0 then
-    local _, pane, _ = window:mux_window():spawn_tab{}
-    local panes = Pane.split(pane, split)
+    local panes = nil
 
-    for _, p in pairs(panes) do
-      for _, c in pairs(event) do
-        p:send_text(c[1] .. "\r")
-        Wezterm.sleep_ms(c[2])
+    if new then
+      local _, p, _ = window:mux_window():spawn_tab{}
+      panes = Pane.split(p, split)
+    else
+      panes = Pane.split(pane, split)
+    end
+
+    local cmd = nil
+    local ms = nil
+
+    -- NOTE: Iterating 'event' in the outer loop requires shorter sleeps.
+    for _, e in ipairs(event) do
+      for _, p in pairs(panes) do
+        cmd, ms = next(e)
+        p:send_text(cmd .. "\r")
+        Wezterm.sleep_ms(ms)
       end
     end
   end
 end
 
-local function invoke(window, pane, event)
+local function parse(window, pane, line)
   local patterns = {
-    "([^%s]+)%s*(%d*)",
+    "([^%s]+)%s+([ft])%s*(%d*)",
   }
 
   for _, p in pairs(patterns) do
-    local name, split = string.match(event, p)
+    local name, new, split = string.match(line, p)
 
-    if name then
-      run(window, pane, name, split)
+    if name ~=nil and new ~= nil then
+      invoke(window, pane, name, (new == "t" or false), split)
     end
   end
 end
 
 function M.select()
-  return Prompt.set("Select an event", invoke)
+  return Prompt.set("Select an event", parse)
 end
 
 return M
