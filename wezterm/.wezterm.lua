@@ -5,6 +5,15 @@ local Font = require("n_font")
 local Keymap= require("n_keymap")
 local Launcher= require("n_launcher")
 
+Wezterm.on("gui-startup", function(_)
+  local _, _, window = Wezterm.mux.spawn_window({})
+  local dim = window:gui_window():get_dimensions()
+  local scr = Wezterm.gui.screens()
+  local x = (scr.active.width - dim.pixel_width) / 2
+  local y = (scr.active.height - dim.pixel_height) / 2
+  window:gui_window():set_position(x, y)
+end)
+
 Wezterm.on("update-right-status", function(window, _)
   local date = Wezterm.strftime("%a %Y-%m-%d %H:%M ")
   window:set_right_status(date)
@@ -17,8 +26,8 @@ local config = {
   default_cwd = ".",
   default_prog = {"nu"},
   enable_scroll_bar = true,
-  font = Wezterm.font(font["name"]),
-  font_size = font["size"],
+  font = Wezterm.font(font.name),
+  font_size = font.size,
   harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
   initial_cols = 120,
   initial_rows = 30,
