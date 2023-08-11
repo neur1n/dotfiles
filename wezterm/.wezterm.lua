@@ -4,6 +4,7 @@ local Color = require("n_color")
 local Font = require("n_font")
 local Keymap= require("n_keymap")
 local Launcher= require("n_launcher")
+local Snippet= require("n_snippet")
 
 Wezterm.on("gui-startup", function(_)
   local _, _, window = Wezterm.mux.spawn_window({})
@@ -14,9 +15,13 @@ Wezterm.on("gui-startup", function(_)
   window:gui_window():set_position(x, y)
 end)
 
-Wezterm.on("update-right-status", function(window, _)
+Wezterm.on("update-right-status", function(window, pane)
   local date = Wezterm.strftime("%a %Y-%m-%d %H:%M ")
   window:set_right_status(date)
+end)
+
+Wezterm.on(Keymap.snippet, function(window, pane)
+  window:perform_action(Snippet.select(Keymap.snippet), pane)
 end)
 
 local font = Font.get()

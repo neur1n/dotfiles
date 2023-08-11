@@ -14,9 +14,9 @@ local function split4(pane)
 end
 
 function M.split(pane, count)
-  if count == "2" then
+  if count == 2 then
     return split2(pane)
-  elseif count == "4" then
+  elseif count == 4 then
     return split4(pane)
   end
 
