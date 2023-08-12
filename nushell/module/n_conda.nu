@@ -1,5 +1,5 @@
 export-env {
-  let-env CONDA_BASE_PATH = (if ((sys).host.name == "Windows") {$env.Path} else {$env.PATH})
+  $env.CONDA_BASE_PATH = (if ((sys).host.name == "Windows") {$env.Path} else {$env.PATH})
 
   let info = (
       if not (which mamba | is-empty) {
@@ -10,16 +10,16 @@ export-env {
         ('{"root_prefix": "", "envs": ""}' | from json)
       })
 
-  let-env CONDA_ROOT = $info.root_prefix
+  $env.CONDA_ROOT = $info.root_prefix
 
-  let-env CONDA_ENVS = ($info.envs | reduce -f {} {|it, acc|
+  $env.CONDA_ENVS = ($info.envs | reduce -f {} {|it, acc|
       if $it == $info.root_prefix {
         $acc | upsert "base" $it
       } else {
         $acc | upsert ($it | path basename) $it
       }})
 
-  let-env CONDA_CURR = null
+  $env.CONDA_CURR = null
 }
 
 export def-env activate [name: string] {
@@ -50,9 +50,13 @@ export def-env deactivate [] {
     return
   }
 
-  let-env CONDA_CURR = null
+  $env.CONDA_CURR = null
 
   load-env {Path: $env.CONDA_BASE_PATH, PATH: $env.CONDA_BASE_PATH}
+}
+
+export def-env list [] {
+  print $env.CONDA_ENVS
 }
 
 def update-path-linux [env_path: path] {

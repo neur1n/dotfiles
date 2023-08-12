@@ -180,7 +180,7 @@ let default_theme = {
 }
 
 # The default config record. This is where much of your global configuration is setup.
-let-env config = {
+$env.config = {
   show_banner: false # true or false to enable or disable the banner
   ls: {
     use_ls_colors: true # use the LS_COLORS environment variable to colorize output

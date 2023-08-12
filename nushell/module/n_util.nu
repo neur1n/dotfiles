@@ -3,10 +3,10 @@ use n_sys.nu
 
 export def append-path [paths: path] {
   if (n_sys is-windows) {
-    let-env Path = ($env.Path | append $paths)
+    $env.Path = ($env.Path | append $paths)
     $env.Path
   } else {
-    let-env PATH = ($env.PATH | append $paths)
+    $env.PATH = ($env.PATH | append $paths)
     $env.PATH
   }
 }
@@ -21,10 +21,10 @@ export def fzf-nvim [] {
 
 export def insert-path [paths: path] {
   if (n_sys is-windows) {
-    let-env Path = ($env.Path | prepend $paths)
+    $env.Path = ($env.Path | prepend $paths)
     $env.Path
   } else {
-    let-env PATH = ($env.PATH | prepend $paths)
+    $env.PATH = ($env.PATH | prepend $paths)
     $env.PATH
   }
 }

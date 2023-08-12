@@ -1,5 +1,5 @@
 export-env {
-  let-env MSVS_BASE_PATH = $env.Path
+  $env.MSVS_BASE_PATH = $env.Path
 
   let info = (
       if not (which vswhere | is-empty) {
@@ -9,9 +9,9 @@ export-env {
       }
   )
 
-  let-env MSVS_ROOT = ($info.installationPath.0 | str replace -a '\\' '/')
+  $env.MSVS_ROOT = ($info.installationPath.0 | str replace -a '\\' '/')
 
-  let-env MSVS_MSVC_ROOT = (
+  $env.MSVS_MSVC_ROOT = (
       if not ($"($env.MSVS_ROOT)/VC/Tools/MSVC/" | path exists) {
         ""
       } else if (ls $"($env.MSVS_ROOT)/VC/Tools/MSVC/*" | is-empty) {
@@ -20,11 +20,11 @@ export-env {
         ((ls $"($env.MSVS_ROOT)/VC/Tools/MSVC/*").name.0 | str replace -a '\\' '/')
       })
 
-  let-env MSVS_MSDK_ROOT = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' InstallationFolder | get value)
+  $env.MSVS_MSDK_ROOT = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' InstallationFolder | get value)
 
-  let-env MSVS_MSDK_VER = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' ProductVersion | get value) + ".0"
+  $env.MSVS_MSDK_VER = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' ProductVersion | get value) + ".0"
 
-  let-env MSVS_INCLUDE_PATH = ([
+  $env.MSVS_INCLUDE_PATH = ([
     $"($env.MSVS_ROOT)/Include/($env.MSVS_MSDK_VER)/cppwinrt/winrt",
     $"($env.MSVS_MSVC_ROOT)/include",
     $"($env.MSVS_MSDK_ROOT)Include/($env.MSVS_MSDK_VER)/cppwinrt/winrt",
