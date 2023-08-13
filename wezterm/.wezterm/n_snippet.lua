@@ -59,4 +59,10 @@ function M.select(path)
   }
 end
 
+M.path = Wezterm.config_dir .. "/.wezterm/snippet_vault.json"
+
+Wezterm.on(M.path, function(window, pane)
+  window:perform_action(M.select(M.path), pane)
+end)
+
 return M

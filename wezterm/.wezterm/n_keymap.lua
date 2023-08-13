@@ -1,8 +1,8 @@
 local Wezterm = require("wezterm")
 
-local M = {}
+local Snippet= require("n_snippet")
 
-M.snippet = Wezterm.config_dir .. "/.wezterm/snippet_vault.json"
+local M = {}
 
 local map = {
   {key = "UpArrow", mods = "ALT", action = Wezterm.action.ActivatePaneDirection("Up")},
@@ -10,7 +10,7 @@ local map = {
   {key = "LeftArrow", mods = "ALT", action = Wezterm.action.ActivatePaneDirection("Left")},
   {key = "RightArrow", mods = "ALT", action = Wezterm.action.ActivatePaneDirection("Right")},
   {key = "l", mods = "CTRL|SHIFT", action = Wezterm.action.ShowLauncher},
-  {key = "s", mods = "CTRL|SHIFT", action = Wezterm.action.EmitEvent(M.snippet)},
+  {key = "s", mods = "CTRL|SHIFT", action = Wezterm.action.EmitEvent(Snippet.path)},
   {key = "_", mods = "ALT|SHIFT", action = Wezterm.action.SplitPane{direction = "Down"}},
   {key = "+", mods = "ALT|SHIFT", action = Wezterm.action.SplitPane{direction = "Right"}},
 }
