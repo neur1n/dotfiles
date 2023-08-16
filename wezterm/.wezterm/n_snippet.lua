@@ -34,7 +34,6 @@ function M.select(path)
     action = Wezterm.action_callback(function(window, pane, id, label)
       local snippet = Wezterm.json_parse(id)
       local panes = nil
-      print(snippet)
 
       if snippet.spawn == true then
         local _, p, _ = window:mux_window():spawn_tab{}
