@@ -11,7 +11,7 @@ export def is-apple [] {
 }
 
 export def is-linux [] {
-  (sys).host.name == "Linux"
+  (sys).host.long_os_version =~ ".*Linux.*"
 }
 
 export def is-windows [] {

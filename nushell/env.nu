@@ -32,7 +32,7 @@ $env.NU_PLUGIN_DIRS = [
 $env.NUCONF = ($nu.config-path | path expand | path dirname)
 
 let bin = (
-  if (sys).host.name == "Linux" {
+  if (sys).host.long_os_version =~ ".*Linux.*" {
     (ls $"($env.NUCONF)/../bin/linux/*").name
   } else if (sys).host.name == "Windows" {
     (ls $"($env.NUCONF)/../bin/windows/*").name
