@@ -31,19 +31,27 @@ $env.NU_PLUGIN_DIRS = [
 #================================================================= Customize{{{
 $env.NUCONF = ($nu.config-path | path expand | path dirname)
 
+let bin = (
+  if (sys).host.name == "Linux" {
+    (ls $"($env.NUCONF)/../bin/linux/*").name
+  } else if (sys).host.name == "Windows" {
+    (ls $"($env.NUCONF)/../bin/windows/*").name
+  }
+)
+
 $env.Path = (
   if "Path" in $env {
-    $env.Path | split row (char esep) | prepend (ls $"($env.NUCONF)/../bin/*/*").name
+    $env.Path | split row (char esep) | prepend $bin
   } else {
-    $env.PATH | split row (char esep) | prepend (ls $"($env.NUCONF)/../bin/*/*").name
+    $env.PATH | split row (char esep) | prepend $bin
   }
 )
 
 $env.PATH = (
   if "Path" in $env {
-    $env.Path | split row (char esep) | prepend (ls $"($env.NUCONF)/../bin/*/*").name
+    $env.Path | split row (char esep) | prepend $bin
   } else {
-    $env.PATH | split row (char esep) | prepend (ls $"($env.NUCONF)/../bin/*/*").name
+    $env.PATH | split row (char esep) | prepend $bin
   }
 )
 
