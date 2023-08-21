@@ -1,8 +1,7 @@
 extends _
 
 snippet assert "assert statement"
-	assert ${1:expr}, "${2:msg}"
-	$0
+	assert ${1:expr}, "${2:msg}"$0
 
 snippet class "class"
 	class ${1:`substitute(expand('%:r:h'), '\%(^\|_\)\(.\)', '\U\1', 'g')`}(${2:object}):
@@ -11,8 +10,7 @@ snippet class "class"
 			$0
 
 snippet fprint "formatted print"
-	print(f"$1")
-	$0
+	print(f"$1")$0
 
 snippet ifmain "if main"
 	if __name__ == "__main__":
