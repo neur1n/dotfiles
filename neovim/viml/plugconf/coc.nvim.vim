@@ -26,8 +26,9 @@ inoremap <silent><expr> <CR>
 nnoremap <silent> K :call <SID>ShowDocumentation()<CR>
 nnoremap <silent> <Leader>st :CocList outline<CR>
 
-vmap <silent> <Leader>ca <Plug>(coc-codeaction-selected)
-nmap <silent> <Leader>ca <Plug>(coc-codeaction-selected)
+nmap <silent> <Leader>ac <Plug>(coc-codeaction-cursor)
+nmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
+xmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
 
 nmap <silent> <Leader>gD <Plug>(coc-declaration)
 nmap <silent> <Leader>gd <Plug>(coc-definition)
