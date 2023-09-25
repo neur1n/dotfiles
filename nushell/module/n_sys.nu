@@ -1,6 +1,6 @@
 export def ip [] {
   if (is-windows) {
-    (ipconfig | find "IPv4 Address").0 | str replace ".*\\b((\\d{1,3}\\.){3}\\d{1,3})" "$1"
+    (ipconfig | find "IPv4 Address").0 | str replace -am '.*\b((\d{1,3}\.){3}\d{1,3})\b' '$1'
   } else {
     (hostname -I | awk "{print $1}")
   }

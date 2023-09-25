@@ -126,7 +126,7 @@ def show-git [] {
 
 def show-timestamp [] {
   let lsep = (n_hl create "\n" $cs.time)
-  let ts = (n_hl create (date now | date format "%H:%M:%S") $palette.bgh $cs.time)
+  let ts = (n_hl create (date now | format date "%H:%M:%S") $palette.bgh $cs.time)
 
   $"(n_hl render $lsep)(n_hl render $ts)"
 }
@@ -154,8 +154,8 @@ def left-prompt [] {
 
 def right-prompt [] {
   let timestamp = ([
-      (date now | date format "%Y-%m-%d %H:%M:%S")
-  ] | str collect)
+      (date now | format date "%Y-%m-%d %H:%M:%S")
+  ] | str join)
 
   let prompt = $"($timestamp)"
 
