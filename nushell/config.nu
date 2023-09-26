@@ -263,7 +263,8 @@ $env.config = {
   history: {
     max_size: 10000 # Session has to be reloaded for this to take effect
     sync_on_enter: true # Enable to share history between multiple sessions, else you have to close the session to write history to file
-    file_format: "plaintext" # "sqlite" or "plaintext"
+    file_format: "sqlite" # "sqlite" or "plaintext"
+    isolation: true
   }
   completions: {
     case_sensitive: false # set to true to enable case-sensitive completions
