@@ -6,6 +6,7 @@ let s:plugins = [
       "\ GENERAL
       \ {'author': 'skywind3000'    , 'repo': 'asyncrun.vim'         , 'opt': {}},
       \ {'author': 'skywind3000'    , 'repo': 'asynctasks.vim'       , 'opt': {}},
+      \ {'author': 'smithbm2316'    , 'repo': 'centerpad.nvim'       , 'opt': {}},
       \ {'author': 'numToStr'       , 'repo': 'Comment.nvim'         , 'opt': {}},
       \ {'author': 'LhKipp'         , 'repo': 'nvim-nu'              , 'opt': {}},
       \ {'author': 'kylechui'       , 'repo': 'nvim-surround'        , 'opt': {}},
