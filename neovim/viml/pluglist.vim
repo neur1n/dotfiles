@@ -6,7 +6,6 @@ let s:plugins = [
       "\ GENERAL
       \ {'author': 'skywind3000'    , 'repo': 'asyncrun.vim'         , 'opt': {}},
       \ {'author': 'skywind3000'    , 'repo': 'asynctasks.vim'       , 'opt': {}},
-      \ {'author': 'smithbm2316'    , 'repo': 'centerpad.nvim'       , 'opt': {}},
       \ {'author': 'numToStr'       , 'repo': 'Comment.nvim'         , 'opt': {}},
       \ {'author': 'LhKipp'         , 'repo': 'nvim-nu'              , 'opt': {}},
       \ {'author': 'kylechui'       , 'repo': 'nvim-surround'        , 'opt': {}},
@@ -21,6 +20,7 @@ let s:plugins = [
       \ {'author': 'justinmk'       , 'repo': 'vim-sneak'            , 'opt': {}},
       \ {'author': 'mg979'          , 'repo': 'vim-visual-multi'     , 'opt': {}},
       \ {'author': 'wesQ3'          , 'repo': 'vim-windowswap'       , 'opt': {}},
+      \ {'author': 'folke'          , 'repo': 'zen-mode.nvim'        , 'opt': {}},
       "\ COMPLETION
       \ {'author': 'neoclide'       , 'repo': 'coc.nvim'             , 'opt': {'branch': 'release'}},
       \ {'author': 'neoclide'       , 'repo': 'coc-neco'             , 'opt': {'for': 'vim'}},
