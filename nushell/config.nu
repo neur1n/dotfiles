@@ -544,6 +544,7 @@ use n_util.nu
 source n_prompt.nu
 source ~/.zoxide.nu
 
+alias c-build = n_c run-build
 alias c-cmake = n_c run-cmake
 alias c-init = n_c init-workspace
 
