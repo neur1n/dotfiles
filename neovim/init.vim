@@ -31,6 +31,8 @@ set iminsert=0 imsearch=0
 set incsearch
 set laststatus=2                           " show statusline even only 1 window
 set linespace=0
+set list
+set listchars=tab:⇥\ ,trail:·,nbsp:␣,extends:»,precedes:«
 set modeline
 set mousemodel=popup
 set noshowmode
