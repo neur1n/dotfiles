@@ -54,6 +54,7 @@ function M.select(path)
       end
     end),
     choices = list,
+    fuzzy = true,
     title = "Snippets"
   }
 end
