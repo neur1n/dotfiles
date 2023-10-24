@@ -2,7 +2,7 @@
 let s:fonts = [
       \ {'name': '3270 Nerd Font Mono'           , 'size': 12},
       \ {'name': 'Agave Nerd Font Mono'          , 'size': 13},
-      \ {'name': 'CaskaydiaCove NFM'             , 'size': 12},
+      \ {'name': 'CaskaydiaCove Nerd Font Mono'  , 'size': 12},
       \ {'name': 'ComicShannsMono Nerd Font Mono', 'size': 12},
       \ {'name': 'FantasqueSansM Nerd Font Mono' , 'size': 13},
       \ {'name': 'FiraCode Nerd Font Mono Ret'   , 'size': 11},
