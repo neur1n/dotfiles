@@ -130,5 +130,5 @@ endfunction
 augroup n_coc
   autocmd!
   autocmd ColorScheme neucs call <SID>SetColors()
-  autocmd BufRead * CocStart
+  autocmd FileType * CocStart
 augroup END
