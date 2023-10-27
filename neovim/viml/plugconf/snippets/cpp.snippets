@@ -4,14 +4,26 @@ snippet class "generic class"
 	class ${1:`expand('%:r')`}
 	{
 	public:
-		$1();
+		$1(const $1&) = default;
+		$1& operator = (const $1&) = default;
+		$1($1&&) = default;
+		$1& operator = ($1&&) = default;
 
-		~$1();
+		$1() = default;
+
+		~$1() = default;
 
 	private:
 		class Impl;
 
-		Impl* m_impl;
+		Impl* m_impl{nullptr};
+	};  // class $1
+
+snippet interface "interface class"
+	class ${1:`expand('%:r')`}
+	{
+	public:
+		virtual ~$1() = default;
 	};  // class $1
 
 snippet namespace "namespace"
@@ -36,5 +48,5 @@ snippet singleton "singleton class"
 
 		~$1();
 
-		Impl *m_impl;
+		Impl *m_impl{nullptr};
 	};  // class $1

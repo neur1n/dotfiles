@@ -11,7 +11,6 @@ let s:plugins = [
       \ {'author': 'kylechui'       , 'repo': 'nvim-surround'        , 'opt': {}},
       \ {'author': 'nvim-treesitter', 'repo': 'nvim-treesitter'      , 'opt': {'do': ':TSUpdate'}},
       \ {'author': 'nguyenvukhang'  , 'repo': 'nvim-toggler'         , 'opt': {}},
-      \ {'author': 'nvim-treesitter', 'repo': 'playground'           , 'opt': {}},
       \ {'author': 'nvim-lua'       , 'repo': 'plenary.nvim'         , 'opt': {}},
       \ {'author': 'nvim-telescope' , 'repo': 'telescope.nvim'       , 'opt': {'branch': '0.1.x'}},
       \ {'author': 'junegunn'       , 'repo': 'vim-easy-align'       , 'opt': {}},
