@@ -71,10 +71,6 @@ call coc#config('git.branchCharacter', '')
 "---------------------------------------------------- neoclide/coc-highlight{{{
 call coc#config('colors.filetypes', ['*'])
 "}}}
-"--------------------------------------------- coc-extensions/coc-powershell{{{
-call coc#config('powershell.powerShellExePath', 'pwsh')
-call coc#config('powershell.integratedConsole.showOnStartup', v:false)
-"}}}
 "----------------------------------------------------- neoclide/coc-snippets{{{
 call coc#config('snippets.snipmate.enable', v:true)
 call coc#config('snippets.ultisnips.enable', v:false)
@@ -90,9 +86,6 @@ call coc#config('Lua.telemetry.enable', v:false)
 call coc#config('Lua.workspace.checkThirdParty', v:false)
 "}}}
 "---------------------------------------------------- fannheyward/coc-texlab{{{
-call coc#config('texlab.auxDirectory', 'build')
-call coc#config('texlab.build.onSave', v:true)
-call coc#config('texlab.build.executable', 'xelatex')
 call coc#config('texlab.build.args', [
       \ '-file-line-error',
       \ '-interaction=nonstopmode',
@@ -101,6 +94,10 @@ call coc#config('texlab.build.args', [
       \ '-synctex=1',
       \ '%f'
       \ ])
+call coc#config('texlab.build.auxDirectory', 'build')
+call coc#config('texlab.build.logDirectory', 'build')
+call coc#config('texlab.build.executable', 'xelatex')
+call coc#config('texlab.build.onSave', v:true)
 call coc#config('texlab.path', 'texlab')
 
 if has('unix')
