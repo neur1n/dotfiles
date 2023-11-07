@@ -94,8 +94,7 @@ call coc#config('texlab.build.args', [
       \ '-synctex=1',
       \ '%f'
       \ ])
-call coc#config('texlab.build.auxDirectory', 'build')
-call coc#config('texlab.build.logDirectory', 'build')
+call coc#config('texlab.auxDirectory', 'build')
 call coc#config('texlab.build.executable', 'xelatex')
 call coc#config('texlab.build.onSave', v:true)
 call coc#config('texlab.path', 'texlab')
