@@ -50,3 +50,6 @@ snippet singleton "singleton class"
 
 		Impl *m_impl{nullptr};
 	};  // class $1
+
+snippet xlog "x_log from x.h"
+	x_log('${1:d}', ${2:nullptr}, "$3"$4);$0
