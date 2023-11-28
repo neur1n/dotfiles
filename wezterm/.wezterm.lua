@@ -30,7 +30,7 @@ local config = {
   enable_scroll_bar = true,
   font = Wezterm.font(font.name),
   font_size = font.size,
-  harfbuzz_features = {"calt=0", "clig=0", "liga=0"},
+  harfbuzz_features = {"calt=1", "clig=1", "liga=1"},
   initial_cols = 200,
   initial_rows = 50,
   keys = Keymap.get(),
