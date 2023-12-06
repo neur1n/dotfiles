@@ -33,10 +33,11 @@ if has('win32')
 elseif has('unix')
   let s:cmd = 'xdpyinfo | grep dimensions'
 endif
+let s:scr_w = matchstr(system(s:cmd), '[0-9]\+')
 
-if matchstr(system(s:cmd), '[0-9]\+') >= 2560
-  execute printf('GuiFont! %s:h%d', s:fonts[s:index]['name'], s:fonts[s:index]['size'])
-else
+if s:scr_w > 2560
+  execute printf('GuiFont! %s:h%d', s:fonts[s:index]['name'], s:fonts[s:index]['size'] + 2)
+elseif s:scr_w < 2560
   execute printf('GuiFont! %s:h%d', s:fonts[s:index]['name'], s:fonts[s:index]['size'] - 2)
 endif
 

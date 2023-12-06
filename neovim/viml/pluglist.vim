@@ -6,7 +6,9 @@ let s:plugins = [
       "\ GENERAL
       \ {'author': 'skywind3000'    , 'repo': 'asyncrun.vim'         , 'opt': {}},
       \ {'author': 'skywind3000'    , 'repo': 'asynctasks.vim'       , 'opt': {}},
-      \ {'author': 'numToStr'       , 'repo': 'Comment.nvim'         , 'opt': {}},
+      \ {'author': 'github'         , 'repo': 'copilot.vim'          , 'opt': {}},
+      \ {'author': 'tpope'          , 'repo': 'vim-commentary'       , 'opt': {}},
+      \ {'author': 'ggandor'        , 'repo': 'leap.nvim'            , 'opt': {}},
       \ {'author': 'LhKipp'         , 'repo': 'nvim-nu'              , 'opt': {}},
       \ {'author': 'kylechui'       , 'repo': 'nvim-surround'        , 'opt': {}},
       \ {'author': 'nvim-treesitter', 'repo': 'nvim-treesitter'      , 'opt': {'do': ':TSUpdate'}},
@@ -16,7 +18,6 @@ let s:plugins = [
       \ {'author': 'junegunn'       , 'repo': 'vim-easy-align'       , 'opt': {}},
       \ {'author': 'lukas-reineke'  , 'repo': 'indent-blankline.nvim', 'opt': {}},
       \ {'author': 'matze'          , 'repo': 'vim-move'             , 'opt': {}},
-      \ {'author': 'justinmk'       , 'repo': 'vim-sneak'            , 'opt': {}},
       \ {'author': 'mg979'          , 'repo': 'vim-visual-multi'     , 'opt': {}},
       \ {'author': 'wesQ3'          , 'repo': 'vim-windowswap'       , 'opt': {}},
       \ {'author': 'folke'          , 'repo': 'zen-mode.nvim'        , 'opt': {}},
