@@ -1,3 +1,193 @@
+14.0.3 (2023-11-28)
+===================
+This is a patch release with a bug fix for the `--sortr` flag.
+
+Bug fixes:
+
+* [BUG #2664](https://github.com/BurntSushi/ripgrep/issues/2664):
+  Fix `--sortr=path`. I left a `todo!()` in the source. Oof.
+
+
+14.0.2 (2023-11-27)
+===================
+This is a patch release with a few small bug fixes.
+
+Bug fixes:
+
+* [BUG #2654](https://github.com/BurntSushi/ripgrep/issues/2654):
+  Fix `deb` release sha256 sum file.
+* [BUG #2658](https://github.com/BurntSushi/ripgrep/issues/2658):
+  Fix partial regression in the behavior of `--null-data --line-regexp`.
+* [BUG #2659](https://github.com/BurntSushi/ripgrep/issues/2659):
+  Fix Fish shell completions.
+* [BUG #2662](https://github.com/BurntSushi/ripgrep/issues/2662):
+  Fix typo in documentation for `-i/--ignore-case`.
+
+
+14.0.1 (2023-11-26)
+===================
+This a patch release meant to fix `cargo install ripgrep` on Windows.
+
+Bug fixes:
+
+* [BUG #2653](https://github.com/BurntSushi/ripgrep/issues/2653):
+  Include `pkg/windows/Manifest.xml` in crate package.
+
+
+14.0.0 (2023-11-26)
+===================
+ripgrep 14 is a new major version release of ripgrep that has some new
+features, performance improvements and a lot of bug fixes.
+
+The headlining feature in this release is hyperlink support. In this release,
+they are an opt-in feature but may change to an opt-out feature in the future.
+To enable them, try passing `--hyperlink-format default`. If you use [VS Code],
+then try passing `--hyperlink-format vscode`. Please [report your experience
+with hyperlinks][report-hyperlinks], positive or negative.
+
+[VS Code]: https://code.visualstudio.com/
+[report-hyperlinks]: https://github.com/BurntSushi/ripgrep/discussions/2611
+
+Another headlining development in this release is that it contains a rewrite
+of its regex engine. You generally shouldn't notice any changes, except for
+some searches may get faster. You can read more about the [regex engine rewrite
+on my blog][regex-internals]. Please [report your performance improvements or
+regressions that you notice][report-perf].
+
+[report-perf]: https://github.com/BurntSushi/ripgrep/discussions/2652
+
+Finally, ripgrep switched the library it uses for argument parsing. Users
+should not notice a difference in most cases (error messages have changed
+somewhat), but flag overrides should generally be more consistent. For example,
+things like `--no-ignore --ignore-vcs` work as one would expect (disables all
+filtering related to ignore rules except for rules found in version control
+systems such as `git`).
+
+[regex-internals]: https://blog.burntsushi.net/regex-internals/
+
+**BREAKING CHANGES**:
+
+* `rg -C1 -A2` used to be equivalent to `rg -A2`, but now it is equivalent to
+  `rg -B1 -A2`. That is, `-A` and `-B` no longer completely override `-C`.
+  Instead, they only partially override `-C`.
+
+Build process changes:
+
+* ripgrep's shell completions and man page are now created by running ripgrep
+with a new `--generate` flag. For example, `rg --generate man` will write a
+man page in `roff` format on stdout. The release archives have not changed.
+* The optional build dependency on `asciidoc` or `asciidoctor` has been
+dropped. Previously, it was used to produce ripgrep's man page. ripgrep now
+owns this process itself by writing `roff` directly.
+
+Performance improvements:
+
+* [PERF #1746](https://github.com/BurntSushi/ripgrep/issues/1746):
+  Make some cases with inner literals faster.
+* [PERF #1760](https://github.com/BurntSushi/ripgrep/issues/1760):
+  Make most searches with `\b` look-arounds (among others) much faster.
+* [PERF #2591](https://github.com/BurntSushi/ripgrep/pull/2591):
+  Parallel directory traversal now uses work stealing for faster searches.
+* [PERF #2642](https://github.com/BurntSushi/ripgrep/pull/2642):
+  Parallel directory traversal has some contention reduced.
+
+Feature enhancements:
+
+* Added or improved file type filtering for Ada, DITA, Elixir, Fuchsia, Gentoo,
+  Gradle, GraphQL, Markdown, Prolog, Raku, TypeScript, USD, V
+* [FEATURE #665](https://github.com/BurntSushi/ripgrep/issues/665):
+  Add a new `--hyperlink-format` flag that turns file paths into hyperlinks.
+* [FEATURE #1709](https://github.com/BurntSushi/ripgrep/issues/1709):
+  Improve documentation of ripgrep's behavior when stdout is a tty.
+* [FEATURE #1737](https://github.com/BurntSushi/ripgrep/issues/1737):
+  Provide binaries for Apple silicon.
+* [FEATURE #1790](https://github.com/BurntSushi/ripgrep/issues/1790):
+  Add new `--stop-on-nonmatch` flag.
+* [FEATURE #1814](https://github.com/BurntSushi/ripgrep/issues/1814):
+  Flags are now categorized in `-h/--help` output and ripgrep's man page.
+* [FEATURE #1838](https://github.com/BurntSushi/ripgrep/issues/1838):
+  An error is shown when searching for NUL bytes with binary detection enabled.
+* [FEATURE #2195](https://github.com/BurntSushi/ripgrep/issues/2195):
+  When `extra-verbose` mode is enabled in zsh, show extra file type info.
+* [FEATURE #2298](https://github.com/BurntSushi/ripgrep/issues/2298):
+  Add instructions for installing ripgrep using `cargo binstall`.
+* [FEATURE #2409](https://github.com/BurntSushi/ripgrep/pull/2409):
+  Added installation instructions for `winget`.
+* [FEATURE #2425](https://github.com/BurntSushi/ripgrep/pull/2425):
+  Shell completions (and man page) can be created via `rg --generate`.
+* [FEATURE #2524](https://github.com/BurntSushi/ripgrep/issues/2524):
+  The `--debug` flag now indicates whether stdin or `./` is being searched.
+* [FEATURE #2643](https://github.com/BurntSushi/ripgrep/issues/2643):
+  Make `-d` a short flag for `--max-depth`.
+* [FEATURE #2645](https://github.com/BurntSushi/ripgrep/issues/2645):
+  The `--version` output will now also contain PCRE2 availability information.
+
+Bug fixes:
+
+* [BUG #884](https://github.com/BurntSushi/ripgrep/issues/884):
+  Don't error when `-v/--invert-match` is used multiple times.
+* [BUG #1275](https://github.com/BurntSushi/ripgrep/issues/1275):
+  Fix bug with `\b` assertion in the regex engine.
+* [BUG #1376](https://github.com/BurntSushi/ripgrep/issues/1376):
+  Using `--no-ignore --ignore-vcs` now works as one would expect.
+* [BUG #1622](https://github.com/BurntSushi/ripgrep/issues/1622):
+  Add note about error messages to `-z/--search-zip` documentation.
+* [BUG #1648](https://github.com/BurntSushi/ripgrep/issues/1648):
+  Fix bug where sometimes short flags with values, e.g., `-M 900`, would fail.
+* [BUG #1701](https://github.com/BurntSushi/ripgrep/issues/1701):
+  Fix bug where some flags could not be repeated.
+* [BUG #1757](https://github.com/BurntSushi/ripgrep/issues/1757):
+  Fix bug when searching a sub-directory didn't have ignores applied correctly.
+* [BUG #1891](https://github.com/BurntSushi/ripgrep/issues/1891):
+  Fix bug when using `-w` with a regex that can match the empty string.
+* [BUG #1911](https://github.com/BurntSushi/ripgrep/issues/1911):
+  Disable mmap searching in all non-64-bit environments.
+* [BUG #1966](https://github.com/BurntSushi/ripgrep/issues/1966):
+  Fix bug where ripgrep can panic when printing to stderr.
+* [BUG #2046](https://github.com/BurntSushi/ripgrep/issues/2046):
+  Clarify that `--pre` can accept any kind of path in the documentation.
+* [BUG #2108](https://github.com/BurntSushi/ripgrep/issues/2108):
+  Improve docs for `-r/--replace` syntax.
+* [BUG #2198](https://github.com/BurntSushi/ripgrep/issues/2198):
+  Fix bug where `--no-ignore-dot` would not ignore `.rgignore`.
+* [BUG #2201](https://github.com/BurntSushi/ripgrep/issues/2201):
+  Improve docs for `-r/--replace` flag.
+* [BUG #2288](https://github.com/BurntSushi/ripgrep/issues/2288):
+  `-A` and `-B` now only each partially override `-C`.
+* [BUG #2236](https://github.com/BurntSushi/ripgrep/issues/2236):
+  Fix gitignore parsing bug where a trailing `\/` resulted in an error.
+* [BUG #2243](https://github.com/BurntSushi/ripgrep/issues/2243):
+  Fix `--sort` flag for values other than `path`.
+* [BUG #2246](https://github.com/BurntSushi/ripgrep/issues/2246):
+  Add note in `--debug` logs when binary files are ignored.
+* [BUG #2337](https://github.com/BurntSushi/ripgrep/issues/2337):
+  Improve docs to mention that `--stats` is always implied by `--json`.
+* [BUG #2381](https://github.com/BurntSushi/ripgrep/issues/2381):
+  Make `-p/--pretty` override flags like `--no-line-number`.
+* [BUG #2392](https://github.com/BurntSushi/ripgrep/issues/2392):
+  Improve global git config parsing of the `excludesFile` field.
+* [BUG #2418](https://github.com/BurntSushi/ripgrep/pull/2418):
+  Clarify sorting semantics of `--sort=path`.
+* [BUG #2458](https://github.com/BurntSushi/ripgrep/pull/2458):
+  Make `--trim` run before `-M/--max-columns` takes effect.
+* [BUG #2479](https://github.com/BurntSushi/ripgrep/issues/2479):
+  Add documentation about `.ignore`/`.rgignore` files in parent directories.
+* [BUG #2480](https://github.com/BurntSushi/ripgrep/issues/2480):
+  Fix bug when using inline regex flags with `-e/--regexp`.
+* [BUG #2505](https://github.com/BurntSushi/ripgrep/issues/2505):
+  Improve docs for `--vimgrep` by mentioning footguns and some work-arounds.
+* [BUG #2519](https://github.com/BurntSushi/ripgrep/issues/2519):
+  Fix incorrect default value in documentation for `--field-match-separator`.
+* [BUG #2523](https://github.com/BurntSushi/ripgrep/issues/2523):
+  Make executable searching take `.com` into account on Windows.
+* [BUG #2574](https://github.com/BurntSushi/ripgrep/issues/2574):
+  Fix bug in `-w/--word-regexp` that would result in incorrect match offsets.
+* [BUG #2623](https://github.com/BurntSushi/ripgrep/issues/2623):
+  Fix a number of bugs with the `-w/--word-regexp` flag.
+* [BUG #2636](https://github.com/BurntSushi/ripgrep/pull/2636):
+  Strip release binaries for macOS.
+
+
 13.0.0 (2021-06-12)
 ===================
 ripgrep 13 is a new major version release of ripgrep that primarily contains

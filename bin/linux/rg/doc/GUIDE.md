@@ -178,11 +178,15 @@ search. By default, when you search a directory, ripgrep will ignore all of
 the following:
 
 1. Files and directories that match glob patterns in these three categories:
-  1. gitignore globs (including global and repo-specific globs).
-  2. `.ignore` globs, which take precedence over all gitignore globs when
-     there's a conflict.
-  3. `.rgignore` globs, which take precedence over all `.ignore` globs when
-     there's a conflict.
+      1. `.gitignore` globs (including global and repo-specific globs). This
+         includes `.gitignore` files in parent directories that are part of the
+         same `git` repository. (Unless the `--no-require-git` flag is given.)
+      2. `.ignore` globs, which take precedence over all gitignore globs
+         when there's a conflict. This includes `.ignore` files in parent
+         directories.
+      3. `.rgignore` globs, which take precedence over all `.ignore` globs
+         when there's a conflict. This includes `.rgignore` files in parent
+         directories.
 2. Hidden files and directories.
 3. Binary files. (ripgrep considers any file with a `NUL` byte to be binary.)
 4. Symbolic links aren't followed.
@@ -190,7 +194,8 @@ the following:
 All of these things can be toggled using various flags provided by ripgrep:
 
 1. You can disable all ignore-related filtering with the `--no-ignore` flag.
-2. Hidden files and directories can be searched with the `--hidden` flag.
+2. Hidden files and directories can be searched with the `--hidden` (`-.` for
+short) flag.
 3. Binary files can be searched via the `--text` (`-a` for short) flag.
    Be careful with this flag! Binary files may emit control characters to your
    terminal, which might cause strange behavior.
@@ -566,12 +571,15 @@ $ cat $HOME/.ripgreprc
 --type-add
 web:*.{html,css,js}*
 
+# Search hidden files / directories (e.g. dotfiles) by default
+--hidden
+
 # Using glob patterns to include/exclude files or folders
---glob=!git/*
+--glob=!.git/*
 
 # or
 --glob
-!git/*
+!.git/*
 
 # Set the colors.
 --colors=line:none
@@ -648,9 +656,9 @@ given, which is the default:
   they correspond to a UTF-16 BOM, then ripgrep will transcode the contents of
   the file from UTF-16 to UTF-8, and then execute the search on the transcoded
   version of the file. (This incurs a performance penalty since transcoding
-  is slower than regex searching.) If the file contains invalid UTF-16, then
-  the Unicode replacement codepoint is substituted in place of invalid code
-  units.
+  is needed in addition to regex searching.) If the file contains invalid
+  UTF-16, then the Unicode replacement codepoint is substituted in place of
+  invalid code units.
 * To handle other cases, ripgrep provides a `-E/--encoding` flag, which permits
   you to specify an encoding from the
   [Encoding Standard](https://encoding.spec.whatwg.org/#concept-encoding-get).
@@ -992,6 +1000,8 @@ used options that will likely impact how you use ripgrep on a regular basis.
 * `-S/--smart-case`: This is similar to `--ignore-case`, but disables itself
   if the pattern contains any uppercase letters. Usually this flag is put into
   alias or a config file.
+* `-F/--fixed-strings`: Disable regular expression matching and treat the pattern
+   as a literal string.
 * `-w/--word-regexp`: Require that all matches of the pattern be surrounded
   by word boundaries. That is, given `pattern`, the `--word-regexp` flag will
   cause ripgrep to behave as if `pattern` were actually `\b(?:pattern)\b`.
