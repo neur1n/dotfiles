@@ -61,18 +61,24 @@ patch release out with a fix. However, no promises are made.
 Does ripgrep have a man page?
 </h3>
 
-Yes! Whenever ripgrep is compiled on a system with `asciidoctor` or `asciidoc`
-present, then a man page is generated from ripgrep's argv parser. After
-compiling ripgrep, you can find the man page like so from the root of the
-repository:
+Yes. If you installed ripgrep through a package manager on a Unix system, then
+it would have ideally been installed for you in the proper location. In which
+case, `man rg` should just work.
+
+Otherwise, you can ask ripgrep to generate the man page:
 
 ```
-$ find ./target -name rg.1 -print0 | xargs -0 ls -t | head -n1
-./target/debug/build/ripgrep-79899d0edd4129ca/out/rg.1
+$ mkdir -p man/man1
+$ rg --generate man > man/man1/rg.1
+$ MANPATH="$PWD/man" man rg
 ```
 
-Running `man -l ./target/debug/build/ripgrep-79899d0edd4129ca/out/rg.1` will
-show the man page in your normal pager.
+Or, if your version of `man` supports the `-l/--local-file` flag, then this
+will suffice:
+
+```
+$ rg --generate man | man -l -
+```
 
 Note that the man page's documentation for options is equivalent to the output
 shown in `rg --help`. To see more condensed documentation (one line per flag),
@@ -86,22 +92,42 @@ The man page is also included in all
 Does ripgrep have support for shell auto-completion?
 </h3>
 
-Yes! Shell completions can be found in the
-[same directory as the man page](#manpage)
-after building ripgrep. Zsh completions are maintained separately and committed
-to the repository in `complete/_rg`.
+Yes! If you installed ripgrep through a package manager on a Unix system, then
+the shell completion files included in the release archive should have been
+installed for you automatically. If not, you can generate completes using
+ripgrep's command line interface.
 
-Shell completions are also included in all
-[ripgrep binary releases](https://github.com/BurntSushi/ripgrep/releases).
+For **bash**:
 
-For **bash**, move `rg.bash` to
-`$XDG_CONFIG_HOME/bash_completion` or `/etc/bash_completion.d/`.
+```
+$ dir="$XDG_CONFIG_HOME/bash_completion"
+$ mkdir -p "$dir"
+$ rg --generate complete-bash > "$dir/rg.bash"
+```
 
-For **fish**, move `rg.fish` to `$HOME/.config/fish/completions/`.
+For **fish**:
 
-For **zsh**, move `_rg` to one of your `$fpath` directories.
+```
+$ dir="$XDG_CONFIG_HOME/fish/completions"
+$ mkdir -p "$dir"
+$ rg --generate complete-fish > "$dir/rg.fish"
+```
 
-For **PowerShell**, add `. _rg.ps1` to your PowerShell
+For **zsh**:
+
+```
+$ dir="$HOME/.zsh-complete"
+$ mkdir -p "$dir"
+$ rg --generate complete-zsh > "$dir/_rg"
+```
+
+For **PowerShell**, create the completions:
+
+```
+$ rg --generate complete-powershell > _rg.ps1
+```
+
+And then add `. _rg.ps1` to your PowerShell
 [profile](https://technet.microsoft.com/en-us/library/bb613488(v=vs.85).aspx)
 (note the leading period). If the `_rg.ps1` file is not on your `PATH`, do
 `. /path/to/_rg.ps1` instead.
@@ -1010,15 +1036,11 @@ tools like ack or The Silver Searcher weren't already doing.
 How can I donate to ripgrep or its maintainers?
 </h3>
 
-As of now, you can't. While I believe the various efforts that are being
-undertaken to help fund FOSS are extremely important, they aren't a good fit
-for me. ripgrep is and I hope will remain a project of love that I develop in
-my free time. As such, involving money---even in the form of donations given
-without expectations---would severely change that dynamic for me personally.
+I welcome [sponsorship](https://github.com/sponsors/BurntSushi/).
 
-Instead, I'd recommend donating to something else that is doing work that you
-find meaningful. If you would like suggestions, then my favorites are:
+Or if you'd prefer, donating to a charitably organization that you like would
+also be most welcome. My favorites are:
 
 * [The Internet Archive](https://archive.org/donate/)
-* [Rails Girls](https://railsgirlssummerofcode.org/campaign/)
+* [Rails Girls](https://railsgirlssummerofcode.org/)
 * [Wikipedia](https://wikimediafoundation.org/support/)

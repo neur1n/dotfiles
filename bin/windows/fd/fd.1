@@ -29,11 +29,21 @@ By default
 .B fd
 uses regular expressions for the pattern. However, this can be changed to use simple glob patterns
 with the '\-\-glob' option.
+.P
+By default
+.B fd
+will exclude hidden files and directories, as well as any files that match gitignore rules
+or ignore rules in .ignore or .fdignore files. For convenenience, '.git' is treated as if it
+was always included in gitignore rules. These files can be included with options such as
+'\-\-hidden' and '\-\-no\-ignore'.
 .SH OPTIONS
 .TP
 .B \-H, \-\-hidden
 Include hidden files and directories in the search results
 (default: hidden files and directories are skipped). The flag can be overridden with '--no-hidden'.
+.IP
+Ignored files and .git/ are still excluded unless \-\-no\-ignore or \-\-no\-ignore\-vcs
+is also used.
 .TP
 .B \-I, \-\-no\-ignore
 Show search results from files and directories that would otherwise be ignored by
@@ -69,7 +79,16 @@ and the global gitignore configuration
 .RI ( core.excludesFile
 git setting, which defaults to
 .IR $HOME/.config/git/ignore ).
+The pattern ".git/" is automatically added to the list of VCS ignore rules.
 The flag can be overridden with '--ignore-vcs'.
+.TP
+.B \-\-no\-require\-git
+Do not require a git repository to respect gitignores. By default, fd will only
+respect global gitignore rules, .gitignore rules and local exclude rules if fd
+detects that you are searching inside a git repository. This flag allows you to
+relax this restriction such that fd will respect all git related ignore rules
+regardless of whether you’re searching in a git repository or not. The flag can
+be overridden with '--require-git'.
 .TP
 .B \-\-no\-ignore\-parent
 Show search results from files and directories that would otherwise be ignored by gitignore files in
@@ -93,6 +112,11 @@ Perform a regular-expression based search (default). This can be used to overrid
 .B \-F, \-\-fixed\-strings
 Treat the pattern as a literal string instead of a regular expression. Note that this also
 performs substring comparison. If you want to match on an exact filename, consider using '\-\-glob'.
+.TP
+.BI "\-\-and " pattern
+Add additional required search patterns, all of which must be matched. Multiple additional
+patterns can be specified. The patterns are regular expressions, unless '\-\-glob'
+or '\-\-fixed\-strings' is used.
 .TP
 .B \-a, \-\-absolute\-path
 Shows the full path starting from the root as opposed to relative paths.
@@ -171,6 +195,10 @@ regular files
 directories
 .IP "l, symlink"
 symbolic links
+.IP "b, block-device"
+block devices
+.IP "c, char-device"
+character devices
 .IP "s, socket"
 sockets
 .IP "p, pipe"
@@ -351,6 +379,10 @@ This option can be specified multiple times, in which case all commands are run 
 file found, in the order they are provided. In that case, you must supply a ';' argument for
 all but the last commands.
 
+If parallelism is enabled, the order commands will be executed in is non-deterministic. And even with
+--threads=1, the order is determined by the operating system and may not be what you expect. Thus, it is
+recommended that you don't rely on any ordering of the results.
+
 The following placeholders are substituted before the command is executed:
 .RS
 .IP {}
@@ -363,9 +395,16 @@ parent directory
 path without file extension
 .IP {/.}
 basename without file extension
+.IP {{
+literal '{' (an escape sequence)
+.IP }}
+literal '}' (an escape sequence)
 .RE
 
 If no placeholder is present, an implicit "{}" at the end is assumed.
+
+Notice that you can use "{{" and "}}" to escape "{" and "}" respectively, which is especially
+useful if you need to include the literal text of one of the above placeholders.
 
 Examples:
 
@@ -387,6 +426,9 @@ Examples:
 Execute
 .I command
 once, with all search results as arguments.
+
+The order of the arguments is non-deterministic and should not be relied upon.
+
 One of the following placeholders is substituted before the command is executed:
 .RS
 .IP {}
