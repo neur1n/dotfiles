@@ -23,8 +23,8 @@ inoremap <expr> <S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <CR>
       \ coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
 
-nnoremap <silent> K :call <SID>ShowDocumentation()<CR>
-nnoremap <silent> <Leader>st :CocList outline<CR>
+nnoremap <silent> K <Cmd>call <SID>ShowDocumentation()<CR>
+nnoremap <silent> <Leader>st <Cmd>CocList outline<CR>
 
 nmap <silent> <Leader>ac <Plug>(coc-codeaction-cursor)
 nmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
@@ -87,15 +87,20 @@ call coc#config('Lua.workspace.checkThirdParty', v:false)
 "}}}
 "---------------------------------------------------- fannheyward/coc-texlab{{{
 call coc#config('texlab.build.args', [
+      \ '-aux-directory=build',
+      \ '-bibtex',
       \ '-file-line-error',
       \ '-interaction=nonstopmode',
+      \ '-MSWinBackSlash-',
       \ '-output-directory=build',
       \ '-shell-escape',
       \ '-synctex=1',
-      \ '%f'
+      \ '-view=pdf',
+      \ '-xelatex',
+      \ '%f',
       \ ])
 call coc#config('texlab.auxDirectory', 'build')
-call coc#config('texlab.build.executable', 'xelatex')
+call coc#config('texlab.build.executable', 'latexmk')
 call coc#config('texlab.build.onSave', v:true)
 call coc#config('texlab.path', 'texlab')
 
@@ -107,8 +112,9 @@ elseif has('win32')
   call coc#config('texlab.forwardSearch.args', ['-reuse-instance', '%p', '-forward-search', '%f', '%l'])
 endif
 
-nnoremap <silent> <Leader>ll :execute 'CocCommand latex.Build'<CR>
-nnoremap <silent> <Leader>lv :execute 'CocCommand latex.ForwardSearch'<CR>
+nnoremap <silent> <Leader>le <Cmd>CocCommand workspace.showOutput texlab<CR>
+nnoremap <silent> <Leader>ll <Cmd>CocCommand latex.Build<CR>
+nnoremap <silent> <Leader>lv <Cmd>CocCommand latex.ForwardSearch<CR>
 "}}}
 
 function! s:SetColors() abort

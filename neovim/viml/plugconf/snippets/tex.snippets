@@ -1,0 +1,31 @@
+extends _
+
+snippet enumerate "enumerate closure"
+	\begin{enumerate}
+		\item $1
+	\end{enumerate}$0
+
+snippet figure "figure closure"
+	\begin{figure}[!htbp]
+		\centering
+		\includegraphics[width=0.9\linewidth]{$1}
+		\caption{$2}
+		\label{fig:$3}
+	\end{figure}$0
+
+snippet itemize "itemize closure"
+	\begin{itemize}
+		\item $1
+	\end{itemize}$0
+
+snippet section "section title"
+	\section{$1}
+	\label{sec:$1}$0
+
+snippet subsection "subsection title"
+	\subsection{$1}
+	\label{subsec:$1}$0
+
+snippet subsubsection "subsubsection title"
+	\subsubsection{$1}
+	\label{subsubsec:$1}$0
