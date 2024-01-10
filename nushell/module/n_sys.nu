@@ -1,6 +1,11 @@
 export def ip [] {
   if (is-windows) {
-    (ipconfig | find "IPv4 Address").0 | str replace -am '.*\b((\d{1,3}\.){3}\d{1,3})\b' '$1'
+    let addr = (ipconfig | find "IPv4 Address")
+    if ($addr | is-empty) {
+      "127.0.0.1"
+    } else {
+      $addr.0 | str replace -am '.*\b((\d{1,3}\.){3}\d{1,3})\b' '$1'
+    }
   } else {
     (hostname -I | awk "{print $1}")
   }
