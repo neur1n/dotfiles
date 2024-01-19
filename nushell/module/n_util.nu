@@ -34,7 +34,7 @@ export def pid [name: string] {
 }
 
 export def random-index [data: any] {
-  (random integer ..(($data | length) - 1))
+  (random int ..(($data | length) - 1))
 }
 
 export def same-file [file1: path, file2: path, echo: bool = false] {

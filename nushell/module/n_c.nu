@@ -48,7 +48,7 @@ export def run-cmake [
       } else {
         $args
       })
-  
+
   let tmp = ($compiler | str downcase)
   let args = (
       if ($tmp == "msvc") {

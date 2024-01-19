@@ -18,14 +18,14 @@ $env.ENV_CONVERSIONS = {
 # Directories to search for scripts when calling source or use
 # By default, <nushell-config-dir>/scripts is added
 $env.NU_LIB_DIRS = [
-  ($nu.config-path | path dirname | path join 'module'),
-  ($nu.config-path | path dirname | path join 'script')
+  ($nu.default-config-dir | path join 'module'),
+  ($nu.default-config-dir | path join 'script')
 ]
 
 # Directories to search for plugin binaries when calling register
 # By default, <nushell-config-dir>/plugins is added
 $env.NU_PLUGIN_DIRS = [
-  ($nu.config-path | path join 'plugin')
+  ($nu.default-config-dir | path join 'plugin')
 ]
 
 #================================================================= Customize{{{
@@ -55,5 +55,6 @@ $env.PATH = (
   }
 )
 
-zoxide init nushell | save -f ~/.zoxide.nu
+# zoxide init nushell | save -f ~/.zoxide.nu
+zoxide init nushell | str replace --all "-- $rest" "-- ...$rest" | str replace --all "def-env" "def --env" | save -f ~/.zoxide.nu
 # Customize}}}
