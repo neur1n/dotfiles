@@ -22,7 +22,7 @@ export def run-build [build: string = "default"] {
       }
   )
 
-  run-external cmake $args
+  run-external cmake ...$args
 }
 
 export def run-cmake [
@@ -74,7 +74,7 @@ export def run-cmake [
         $args
       })
 
-  run-external cmake ([$args, $rest] | flatten)
+  run-external cmake ...$args ...$rest
 
   if ("compile_commands.json" | path exists) {
     cp "compile_commands.json" $src
