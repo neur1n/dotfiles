@@ -25,6 +25,8 @@ set cursorline
 set expandtab shiftwidth=2 softtabstop=2   " insert 2 <Space>s instead of <Tab>
 set foldmethod=marker
 set foldlevelstart=99                              " start with no folds closed
+set formatoptions-=ro                   " turn off insertion of comment leaders
+set formatoptions+=j               " remove a comment leader when joining lines
 set guicursor+=a:blinkon0-Cursor/lCursor
 set hlsearch
 set iminsert=0 imsearch=0

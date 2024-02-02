@@ -24,7 +24,6 @@ inoremap <silent><expr> <CR>
       \ coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
 
 nnoremap <silent> K <Cmd>call <SID>ShowDocumentation()<CR>
-nnoremap <silent> <Leader>st <Cmd>CocList outline<CR>
 
 nmap <silent> <Leader>ac <Plug>(coc-codeaction-cursor)
 nmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
@@ -89,6 +88,7 @@ call coc#config('Lua.workspace.checkThirdParty', v:false)
 call coc#config('texlab.build.args', [
       \ '-aux-directory=build',
       \ '-bibtex',
+      \ '-f',
       \ '-file-line-error',
       \ '-interaction=nonstopmode',
       \ '-MSWinBackSlash-',

@@ -7,7 +7,7 @@ let s:fonts = [
       \ {'name': 'DaddyTimeMono Nerd Font Mono'  , 'size': 12},
       \ {'name': 'EnvyCodeR Nerd Font Mono'      , 'size': 12},
       \ {'name': 'FantasqueSansM Nerd Font Mono' , 'size': 13},
-      \ {'name': 'FiraCode Nerd Font Mono'       , 'size': 11},
+      \ {'name': 'FiraCode Nerd Font Mono Ret'   , 'size': 11},
       \ {'name': 'GohuFont uni11 Nerd Font Mono' , 'size': 12},
       \ {'name': 'GohuFont uni14 Nerd Font Mono' , 'size': 12},
       \ {'name': 'Hurmit Nerd Font Mono'         , 'size': 11},
