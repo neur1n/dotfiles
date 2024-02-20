@@ -134,12 +134,7 @@ def show-timestamp [] {
 def show-venv [mode: string] {
   let sym = (if ($mode == "i") {" "} else {" "})
 
-  let name = (
-    if (not "CONDA_CURR" in $env) or ($env.CONDA_CURR == null) {
-      ""
-    } else {
-      $env.CONDA_CURR
-    })
+  let name = ($env.CONDA_CURR? | default "")
 
   let lsep = (n_hl create "" $cs.venv $cs.time)
   let venv = (n_hl create $"(n_emo get-emoji)($name)" $palette.bgh $cs.venv)
