@@ -22,7 +22,6 @@ local fonts = {
   {["name"] = "MonaspiceXe Nerd Font Mono"    , ["size"] = 11},
   {["name"] = "Monocraft Nerd Font"           , ["size"] = 10},
   {["name"] = "Monofur Nerd Font Mono"        , ["size"] = 13},
-  {["name"] = "OpenDyslexicM Nerd Font Mono"  , ["size"] =  9},
   {["name"] = "ProFontWindows Nerd Font Mono" , ["size"] = 13},
   {["name"] = "ProggyClean Nerd Font Mono"    , ["size"] = 16},
   {["name"] = "SpaceMono Nerd Font Mono"      , ["size"] = 11},
