@@ -14,5 +14,6 @@ augroup n_autocmd
 "}}}
 "***************************************************************** scrolloff{{{
   autocmd BufWinEnter,VimResized,WinEnter * execute 'setlocal scrolloff='.winheight(win_getid())/3
+  autocmd BufWinEnter,VimResized,WinEnter * execute 'setlocal sidescrolloff='.winwidth(win_getid())/3
 "}}}
 augroup END
