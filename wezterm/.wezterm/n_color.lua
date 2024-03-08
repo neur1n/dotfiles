@@ -11,15 +11,15 @@ local palettes = {
     "#69d0a5",
     "#fafafa"
   },
-  gruvbox = {
-    "#928374",
-    "#fb4934",
-    "#b8bb26",
-    "#fabd2f",
-    "#83a598",
-    "#d3869b",
-    "#8ec07c",
-    "#ebdbb2",
+  github = {
+    "#666666",
+    "#ea4a5a",
+    "#34d058",
+    "#ffea7f",
+    "#2188ff",
+    "#b392f0",
+    "#39c5cf",
+    "#e1e4e8",
   },
   iceberg = {
     "#444b71",
@@ -31,15 +31,35 @@ local palettes = {
     "#89b8c2",
     "#d2d4de",
   },
-  onedark = {
-    "#5c6370",
-    "#ef596f",
-    "#89ca78",
-    "#e5c07b",
-    "#61afef",
-    "#d55fde",
-    "#2bbac5",
-    "#abb2bf",
+  neovim = {
+    "#75787e",
+    "#ffc3fa",
+    "#aaedb7",
+    "#f4d88c",
+    "#9fd8ff",
+    "#cfcefd",
+    "#83efef",
+    "#d7dae1",
+  },
+  nightfox = {
+    "#4e4e4e",
+    "#c94f6d",
+    "#81b29a",
+    "#dbc074",
+    "#719cd6",
+    "#9d79d6",
+    "#63cdcf",
+    "#cdcecf",
+  },
+  synthwave = {
+    "#4e4e4e",
+    "#fe4450",
+    "#72f1b8",
+    "#ffe347",
+    "#2ee2fa",
+    "#af125a",
+    "#3bf4fb",
+    "#a2c7e5",
   },
 }
 
@@ -47,36 +67,36 @@ local schemes = {
   -- clack
   {
     foreground    = "#fafafa",
-    background    = "#16161d",
+    background    = "#1f1f2a",
     cursor_fg     = "#fafafa",
     cursor_bg     = "#4f86f7",
     cursor_border = "#fafafa",
-    selection_fg  = "#16161d",
+    selection_fg  = "#1f1f2a",
     selection_bg  = "#e2be7d",
     ansi = palettes["clack"],
     brights = palettes["clack"],
     tab_bar = {
       active_tab = {
         bg_color = palettes["clack"][math.random(2, #palettes["clack"]-1)],
-        fg_color = "#16161d",
+        fg_color = "#1f1f2a",
       },
     },
   },
-  -- gruvbox
+  -- github
   {
-    foreground    = "#ebdbb2",
-    background    = "#282828",
-    cursor_fg     = "#ebdbb2",
+    foreground    = "#e1e4e8",
+    background    = "#24292e",
+    cursor_fg     = "#e1e4e8",
     cursor_bg     = "#4f86f7",
-    cursor_border = "#ebdbb2",
-    selection_fg  = "#282828",
+    cursor_border = "#e1e4e8",
+    selection_fg  = "#24292e",
     selection_bg  = "#e2be7d",
-    ansi = palettes["gruvbox"],
-    brights = palettes["gruvbox"],
+    ansi = palettes["github"],
+    brights = palettes["github"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["gruvbox"][math.random(2, #palettes["gruvbox"]-1)],
-        fg_color = "#16161d",
+        bg_color = palettes["github"][math.random(2, #palettes["github"]-1)],
+        fg_color = "#24292e",
       },
     },
   },
@@ -94,25 +114,61 @@ local schemes = {
     tab_bar = {
       active_tab = {
         bg_color = palettes["iceberg"][math.random(2, #palettes["iceberg"]-1)],
-        fg_color = "#16161d",
+        fg_color = "#161822",
       },
     },
   },
-  -- onedark
+  -- neovim
   {
-    foreground    = "#abb2bf",
-    background    = "#282c34",
-    cursor_fg     = "#abb2bf",
+    foreground    = "#d7dae1",
+    background    = "#1c1d23",
+    cursor_fg     = "#d7dae1",
     cursor_bg     = "#4f86f7",
-    cursor_border = "#abb2bf",
-    selection_fg  = "#282c34",
+    cursor_border = "#d7dae1",
+    selection_fg  = "#1c1d23",
     selection_bg  = "#e2be7d",
-    ansi = palettes["onedark"],
-    brights = palettes["onedark"],
+    ansi = palettes["neovim"],
+    brights = palettes["neovim"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["onedark"][math.random(2, #palettes["onedark"]-1)],
-        fg_color = "#16161d",
+        bg_color = palettes["neovim"][math.random(2, #palettes["neovim"]-1)],
+        fg_color = "#1c1d23",
+      },
+    },
+  },
+  -- nightfox
+  {
+    foreground    = "#cdcecf",
+    background    = "#192330",
+    cursor_fg     = "#cdcecf",
+    cursor_bg     = "#4f86f7",
+    cursor_border = "#cdcecf",
+    selection_fg  = "#192330",
+    selection_bg  = "#e2be7d",
+    ansi = palettes["nightfox"],
+    brights = palettes["nightfox"],
+    tab_bar = {
+      active_tab = {
+        bg_color = palettes["nightfox"][math.random(2, #palettes["nightfox"]-1)],
+        fg_color = "#192330",
+      },
+    },
+  },
+  -- synthwave
+  {
+    foreground    = "#a2c7e5",
+    background    = "#2e2a4f",
+    cursor_fg     = "#a2c7e5",
+    cursor_bg     = "#ff7edb",
+    cursor_border = "#a2c7e5",
+    selection_fg  = "#2e2a4f",
+    selection_bg  = "#e2be7d",
+    ansi = palettes["synthwave"],
+    brights = palettes["synthwave"],
+    tab_bar = {
+      active_tab = {
+        bg_color = palettes["synthwave"][math.random(2, #palettes["synthwave"]-1)],
+        fg_color = "#2e2a4f",
       },
     },
   },
