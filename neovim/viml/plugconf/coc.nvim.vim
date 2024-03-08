@@ -29,30 +29,27 @@ nmap <silent> <Leader>ac <Plug>(coc-codeaction-cursor)
 nmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
 xmap <silent> <Leader>a <Plug>(coc-codeaction-selected)
 
-nmap <silent> <Leader>gD <Plug>(coc-declaration)
-nmap <silent> <Leader>gd <Plug>(coc-definition)
-nmap <silent> <Leader>gi <Plug>(coc-implementation)
-nmap <silent> <Leader>gr <Plug>(coc-references)
-nmap <silent> <Leader>gt <Plug>(coc-type-definition)
-nmap <silent> <Leader>rf <Plug>(coc-refactor)
-nmap <silent> <Leader>rn <Plug>(coc-rename)
+nnoremap <silent> <Leader>gD <Plug>(coc-declaration)
+nnoremap <silent> <Leader>gd <Plug>(coc-definition)
+nnoremap <silent> <Leader>gi <Plug>(coc-implementation)
+nnoremap <silent> <Leader>gr <Plug>(coc-references)
+nnoremap <silent> <Leader>gt <Plug>(coc-type-definition)
+nnoremap <silent> <Leader>rf <Plug>(coc-refactor)
+nnoremap <silent> <Leader>rn <Plug>(coc-rename)
 
-nmap <silent> <Leader>fm <Plug>(coc-format)
-nmap <silent> <Leader>fx <Plug>(coc-fix-current)
-nmap <silent> <Leader>fh <Plug>(coc-float-hide)
-nmap <silent> <Leader>fj <Plug>(coc-float-jump)
+nnoremap <silent> <Leader>fm <Plug>(coc-format)
+nnoremap <silent> <Leader>fx <Plug>(coc-fix-current)
+nnoremap <silent> <Leader>fh <Plug>(coc-float-hide)
+nnoremap <silent> <Leader>fj <Plug>(coc-float-jump)
 
-nmap <silent> <C-p> <Plug>(coc-diagnostic-prev)
-nmap <silent> <C-n> <Plug>(coc-diagnostic-next)
-
-nmap [d <Plug>(coc-git-prevchunk)
-nmap ]d <Plug>(coc-git-nextchunk)
+nnoremap <silent> <C-p> <Plug>(coc-diagnostic-prev)
+nnoremap <silent> <C-n> <Plug>(coc-diagnostic-next)
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 let g:coc_global_extensions = [
-      \ 'coc-diagnostic', 'coc-git', 'coc-json', 'coc-pairs', 'coc-snippets',
-      \ 'coc-spell-checker', 'coc-word']
+      \ 'coc-diagnostic', 'coc-git', 'coc-json', 'coc-pairs', 'coc-lists',
+      \ 'coc-snippets', 'coc-spell-checker', 'coc-word']
 
 "--------------------------------------------------------- clangd/coc-clangd{{{
 call coc#config('clangd.arguments', ['--clang-tidy', '--header-insertion=never'])
@@ -66,9 +63,25 @@ call coc#config('cSpell.allowCompoundWords', v:true)
 "}}}
 "---------------------------------------------------------- neoclide/coc-git{{{
 call coc#config('git.branchCharacter', '')
+nnoremap [d <Plug>(coc-git-prevchunk)
+nnoremap ]d <Plug>(coc-git-nextchunk)
 "}}}
 "---------------------------------------------------- neoclide/coc-highlight{{{
 call coc#config('colors.filetypes', ['*'])
+"}}}
+"-------------------------------------------------------- neoclide/coc-lists{{{
+if executable('rg')
+  call coc#config('list.source.grep.command', 'rg')
+  call coc#config('list.source.grep.args', ['--hidden'])
+  call coc#config('list.source.files.args', ['--hidden', '--files'])
+endif
+nnoremap <silent> <Leader>lb <Cmd>CocList --auto-preview buffers<CR>
+nnoremap <silent> <Leader>lc <Cmd>CocList --auto-preview cmdhistory<CR>
+nnoremap <silent> <Leader>lf <Cmd>CocList --auto-preview files<CR>
+nnoremap <silent> <Leader>lr <Cmd>CocList --auto-preview gfiles<CR>
+nnoremap <silent> <Leader>lg <Cmd>CocList --auto-preview grep<CR>
+nnoremap <silent> <Leader>lh <Cmd>CocList --auto-preview mru<CR>
+nnoremap <silent> <Leader>ls <Cmd>CocList --auto-preview outline<CR>
 "}}}
 "----------------------------------------------------- neoclide/coc-snippets{{{
 call coc#config('snippets.snipmate.enable', v:true)
