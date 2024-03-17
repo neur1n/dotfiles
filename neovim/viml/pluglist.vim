@@ -25,8 +25,8 @@ let s:plugins = [
       \ {'author': 'neoclide'       , 'repo': 'coc-neco'             , 'opt': {'for': 'vim'}},
       \ {'author': 'Shougo'         , 'repo': 'neco-vim'             , 'opt': {'for': 'vim'}},
       "\ LAST
-      \ {'author': 'Neur1n'         , 'repo': 'neuims'               , 'opt': {'on': 'IMSToggle'}},
-      \ {'author': 'Neur1n'         , 'repo': 'noline.nvim'          , 'opt': {}},
+      \ {'author': 'neur1n'         , 'repo': 'neuims'               , 'opt': {'on': 'IMSToggle'}},
+      \ {'author': 'neur1n'         , 'repo': 'noline.nvim'          , 'opt': {}},
     \ ]
 
 call plug#begin('$VIMCONF/plugged')
