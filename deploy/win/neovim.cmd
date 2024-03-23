@@ -3,13 +3,11 @@
 SET src=%~dp0.
 SET dst=%LOCALAPPDATA%\nvim
 
-FOR /F %%d IN ('DIR /B /A:D %src%\..\..\neovim\*') DO (
-  MKLINK /J %dst%\%%d %src%\..\..\neovim\%%d
+IF EXIST %dst% (
+  RMDIR /S /Q %dst%
 )
 
-FOR /F %%f IN ('DIR /B /A-D %src%\..\..\neovim\*') DO (
-  MKLINK %dst%\%%f %src%\..\..\neovim\%%f
-)
+MKLINK /J %dst% %src%\..\..\neovim
 
 MKDIR %dst%\recovery\backup
 MKDIR %dst%\recovery\session

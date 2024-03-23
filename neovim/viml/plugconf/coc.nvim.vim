@@ -48,7 +48,7 @@ nnoremap <silent> <C-n> <Plug>(coc-diagnostic-next)
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 let g:coc_global_extensions = [
-      \ 'coc-diagnostic', 'coc-git', 'coc-json', 'coc-pairs', 'coc-lists',
+      \ 'coc-diagnostic', 'coc-git', 'coc-json', 'coc-pairs',
       \ 'coc-snippets', 'coc-spell-checker', 'coc-word']
 
 "--------------------------------------------------------- clangd/coc-clangd{{{
@@ -68,20 +68,6 @@ nnoremap ]d <Plug>(coc-git-nextchunk)
 "}}}
 "---------------------------------------------------- neoclide/coc-highlight{{{
 call coc#config('colors.filetypes', ['*'])
-"}}}
-"-------------------------------------------------------- neoclide/coc-lists{{{
-if executable('rg')
-  call coc#config('list.source.grep.command', 'rg')
-  call coc#config('list.source.grep.args', ['--hidden'])
-  call coc#config('list.source.files.args', ['--hidden', '--files'])
-endif
-nnoremap <silent> <Leader>lb <Cmd>CocList --auto-preview buffers<CR>
-nnoremap <silent> <Leader>lc <Cmd>CocList --auto-preview cmdhistory<CR>
-nnoremap <silent> <Leader>lf <Cmd>CocList --auto-preview files<CR>
-nnoremap <silent> <Leader>lr <Cmd>CocList --auto-preview gfiles<CR>
-nnoremap <silent> <Leader>lg <Cmd>CocList --auto-preview grep<CR>
-nnoremap <silent> <Leader>lh <Cmd>CocList --auto-preview mru<CR>
-nnoremap <silent> <Leader>ls <Cmd>CocList --auto-preview outline<CR>
 "}}}
 "----------------------------------------------------- neoclide/coc-snippets{{{
 call coc#config('snippets.snipmate.enable', v:true)
