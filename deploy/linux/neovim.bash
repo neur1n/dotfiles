@@ -7,10 +7,6 @@ if [ -d "$dst" ]; then
   rm -rf "$dst"
 fi
 
-if [[ ! -d "~/.config/nvim" ]]; then
-  mkdir -p ~/.config/nvim
-fi
-
 ln -ns "$src/../../neovim" "$dst"
 
 mkdir -p "$dst/recovery/backup"
