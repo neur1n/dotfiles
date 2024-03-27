@@ -1,6 +1,6 @@
-local api = vim.api
-
 local M = {}
+
+local Palette = require("palette")
 
 local Buffer = require("noline.source.buffer")
 local Edit = require("noline.source.edit")
@@ -12,7 +12,6 @@ local State = require("plugconf.noline.state")
 local Decorator = require("plugconf.noline.decorator")
 local Diagnosis = require("plugconf.noline.diagnosis")
 local Mode = require("plugconf.noline.mode")
-local Palette = require("plugconf.noline.palette")
 local Tag = require("plugconf.noline.tag")
 
 local palette = Palette.get()
@@ -128,10 +127,10 @@ function M.setup_c()
     Edit.readonly(glyph.ro, " ")}, "NEdit")
   expr = expr .. Component.create(decor["right"], "NNameD")
 
-  expr = expr .. Component.create(Diagnosis.info("coc", "error",       glyph.e, " "), "NDiagE")
-  expr = expr .. Component.create(Diagnosis.info("coc", "warning",     glyph.w, " "), "NDiagW")
-  expr = expr .. Component.create(Diagnosis.info("coc", "hint",        glyph.h, " "), "NDiagH")
-  expr = expr .. Component.create(Diagnosis.info("coc", "information", glyph.i, " "), "NDiagI")
+  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.ERROR, glyph.e, " "), "NDiagE")
+  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.WARN,  glyph.w, " "), "NDiagW")
+  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.HINT,  glyph.h, " "), "NDiagH")
+  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.INFO,  glyph.i, " "), "NDiagI")
 
   expr = expr .. "%=%<"
 
@@ -188,13 +187,13 @@ function M.setup_nc()
 end
 
 function M.update()
-  for number, handle in pairs(api.nvim_tabpage_list_wins(0)) do
+  for number, handle in pairs(vim.api.nvim_tabpage_list_wins(0)) do
     if vim.fn.win_gettype() == "" then
-      if number == api.nvim_win_get_number(0) then
-        api.nvim_win_set_option(handle, "statusline",
+      if number == vim.api.nvim_win_get_number(0) then
+        vim.api.nvim_win_set_option(handle, "statusline",
           "%{%v:lua.require'plugconf.noline.statusline'.setup_c()%}")
       else
-        api.nvim_win_set_option(handle, "statusline",
+        vim.api.nvim_win_set_option(handle, "statusline",
           "%{%v:lua.require'plugconf.noline.statusline'.setup_nc()%}")
       end
     end

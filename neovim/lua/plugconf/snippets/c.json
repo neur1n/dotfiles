@@ -1,0 +1,60 @@
+{
+  "section": {
+    "prefix": ["section"],
+    "body": [
+      "// ************************************************************ ${1:$TM_FILENAME_BASE}{{{",
+      "$2",
+      "// $1}}}$0"
+    ],
+    "description": "code section"
+  },
+  "for": {
+    "prefix": ["for"],
+    "body": [
+      "for (${1:size_t} ${2:i} = ${3:0}; $2 ${4:<} ${5:bound}; ${6:++}$2) {",
+      "  $7",
+      "}$0"
+    ],
+    "description": "for loop"
+  },
+  "guard": {
+    "prefix": ["guard"],
+    "body": [
+      "#ifndef ${1:${TM_FILENAME_BASE}_H}",
+      "#define $1",
+      "",
+      "$0",
+      "",
+      "#endif // $1"
+    ],
+    "description": "include guard"
+  },
+  "main": {
+    "prefix": ["main"],
+    "body": [
+      "int main(int argc, char** argv)",
+      "{",
+      "  $0",
+      "  return 0;",
+      "}"
+    ],
+    "description": "main function"
+  },
+  "struct": {
+    "prefix": ["struct"],
+    "body": [
+      "typedef struct _$1_",
+      "{",
+      "  $0",
+      "} $1;"
+    ],
+    "description": "struct"
+  },
+  "x_log": {
+    "prefix": ["xlog"],
+    "body": [
+      "x_log('${1:d}', ${2:NULL}, \"$3\"$4);$0"
+    ],
+    "description": "x_log from x.h"
+  }
+}

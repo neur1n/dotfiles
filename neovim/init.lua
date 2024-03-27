@@ -1,0 +1,10 @@
+require("plugconf.lazy").setup()
+
+require("autocmd").setup()
+require("colorscheme").setup()
+require("command").setup()
+require("environment").setup()
+require("keymap").setup()
+require("netrw").setup()
+require("option").setup()
+require("quickfix").setup()

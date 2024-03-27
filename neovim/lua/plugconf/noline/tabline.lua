@@ -1,6 +1,6 @@
-local api = vim.api
-
 local M = {}
+
+local Palette = require("palette")
 
 local Tabline = require("noline.source.tabline")
 local Component = require("noline.utility.component")
@@ -8,7 +8,6 @@ local Highlight = require("noline.utility.highlight")
 
 local State = require("plugconf.noline.state")
 local Decorator = require("plugconf.noline.decorator")
-local Palette = require("plugconf.noline.palette")
 local Runner = require("plugconf.noline.runner")
 local Tab = require("plugconf.noline.tab")
 local VCS = require("plugconf.noline.vcs")
@@ -69,7 +68,7 @@ function M.setup()
 
   expr = expr .. "%="
 
-  expr = expr .. Component.create({VCS.get("coc", ""), "", " "}, "NVcs")
+  expr = expr .. Component.create({VCS.get("gitsigns", ""), "", " "}, "NVcs")
 
   expr = expr .. Component.create(Tabline.button("", " ", " "), "NClose")
 
@@ -77,7 +76,7 @@ function M.setup()
 end
 
 function M.update()
-  api.nvim_set_option("tabline", "%{%v:lua.require'plugconf.noline.tabline'.setup()%}")
+  vim.api.nvim_set_option("tabline", "%{%v:lua.require'plugconf.noline.tabline'.setup()%}")
   State.tal_initialized = true
 end
 

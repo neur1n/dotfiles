@@ -14,7 +14,7 @@ local decorators = {
 }
 
 function M.get()
-  local group = ""
+  local group = {}
 
   if (not State.stl_initialized) or (not State.tal_initialized) then
     math.randomseed(os.time())
