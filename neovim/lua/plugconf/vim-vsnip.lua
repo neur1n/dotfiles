@@ -16,6 +16,22 @@ function M.setup()
     cpp = {"c"},
     cuda = {"c"},
   }
+
+  vim.keymap.set({"i", "s"}, "<C-j>", function()
+    if vim.fn["vsnip#jumpable"](1) then
+      return "<Plug>(vsnip-jump-next)"
+    else
+      return "<C-j>"
+    end
+  end, {noremap = true, expr = true})
+
+  vim.keymap.set({"i", "s"}, "<C-k>", function()
+    if vim.fn["vsnip#jumpable"](-1) then
+      return "<Plug>(vsnip-jump-prev)"
+    else
+      return "<C-k>"
+    end
+  end, {noremap = true, expr = true})
 end
 
 return M
