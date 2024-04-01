@@ -7,7 +7,7 @@ function M.keymap()
     {"<Leader>sf", "<Cmd>lua require('telescope.builtin').find_files()<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>sg", "<Cmd>lua require('telescope.builtin').live_grep()<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>sh", "<Cmd>lua require('telescope.builtin').oldfiles()<CR>", mode = "n", {noremap = true, silent = true}},
-    -- {"<Leader>sr", <Cmd>lua require("telescope.builtin").find_files(), mode = "n", {noremap = true, silent = true}},
+    {"<Leader>sr", "<Cmd>lua require('telescope.builtin').find_files({cwd=require('utility').root_dir()})<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>ss", "<Cmd>lua require('telescope.builtin').search_history()<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>st", "<Cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", mode = "n", {noremap = true, silent = true}},
   }
