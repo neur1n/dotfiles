@@ -244,6 +244,9 @@ function M.setup()
 
   hl_native()
   hl_syntax()
+
+  -- NOTE: For hot reloading.
+  plt = require("palette").get()
 end
 
 return M
