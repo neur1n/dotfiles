@@ -69,7 +69,7 @@ end
 local function hl_native()
   local option = {}
 
-  vim.api.nvim_set_hl(0, "Comment", {fg = plt.grays.g, italic = true, ctermfg = plt.grays.c, cterm = {italic = true}})
+  vim.api.nvim_set_hl(0, "Comment", {fg = plt.graym.g, italic = true, ctermfg = plt.graym.c, cterm = {italic = true}})
   vim.api.nvim_set_hl(0, "Normal", {fg = plt.fgm.g, bg = plt.bgm.g, ctermfg = plt.fgm.c, ctermbg = plt.bgm.c})
   vim.api.nvim_set_hl(0, "NormalNC", {fg = plt.fgm.g, bg = plt.bgs.g, ctermfg = plt.fgm.c, ctermbg = plt.bgs.c})
 
@@ -83,8 +83,8 @@ local function hl_native()
   vim.api.nvim_set_hl(0, "Directory", {link = "NeuBlueBold"})
   vim.api.nvim_set_hl(0, "DiffAdd", {fg = plt.bgm.g, bg = plt.green.g, ctermfg = plt.bgm.c, ctermbg = plt.green.c})
   vim.api.nvim_set_hl(0, "DiffChange", {fg = plt.bgm.g, bg = plt.orange.g, ctermfg = plt.bgm.c, ctermbg = plt.orange.c})
-  vim.api.nvim_set_hl(0, "DiffDelete", {fg = plt.bgm.g, bg = plt.red.c, ctermfg = plt.bgm.c, ctermbg = plt.red.c})
-  vim.api.nvim_set_hl(0, "DiffText", {fg = plt.bgm.g, bg = plt.yellow.c, ctermfg = plt.bgm.c, ctermbg = plt.yellow.c})
+  vim.api.nvim_set_hl(0, "DiffDelete", {fg = plt.bgm.g, bg = plt.red.g, ctermfg = plt.bgm.c, ctermbg = plt.red.c})
+  vim.api.nvim_set_hl(0, "DiffText", {fg = plt.bgm.g, bg = plt.yellow.g, ctermfg = plt.bgm.c, ctermbg = plt.yellow.c})
   vim.api.nvim_set_hl(0, "EndOfBuffer", {link = "NeuGrayM"})
   vim.api.nvim_set_hl(0, "TermCursor", {link = "NeuSpecialBold"})
   vim.api.nvim_set_hl(0, "TermCursorNC", {link = "NeuSpecial"})
@@ -198,6 +198,32 @@ local function hl_syntax()
   vim.api.nvim_set_hl(0, "Error", {link = "NeuError"})
 end
 
+local function hl_terminal()
+  vim.g.terminal_color_0 = plt.bgs.g
+  vim.g.terminal_color_8 = plt.bgm.g
+
+  vim.g.terminal_color_1 = plt.red.g
+  vim.g.terminal_color_9 = plt.red.g
+
+  vim.g.terminal_color_2 = plt.green.g
+  vim.g.terminal_color_10 = plt.green.g
+
+  vim.g.terminal_color_3 = plt.yellow.g
+  vim.g.terminal_color_11 = plt.yellow.g
+
+  vim.g.terminal_color_4 = plt.blue.g
+  vim.g.terminal_color_12 = plt.blue.g
+
+  vim.g.terminal_color_5 = plt.purple.g
+  vim.g.terminal_color_13 = plt.purple.g
+
+  vim.g.terminal_color_6 = plt.cyan.g
+  vim.g.terminal_color_14 = plt.cyan.g
+
+  vim.g.terminal_color_7 = plt.fgs.g
+  vim.g.terminal_color_15 = plt.fgm.g
+end
+
 function M.setup()
   vim.cmd("highlight clear")
 
@@ -215,12 +241,12 @@ function M.setup()
   for group, option in pairs(basic) do
     vim.api.nvim_set_hl(0, group, option)
 
-    boption = option
+    boption = vim.deepcopy(option)
     boption.bold = true
     boption.cterm = {bold = true}
     vim.api.nvim_set_hl(0, group .. "Bold", boption)
 
-    ioption = option
+    ioption = vim.deepcopy(option)
     ioption.italic = true
     ioption.cterm = {italic = true}
     vim.api.nvim_set_hl(0, group .. "Italic", ioption)
@@ -230,12 +256,12 @@ function M.setup()
     for group, option in pairs(table) do
       vim.api.nvim_set_hl(0, group, option)
 
-      boption = option
+      boption = vim.deepcopy(option)
       boption.bold = true
       boption.cterm = {bold = true}
       vim.api.nvim_set_hl(0, group .. "Bold", boption)
 
-      ioption = option
+      ioption = vim.deepcopy(option)
       ioption.italic = true
       ioption.cterm = {italic = true}
       vim.api.nvim_set_hl(0, group .. "Italic", ioption)
@@ -244,6 +270,7 @@ function M.setup()
 
   hl_native()
   hl_syntax()
+  hl_terminal()
 
   -- NOTE: For hot reloading.
   plt = require("palette").get()
