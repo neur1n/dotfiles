@@ -1,5 +1,7 @@
 local M = {}
 
+local border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}
+
 local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
@@ -18,12 +20,13 @@ function M.setup()
       ghost_text = false,
     },
     sources = Cmp.config.sources({
-      {name = "buffer"},
       {name = "copilot"},
       {name = "nvim_lsp"},
       {name = "nvim_lsp_signature_help"},
       {name = "path"},
       {name = "vsnip"},
+    }, {
+      {name = "buffer"},
     }),
     snippet = {
       expand = function(args)
@@ -90,16 +93,16 @@ function M.setup()
   Cmp.setup.cmdline({"/", "?"}, {
     mapping = Cmp.mapping.preset.cmdline(),
     sources = {
-      {name = "buffer"}
+      {name = "buffer"},
     }
   })
 
   Cmp.setup.cmdline(":", {
     mapping = Cmp.mapping.preset.cmdline(),
     sources = Cmp.config.sources({
-      {name = "path"}
+      {name = "path"},
     }, {
-      {name = "cmdline"}
+      {name = "cmdline"},
     })
   })
 

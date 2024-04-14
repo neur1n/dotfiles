@@ -44,6 +44,7 @@ local plugins ={
   {
     "LhKipp/nvim-nu",
     lazy = true,
+    event = "FileType nu",
     config = require("plugconf.nvim-nu").setup,
   },
   {
@@ -61,7 +62,6 @@ local plugins ={
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = true,
-    build = "TSUpdate",
     event = "BufReadPost",
     cmd = {
       "TSInstall",
@@ -102,12 +102,13 @@ local plugins ={
     "mg979/vim-visual-multi",
     lazy = true,
     event = "VeryLazy",
+    init = require("plugconf.vim-visual-multi").setup,
   },
   {
-    "mg979/vim-visual-multi",
+    "sindrets/winshift.nvim",
     lazy = true,
-    event = "VeryLazy",
-    init = require("plugconf.vim-visual-multi").setup,
+    keys = require("plugconf.winshift").keymap,
+    config = require("plugconf.winshift").setup,
   },
   {
     "folke/zen-mode.nvim",

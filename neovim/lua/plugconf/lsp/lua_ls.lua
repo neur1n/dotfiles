@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+function M.setup(handlers)
   require("lspconfig").lua_ls.setup({
     settings = {
       Lua = {
@@ -8,7 +8,8 @@ function M.setup()
           version = "LuaJIT",
         }
       }
-    }
+    },
+    handlers = handlers,
   })
 end
 

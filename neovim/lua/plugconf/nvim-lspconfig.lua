@@ -1,11 +1,28 @@
 local M = {}
 
+local border = {
+  {"╭", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╮", "FloatBorder"},
+  {"│", "FloatBorder"},
+  {"╯", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╰", "FloatBorder"},
+  {"│", "FloatBorder"},
+}
+local handlers =  {
+  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border}),
+}
+
+local signs = {Error = "🔥", Warn = "⚡", Hint = "💡", Info = "🔎"}
+
 function M.setup()
   local Lspconfig = require("lspconfig")
 
-  require("plugconf.lsp.clangd").setup()
-  require("plugconf.lsp.lua_ls").setup()
-  require("plugconf.lsp.texlab").setup()
+  require("plugconf.lsp.clangd").setup(handlers)
+  require("plugconf.lsp.lua_ls").setup(handlers)
+  require("plugconf.lsp.texlab").setup(handlers)
   Lspconfig.pyright.setup({})
 
   vim.keymap.set("n", "<C-p>", vim.diagnostic.goto_prev, {noremap = true})
@@ -51,7 +68,6 @@ function M.setup()
     virtual_text = false,
   })
 
-  local signs = {Error = "🔥", Warn = "⚡", Hint = "💡", Info = "🔎"}
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
@@ -60,7 +76,13 @@ function M.setup()
   vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
     group = vim.api.nvim_create_augroup("float_diagnostic", {clear = true}),
     callback = function ()
-      vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})
+      local curr = vim.api.nvim_win_get_cursor(0)
+      local last = vim.w.lsp_cursor or {nil, nil}
+
+      if (curr[1] ~= last[1]) or (curr[2] ~= last[2]) then
+        vim.w.lsp_cursor = curr
+        vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})
+      end
     end
   })
 end

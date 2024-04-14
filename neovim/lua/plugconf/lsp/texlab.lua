@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup()
+function M.setup(handlers)
   local Env = require("environment")
 
   local fexec = nil
@@ -45,7 +45,8 @@ function M.setup()
           args = fargs,
         },
       },
-    }
+    },
+    handlers = handlers,
   })
 
   vim.keymap.set("n", "<Leader>lb", "<Cmd>TexlabBuild<CR>", {noremap = true})

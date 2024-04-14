@@ -1,11 +1,12 @@
 local M = {}
 
-function M.setup()
+function M.setup(handlers)
   require("lspconfig").clangd.setup({
     cmd = {
       "clangd",
       "--offset-encoding=utf-16",
-    }
+    },
+    handlers = handlers,
   })
 end
 
