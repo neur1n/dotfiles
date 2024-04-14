@@ -1,5 +1,6 @@
 use n_emo.nu
 use n_sys.nu
+use n_git.nu
 use n_hl.nu
 use n_plt.nu
 use n_util.nu
@@ -35,12 +36,10 @@ def show-session [] {
 }
 
 def show-path [] {
-  let gstatus = (panache-git repo-structured)
-
   let lsep = (n_hl create "" $cs.path $cs.sess)
   let path = (n_hl create $env.PWD $palette.bgh $cs.path)
   let rsep = (
-      if $gstatus.in_git_repo {
+      if (n_git in-repo) {
         (n_hl create "" $cs.path $palette.graym)
       } else {
         (n_hl create "" $cs.path)
@@ -50,6 +49,10 @@ def show-path [] {
 }
 
 def show-git [] {
+  if not (n_git in-repo) {
+    return ""
+  }
+
   let gstatus = (panache-git repo-structured)
 
   if (not $gstatus.in_git_repo) {
