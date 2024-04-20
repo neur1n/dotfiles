@@ -42,12 +42,6 @@ local plugins ={
     config = require("plugconf.nvim-autopairs").setup,
   },
   {
-    "LhKipp/nvim-nu",
-    lazy = true,
-    event = "FileType nu",
-    config = require("plugconf.nvim-nu").setup,
-  },
-  {
     "kylechui/nvim-surround",
     lazy = true,
     event = "VeryLazy",
@@ -69,6 +63,9 @@ local plugins ={
       "TSUpdate",
     },
     config = require("plugconf.nvim-treesitter").setup,
+    dependencies = {
+      "nushell/tree-sitter-nu",
+    },
   },
   {
     "nvim-telescope/telescope.nvim",
