@@ -1,5 +1,5 @@
 export def init-workspace [...rest: string] {
-  let targets = ["debug", "release", "include", "src", "thirdparty"]
+  let targets = ["inc", "src", "thirdparty"]
   let targets = ($targets | append $rest)
 
   for t in $targets {
@@ -62,7 +62,7 @@ export def run-cmake [
       })
 
   let args = (
-      if not ($tmp == "msvc") {
+      if ($tmp != "msvc") {
         if $arch == 32 {
           ($args | append "-DCMAKE_C_FLAGS=-m32" | append "-DCMAKE_CXX_FLAGS=-m32")
         } else if $arch == 64 {
