@@ -44,7 +44,7 @@ local plugins ={
   {
     "kylechui/nvim-surround",
     lazy = true,
-    event = "VeryLazy",
+    event = "BufReadPost",
     config = require("plugconf.nvim-surround").setup,
   },
   {
@@ -82,8 +82,8 @@ local plugins ={
   },
   {
     "tpope/vim-commentary",
-    lazy = false,
-    event = "VeryLazy",
+    lazy = true,
+    event = "BufReadPost",
   },
   {
     "junegunn/vim-easy-align",
@@ -93,12 +93,12 @@ local plugins ={
   {
     "matze/vim-move",
     lazy = true,
-    event = "VeryLazy",
+    event = "BufReadPost",
   },
   {
     "mg979/vim-visual-multi",
     lazy = true,
-    event = "VeryLazy",
+    event = "BufReadPost",
     init = require("plugconf.vim-visual-multi").setup,
   },
   {
