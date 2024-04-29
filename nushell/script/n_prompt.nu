@@ -4,7 +4,6 @@ use n_git.nu
 use n_hl.nu
 use n_plt.nu
 use n_util.nu
-use panache-git.nu
 
 
 let palette = (n_plt get-palette)
@@ -53,77 +52,84 @@ def show-git [] {
     return ""
   }
 
-  let gstatus = (panache-git repo-structured)
+  let status = (n_git status)
 
-  if (not $gstatus.in_git_repo) {
+  if not (n_git in-repo) {
     ""
   } else {
     let r = ""  # rev count
 
-    let acnt = $gstatus.commits_ahead
+    let acnt = $status.ahead
     let r = (if ($acnt > 0) {$"($r) ($acnt)"} else {$r})
 
 
-    let bcnt = $gstatus.commits_behind
+    let bcnt = $status.behind
     let r = (if ($bcnt > 0) {$"($r) ($bcnt)"} else {$r})
 
-    let has_remote = $gstatus.tracking_upstream_branch
-    let b = (if $gstatus.on_named_branch {$"($gstatus.branch_name)"} else {$"($gstatus.commit_hash)"})
-    let b = (if ($has_remote and ($acnt == 0) and ($bcnt == 0)) {$"($b)"} else {$b})
+    let has_upstream = ($status.upstream | is-not-empty)
+    let b = (if ($status.branch | str contains --not "(detached)") {$status.branch} else {$status.hash})
+    let b = (if ($has_upstream and ($acnt == 0) and ($bcnt == 0)) {$"($b)"} else {$b})
 
     let s = ""  # staged
 
     let s = (
-        if ($gstatus.staging_added_count > 0) {
-          $"($s) ($gstatus.staging_added_count)"
+        if ($status.staged_added > 0) {
+          $"($s) ($status.staged_added)"
         } else {
           $s
         })
 
     let s = (
-        if ($gstatus.staging_modified_count > 0) {
-          $"($s) ($gstatus.staging_modified_count)"
+        if ($status.staged_deleted > 0) {
+          $"($s) ($status.staged_deleted)"
         } else {
           $s
         })
 
     let s = (
-        if ($gstatus.staging_deleted_count > 0) {
-          $"($s) ($gstatus.staging_deleted_count)"
+        if ($status.staged_modified > 0) {
+          $"($s) ($status.staged_modified)"
         } else {
           $s
         })
 
-    let l = ""  # local
+    let u = ""  # unstaged
 
-    let l = (
-        if ($gstatus.untracked_count > 0) {
-          $"($l) ($gstatus.untracked_count)"
+    let u = (
+        if ($status.unstaged_deleted > 0) {
+          $"($u) ($status.unstaged_deleted)"
         } else {
-          $l
+          $u
         })
 
-    let l = (
-        if ($gstatus.worktree_modified_count > 0) {
-          $"($l) ($gstatus.worktree_modified_count)"
+    let u = (
+        if ($status.unstaged_modified > 0) {
+          $"($u) ($status.unstaged_modified)"
         } else {
-          $l
+          $u
         })
 
-    let l = (
-        if ($gstatus.worktree_deleted_count > 0) {
-          $"($l) ($gstatus.worktree_deleted_count)"
+    let u = (
+        if ($status.untracked > 0) {
+          $"($u) ($status.untracked)"
         } else {
-          $l
+          $u
+        })
+
+    let u = (
+        if ($status.conflict > 0) {
+          $"($u) ($status.conflict)"
+        } else {
+          $u
         })
 
     let name = (n_hl create $b $palette.bgh $palette.graym)
     let revc = (n_hl create $r $palette.bgh $palette.graym)
     let staged = (n_hl create $s $palette.green $palette.graym)
-    let local = (n_hl create $l $palette.red $palette.graym)
+    let unstaged = (n_hl create $u $palette.red $palette.graym)
     let rsep = (n_hl create "" $palette.graym)
 
-    $"(n_hl render $name)(n_hl render $revc)(n_hl render $staged)(n_hl render $local)(n_hl render $rsep)"
+    $"(n_hl render $name)(n_hl render $revc)(n_hl render $staged)(n_hl render $unstaged)(n_hl render $rsep)"
   }
 }
 
