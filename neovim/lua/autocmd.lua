@@ -21,6 +21,23 @@ function M.setup()
     end
   })
 
+  vim.api.nvim_create_autocmd({"BufWinEnter", "VimResized" ,"WinEnter"}, {
+    group = id,
+    pattern = "*",
+    callback = function()
+      vim.wo.scrolloff = math.floor(vim.api.nvim_win_get_height(0) / 3)
+      vim.wo.sidescrolloff = math.floor(vim.api.nvim_win_get_width(0) / 3)
+    end
+  })
+
+  vim.api.nvim_create_autocmd("FileType", {
+    group = id,
+    pattern = "*",
+    callback = function()
+      vim.opt_local.formatoptions:remove({"o", "r"})
+    end
+  })
+
   vim.api.nvim_create_autocmd({"ModeChanged", "WinEnter", "WinLeave"}, {
     group = id,
     pattern = "*",
@@ -31,15 +48,6 @@ function M.setup()
       else
         vim.o.relativenumber = false
       end
-    end
-  })
-
-  vim.api.nvim_create_autocmd({"BufWinEnter", "VimResized" ,"WinEnter"}, {
-    group = id,
-    pattern = "*",
-    callback = function()
-      vim.wo.scrolloff = math.floor(vim.api.nvim_win_get_height(0) / 3)
-      vim.wo.sidescrolloff = math.floor(vim.api.nvim_win_get_width(0) / 3)
     end
   })
 
