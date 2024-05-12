@@ -64,7 +64,10 @@ function M.setup()
 
   expr = expr .. "%="
 
-  expr = expr .. Component.create(Runner.status(), "NRunner")
+  local runner = Runner.status()
+  if runner ~= "" then
+    expr = expr .. Component.create(runner, "NRunner")
+  end
 
   expr = expr .. "%="
 
