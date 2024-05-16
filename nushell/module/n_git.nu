@@ -38,8 +38,8 @@ export def status [] {
       $info.upstream = ($line | split column " " | get column3).0
     } else if ($line | str starts-with "# branch.ab") {
       let ab = ($line | split column " " col1 col2 ahead behind)
-      $info.ahead = ($ab.ahead.0 | into int)
-      $info.behind = ($ab.behind.0 | into int)
+      $info.ahead = ($ab.ahead.0 | into int | math abs)
+      $info.behind = ($ab.behind.0 | into int | math abs)
     } else if ($line | str starts-with "1") or ($line | str starts-with "2") {
       let staging = ($line | split column " " | get column2 | split column "" staged unstaged --collapse-empty)
       if $staging.staged.0 == "A" {
