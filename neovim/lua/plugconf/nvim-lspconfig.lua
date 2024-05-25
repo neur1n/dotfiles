@@ -44,19 +44,6 @@ function M.setup()
       vim.keymap.set("n", "<Leader>gf", function()
         vim.lsp.buf.format{async = true}
       end, opts)
-      vim.keymap.set("n", "K", function()
-        local clients = vim.lsp.get_active_clients()
-        if clients then
-          for _, client in pairs(clients) do
-            if client.server_capabilities.hoverProvider then
-              vim.lsp.buf.hover()
-              return
-            end
-          end
-        end
-
-        vim.api.nvim_feedkeys("K", "in", true)
-      end, opts)
     end,
   })
 
