@@ -25,7 +25,7 @@
       "",
       "$0",
       "",
-      "#endif // $1"
+      "#endif  // $1"
     ],
     "description": "include guard"
   },
