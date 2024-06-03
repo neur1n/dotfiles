@@ -12,15 +12,15 @@ export def ip [] {
 }
 
 export def is-apple [] {
-  (sys).host.name == "Apple"
+  (sys host).name == "Apple"
 }
 
 export def is-linux [] {
-  (sys).host.long_os_version =~ ".*Linux.*"
+  (sys host).long_os_version =~ ".*Linux.*"
 }
 
 export def is-windows [] {
-  (sys).host.name == "Windows"
+  (sys host).name == "Windows"
 }
 
 export def os-logo [] {

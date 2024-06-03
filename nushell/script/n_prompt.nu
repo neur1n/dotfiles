@@ -67,7 +67,7 @@ def show-git [] {
     let r = (if ($bcnt > 0) {$"($r) ($bcnt)"} else {$r})
 
     let has_upstream = ($status.upstream | is-not-empty)
-    let b = (if ($status.branch | str contains --not "(detached)") {$status.branch} else {$status.hash})
+    let b = (if not ($status.branch | str contains "(detached)") {$status.branch} else {$status.hash})
     let b = (if ($has_upstream and ($acnt == 0) and ($bcnt == 0)) {$"($b)"} else {$b})
 
     let s = ""  # staged
