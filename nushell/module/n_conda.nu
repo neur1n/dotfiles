@@ -1,5 +1,5 @@
 export-env {
-  $env.CONDA_BASE_PATH = (if ((sys).host.name == "Windows") {$env.Path} else {$env.PATH})
+  $env.CONDA_BASE_PATH = (if ((sys host).name == "Windows") {$env.Path} else {$env.PATH})
 
   let info = (
       if not (which mamba | is-empty) {
@@ -35,7 +35,7 @@ export def --env activate [name: string] {
   }
 
   let new_path = (
-    if ((sys).host.name == "Windows") {
+    if ((sys host).name == "Windows") {
       update-path-windows ($env.CONDA_ENVS | get $name)
     } else {
       update-path-linux ($env.CONDA_ENVS | get $name)
