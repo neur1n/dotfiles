@@ -140,14 +140,34 @@ def show-timestamp [] {
   $"(n_hl render $lsep)(n_hl render $ts)"
 }
 
-def show-venv [mode: string] {
-  let sym = (if ($mode == "i") {" "} else {" "})
-
-  let name = ($env.CONDA_CURR? | default "")
-
+def show-mode [mode: string] {
   let lsep = (n_hl create "" $cs.venv $cs.time)
-  let venv = (n_hl create $"(n_emo get-emoji)($name)" $palette.bgh $cs.venv)
-  let rsep = (n_hl create $sym $cs.venv)
+  let emo = (n_hl create $"(n_emo get-emoji)" $palette.bgh $cs.venv)
+  let rsep = (n_hl create (if ($mode == "i") {" "} else {" "}) $cs.venv)
+
+  $"(n_hl render $lsep)(n_hl render $emo)(n_hl render $rsep)"
+}
+
+def show-venv [] {
+  let envs = []
+
+  let envs = (if ($env.MSVS_ACTIVATED? | default false) {
+    $envs | append "󰘐"
+  } else {
+    $envs
+  })
+
+  let envs = (if ($env.CONDA_CURR? != null) {
+    $envs | append $"󰌠($env.CONDA_CURR)"
+  } else {
+    $envs
+  })
+
+  let name = ($envs | str join "·")
+
+  let lsep = (n_hl create (if ($name | is-empty) {""} else {"["}) $cs.venv)
+  let venv = (n_hl create $name $cs.venv)
+  let rsep = (n_hl create (if ($name | is-empty) {""} else {"] "}) $cs.venv)
 
   $"(n_hl render $lsep)(n_hl render $venv)(n_hl render $rsep)"
 }
@@ -167,7 +187,7 @@ def right-prompt [] {
 }
 
 def indicator [mode: string] {
-  $"(show-timestamp)(show-venv $mode)"
+  $"(show-timestamp)(show-mode $mode)(show-venv)"
 }
 
 $env.PROMPT_COMMAND = {|| left-prompt}

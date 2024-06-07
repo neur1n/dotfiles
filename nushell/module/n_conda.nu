@@ -1,30 +1,32 @@
 export-env {
-  $env.CONDA_BASE_PATH = (if ((sys host).name == "Windows") {$env.Path} else {$env.PATH})
+  if not ("CONDA_CURR" in $env) {
+    $env.CONDA_BASE_PATH = (if ((sys host).name == "Windows") {$env.Path} else {$env.PATH})
 
-  let info = (
-      if not (which mamba | is-empty) {
-        (mamba info --envs --json | from json)
-      } else if not (which conda | is-empty) {
-        (conda info --envs --json | from json)
-      } else {
-        ('{"root_prefix": "", "envs": ""}' | from json)
-      })
+    let info = (
+        if not (which mamba | is-empty) {
+          (mamba info --envs --json | from json)
+        } else if not (which conda | is-empty) {
+          (conda info --envs --json | from json)
+        } else {
+          ('{"root_prefix": "", "envs": ""}' | from json)
+        })
 
-  $env.CONDA_ROOT = $info.root_prefix
+    $env.CONDA_ROOT = $info.root_prefix
 
-  $env.CONDA_ENVS = ($info.envs | reduce -f {} {|it, acc|
-      if $it == $info.root_prefix {
-        $acc | upsert "base" $it
-      } else {
-        $acc | upsert ($it | path basename) $it
-      }})
+    $env.CONDA_ENVS = ($info.envs | reduce -f {} {|it, acc|
+        if $it == $info.root_prefix {
+          $acc | upsert "base" $it
+        } else {
+          $acc | upsert ($it | path basename) $it
+        }})
 
-  $env.CONDA_CURR = null
+    $env.CONDA_CURR = null
+  }
 }
 
 export def --env activate [name: string] {
   if ($env.CONDA_ROOT | is-empty) {
-    print "Neither Conda nor Mamba is valid."
+    print "Neither Conda nor Mamba is available."
     return
   }
 
@@ -46,7 +48,7 @@ export def --env activate [name: string] {
 
 export def --env deactivate [] {
   if ($env.CONDA_ROOT | is-empty) {
-    print "Neither Conda nor Mamba is valid."
+    print "Neither Conda nor Mamba is available."
     return
   }
 
