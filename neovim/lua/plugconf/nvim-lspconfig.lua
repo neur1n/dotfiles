@@ -22,6 +22,7 @@ function M.setup()
 
   require("plugconf.lsp.clangd").setup(handlers)
   require("plugconf.lsp.lua_ls").setup(handlers)
+  require("plugconf.lsp.ltex").setup(handlers)
   require("plugconf.lsp.texlab").setup(handlers)
   Lspconfig.pyright.setup({})
 
