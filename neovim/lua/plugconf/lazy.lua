@@ -71,6 +71,7 @@ local plugins ={
     "nvim-telescope/telescope.nvim",
     lazy = true,
     keys = require("plugconf.telescope").keymap,
+    config = require("plugconf.telescope").setup,
     dependencies = {
       "nvim-lua/plenary.nvim",
       {

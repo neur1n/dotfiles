@@ -15,6 +15,29 @@ end
 
 function M.setup()
   require("telescope").setup({
+    pickers = {
+      buffers = {
+        theme = "dropdown",
+      },
+      command_history = {
+        theme = "dropdown",
+      },
+      find_files = {
+        theme = "dropdown",
+      },
+      live_grep = {
+        theme = "dropdown",
+      },
+      oldfiles = {
+        theme = "dropdown",
+      },
+      search_history = {
+        theme = "dropdown",
+      },
+      lsp_document_symbols = {
+        theme = "dropdown",
+      },
+    },
     extensions = {
       fzf = {
         fuzzy = true,
