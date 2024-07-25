@@ -1,4 +1,11 @@
 {
+  "date": {
+    "prefix": ["datetime"],
+    "body": [
+      "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+    ],
+    "description": "YYYY-MM-DD"
+  },
   "datetime": {
     "prefix": ["datetime"],
     "body": [
