@@ -6,6 +6,13 @@ export def in-repo [] {
   }
 }
 
+export def remove-submodule [path: string] {
+  mv $path $"($path)_tmp"
+  git submodule deinit -f -- $path
+  rm -rf $".git/modules/($path)"
+  git rm -f $path
+}
+
 export def status [] {
   if not (in-repo) {
     return []
@@ -63,11 +70,4 @@ export def status [] {
   }
 
   return $info
-}
-
-export def remove-submodule [path: string] {
-  mv $path $"($path)_tmp"
-  git submodule deinit -f -- $path
-  rm -rf $".git/modules/($path)"
-  git rm -f $path
 }
