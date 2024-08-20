@@ -157,7 +157,7 @@ local schemes = {
   -- synthwave
   {
     foreground    = "#a2c7e5",
-    background    = "#2e2a4f",
+    background    = "#262335",
     cursor_fg     = "#a2c7e5",
     cursor_bg     = "#ff7edb",
     cursor_border = "#a2c7e5",

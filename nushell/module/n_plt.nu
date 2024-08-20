@@ -137,9 +137,9 @@ def nightfox [] {
 
 def synthwave [] {
   {
-    bgh    : "#262335",
-    bgm    : "#2e2a4f",
-    bgs    : "#353163",
+    bgh    : "#201d2c",
+    bgm    : "#262335",
+    bgs    : "#2e2a4f",
     fgh    : "#d7b49e",
     fgm    : "#a2c7e5",
     fgs    : "#fbf9ff",

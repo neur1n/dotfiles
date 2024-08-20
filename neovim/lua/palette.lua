@@ -107,9 +107,9 @@ local nightfox = {
 
 local synthwave = {
   name    = "synthwave",
-  bgh     = {c = 235, g = "#262335"},
-  bgm     = {c = 237, g = "#2e2a4f"},
-  bgs     = {c = 238, g = "#353163"},
+  bgh     = {c = 233, g = "#201d2c"},
+  bgm     = {c = 235, g = "#262335"},
+  bgs     = {c = 237, g = "#2e2a4f"},
   fgh     = {c = 181, g = "#d7b49e"},
   fgm     = {c = 152, g = "#a2c7e5"},
   fgs     = {c = 231, g = "#fbf9ff"},
