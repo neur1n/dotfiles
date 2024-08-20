@@ -11,6 +11,12 @@ local plugins ={
     },
   },
   {
+    "NvChad/nvim-colorizer.lua",
+    lazy = true,
+    event = "ColorScheme *",
+    config = require("plugconf.nvim-colorizer").setup,
+  },
+  {
     "lewis6991/gitsigns.nvim",
     lazy = true,
     event = "ColorScheme *",
