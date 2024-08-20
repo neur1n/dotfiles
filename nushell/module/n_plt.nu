@@ -47,24 +47,24 @@ def clack [] {
   }
 }
 
-def gruvbox [] {
+def github [] {
   {
-    bgh    : "#1d2021",
-    bgm    : "#282828",
-    bgs    : "#32302f",
-    fgh    : "#d5c4a1",
-    fgm    : "#ebdbb2",
-    fgs    : "#fbf1c7",
-    grayh  : "#7c6f64",
-    graym  : "#928374",
-    grays  : "#a89984",
-    red    : "#fb4934",
-    orange : "#fe8019",
-    yellow : "#fabd2f",
-    green  : "#b8bb26",
-    cyan   : "#8ec07c",
-    blue   : "#83a598",
-    purple : "#d3869b",
+    bgh    : "#1f2428",
+    bgm    : "#24292e",
+    bgs    : "#2c313a",
+    fgh    : "#d1d5da",
+    fgm    : "#e1e4e8",
+    fgs    : "#fafbfc",
+    grayh  : "#586069",
+    graym  : "#666666",
+    grays  : "#6a737d",
+    red    : "#ea4a5a",
+    orange : "#d18616",
+    yellow : "#ffea7f",
+    green  : "#34d058",
+    cyan   : "#39c5cf",
+    blue   : "#2188ff",
+    purple : "#b392f0",
     special: "#4f86f7"
   }
 }
@@ -91,25 +91,69 @@ def iceberg [] {
   }
 }
 
-def onedark [] {
+def neovim [] {
   {
-    bgh    : "#24272e",
-    bgm    : "#282c34",
-    bgs    : "#3a3f4b",
-    fgh    : "#969faf",
-    fgm    : "#abb2bf",
-    fgs    : "#b3b9c5",
-    grayh  : "#525964",
-    graym  : "#5c6370",
-    grays  : "#697180",
-    red    : "#ef596f",
-    orange : "#d19a66",
-    yellow : "#e5c07b",
-    green  : "#89ca78",
-    cyan   : "#2bbac5",
-    blue   : "#61afef",
-    purple : "#d55fde",
-    special: "#e2be7d"
+    bgh    : "#0a0b10",
+    bgm    : "#1c1d23",
+    bgs    : "#2c2e33",
+    fgh    : "#ebeef5",
+    fgm    : "#d7dae1",
+    fgs    : "#c4c6cd",
+    grayh  : "#4f5258",
+    graym  : "#75787e",
+    grays  : "#9b9ea4",
+    red    : "#ffc3fa",
+    orange : "#ffbcb5",
+    yellow : "#f4d88c",
+    green  : "#aaedb7",
+    cyan   : "#83efef",
+    blue   : "#9fd8ff",
+    purple : "#cfcefd",
+    special: "#4f86f7"
+  }
+}
+
+def nightfox [] {
+  {
+    bgh    : "#131a24",
+    bgm    : "#192330",
+    bgs    : "#212e3f",
+    fgh    : "#d6d6d7",
+    fgm    : "#cdcecf",
+    fgs    : "#aeafb0",
+    grayh  : "#464646",
+    graym  : "#4e4e4e",
+    grays  : "#5f5f5f",
+    red    : "#c94f6d",
+    orange : "#f4a261",
+    yellow : "#dbc074",
+    green  : "#81b29a",
+    cyan   : "#63cdcf",
+    blue   : "#719cd6",
+    purple : "#9d79d6",
+    special: "#4f86f7"
+  }
+}
+
+def synthwave [] {
+  {
+    bgh    : "#262335",
+    bgm    : "#2e2a4f",
+    bgs    : "#353163",
+    fgh    : "#d7b49e",
+    fgm    : "#a2c7e5",
+    fgs    : "#fbf9ff",
+    grayh  : "#464646",
+    graym  : "#4e4e4e",
+    grays  : "#5f5f5f",
+    red    : "#fe4450",
+    orange : "#f39237",
+    yellow : "#ffe347",
+    green  : "#72f1b8",
+    cyan   : "#3bf4fb",
+    blue   : "#2ee2fa",
+    purple : "#af125a",
+    special: "#ff7edb"
   }
 }
 
@@ -120,8 +164,27 @@ def special [] {
 def palettes [] {
   {
     clack  : (clack),
-    gruvbox: (gruvbox),
+    github: (github),
     iceberg: (iceberg),
-    onedark: (onedark),
+    neovim: (neovim),
+    nightfox: (nightfox),
+    synthwave: (synthwave),
   }
 }
+
+#262335
+#2e2a4f
+#353163
+#d7b49e
+#a2c7e5
+#fbf9ff
+#464646
+#4e4e4e
+#5f5f5f
+#fe4450
+#f39237
+#ffe347
+#72f1b8
+#3bf4fb
+#2ee2fa
+#af125a
