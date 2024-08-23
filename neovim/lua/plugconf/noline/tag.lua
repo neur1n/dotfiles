@@ -31,7 +31,7 @@ function M.get(symbol, l_decor, r_decor)
 
   if vim.b.coc_current_function ~= nil then
     expr = vim.b.coc_current_function
-  else
+  elseif vim.treesitter.language.get_lang(vim.bo.filetype) then
     expr = treesitter_current_function()
   end
 
