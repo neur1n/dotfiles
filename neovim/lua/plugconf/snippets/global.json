@@ -1,6 +1,6 @@
 {
   "date": {
-    "prefix": ["datetime"],
+    "prefix": ["date"],
     "body": [
       "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
     ],
