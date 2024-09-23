@@ -1,4 +1,4 @@
-.TH RG 1 2023-11-26 "14.1.0 (rev e50df40a19)" "User Commands"
+.TH RG 1 2024-09-08 "14.1.1 (rev 4649aa9700)" "User Commands"
 .
 .
 .SH NAME
@@ -747,7 +747,7 @@ This flag can be disabled with \fB\-\-no-glob-case-insensitive\fP.
 Search hidden files and directories. By default, hidden files and directories
 are skipped. Note that if a hidden file or a directory is whitelisted in
 an ignore file, then it will be searched even if this flag isn't provided.
-Similarly if a hidden file or directory is given explicitly as an argumnet to
+Similarly if a hidden file or directory is given explicitly as an argument to
 ripgrep.
 .sp
 A file or directory is considered hidden if its base name starts with a dot
@@ -1228,7 +1228,7 @@ of printing the file path as a prefix for each matched line.
 This is the default mode when printing to a tty.
 .sp
 When \fBstdout\fP is not a tty, then ripgrep will default to the standard
-grep-like format. Once can force this format in Unix-like environments by
+grep-like format. One can force this format in Unix-like environments by
 piping the output of ripgrep to \fBcat\fP. For example, \fBrg\fP \fIfoo\fP \fB|
 cat\fP.
 .sp
@@ -2157,7 +2157,7 @@ system will generally handle this for you.
 .
 .
 .SH VERSION
-14.1.0 (rev e50df40a19)
+14.1.1 (rev 4649aa9700)
 .
 .
 .SH HOMEPAGE

@@ -1,5 +1,27 @@
-14.1.0 (TBD)
-============
+14.1.1 (2024-09-08)
+===================
+This is a minor release with a bug fix for a matching bug. In particular, a bug
+was found that could cause ripgrep to ignore lines that should match. That is,
+false negatives. It is difficult to characterize the specific set of regexes
+in which this occurs as it requires multiple different optimization strategies
+to collide and produce an incorrect result. But as one reported example, in
+ripgrep, the regex `(?i:e.x|ex)` does not match `e-x` when it should. (This
+bug is a result of an inner literal optimization performed in the `grep-regex`
+crate and not in the `regex` crate.)
+
+Bug fixes:
+
+* [BUG #2884](https://github.com/BurntSushi/ripgrep/issues/2884):
+  Fix bug where ripgrep could miss some matches that it should report.
+
+Miscellaneous:
+
+* [MISC #2748](https://github.com/BurntSushi/ripgrep/issues/2748):
+  Remove ripgrep's `simd-accel` feature because it was frequently broken.
+
+
+14.1.0 (2024-01-06)
+===================
 This is a minor release with a few small new features and bug fixes. This
 release contains a bug fix for unbounded memory growth while walking a
 directory tree. This release also includes improvements to the completions for
