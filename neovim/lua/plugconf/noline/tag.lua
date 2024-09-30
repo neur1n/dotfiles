@@ -3,7 +3,12 @@ local M = {}
 local Component = require("noline.utility.component")
 
 local function treesitter_current_function()
-  local node = vim.treesitter.get_node()
+  local node = ""
+
+  if not pcall(function () node = vim.treesitter.get_node() end) then
+    return ""
+  end
+
   if not node then
     return ""
   end
