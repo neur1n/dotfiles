@@ -46,7 +46,6 @@ function M.not_current(separator, l_decor, r_decor)
       list[#list+1] = "%" .. number .. "T%X" .. number .. " " .. buf
     end
   end
-  print(vim.inspect(list))
 
   return Component.decorate(table.concat(list, sep), l_decor, r_decor)
 end
