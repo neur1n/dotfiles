@@ -22,7 +22,9 @@ function M.current(l_decor, r_decor)
     end
   end
 
-  expr = vim.api.nvim_tabpage_get_number(0) .. " " .. text
+  local number = vim.api.nvim_tabpage_get_number(0)
+
+  expr = "%" .. number .. "T%X" .. number .. " " .. text
 
   return Component.decorate(expr, l_decor, r_decor)
 end
@@ -41,9 +43,10 @@ function M.not_current(separator, l_decor, r_decor)
     if handle ~= ctab then
       buf = vim.api.nvim_win_get_buf(vim.api.nvim_tabpage_get_win(handle))
       buf = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":t")
-      list[#list+1] = number .. " " .. buf
+      list[#list+1] = "%" .. number .. "T%X" .. number .. " " .. buf
     end
   end
+  print(vim.inspect(list))
 
   return Component.decorate(table.concat(list, sep), l_decor, r_decor)
 end
