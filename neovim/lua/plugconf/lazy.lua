@@ -48,6 +48,12 @@ local plugins ={
     config = require("plugconf.nvim-autopairs").setup,
   },
   {
+    "mfussenegger/nvim-dap",
+    lazy = true,
+    keys = require("plugconf.nvim-dap").keymap,
+    config = require("plugconf.nvim-dap").setup,
+  },
+  {
     "kylechui/nvim-surround",
     lazy = true,
     event = "BufEnter",
@@ -117,9 +123,7 @@ local plugins ={
   {
     "folke/zen-mode.nvim",
     lazy = true,
-    keys = {
-      {"<Leader>zm", "<Cmd>ZenMode<CR>", mode = "n", {noremap = true}}
-    },
+    keys = require("plugconf.zen-mode").keymap,
     config = require("plugconf.zen-mode").setup,
   },
 
