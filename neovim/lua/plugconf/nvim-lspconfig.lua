@@ -18,13 +18,13 @@ local handlers =  {
 local signs = {Error = "🔥", Warn = "⚡", Hint = "💡", Info = "🔎"}
 
 function M.setup()
-  local Lspconfig = require("lspconfig")
+  local lspconfig = require("lspconfig")
 
+  require("plugconf.lsp.basedpyright").setup(handlers)
   require("plugconf.lsp.clangd").setup(handlers)
   require("plugconf.lsp.lua_ls").setup(handlers)
   require("plugconf.lsp.ltex").setup(handlers)
   require("plugconf.lsp.texlab").setup(handlers)
-  Lspconfig.pyright.setup({})
 
   vim.keymap.set("n", "<C-p>", vim.diagnostic.goto_prev, {noremap = true})
   vim.keymap.set("n", "<C-n>", vim.diagnostic.goto_next, {noremap = true})
