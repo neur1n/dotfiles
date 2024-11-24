@@ -1,11 +1,18 @@
 {
+  "bp": {
+    "prefix": ["breakpoint"],
+    "body": [
+      "breakpoint()$0"
+    ],
+    "description": "Add a breakpoint."
+  },
   "ifmain": {
     "prefix": ["ifmain"],
     "body": [
       "if __name__ == \"__main__\":",
       "    $0"
     ],
-    "description": "An if __name__ == \"__main__\": block"
+    "description": "An if __name__ == \"__main__\": block."
   },
   "shebang": {
     "prefix": ["shebang"],
@@ -14,6 +21,6 @@
       "# -*- coding: utf-8 -*-",
       "$0"
     ],
-    "description": "Shebang for Python3"
+    "description": "Shebang for Python3."
   }
 }
