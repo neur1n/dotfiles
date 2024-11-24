@@ -24,7 +24,7 @@ function M.setup()
       {name = "nvim_lsp"},
       {name = "nvim_lsp_signature_help"},
       {name = "path"},
-      {name = "vsnip"},
+      {name = "vsnip", priority = 100},
     }, {
       {name = "buffer"},
     }),
