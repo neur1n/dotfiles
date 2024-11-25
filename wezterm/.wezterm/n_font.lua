@@ -6,6 +6,7 @@ local fonts = {
   {["name"] = "CaskaydiaCove Nerd Font Mono"  , ["size"] = 12},
   {["name"] = "ComicShannsMono Nerd Font Mono", ["size"] = 12},
   {["name"] = "DaddyTimeMono Nerd Font Mono"  , ["size"] = 12},
+  {["name"] = "DepartureMono Nerd Font Mono"  , ["size"] = 10},
   {["name"] = "EnvyCodeR Nerd Font Mono"      , ["size"] = 12},
   {["name"] = "FantasqueSansM Nerd Font Mono" , ["size"] = 13},
   {["name"] = "FiraCode Nerd Font Mono Ret"   , ["size"] = 11},
