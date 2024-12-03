@@ -18,8 +18,6 @@ local handlers =  {
 local signs = {Error = "🔥", Warn = "⚡", Hint = "💡", Info = "🔎"}
 
 function M.setup()
-  local lspconfig = require("lspconfig")
-
   require("plugconf.lsp.basedpyright").setup(handlers)
   require("plugconf.lsp.clangd").setup(handlers)
   require("plugconf.lsp.lua_ls").setup(handlers)

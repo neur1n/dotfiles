@@ -3,19 +3,19 @@ local M = {}
 function M.setup(handlers)
   local Env = require("environment")
 
-  local fexec = nil
-  local fargs = {}
+  local fwd_exec = nil
+  local fwd_args = {}
 
   if Env.is_unix() then
-    fexec = "okular"
+    fwd_exec = "okular"
   elseif Env.is_win() then
-    fexec = "SumatraPDF"
+    fwd_exec = "SumatraPDF"
   end
 
   if Env.is_unix() then
-    fargs = {"--unique", "file:%p#src:%l%f"}
+    fwd_args = {"--unique", "file:%p#src:%l%f"}
   elseif Env.is_win() then
-    fargs = {"-reuse-instance", "%p", "-forward-search", "%f", "%l"}
+    fwd_args = {"-reuse-instance", "%p", "-forward-search", "%f", "%l"}
   end
 
   require("lspconfig").texlab.setup({
@@ -41,8 +41,8 @@ function M.setup(handlers)
         },
         auxDirectory = "build",
         forwardSearch = {
-          executable = fexec,
-          args = fargs,
+          executable = fwd_exec,
+          args = fwd_args,
         },
       },
     },
