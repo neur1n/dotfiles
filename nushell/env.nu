@@ -56,5 +56,4 @@ $env.PATH = (
 )
 
 zoxide init nushell | save -f ~/.zoxide.nu
-# zoxide init nushell | str replace --all "-- $rest" "-- ...$rest" | str replace --all "def-env" "def --env" | save -f ~/.zoxide.nu
 # Customize}}}
