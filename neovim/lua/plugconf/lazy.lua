@@ -11,12 +11,6 @@ local plugins ={
     },
   },
   {
-    "NvChad/nvim-colorizer.lua",
-    lazy = true,
-    event = "ColorScheme *",
-    config = require("plugconf.nvim-colorizer").setup,
-  },
-  {
     "lewis6991/gitsigns.nvim",
     lazy = true,
     event = "ColorScheme *",
@@ -48,10 +42,20 @@ local plugins ={
     config = require("plugconf.nvim-autopairs").setup,
   },
   {
+    "NvChad/nvim-colorizer.lua",
+    lazy = true,
+    event = "ColorScheme *",
+    config = require("plugconf.nvim-colorizer").setup,
+  },
+  {
     "mfussenegger/nvim-dap",
     lazy = true,
     keys = require("plugconf.nvim-dap").keymap,
     config = require("plugconf.nvim-dap").setup,
+  },
+  {
+    "nvim-focus/focus.nvim",
+    config = require("plugconf.focus").setup,
   },
   {
     "kylechui/nvim-surround",
