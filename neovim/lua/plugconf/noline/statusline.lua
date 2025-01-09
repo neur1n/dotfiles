@@ -52,11 +52,11 @@ function M.render_c()
     Highlight.create("NModeC", colors[color], bg, "bold")
 
     color = math.random(#colors)
-    Highlight.create("NNameD",  colors[color], bg)
-    Highlight.create("NName",  colors[color], bg, "inverse")
+    Highlight.create("NNameD", colors[color], bg)
+    Highlight.create("NName", colors[color], bg, "inverse")
     Highlight.link("NEdit", "NName")
 
-    Highlight.create("NTag",  palette.fgm, bg, "bold")
+    Highlight.create("NTag", palette.fgm, bg, "bold")
 
     Highlight.create("NDiagE", palette.red, bg)
     Highlight.create("NDiagW", palette.yellow, bg)
@@ -77,27 +77,27 @@ end
 function M.render_nc()
   if not State.stl_initialized then
     local color = 0
-    local bg = palette.bgm
+    local bg = palette.bgs
 
     math.randomseed(os.time())
 
     color = math.random(#colors)
-    Highlight.create("NName_nc",  colors[color], bg)
+    Highlight.create("NNameNC", colors[color], bg)
 
-    Highlight.create("NEdit_nc",  palette.red, bg)
+    Highlight.create("NEditNC", palette.red, bg)
 
-    Highlight.create("NTag",  palette.fgm, bg, "bold")
+    Highlight.create("NTagNC", palette.fgm, bg, "bold")
 
-    Highlight.create("NDiagE", palette.red, bg)
-    Highlight.create("NDiagW", palette.yellow, bg)
-    Highlight.create("NDiagH", palette.blue, bg)
-    Highlight.create("NDiagI", palette.green, bg)
-
-    color = math.random(#colors)
-    Highlight.create("NFileInfo_nc",  colors[color], bg)
+    Highlight.create("NDiagENC", palette.red, bg)
+    Highlight.create("NDiagWNC", palette.yellow, bg)
+    Highlight.create("NDiagHNC", palette.blue, bg)
+    Highlight.create("NDiagINC", palette.green, bg)
 
     color = math.random(#colors)
-    Highlight.create("NRuler", colors[color], bg)
+    Highlight.create("NFileInfoNC", colors[color], bg)
+
+    color = math.random(#colors)
+    Highlight.create("NRulerNC", colors[color], bg)
   end
 end
 
@@ -158,30 +158,32 @@ function M.setup_nc()
   expr = expr .. Component.create(Edit.paste("P", decor["sep"]), "NMode")
   expr = expr .. Component.create(Edit.spell("S", decor["sep"]), "NMode")
 
-  expr = expr .. Component.create({" ", Buffer.number(), decor["sep"], File.name()}, "NName_nc")
+  -- NOTE: This requires the statuscolumn to be initialized first.
+  expr = expr .. Component.create({"▏"}, "NStatusColumnNC")
+  expr = expr .. Component.create({Buffer.number(), decor["sep"], File.name()}, "NNameNC")
 
   expr = expr .. Component.create({
     Edit.modified(glyph.md, " "),
     Edit.modifiable(glyph.ma, " "),
-    Edit.readonly(glyph.ro, " ")}, "NEdit_nc")
+    Edit.readonly(glyph.ro, " ")}, "NEditNC")
 
-  expr = expr .. Component.create(Diagnosis.info("coc", "error",       glyph.e, " "), "NDiagE")
-  expr = expr .. Component.create(Diagnosis.info("coc", "warning",     glyph.w, " "), "NDiagW")
-  expr = expr .. Component.create(Diagnosis.info("coc", "hint",        glyph.h, " "), "NDiagH")
-  expr = expr .. Component.create(Diagnosis.info("coc", "information", glyph.i, " "), "NDiagI")
+  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.ERROR, glyph.e, " "), "NDiagENC")
+  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.WARN,  glyph.w, " "), "NDiagWNC")
+  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.HINT,  glyph.h, " "), "NDiagHNC")
+  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.INFO,  glyph.i, " "), "NDiagINC")
 
   expr = expr .. "%=%<"
 
-  expr = expr .. Component.create(Tag.get("📦"), "NTag")
+  expr = expr .. Component.create(Tag.get("📦"), "NTagNC")
 
   expr = expr .. "%="
 
-  expr = expr .. Component.create({vim.o.filetype, File.encoding(decor["sep"], decor["sep"]), File.format(), " "}, "NFileInfo_nc")
+  expr = expr .. Component.create({vim.o.filetype, File.encoding(decor["sep"], decor["sep"]), File.format(), " "}, "NFileInfoNC")
 
   expr = expr .. Component.create({
     Buffer.line(4), decor["sep"],
     Buffer.line_count(), ":",
-    Buffer.column("v", -3), " "}, "NRuler")
+    Buffer.column("v", -3), " "}, "NRulerNC")
 
   return expr
 end
@@ -203,7 +205,6 @@ function M.update()
 end
 
 function M.redraw()
-  palette = Palette.get()
   State.stl_initialized = false
 
   M.render_c()

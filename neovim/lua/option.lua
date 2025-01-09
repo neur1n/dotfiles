@@ -34,6 +34,7 @@ local options = {
   colorcolumn = "80",
   completeopt = "menu,menuone,noselect",
   cursorline = true,
+  fillchars = "vert: ",
   foldmethod = "marker",
   foldlevelstart = 99,
   laststatus = 2,

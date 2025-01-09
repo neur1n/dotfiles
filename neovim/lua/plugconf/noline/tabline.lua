@@ -42,7 +42,7 @@ function M.render()
     Highlight.link("NTabR", "NTabL")
 
     color = math.random(#colors)
-    Highlight.create("NTab_nc", colors[color], bg)
+    Highlight.create("NTabNC", colors[color], bg)
 
     color = math.random(#colors)
     Highlight.create("NVcs", colors[color], bg)
@@ -60,7 +60,7 @@ function M.setup()
   expr = expr .. Component.create(Tab.current(), "NTab")
   expr = expr .. Component.create(decor["right"], "NTabR")
 
-  expr = expr .. Component.create(Tab.not_current(decor["sep"], " ", " "), "NTab_nc")
+  expr = expr .. Component.create(Tab.not_current(decor["sep"], " ", " "), "NTabNC")
 
   expr = expr .. "%="
 
@@ -84,7 +84,6 @@ function M.update()
 end
 
 function M.redraw()
-  palette = Palette.get()
   State.tal_initialized = false
 
   M.render()
