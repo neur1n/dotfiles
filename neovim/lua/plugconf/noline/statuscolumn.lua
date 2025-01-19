@@ -41,7 +41,7 @@ function M.setup_c()
   local expr = ""
 
   expr = expr .. Component.create("▌", "NStatusColumn")
-  expr = expr .. Component.create("%s%l")
+  expr = expr .. Component.create("%s%-l ")
 
   return expr
 end
@@ -50,7 +50,7 @@ function M.setup_nc()
   local expr = ""
 
   expr = expr .. Component.create("▏", "NStatusColumnNC")
-  expr = expr .. Component.create("%s%l")
+  expr = expr .. Component.create("%s%-l ")
 
   return expr
 end
