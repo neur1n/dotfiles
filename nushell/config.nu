@@ -5,6 +5,8 @@ $env.config.cursor_shape.vi_insert = "line"
 $env.config.cursor_shape.vi_normal = "block"
 $env.config.edit_mode = "vi"
 $env.config.footer_mode = "auto"
+$env.config.history.file_format = "sqlite"
+$env.config.history.isolation = true
 $env.config.rm.always_trash = true
 $env.config.shell_integration.osc133 = false
 # Override}}}
