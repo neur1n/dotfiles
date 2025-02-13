@@ -20,11 +20,11 @@ local plugins ={
     "lukas-reineke/indent-blankline.nvim",
     lazy = true,
     cmd = {
-      "IBLEnable",
       "IBLDisable",
-      "IBLToggle",
-      "IBLEnableScope",
       "IBLDisableScope",
+      "IBLEnable",
+      "IBLEnableScope",
+      "IBLToggle",
       "IBLToggleScope",
     },
     config = require("plugconf.indent-blankline").setup,
@@ -55,6 +55,12 @@ local plugins ={
   },
   {
     "nvim-focus/focus.nvim",
+    lazy = true,
+    cmd = {
+      "FocusDisable",
+      "FocusEnable",
+      "FocusToggle",
+    },
     config = require("plugconf.focus").setup,
   },
   {
