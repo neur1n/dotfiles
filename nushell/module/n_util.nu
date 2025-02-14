@@ -37,6 +37,19 @@ export def random-index [data: any] {
   (random int ..(($data | length) - 1))
 }
 
+export def repeat [times: int, command: closure] {
+  mut i = 0
+
+  loop {
+    if ($i < $times) {
+      do $command
+      $i = $i + 1
+    } else {
+      break
+    }
+  }
+}
+
 export def same-file [file1: path, file2: path, echo: bool = false] {
   let md5_1 = (open $file1 | hash md5)
   let md5_2 = (open $file2 | hash md5)
