@@ -21,24 +21,50 @@ export def insert-path [paths: path] {
   }
 }
 
-export def nvim-fuzzy [] {
-  let file = (fzf | str trim)
+export def neovim [
+    --fuzzy  (-f),
+    --listen (-l),
+    file?: path] {
+  if not ($fuzzy or $listen) {
+    match $file {
+      null => {
+        run-external nvim
+      }
+      _ => {
+        run-external nvim $file
+      }
+    }
 
-  if not ($file | is-empty) {
-    nvim  $file
+    return
   }
-}
 
-export def nvim-listen [file: path] {
-  let socket = (
-    if (sys host).long_os_version =~ ".*Linux.*" {
-      "/tmp/nvim.sock.9527"
-    } else if (sys host).name == "Windows" {
-      "localhost:9527"
+  let file = (
+    if $fuzzy {
+      (fzf | str trim)
+    } else {
+      ""
     }
   )
 
-  run-external nvim ...["--listen", $socket, $file]
+  mut cmd = ["nvim"]
+
+  if $listen {
+    let socket = (
+      if (n_sys is-windows) {
+        "localhost:9527"
+      } else {
+        "/tmp/nvim.sock.9527"
+      }
+    )
+
+    $cmd = ($cmd | append "--listen" | append $socket)
+  }
+
+  if not ($file | is-empty) {
+    $cmd = ($cmd | append $file)
+  }
+
+  run-external ...$cmd
 }
 
 export def pid [name: string] {
