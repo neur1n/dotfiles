@@ -21,7 +21,8 @@ alias c-build = n_c run-build
 alias c-cmake = n_c run-cmake
 alias c-init = n_c init-workspace
 
-alias fnvim = n_util fzf-nvim
+alias nvimf = n_util nvim-fuzzy
+alias nviml = n_util nvim-listen
 
 alias gco = git checkout
 

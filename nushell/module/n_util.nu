@@ -11,14 +11,6 @@ export def append-path [paths: path] {
   }
 }
 
-export def fzf-nvim [] {
-  let file = (fzf | str trim)
-
-  if not ($file | is-empty) {
-    nvim  $file
-  }
-}
-
 export def insert-path [paths: path] {
   if (n_sys is-windows) {
     $env.Path = ($env.Path | prepend $paths)
@@ -27,6 +19,26 @@ export def insert-path [paths: path] {
     $env.PATH = ($env.PATH | prepend $paths)
     $env.PATH
   }
+}
+
+export def nvim-fuzzy [] {
+  let file = (fzf | str trim)
+
+  if not ($file | is-empty) {
+    nvim  $file
+  }
+}
+
+export def nvim-listen [file: path] {
+  let socket = (
+    if (sys host).long_os_version =~ ".*Linux.*" {
+      "/tmp/nvim.sock.9527"
+    } else if (sys host).name == "Windows" {
+      "localhost:9527"
+    }
+  )
+
+  run-external nvim ...["--listen", $socket, $file]
 }
 
 export def pid [name: string] {
