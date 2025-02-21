@@ -38,14 +38,6 @@ export def neovim [
     return
   }
 
-  let file = (
-    if $fuzzy {
-      (fzf | str trim)
-    } else {
-      ""
-    }
-  )
-
   mut cmd = ["nvim"]
 
   if $listen {
@@ -60,7 +52,14 @@ export def neovim [
     $cmd = ($cmd | append "--listen" | append $socket)
   }
 
-  if not ($file | is-empty) {
+  if $fuzzy {
+    let selected = (fzf | str trim)
+    if not ($selected | is-empty) {
+      $cmd = ($cmd | append $selected)
+    } else if not $listen {
+      return
+    }
+  } else if not ($file | is-empty) {
     $cmd = ($cmd | append $file)
   }
 
