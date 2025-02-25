@@ -1,5 +1,5 @@
 export def ip [] {
-  if (is-windows) {
+  if ($nu.os-info.name == "windows") {
     let addr = (ipconfig | find "IPv4 Address")
     if ($addr | is-empty) {
       "127.0.0.1"
@@ -11,22 +11,10 @@ export def ip [] {
   }
 }
 
-export def is-apple [] {
-  (sys host).name == "Apple"
-}
-
-export def is-linux [] {
-  (sys host).long_os_version =~ ".*Linux.*"
-}
-
-export def is-windows [] {
-  (sys host).name == "Windows"
-}
-
 export def os-logo [] {
-  if (is-apple) {
+  if ($nu.os-info.name == "macos") {
     "\u{f179}"
-  } else if (is-windows) {
+  } else if ($nu.os-info.name == "windows") {
     "\u{f17a}"
   } else {
     "\u{f17c}"

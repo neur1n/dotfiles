@@ -2,7 +2,7 @@ use n_sys.nu
 
 
 export def append-path [paths: path] {
-  if (n_sys is-windows) {
+  if ($nu.os-info.name == "windows") {
     $env.Path = ($env.Path | append $paths)
     $env.Path
   } else {
@@ -12,7 +12,7 @@ export def append-path [paths: path] {
 }
 
 export def insert-path [paths: path] {
-  if (n_sys is-windows) {
+  if ($nu.os-info.name == "windows") {
     $env.Path = ($env.Path | prepend $paths)
     $env.Path
   } else {
@@ -42,7 +42,7 @@ export def neovim [
 
   if $listen {
     let socket = (
-      if (n_sys is-windows) {
+      if ($nu.os-info.name == "windows") {
         "localhost:9527"
       } else {
         "/tmp/nvim.sock.9527"
@@ -105,7 +105,7 @@ export def same-file [file1: path, file2: path, echo: bool = false] {
 }
 
 export def softlink [src: path, dst: path] {
-  if (n_sys is-windows) {
+  if ($nu.os-info.name == "windows") {
     MKLINK /J $dst $src
   } else {
     ln -s $src $dst

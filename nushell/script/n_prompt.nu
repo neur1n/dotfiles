@@ -22,7 +22,7 @@ def show-session [] {
 
   let logo = (n_sys os-logo)
   let user = (
-      if (n_sys is-windows) {
+      if ($nu.os-info.name == "windows") {
         $env.USERNAME
       } else {
         (whoami)

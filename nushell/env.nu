@@ -31,13 +31,7 @@ $env.NU_PLUGIN_DIRS = [
 #================================================================= Customize{{{
 $env.NUCONF = ($nu.config-path | path expand | path dirname)
 
-let bin = (
-  if (sys host).long_os_version =~ ".*Linux.*" {
-    (ls ($"($env.NUCONF)/../bin/linux/*" | into glob)).name
-  } else if (sys host).name == "Windows" {
-    (ls ($"($env.NUCONF)/../bin/windows/*" | into glob)).name
-  }
-)
+let bin = (ls ($"($env.NUCONF)/../bin/($nu.os-info.name)/*" | into glob)).name
 
 $env.Path = (
   if "Path" in $env {
