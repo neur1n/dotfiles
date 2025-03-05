@@ -97,6 +97,10 @@ local plugins ={
     dependencies = {
       "nvim-lua/plenary.nvim",
       {
+        "gbirke/telescope-foldmarkers.nvim",
+        lazy = true,
+      },
+      {
         "nvim-telescope/telescope-fzf-native.nvim",
         lazy = true,
         build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",

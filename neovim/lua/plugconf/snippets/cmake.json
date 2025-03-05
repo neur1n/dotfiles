@@ -1,0 +1,46 @@
+{
+  "cflags": {
+    "prefix": ["c flags"],
+    "body": [
+      "IF(MSVC)",
+      "  SET(CMAKE_C_FLAGS \"\\${CMAKE_C_FLAGS} /W3 /WX /Zc:preprocessor /Zc:__STDC__\")",
+      "ELSE()",
+      "  SET(CMAKE_C_FLAGS \"\\${CMAKE_C_FLAGS} -Wall -Werror -Wextra\")",
+      "ENDIF()",
+      "",
+      "SET(CMAKE_C_STANDARD ${1:11})",
+      "SET(CMAKE_C_STANDARD_REQUIRED ON)",
+      "$0"
+    ],
+    "description": "Frequently used C flags."
+  },
+  "cxxflags": {
+    "prefix": ["cxx flags"],
+    "body": [
+      "IF(MSVC)",
+      "  SET(CMAKE_CXX_FLAGS \"\\${CMAKE_CXX_FLAGS} /W3 /WX /Zc:__cplusplus\")",
+      "ELSE()",
+      "  SET(CMAKE_CXX_FLAGS \"\\${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra\")",
+      "ENDIF()",
+      "",
+      "SET(CMAKE_CXX_STANDARD ${1:17})",
+      "SET(CMAKE_CXX_STANDARD_REQUIRED ON)",
+      "$0"
+    ],
+    "description": "Frequently used CXX flags."
+  },
+  "executable": {
+    "prefix": ["set executable"],
+    "body": [
+      "SET(${1:TYPE}_TARGET",
+      "  $2",
+      ")",
+      "FOREACH(TARGET \\${$1_TARGET})",
+      "  ADD_EXECUTABLE($2 $3)",
+      "  TARGET_LINK_LIBRARIES($2 $4)",
+      "ENDFOREACH()",
+      "$0"
+    ],
+    "description": "Setup one or more executables."
+  }
+}

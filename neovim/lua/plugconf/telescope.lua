@@ -10,6 +10,8 @@ function M.keymap()
     {"<Leader>sr", "<Cmd>lua require('telescope.builtin').find_files({cwd=require('utility').root_dir()})<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>ss", "<Cmd>lua require('telescope.builtin').search_history()<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>st", "<Cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", mode = "n", {noremap = true, silent = true}},
+    -- From extensions.
+    {"<Leader>sm", "<Cmd>Telescope foldmarkers<CR>", mode = "n", {noremap = true, silent = true}},
   }
 end
 
@@ -48,6 +50,7 @@ function M.setup()
     }
   })
 
+  require("telescope").load_extension("foldmarkers")
   require("telescope").load_extension("fzf")
 end
 
