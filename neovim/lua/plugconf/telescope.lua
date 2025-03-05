@@ -6,7 +6,7 @@ function M.keymap()
     {"<Leader>sc", "<Cmd>lua require('telescope.builtin').command_history()<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>sf", "<Cmd>lua require('telescope.builtin').find_files()<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>sg", "<Cmd>lua require('telescope.builtin').live_grep()<CR>", mode = "n", {noremap = true, silent = true}},
-    {"<Leader>sh", "<Cmd>lua require('telescope.builtin').oldfiles()<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>so", "<Cmd>lua require('telescope.builtin').oldfiles()<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>sr", "<Cmd>lua require('telescope.builtin').find_files({cwd=require('utility').root_dir()})<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>ss", "<Cmd>lua require('telescope.builtin').search_history()<CR>", mode = "n", {noremap = true, silent = true}},
     {"<Leader>st", "<Cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", mode = "n", {noremap = true, silent = true}},
@@ -16,28 +16,29 @@ function M.keymap()
 end
 
 function M.setup()
+  local th = "ivy"
   require("telescope").setup({
     pickers = {
       buffers = {
-        theme = "dropdown",
+        theme = th,
       },
       command_history = {
-        theme = "dropdown",
+        theme = th,
       },
       find_files = {
-        theme = "dropdown",
+        theme = th,
       },
       live_grep = {
-        theme = "dropdown",
+        theme = th,
       },
       oldfiles = {
-        theme = "dropdown",
+        theme = "ivy",
       },
       search_history = {
-        theme = "dropdown",
+        theme = th,
       },
       lsp_document_symbols = {
-        theme = "dropdown",
+        theme = th,
       },
     },
     extensions = {
