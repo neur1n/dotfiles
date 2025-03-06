@@ -81,3 +81,19 @@ export def run-cmake [
     print $"compile_commands.json copied to ($src | path expand)"
   }
 }
+
+export def run-install [build: string = "default"] {
+  let tmp = ($build | str downcase)
+
+  let args = (
+      if ($tmp == "debug") {
+        ["--install", ".", "--config", "Debug"]
+      } else if ($tmp == "release") {
+        ["--install", ".", "--config", "Release"]
+      } else {
+        ["--install", "."]
+      }
+  )
+
+  run-external cmake ...$args
+}
