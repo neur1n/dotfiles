@@ -1,3 +1,3 @@
 @echo off
 
-START CMD /C "lemonade --line-ending CR server"
+WSCRIPT lemonade-server.vbs
