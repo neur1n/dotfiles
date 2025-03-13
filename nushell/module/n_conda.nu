@@ -8,7 +8,7 @@ export-env {
         } else if not (which conda | is-empty) {
           (conda info --envs --json | from json)
         } else {
-          ('{"root_prefix": "", "envs": ""}' | from json)
+          ('{"root_prefix": "", "envs": []}' | from json)
         })
 
     $env.CONDA_ROOT = $info.root_prefix
