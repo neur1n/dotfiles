@@ -15,8 +15,6 @@ local handlers =  {
   ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border}),
 }
 
-local signs = {Error = "🔥", Warn = "⚡", Hint = "💡", Info = "🔎"}
-
 function M.setup()
   require("plugconf.lsp.basedpyright").setup(handlers)
   require("plugconf.lsp.clangd").setup(handlers)
@@ -48,16 +46,24 @@ function M.setup()
 
   vim.diagnostic.config({
     severity_sort = true,
-    signs = true,
     underline = true,
     update_in_insert = false,
     virtual_text = false,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = "🔥",
+        [vim.diagnostic.severity.WARN] = "⚡",
+        [vim.diagnostic.severity.INFO] = "🔎",
+        [vim.diagnostic.severity.HINT] = "💡",
+      },
+      numhl = {
+        [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+        [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+        [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+        [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+      },
+    },
   })
-
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
-  end
 
   vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
     group = vim.api.nvim_create_augroup("float_diagnostic", {clear = true}),
