@@ -4,27 +4,10 @@ local File = require("noline.source.file")
 local Component = require("noline.utility.component")
 
 function M.current(l_decor, r_decor)
-  local expr = ""
-  local text = ""
-  local limit = tonumber(vim.o.columns)
-
-  if #vim.api.nvim_list_tabpages() > 1 then
-    limit = vim.o.columns / 2
-  end
-
-  text = File.full_path()
-
-  if vim.api.nvim_buf_get_name(0) == "" or vim.api.nvim_strwidth(text) >= limit then
-    text = File.full_dir()
-
-    if vim.api.nvim_strwidth(text) >= limit then
-      text = File.name()
-    end
-  end
-
+  local text = File.full_path()
   local number = vim.api.nvim_tabpage_get_number(0)
 
-  expr = "%" .. number .. "T%X" .. number .. " " .. text
+  local expr = "%" .. number .. "T%X%<" .. number .. " " .. text
 
   return Component.decorate(expr, l_decor, r_decor)
 end
