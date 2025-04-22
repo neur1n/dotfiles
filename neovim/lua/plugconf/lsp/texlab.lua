@@ -34,7 +34,7 @@ function M.setup(handlers)
             "-shell-escape",
             "-synctex=1",
             "-view=pdf",
-            "-xelatex",
+            "-pdflatex",
             "%f",
           },
           onSave = true,
