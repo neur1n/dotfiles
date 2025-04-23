@@ -1,6 +1,6 @@
 local M = {}
 
-local plugins ={
+local plugin = {
   {
     "skywind3000/asynctasks.vim",
     lazy = true,
@@ -200,7 +200,7 @@ function M.setup()
 
   vim.opt.rtp:prepend(lazypath)
 
-  require("lazy").setup(plugins)
+  require("lazy").setup(plugin)
 end
 
 return M
