@@ -1,21 +1,23 @@
 local M = {}
 
 local fonts = {
+  {name = "0xProto Nerd Font Mono"        , size = 10},
   {name = "Agave Nerd Font Mono"          , size = 13},
+  {name = "AtkynsonMono NFM"              , size = 10},
   {name = "CaskaydiaCove Nerd Font Mono"  , size = 12},
   {name = "ComicShannsMono Nerd Font Mono", size = 12},
   {name = "DepartureMono Nerd Font Mono"  , size = 10},
   {name = "FantasqueSansM Nerd Font Mono" , size = 13},
   {name = "FiraCode Nerd Font Mono"       , size = 11},
-  {name = "GohuFont uni11 Nerd Font Mono" , size = 12},
+  {name = "GohuFont uni11 Nerd Font Mono" , size = 12.5},
   {name = "Hurmit Nerd Font Mono"         , size = 11},
   {name = "IntoneMono Nerd Font Mono"     , size = 11},
   {name = "JetBrainsMono Nerd Font Mono"  , size = 11},
   {name = "Maple Mono NF"                 , size = 11},
-  {name = "Monocraft Nerd Font"           , size = 10},
+  {name = "Monocraft Nerd Font"           , size = 9.5},
   {name = "ProFontWindows Nerd Font Mono" , size = 13},
   {name = "ProggyClean Nerd Font Mono"    , size = 16},
-  {name = "RecMonoCasual Nerd Font Mono"  , size = 12},
+  {name = "RecMonoCasual Nerd Font Mono"  , size = 11},
   {name = "SpaceMono Nerd Font Mono"      , size = 11},
 }
 
