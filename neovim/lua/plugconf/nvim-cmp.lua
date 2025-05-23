@@ -23,7 +23,7 @@ function M.setup()
       {name = "copilot"},
       {name = "nvim_lsp"},
       {name = "nvim_lsp_signature_help"},
-      {name = "path"},
+      {name = "path", option = {trailing_slash = false}},
       {name = "vsnip", priority = 100},
     }, {
       {name = "buffer"},

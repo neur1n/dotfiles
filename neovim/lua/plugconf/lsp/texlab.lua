@@ -34,7 +34,7 @@ function M.setup(handlers)
             "-shell-escape",
             "-synctex=1",
             "-view=pdf",
-            "-pdflatex",
+            vim.uv.fs_stat(".pdflatex") and "-pdflatex" or "-xelatex",
             "%f",
           },
           onSave = true,

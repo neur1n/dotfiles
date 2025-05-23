@@ -88,6 +88,9 @@ function M.setup()
   end
 
   M.set_font()
+
+  -- Corner cases
+  vim.g.tex_flavor = "latex"
 end
 
 return M

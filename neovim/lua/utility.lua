@@ -1,7 +1,9 @@
 local M = {}
 
 local function is_drive_root(path)
-  if vim.uv.os_uname().sysname == "Windows_NT" then
+  local Env = require("environment")
+
+  if Env.is_win() then
     return path:match("^[a-zA-Z]:[\\/]?$") ~= nil
   else
     return path == "/"
