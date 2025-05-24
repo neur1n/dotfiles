@@ -10,8 +10,6 @@ function M.setup()
   vim.keymap.set({"n", "v"}, "gk", "k", {noremap = true})
   vim.keymap.set({"n", "v"}, "j", "gj", {noremap = true})
   vim.keymap.set({"n", "v"}, "k", "gk", {noremap = true})
-
-  vim.cmd([[vnoremap // y/\V<C-R>=escape(@", '\/')<CR><CR>]])
 end
 
 return M

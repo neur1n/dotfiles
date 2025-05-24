@@ -10,37 +10,31 @@ local border = {
   {"╰", "FloatBorder"},
   {"│", "FloatBorder"},
 }
-local handlers =  {
-  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border}),
+local handler = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = border}),
 }
 
 function M.setup()
-  require("plugconf.lsp.basedpyright").setup(handlers)
-  require("plugconf.lsp.clangd").setup(handlers)
-  require("plugconf.lsp.lua_ls").setup(handlers)
-  require("plugconf.lsp.ltex").setup(handlers)
-  require("plugconf.lsp.texlab").setup(handlers)
+  require("plugconf.lsp.basedpyright").setup(handler)
+  require("plugconf.lsp.clangd").setup(handler)
+  require("plugconf.lsp.lua_ls").setup(handler)
+  require("plugconf.lsp.ltex").setup(handler)
+  require("plugconf.lsp.texlab").setup(handler)
 
-  vim.keymap.set("n", "<C-p>", vim.diagnostic.goto_prev, {noremap = true})
-  vim.keymap.set("n", "<C-n>", vim.diagnostic.goto_next, {noremap = true})
+  vim.keymap.set("n", "<M-p>", function() vim.diagnostic.jump({count = -1, float = false}) end, {noremap = true})
+  vim.keymap.set("n", "<M-n>", function() vim.diagnostic.jump({count = 1, float = false}) end, {noremap = true})
 
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-    callback = function(ev)
-      vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-      local opts = {buffer = ev.buf}
-      vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, opts)
-      vim.keymap.set("n", "<Leader>gd", vim.lsp.buf.definition, opts)
-      vim.keymap.set("n", "<Leader>gi", vim.lsp.buf.implementation, opts)
-      vim.keymap.set("n", "<Leader>gt", vim.lsp.buf.type_definition, opts)
-      vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
-      vim.keymap.set("n", "<Leader>gr", vim.lsp.buf.references, opts)
-      vim.keymap.set({"n", "v"}, "<Leader>ga", vim.lsp.buf.code_action, opts)
+    callback = function(event)
+      local opt = {buffer = event.buf}
+      vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, opt)
+      vim.keymap.set("n", "<Leader>gd", vim.lsp.buf.definition, opt)
+      vim.keymap.set("n", "<Leader>gt", vim.lsp.buf.type_definition, opt)
       vim.keymap.set("n", "<Leader>gf", function()
         vim.lsp.buf.format{async = true}
-      end, opts)
+      end, opt)
     end,
   })
 

@@ -1,12 +1,5 @@
 local M = {}
 
-function M.keymap()
-  return {
-    {"<C-j>", "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-j>'", mode = {"i", "s"}, {noremap = true, expr = true}},
-    {"<C-k>", "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<C-k>'", mode = {"i", "s"}, {noremap = true, expr = true}},
-  }
-end
-
 function M.setup()
   vim.g["vsnip_extra_mapping"] = false
 
@@ -17,19 +10,19 @@ function M.setup()
     cuda = {"c"},
   }
 
-  vim.keymap.set({"i", "s"}, "<C-j>", function()
+  vim.keymap.set({"i", "s"}, "<M-j>", function()
     if vim.fn["vsnip#jumpable"](1) then
       return "<Plug>(vsnip-jump-next)"
     else
-      return "<C-j>"
+      return "<M-j>"
     end
   end, {noremap = true, expr = true})
 
-  vim.keymap.set({"i", "s"}, "<C-k>", function()
+  vim.keymap.set({"i", "s"}, "<M-k>", function()
     if vim.fn["vsnip#jumpable"](-1) then
       return "<Plug>(vsnip-jump-prev)"
     else
-      return "<C-k>"
+      return "<M-k>"
     end
   end, {noremap = true, expr = true})
 end

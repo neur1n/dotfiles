@@ -11,9 +11,6 @@ function M.opened()
 end
 
 function M.setup()
-  vim.keymap.set("n", "<CR>", "&buftype ==# 'quickfix' ? '<CR>' : 'o<Esc>'", {noremap = true, expr = true})
-  vim.keymap.set("n", "<S-CR>", "&buftype ==# 'quickfix' ? '<CR>' : 'O<Esc>'", {noremap = true, expr = true})
-
   -- Clear the quickfix
   vim.keymap.set("n", "_", function()
     vim.fn.setqflist({}, "f")

@@ -8,8 +8,8 @@ end
 
 local has_words_before = function()
   unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, row - 1, row, true)[1]:sub(col, col):match("%s") == nil
 end
 
 function M.setup()
@@ -23,10 +23,10 @@ function M.setup()
       {name = "copilot"},
       {name = "nvim_lsp"},
       {name = "nvim_lsp_signature_help"},
-      {name = "path", option = {trailing_slash = false}},
       {name = "vsnip", priority = 100},
     }, {
       {name = "buffer"},
+      {name = "path", option = {trailing_slash = false, label_trailing_slash = false}},
     }),
     snippet = {
       expand = function(args)
@@ -38,16 +38,16 @@ function M.setup()
       documentation = Cmp.config.window.bordered(),
     },
     mapping = Cmp.mapping.preset.insert({
-      ["<C-e>"] = Cmp.mapping.abort(),
       ["<C-Space>"] = Cmp.mapping.complete(),
-      ["<C-b>"] = Cmp.mapping(function(fallback)
+      ["<M-e>"] = Cmp.mapping.abort(),
+      ["<M-b>"] = Cmp.mapping(function(fallback)
         if Cmp.visible_docs() then
           Cmp.mapping.scroll_docs(-5)
         else
           fallback()
         end
       end, {"i", "s"}),
-      ["<C-f>"] = Cmp.mapping(function(fallback)
+      ["<M-f>"] = Cmp.mapping(function(fallback)
         if Cmp.visible_docs() then
           Cmp.mapping.scroll_docs(5)
         else

@@ -108,11 +108,6 @@ local plugin = {
     },
   },
   {
-    "tpope/vim-commentary",
-    lazy = true,
-    event = "BufEnter",
-  },
-  {
     "junegunn/vim-easy-align",
     lazy = true,
     keys = require("plugconf.vim-easy-align").keymap,
