@@ -75,11 +75,13 @@ function M.set_font()
 
   math.randomseed(os.time())
   local font = fonts[math.random(#fonts)]
+  local size = font.size
   if width > 2560 then
-    vim.o.guifont = font.name .. ":" .. (font.size + 2)
+    size = size + 2
   elseif width < 2560 then
-    vim.o.guifont = font.name .. ":" .. (font.size - 2)
+    size = size - 2
   end
+  vim.o.guifont = font.name .. ":" .. size
 end
 
 function M.setup()
