@@ -71,9 +71,16 @@ function M.setup()
       }),
       ["<Tab>"] = Cmp.mapping(function(fallback)
         if Cmp.visible() then
-          Cmp.select_next_item()
+          if #Cmp.get_entries() == 1 then
+            Cmp.confirm({select = true})
+          else
+            Cmp.select_next_item()
+          end
         elseif has_words_before() then
           Cmp.complete()
+          if #Cmp.get_entries() == 1 then
+            Cmp.confirm({select = true})
+          end
         elseif vim.fn["vsnip#available"](1) == 1 then
           feedkey("<Plug>(vsnip-expand-or-jump)", "")
         else
