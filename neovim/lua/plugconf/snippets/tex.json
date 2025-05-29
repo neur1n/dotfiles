@@ -1,0 +1,53 @@
+{
+  "enumerate": {
+    "prefix": ["enumerate"],
+    "body": [
+      "\\begin{enumerate}",
+      "  $0",
+      "\\end{enumerate}"
+    ],
+    "description": "enumerate environment"
+  },
+  "figure": {
+    "prefix": ["figure"],
+    "body": [
+      "\\begin{figure}[${1:htb}]",
+      "  \\centering",
+      "  \\includegraphics[width=${1:\\columnwidth}]{$2}",
+      "",
+      "  \\caption{$3}",
+      "  \\label{fig:$4}",
+      "\\end{figure}"
+    ],
+    "description": "figure environment"
+  },
+  "itemize": {
+    "prefix": ["itemize"],
+    "body": [
+      "\\begin{itemize}",
+      "  $0",
+      "\\end{itemize}"
+    ],
+    "description": "itemize environment"
+  },
+  "table": {
+    "prefix": ["table"],
+    "body": [
+      "\\begin{table}[${1:htb}]",
+      "  \\centering",
+      "  \\caption{$2}",
+      "  \\label{tab:$3}",
+      "",
+      "  % \\resizebox{${4:\\columnwidth}}{!}{%",
+      "  \\begin{tabular}{$5}",
+      "    \\toprule",
+      "    $0",
+      "    \\midrule",
+      "    \\bottomrule",
+      "  \\end{tabular}",
+      "  % }",
+      "\\end{table}"
+    ],
+    "description": "table environment"
+  }
+}

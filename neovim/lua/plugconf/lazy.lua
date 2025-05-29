@@ -77,6 +77,7 @@ local plugin = {
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
     lazy = true,
     event = "BufEnter",
     cmd = {
