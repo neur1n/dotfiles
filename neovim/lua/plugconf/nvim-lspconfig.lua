@@ -30,7 +30,6 @@ function M.setup()
     callback = function(event)
       local opt = {buffer = event.buf}
       vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, opt)
-      vim.keymap.set("n", "<Leader>gd", vim.lsp.buf.definition, opt)
       vim.keymap.set("n", "<Leader>gt", vim.lsp.buf.type_definition, opt)
       vim.keymap.set("n", "<Leader>gf", function()
         vim.lsp.buf.format{async = true}

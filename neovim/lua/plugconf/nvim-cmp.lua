@@ -2,11 +2,15 @@ local M = {}
 
 local border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}
 
-local feedkey = function(key, mode)
+local function feedkey(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
-local has_words_before = function()
+local function has_words_before()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+    return false
+  end
+
   unpack = unpack or table.unpack
   local row, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, row - 1, row, true)[1]:sub(col, col):match("%s") == nil
@@ -76,13 +80,13 @@ function M.setup()
           else
             Cmp.select_next_item()
           end
+        elseif vim.fn["vsnip#available"](1) == 1 then
+          feedkey("<Plug>(vsnip-expand-or-jump)", "")
         elseif has_words_before() then
           Cmp.complete()
           if #Cmp.get_entries() == 1 then
             Cmp.confirm({select = true})
           end
-        elseif vim.fn["vsnip#available"](1) == 1 then
-          feedkey("<Plug>(vsnip-expand-or-jump)", "")
         else
           fallback()
         end

@@ -13,15 +13,13 @@ local plugin = {
   {
     "lewis6991/gitsigns.nvim",
     lazy = true,
-    event = "ColorScheme *",
+    event = "BufWinEnter",
     config = require("plugconf.gitsigns").setup,
   },
   {
     "lukas-reineke/indent-blankline.nvim",
     lazy = true,
     cmd = {
-      "IBLDisable",
-      "IBLDisableScope",
       "IBLEnable",
       "IBLEnableScope",
       "IBLToggle",
@@ -38,13 +36,16 @@ local plugin = {
   {
     "windwp/nvim-autopairs",
     lazy = true,
-    event = "InsertEnter",
+    event = "BufWinEnter",
     config = require("plugconf.nvim-autopairs").setup,
   },
   {
     "NvChad/nvim-colorizer.lua",
     lazy = true,
-    event = "ColorScheme *",
+    cmd = {
+      "ColorizerAttachToBuffer",
+      "ColorizerToggle",
+    },
     config = require("plugconf.nvim-colorizer").setup,
   },
   {
@@ -57,7 +58,6 @@ local plugin = {
     "nvim-focus/focus.nvim",
     lazy = true,
     cmd = {
-      "FocusDisable",
       "FocusEnable",
       "FocusToggle",
     },
@@ -66,7 +66,7 @@ local plugin = {
   {
     "kylechui/nvim-surround",
     lazy = true,
-    event = "BufEnter",
+    event = "BufWinEnter",
     config = require("plugconf.nvim-surround").setup,
   },
   {
@@ -79,7 +79,7 @@ local plugin = {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     lazy = true,
-    event = "BufEnter",
+    event = "BufWinEnter",
     cmd = {
       "TSInstall",
       "TSUninstall",
@@ -116,12 +116,12 @@ local plugin = {
   {
     "matze/vim-move",
     lazy = true,
-    event = "BufEnter",
+    event = "BufWinEnter",
   },
   {
     "mg979/vim-visual-multi",
     lazy = true,
-    event = "BufEnter",
+    event = "BufWinEnter",
     init = require("plugconf.vim-visual-multi").setup,
   },
   {
@@ -139,13 +139,14 @@ local plugin = {
 
   -- Completion
   {
-    "github/copilot.vim",
-     config = require("plugconf.copilot").setup,
+    "zbirenbaum/copilot.lua",
+    event = "BufWinEnter",
+    config = require("plugconf.copilot").setup,
   },
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
-    event = "ColorScheme *",
+    event = "BufWinEnter",
     dependencies = {
       {
         "neovim/nvim-lspconfig",
@@ -175,7 +176,7 @@ local plugin = {
   {
     "neur1n/noline.nvim",
     lazy = true,
-    event = "ColorScheme *",
+    event = "BufWinEnter",
     config = require("plugconf.noline").setup
   },
 }
