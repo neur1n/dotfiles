@@ -1,7 +1,7 @@
 local M = {}
 
-function M.setup(handlers)
-  require("lspconfig").basedpyright.setup({
+function M.setup()
+  vim.lsp.config("basedpyright", {
     settings = {
       basedpyright = {
         analysis = {
@@ -21,8 +21,9 @@ function M.setup(handlers)
         }
       }
     },
-    handlers = handlers,
   })
+
+  vim.lsp.enable("basedpyright")
 end
 
 return M

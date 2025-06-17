@@ -1,13 +1,14 @@
 local M = {}
 
-function M.setup(handlers)
-  require("lspconfig").clangd.setup({
+function M.setup()
+  vim.lsp.config("clangd", {
     cmd = {
       "clangd",
       "--offset-encoding=utf-16",
     },
-    handlers = handlers,
   })
+
+  vim.lsp.enable("clangd")
 end
 
 return M

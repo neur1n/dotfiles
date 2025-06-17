@@ -10,20 +10,10 @@ local border = {
   {"╰", "FloatBorder"},
   {"│", "FloatBorder"},
 }
-local handler = {
-  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = border}),
-}
 
 function M.setup()
-  require("plugconf.lsp.basedpyright").setup(handler)
-  require("plugconf.lsp.clangd").setup(handler)
-  require("plugconf.lsp.lua_ls").setup(handler)
-  require("plugconf.lsp.ltex").setup(handler)
-  require("plugconf.lsp.texlab").setup(handler)
-
-  vim.keymap.set("n", "<M-p>", function() vim.diagnostic.jump({count = -1, float = false}) end, {noremap = true})
-  vim.keymap.set("n", "<M-n>", function() vim.diagnostic.jump({count = 1, float = false}) end, {noremap = true})
+  -- vim.keymap.set("n", "<M-p>", function() vim.diagnostic.jump({count = -1, float = false}) end, {noremap = true})
+  -- vim.keymap.set("n", "<M-n>", function() vim.diagnostic.jump({count = 1, float = false}) end, {noremap = true})
 
   vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -70,6 +60,12 @@ function M.setup()
       end
     end
   })
+
+  require("plugconf.lsp.basedpyright").setup()
+  require("plugconf.lsp.clangd").setup()
+  require("plugconf.lsp.lua_ls").setup()
+  require("plugconf.lsp.ltex").setup()
+  require("plugconf.lsp.texlab").setup()
 end
 
 return M

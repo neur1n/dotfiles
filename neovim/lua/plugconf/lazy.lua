@@ -13,7 +13,7 @@ local plugin = {
   {
     "lewis6991/gitsigns.nvim",
     lazy = true,
-    event = "BufWinEnter",
+    event = "VeryLazy",
     config = require("plugconf.gitsigns").setup,
   },
   {
@@ -36,7 +36,7 @@ local plugin = {
   {
     "windwp/nvim-autopairs",
     lazy = true,
-    event = "BufWinEnter",
+    event = "VeryLazy",
     config = require("plugconf.nvim-autopairs").setup,
   },
   {
@@ -66,7 +66,7 @@ local plugin = {
   {
     "kylechui/nvim-surround",
     lazy = true,
-    event = "BufWinEnter",
+    event = "VeryLazy",
     config = require("plugconf.nvim-surround").setup,
   },
   {
@@ -79,7 +79,7 @@ local plugin = {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     lazy = true,
-    event = "BufWinEnter",
+    event = "VeryLazy",
     cmd = {
       "TSInstall",
       "TSUninstall",
@@ -116,12 +116,12 @@ local plugin = {
   {
     "matze/vim-move",
     lazy = true,
-    event = "BufWinEnter",
+    event = "VeryLazy",
   },
   {
     "mg979/vim-visual-multi",
     lazy = true,
-    event = "BufWinEnter",
+    event = "VeryLazy",
     init = require("plugconf.vim-visual-multi").setup,
   },
   {
@@ -140,13 +140,13 @@ local plugin = {
   -- Completion
   {
     "zbirenbaum/copilot.lua",
-    event = "BufWinEnter",
+    event = "VeryLazy",
     config = require("plugconf.copilot").setup,
   },
   {
     "hrsh7th/nvim-cmp",
     lazy = true,
-    event = "BufWinEnter",
+    event = "VeryLazy",
     dependencies = {
       {
         "neovim/nvim-lspconfig",
@@ -176,7 +176,7 @@ local plugin = {
   {
     "neur1n/noline.nvim",
     lazy = true,
-    event = "BufWinEnter",
+    event = "VeryLazy",
     config = require("plugconf.noline").setup
   },
 }

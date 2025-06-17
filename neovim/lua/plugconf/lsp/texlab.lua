@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup(handlers)
+function M.setup()
   local Env = require("environment")
 
   local fwd_exec = nil
@@ -18,7 +18,7 @@ function M.setup(handlers)
     fwd_args = {"-reuse-instance", "%p", "-forward-search", "%f", "%l"}
   end
 
-  require("lspconfig").texlab.setup({
+  vim.lsp.config("texlab", {
     settings = {
       texlab = {
         build = {
@@ -46,11 +46,12 @@ function M.setup(handlers)
         },
       },
     },
-    handlers = handlers,
   })
 
-  vim.keymap.set("n", "<Leader>lb", "<Cmd>TexlabBuild<CR>", {noremap = true})
-  vim.keymap.set("n", "<Leader>lf", "<Cmd>TexlabForward<CR>", {noremap = true})
+  vim.lsp.enable("texlab")
+
+  vim.keymap.set("n", "<Leader>tb", "<Cmd>LspTexlabBuild<CR>", {noremap = true})
+  vim.keymap.set("n", "<Leader>tf", "<Cmd>LspTexlabForward<CR>", {noremap = true})
 end
 
 return M

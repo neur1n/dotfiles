@@ -1,7 +1,7 @@
 local M = {}
 
-function M.setup(handlers)
-  require("lspconfig").lua_ls.setup({
+function M.setup()
+  vim.lsp.config("lua_ls", {
     settings = {
       Lua = {
         runtime = {
@@ -9,8 +9,9 @@ function M.setup(handlers)
         }
       }
     },
-    handlers = handlers,
   })
+
+  vim.lsp.enable("lua_ls")
 end
 
 return M

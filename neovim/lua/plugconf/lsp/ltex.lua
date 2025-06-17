@@ -18,16 +18,17 @@ local function local_dict()
   return words
 end
 
-function M.setup(handlers)
-  require("lspconfig").ltex.setup({
+function M.setup()
+  vim.lsp.config("ltex", {
     settings = {
       ltex = {
         dictionary = {["en-US"] = local_dict()},
         language = "en-US",
       },
     },
-    handlers = handlers,
   })
+
+  vim.lsp.enable("ltex")
 end
 
 return M
