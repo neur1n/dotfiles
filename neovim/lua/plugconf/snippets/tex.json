@@ -1,4 +1,14 @@
 {
+  "equation": {
+    "prefix": ["align"],
+    "body": [
+      "\\begin{align}",
+      "  $0",
+      "  \\label{eqn:$1}",
+      "\\end{align}"
+    ],
+    "description": "align environment"
+  },
   "enumerate": {
     "prefix": ["enumerate"],
     "body": [
@@ -7,6 +17,16 @@
       "\\end{enumerate}"
     ],
     "description": "enumerate environment"
+  },
+  "equation": {
+    "prefix": ["equation"],
+    "body": [
+      "\\begin{equation}",
+      "  $0",
+      "  \\label{eqn:$1}",
+      "\\end{equation}"
+    ],
+    "description": "equation environment"
   },
   "figure": {
     "prefix": ["figure"],

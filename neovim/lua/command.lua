@@ -27,6 +27,14 @@ function M.setup()
     end
   end, {})
 
+  vim.api.nvim_create_user_command("ToggleVirtualLine", function()
+    if vim.diagnostic.config()["virtual_lines"] then
+      vim.diagnostic.config({virtual_lines = false})
+    else
+      vim.diagnostic.config({virtual_lines = {current_line = true}})
+    end
+  end, {})
+
   vim.api.nvim_create_user_command("TrimTrailingWhitespace", function()
     vim.cmd("silent! execute '%s/\\s\\+$//g'")
   end, {})
