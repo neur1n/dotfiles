@@ -43,6 +43,7 @@ local options = {
   splitright = true,
   termguicolors = true,
   updatetime = 500,
+  winborder = "rounded",
 
   -- File encoding and format
   encoding = "utf-8",

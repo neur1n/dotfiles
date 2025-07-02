@@ -26,6 +26,9 @@ function M.setup()
         [vim.diagnostic.severity.HINT] = "💡",
       },
     },
+    virtual_lines = {
+      current_line = true,
+    },
   })
 
   require("plugconf.lsp.basedpyright").setup()
