@@ -42,5 +42,15 @@
       "$0"
     ],
     "description": "Setup one or more executables."
+  },
+  "outdir": {
+    "prefix": ["outdir"],
+    "body": [
+      "SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY $1{PROJECT_BINARY_DIR}/lib)",
+      "SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY $1{PROJECT_BINARY_DIR}/lib)",
+      "SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY $1{PROJECT_BINARY_DIR}/bin)",
+      "$0"
+    ],
+    "description": "Setting output directory for build artifacts."
   }
 }
