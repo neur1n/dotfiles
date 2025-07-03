@@ -1,9 +1,0 @@
-{
-  "x_log": {
-    "prefix": ["xlog"],
-    "body": [
-      "x_log('${1:d}', ${2:nullptr}, \"$3\"$4);$0"
-    ],
-    "description": "x_log from x.h"
-  }
-}

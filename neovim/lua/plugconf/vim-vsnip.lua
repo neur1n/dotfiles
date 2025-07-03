@@ -6,8 +6,8 @@ function M.setup()
   vim.g["vsnip_snippet_dir"] = vim.fn.stdpath("config") .. "/lua/plugconf/snippets"
 
   vim.g["vsnip_filetypes"] = {
-    cpp = {"c"},
-    cuda = {"c"},
+    cpp = {"c", "cpp"},
+    cuda = {"c", "cpp"},
   }
 
   vim.keymap.set({"i", "s"}, "<C-j>", function()

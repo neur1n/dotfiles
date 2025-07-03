@@ -1,18 +1,9 @@
 {
-  "for": {
-    "prefix": ["for"],
-    "body": [
-      "for (${1:size_t} ${2:i} = ${3:0}; $2 ${4:<} ${5:bound}; ${6:++}$2) {",
-      "  $7",
-      "}$0"
-    ],
-    "description": "for loop"
-  },
   "x_log": {
-    "prefix": ["xlog"],
+    "prefix": ["cpplog"],
     "body": [
       "x_log('${1:d}', ${2:nullptr}, \"$3\"$4);$0"
     ],
-    "description": "x_log from x.h"
+    "description": "C++ version x_log from x.h."
   }
 }

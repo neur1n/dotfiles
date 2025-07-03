@@ -6,7 +6,7 @@
       "$2",
       "// $1}}}$0"
     ],
-    "description": "code section"
+    "description": "Code section enclosure."
   },
   "for": {
     "prefix": ["for"],
@@ -15,7 +15,7 @@
       "  $7",
       "}$0"
     ],
-    "description": "for loop"
+    "description": "For loop enclosure."
   },
   "guard": {
     "prefix": ["guard"],
@@ -27,7 +27,7 @@
       "",
       "#endif  // $1"
     ],
-    "description": "include guard"
+    "description": "Include guard for header files."
   },
   "main": {
     "prefix": ["main"],
@@ -38,7 +38,7 @@
       "  return 0;",
       "}"
     ],
-    "description": "main function"
+    "description": "A main function template."
   },
   "struct": {
     "prefix": ["struct"],
@@ -51,10 +51,10 @@
     "description": "struct"
   },
   "x_log": {
-    "prefix": ["xlog"],
+    "prefix": ["clog"],
     "body": [
       "x_log('${1:d}', ${2:NULL}, \"$3\"$4);$0"
     ],
-    "description": "x_log from x.h"
+    "description": "C version x_log from x.h."
   }
 }
