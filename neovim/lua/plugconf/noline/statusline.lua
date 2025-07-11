@@ -2,11 +2,10 @@ local M = {}
 
 local Palette = require("palette")
 
-local Buffer = require("noline.source.buffer")
-local Edit = require("noline.source.edit")
-local File = require("noline.source.file")
-local Component = require("noline.utility.component")
-local Highlight = require("noline.utility.highlight")
+local Component = require("noline.component")
+local Buffer = require("noline.buffer")
+local Edit = require("noline.edit")
+local File = require("noline.file")
 
 local State = require("plugconf.noline.state")
 local Decorator = require("plugconf.noline.decorator")
@@ -33,42 +32,110 @@ function M.render_c()
     math.randomseed(os.time())
 
     color = math.random(#colors)
-    Highlight.create("NStart", colors[color], bg)
-    Highlight.create("NEnd"  , colors[color], bg)
+    vim.api.nvim_set_hl(0, "NStart", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NEnd", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NModeN", colors[color], bg, "bold")
+    vim.api.nvim_set_hl(0, "NModeN", {
+      fg = colors[color].g, bg = bg.g, bold = true,
+      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NModeV", colors[color], bg, "bold")
+    vim.api.nvim_set_hl(0, "NModeV", {
+      fg = colors[color].g, bg = bg.g, bold = true,
+      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NModeI", colors[color], bg, "bold")
+    vim.api.nvim_set_hl(0, "NModeI", {
+      fg = colors[color].g, bg = bg.g, bold = true,
+      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NModeR", colors[color], bg, "bold")
+    vim.api.nvim_set_hl(0, "NModeR", {
+      fg = colors[color].g, bg = bg.g, bold = true,
+      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NModeC", colors[color], bg, "bold")
+    vim.api.nvim_set_hl(0, "NModeC", {
+      fg = colors[color].g, bg = bg.g, bold = true,
+      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NNameD", colors[color], bg)
-    Highlight.create("NName", colors[color], bg, "inverse")
-    Highlight.link("NEdit", "NName")
+    vim.api.nvim_set_hl(0, "NNameD", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NName", {
+      fg = colors[color].g, bg = bg.g, reverse = true,
+      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {reverse = true},
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NEdit", {link = "NName"})
 
-    Highlight.create("NTag", palette.fgm, bg, "bold")
+    vim.api.nvim_set_hl(0, "NTag", {
+      fg = palette.fgm.g, bg = bg.g, bold = true,
+      ctermfg = palette.fgm.c, ctermbg = bg.c, cterm = {bold = true},
+      force = true
+    })
 
-    Highlight.create("NDiagE", palette.red, bg)
-    Highlight.create("NDiagW", palette.yellow, bg)
-    Highlight.create("NDiagH", palette.blue, bg)
-    Highlight.create("NDiagI", palette.green, bg)
+    vim.api.nvim_set_hl(0, "NDiagE", {
+      fg = palette.red.g, bg = bg.g,
+      ctermfg = palette.red.c, ctermbg = bg.c,
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NDiagW", {
+      fg = palette.yellow.g, bg = bg.g,
+      ctermfg = palette.yellow.c, ctermbg = bg.c,
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NDiagH", {
+      fg = palette.blue.g, bg = bg.g,
+      ctermfg = palette.blue.c, ctermbg = bg.c,
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NDiagI", {
+      fg = palette.green.g, bg = bg.g,
+      ctermfg = palette.green.c, ctermbg = bg.c,
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NFileInfoD", colors[color], bg)
-    Highlight.create("NFileInfo",  colors[color], bg, "inverse")
+    vim.api.nvim_set_hl(0, "NFileInfoD", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NFileInfo", {
+      fg = colors[color].g, bg = bg.g, reverse = true,
+      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {reverse = true},
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NRuler", colors[color], bg)
+    vim.api.nvim_set_hl(0, "NRuler", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
   end
 
   Mode.highlight()
@@ -82,22 +149,58 @@ function M.render_nc()
     math.randomseed(os.time())
 
     color = math.random(#colors)
-    Highlight.create("NNameNC", colors[color], bg)
+    vim.api.nvim_set_hl(0, "NNameNC", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
 
-    Highlight.create("NEditNC", palette.red, bg)
+    vim.api.nvim_set_hl(0, "NEditNC", {
+      fg = palette.red.g, bg = bg.g,
+      ctermfg = palette.red.c, ctermbg = bg.c,
+      force = true
+    })
 
-    Highlight.create("NTagNC", palette.fgm, bg, "bold")
+    vim.api.nvim_set_hl(0, "NTagNC", {
+      fg = palette.fgm.g, bg = bg.g, bold = true,
+      ctermfg = palette.fgm.c, ctermbg = bg.c, cterm = {bold = true},
+      force = true
+    })
 
-    Highlight.create("NDiagENC", palette.red, bg)
-    Highlight.create("NDiagWNC", palette.yellow, bg)
-    Highlight.create("NDiagHNC", palette.blue, bg)
-    Highlight.create("NDiagINC", palette.green, bg)
+    vim.api.nvim_set_hl(0, "NDiagENC", {
+      fg = palette.red.g, bg = bg.g,
+      ctermfg = palette.red.c, ctermbg = bg.c,
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NDiagWNC", {
+      fg = palette.yellow.g, bg = bg.g,
+      ctermfg = palette.yellow.c, ctermbg = bg.c,
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NDiagHNC", {
+      fg = palette.blue.g, bg = bg.g,
+      ctermfg = palette.blue.c, ctermbg = bg.c,
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NDiagINC", {
+      fg = palette.green.g, bg = bg.g,
+      ctermfg = palette.green.c, ctermbg = bg.c,
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NFileInfoNC", colors[color], bg)
+    vim.api.nvim_set_hl(0, "NFileInfoNC", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NRulerNC", colors[color], bg)
+    vim.api.nvim_set_hl(0, "NRulerNC", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
   end
 end
 

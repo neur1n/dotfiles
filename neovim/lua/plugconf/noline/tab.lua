@@ -1,7 +1,7 @@
 local M ={}
 
-local File = require("noline.source.file")
-local Component = require("noline.utility.component")
+local Component = require("noline.component")
+local File = require("noline.file")
 
 function M.current(l_decor, r_decor)
   local text = File.full_path()

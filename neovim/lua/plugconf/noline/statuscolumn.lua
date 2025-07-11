@@ -2,8 +2,7 @@ local M = {}
 
 local Palette = require("palette")
 
-local Component = require("noline.utility.component")
-local Highlight = require("noline.utility.highlight")
+local Component = require("noline.component")
 
 local State = require("plugconf.noline.state")
 
@@ -26,14 +25,22 @@ function M.render_c()
     math.randomseed(os.time())
 
     color = math.random(#colors)
-    Highlight.create("NStatusColumn", colors[color], bg)
+    vim.api.nvim_set_hl(0, "NStatusColumn", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
   end
 end
 
 function M.render_nc()
   if not State.stc_initializedt then
     local bg = palette.bgs
-    Highlight.create("NStatusColumnNC", nil, bg)
+    vim.api.nvim_set_hl(0, "NStatusColumnNC", {
+      fg = nil, bg = bg.g,
+      ctermfg = nil, ctermbg = bg.c,
+      force = true
+    })
   end
 end
 

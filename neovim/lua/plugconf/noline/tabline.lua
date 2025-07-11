@@ -2,9 +2,8 @@ local M = {}
 
 local Palette = require("palette")
 
-local Tabline = require("noline.source.tabline")
-local Component = require("noline.utility.component")
-local Highlight = require("noline.utility.highlight")
+local Component = require("noline.component")
+local Tabline = require("noline.tabline")
 
 local State = require("plugconf.noline.state")
 local Decorator = require("plugconf.noline.decorator")
@@ -28,26 +27,40 @@ function M.render()
     local color = 0
     local bg = palette.bgm
 
-    Highlight.create("NRunner")
-    Highlight.link("NRunnerR", "NeuBlueBold")
-    Highlight.link("NRunnerS", "NeuGreenBold")
-    Highlight.link("NRunnerI", "NeuYellowBold")
-    Highlight.link("NRunnerF", "NeuRedBold")
-
     math.randomseed(os.time())
 
     color = math.random(#colors)
-    Highlight.create("NTab", colors[color], bg, "bold,inverse")
-    Highlight.create("NTabL", colors[color], bg, "bold")
-    Highlight.link("NTabR", "NTabL")
+    vim.api.nvim_set_hl(0, "NTab", {
+      fg = colors[color].g, bg = bg.g, bold = true, reverse = true,
+      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true, reverse = true},
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NTabL", {
+      fg = colors[color].g, bg = bg.g, bold = true,
+      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      force = true
+    })
+    vim.api.nvim_set_hl(0, "NTabR", {link = "NTabL", force = true})
 
     color = math.random(#colors)
-    Highlight.create("NTabNC", colors[color], bg)
+    vim.api.nvim_set_hl(0, "NTabNC", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
 
     color = math.random(#colors)
-    Highlight.create("NVcs", colors[color], bg)
+    vim.api.nvim_set_hl(0, "NVcs", {
+      fg = colors[color].g, bg = bg.g,
+      ctermfg = colors[color].c, ctermbg = bg.c,
+      force = true
+    })
 
-    Highlight.create("NClose", palette.red, palette.fgs, "bold,inverse")
+    vim.api.nvim_set_hl(0, "NClose", {
+      fg = palette.red.g, bg = palette.fgs.g, bold = true, reverse = true,
+      ctermfg = palette.red.c, ctermbg = palette.fgs.c, cterm = {bold = true, reverse = true},
+      force = true
+    })
   end
 end
 

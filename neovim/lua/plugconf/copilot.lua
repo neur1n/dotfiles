@@ -2,6 +2,9 @@ local M = {}
 
 function M.setup()
   require("copilot").setup({
+    filetypes = {
+      markdown = true,
+    },
     suggestion = {
       auto_trigger = true,
       keymap = {

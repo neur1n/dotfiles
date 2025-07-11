@@ -1,6 +1,6 @@
 local M = {}
 
-local Component = require("noline.utility.component")
+local Component = require("noline.component")
 
 local function treesitter_current_function()
   local node = ""

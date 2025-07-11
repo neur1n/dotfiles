@@ -16,31 +16,8 @@ function M.keymap()
 end
 
 function M.setup()
-  local th = "ivy"
   require("telescope").setup({
-    pickers = {
-      buffers = {
-        theme = th,
-      },
-      command_history = {
-        theme = th,
-      },
-      find_files = {
-        theme = th,
-      },
-      live_grep = {
-        theme = th,
-      },
-      oldfiles = {
-        theme = "ivy",
-      },
-      search_history = {
-        theme = th,
-      },
-      lsp_document_symbols = {
-        theme = th,
-      },
-    },
+    defaults = require("telescope.themes").get_ivy(),
     extensions = {
       fzf = {
         fuzzy = true,

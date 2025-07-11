@@ -1,6 +1,6 @@
 local M = {}
 
-local Component = require("noline.utility.component")
+local Component = require("noline.component")
 
 function M.get(source, symbol)
   local status = ""

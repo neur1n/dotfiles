@@ -1,6 +1,6 @@
 local M = {}
 
-local Component = require("noline.utility.component")
+local Component = require("noline.component")
 
 function M.info(source, type, symbol, l_decor, r_decor)
   local count = 0
