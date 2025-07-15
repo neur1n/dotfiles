@@ -93,6 +93,7 @@ function M.setup()
   M.set_font()
 
   -- Corner cases
+  vim.g.clipboard = "osc52"
   vim.g.tex_flavor = "latex"
 end
 
