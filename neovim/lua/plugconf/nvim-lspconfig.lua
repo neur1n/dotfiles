@@ -1,18 +1,6 @@
 local M = {}
 
 function M.setup()
-  vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-    callback = function(event)
-      local opt = {buffer = event.buf}
-      vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, opt)
-      vim.keymap.set("n", "<Leader>gt", vim.lsp.buf.type_definition, opt)
-      vim.keymap.set("n", "<Leader>gf", function()
-        vim.lsp.buf.format{async = true}
-      end, opt)
-    end,
-  })
-
   vim.diagnostic.config({
     severity_sort = true,
     underline = true,
@@ -26,9 +14,28 @@ function M.setup()
         [vim.diagnostic.severity.HINT] = "💡",
       },
     },
-    virtual_lines = {
-      current_line = true,
-    },
+  })
+
+  local id = vim.api.nvim_create_augroup("n_lsp", {clear = true})
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    group = id,
+    callback = function(event)
+      local opt = {buffer = event.buf}
+      vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, opt)
+      vim.keymap.set("n", "<Leader>gt", vim.lsp.buf.type_definition, opt)
+      vim.keymap.set("n", "<Leader>gf", function()
+        vim.lsp.buf.format{async = true}
+      end, opt)
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+    group = id,
+    pattern = "*",
+    callback = function ()
+      vim.diagnostic.open_float({scope="cursor"})
+    end,
   })
 
   require("plugconf.lsp.basedpyright").setup()
