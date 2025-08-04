@@ -1,5 +1,0 @@
-# vim: ft=sh
-
-bind 'set completion-ignore-case on'
-# bind 'set editing-mode vi'
-# bind 'set show-mode-in-prompt on'

@@ -1,6 +1,0 @@
-(straight-use-package '(company        :fork "company-mode/company-mode"))
-(straight-use-package '(evil           :fork "emacs-evil/evil"))
-(straight-use-package '(lsp-mode       :fork "emacs-lsp/lsp-mode"))
-(straight-use-package '(lsp-ui         :fork "emacs-lsp/lsp-ui"))
-(straight-use-package '(material-theme :fork "cpaulik/emacs-material-theme"))
-; (straight-use-package '(gruvbox-theme :fork "greduan/emacs-theme-gruvbox"))
