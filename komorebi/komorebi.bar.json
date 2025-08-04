@@ -1,0 +1,51 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.37/schema.bar.json",
+  "font_family": "Cascadia Code",
+  "monitor": 0,
+  "transparency_alpha": 0,
+  "grouping": {
+    "kind": "Alignment",
+    "rounding": [0.0, 10.0, 10.0, 0.0],
+    "style": "DefaultWithGlowB3O1S2",
+    "transparency_alpha": 255
+  },
+  "left_widgets": [
+    {
+      "Media": {
+        "enable": true
+      }
+    }
+  ],
+  "center_widgets": [
+    {
+      "Komorebi": {
+        "workspaces": {
+          "enable": true,
+          "hide_empty_workspaces": false
+        },
+        "layout": {
+          "enable": true
+        }
+      }
+    }
+  ],
+  "right_widgets": [
+    {
+      "Update": {
+        "enable": true
+      }
+    },
+    {
+      "Date": {
+        "enable": true,
+        "format": "YearMonthDate"
+      }
+    },
+    {
+      "Time": {
+        "enable": true,
+        "format": "TwentyFourHourWithoutSeconds"
+      }
+    }
+  ]
+}

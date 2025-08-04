@@ -1,0 +1,78 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.37/schema.json",
+  "app_specific_configuration_path": "$Env:USERPROFILE/komorebi.app.json",
+  "bar_configurations": ["$Env:USERPROFILE/komorebi.bar.json"],
+  "border": true,
+  "border_offset": -1,
+  "border_width": 10,
+  "default_workspace_padding": 5,
+  "default_container_padding": 5,
+  "floating_window_aspect_ratio": "Widescreen",
+  "window_hiding_behaviour": "Cloak",
+  "stackbar": {
+    "height": 50,
+    "label": "Process",
+    "mode": "OnStack",
+    "tabs": {
+      "width": 200
+    }
+  },
+  "theme": {
+    "palette": "Catppuccin",
+    "name": "Macchiato"
+  },
+  "monitors": [
+    {
+      "workspaces": [
+        {
+          "name": "I",
+          "layout": "BSP",
+          "layout_flip": "Horizontal"
+        },
+        {
+          "name": "II",
+          "layout": "Grid"
+        }
+      ]
+    },
+    {
+      "workspaces": [
+        {
+          "name": "null"
+        }
+      ]
+    }
+  ],
+  "ignore_rules": [
+    {
+      "kind": "Exe",
+      "id": "copyq.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
+      "id": "nomacs.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
+      "id": "v2rayN",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
+      "id": "Weixin.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Picture in picture",
+      "matching_strategy": "Contains"
+    },
+    {
+      "kind": "Title",
+      "id": "Vivaldi Settings",
+      "matching_strategy": "Contains"
+    }
+  ]
+}

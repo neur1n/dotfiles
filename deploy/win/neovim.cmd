@@ -9,7 +9,4 @@ IF EXIST %dst% (
 
 MKLINK /J %dst% %src%\..\..\neovim
 
-MKDIR %dst%\recovery\backup
-MKDIR %dst%\recovery\session
-
 START %dst%
