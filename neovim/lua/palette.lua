@@ -65,22 +65,22 @@ local iceberg = {
 
 local neovim = {
   name    = "neovim",
-  bgh     = {c = 232, g = "#0a0b10"},
-  bgm     = {c = 234, g = "#1c1d23"},
+  bgh     = {c = 232, g = "#07080d"},
+  bgm     = {c = 234, g = "#14161b"},
   bgs     = {c = 236, g = "#2c2e33"},
-  fgh     = {c = 255, g = "#ebeef5"},
-  fgm     = {c = 253, g = "#d7dae1"},
+  fgh     = {c = 255, g = "#eef1f8"},
+  fgm     = {c = 253, g = "#e0e2ea"},
   fgs     = {c = 251, g = "#c4c6cd"},
   grayh   = {c = 240, g = "#4f5258"},
   graym   = {c = 243, g = "#75787e"},
   grays   = {c = 247, g = "#9b9ea4"},
-  red     = {c = 225, g = "#ffc3fa"},
-  orange  = {c = 217, g = "#ffbcb5"},
-  yellow  = {c = 222, g = "#f4d88c"},
-  green   = {c = 157, g = "#aaedb7"},
-  cyan    = {c = 123, g = "#83efef"},
-  blue    = {c = 153, g = "#9fd8ff"},
-  purple  = {c = 189, g = "#cfcefd"},
+  red     = {c = 225, g = "#ffc0b9"},
+  orange  = {c = 217, g = "#fed0a7"},
+  yellow  = {c = 222, g = "#fce094"},
+  green   = {c = 157, g = "#b3f6c0"},
+  cyan    = {c = 123, g = "#8cf8f7"},
+  blue    = {c = 153, g = "#a6dbff"},
+  purple  = {c = 189, g = "#ffcaff"},
   special = {c = 180, g = "#e2be7d"}
 }
 
