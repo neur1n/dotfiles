@@ -144,7 +144,7 @@ end
 function M.render_nc()
   if not State.stl_initialized then
     local color = 0
-    local bg = palette.bgs
+    local bg = palette.bgm
 
     math.randomseed(os.time())
 
