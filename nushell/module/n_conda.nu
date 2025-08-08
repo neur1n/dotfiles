@@ -8,13 +8,20 @@ export-env {
         } else if not (which conda | is-empty) {
           (conda info --envs --json | from json)
         } else {
-          ('{"root_prefix": "", "envs": []}' | from json)
+          ('{"root": "", "envs": []}' | from json)
         })
 
-    $env.CONDA_ROOT = $info.root_prefix
+    let info = (
+        if not ("root" in $info) {
+          $info | insert root $info.envs.0
+        } else {
+          $info
+        })
+
+    $env.CONDA_ROOT = $info.root
 
     $env.CONDA_ENVS = ($info.envs | reduce -f {} {|it, acc|
-        if $it == $info.root_prefix {
+        if $it == $info.root {
           $acc | upsert "base" $it
         } else {
           $acc | upsert ($it | path basename) $it
