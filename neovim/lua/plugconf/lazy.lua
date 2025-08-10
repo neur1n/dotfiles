@@ -148,6 +148,10 @@ local plugin = {
     version = "1.*",
     event = "VeryLazy",
     config = require("plugconf.blink-cmp").setup,
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      config = require("plugconf.nvim-lspconfig").setup,
+    },
   },
 
   {
