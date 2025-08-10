@@ -34,7 +34,18 @@ function M.setup()
     group = id,
     pattern = "*",
     callback = function ()
-      vim.diagnostic.open_float({scope="cursor"})
+      vim.diagnostic.open_float({
+        scope="cursor",
+        -- NOTE: These are used by `vim.lsp.util.open_floating_preview` internally.
+        close_events = {
+          "BufHidden",
+          "CursorMoved",
+          "CursorMovedI",
+          "InsertCharPre",
+          "WinLeave",
+        },
+        focusable = false,
+      })
     end,
   })
 
