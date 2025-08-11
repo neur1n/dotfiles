@@ -43,36 +43,30 @@
       ]
     }
   ],
+  "floating_applications": [
+    {
+      "kind": "Exe",
+      "id": "neovide.exe",
+      "matching_strategy": "Equals"
+    }
+  ],
   "ignore_rules": [
     {
       "kind": "Exe",
-      "id": "copyq.exe",
+      "id": ".*",
+      "matching_strategy": "Regex"
+    }
+  ],
+  "manage_rules": [
+    {
+      "kind": "Exe",
+      "id": "neovide.exe",
       "matching_strategy": "Equals"
     },
     {
       "kind": "Exe",
-      "id": "nomacs.exe",
+      "id": "wezterm-gui.exe",
       "matching_strategy": "Equals"
-    },
-    {
-      "kind": "Exe",
-      "id": "v2rayN",
-      "matching_strategy": "Equals"
-    },
-    {
-      "kind": "Exe",
-      "id": "Weixin.exe",
-      "matching_strategy": "Equals"
-    },
-    {
-      "kind": "Title",
-      "id": "Picture in picture",
-      "matching_strategy": "Contains"
-    },
-    {
-      "kind": "Title",
-      "id": "Vivaldi Settings",
-      "matching_strategy": "Contains"
     }
   ]
 }

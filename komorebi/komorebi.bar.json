@@ -11,13 +11,6 @@
   },
   "left_widgets": [
     {
-      "Media": {
-        "enable": true
-      }
-    }
-  ],
-  "center_widgets": [
-    {
       "Komorebi": {
         "workspaces": {
           "enable": true,
@@ -26,6 +19,29 @@
         "layout": {
           "enable": true
         }
+      }
+    }
+  ],
+  "center_widgets": [
+    {
+      "Media": {
+        "enable": true
+      }
+    },
+    {
+      "Applications": {
+        "display": "Icon",
+        "enable": true,
+        "items": [
+          {
+            "command": "cloudmusic.exe",
+            "name": "NetEase Cloud Music"
+          },
+          {
+            "command": "wezterm-gui.exe",
+            "name": "WezTerm"
+          }
+        ]
       }
     }
   ],
