@@ -144,26 +144,14 @@ local plugin = {
     config = require("plugconf.copilot").setup,
   },
   {
-    "hrsh7th/nvim-cmp",
-    lazy = true,
+    "Saghen/blink.cmp",
+    version = "1.*",
     event = "VeryLazy",
+    config = require("plugconf.blink-cmp").setup,
     dependencies = {
-      {
-        "neovim/nvim-lspconfig",
-        config = require("plugconf.nvim-lspconfig").setup,
-      },
-      {
-        "hrsh7th/vim-vsnip",
-        config = require("plugconf.vim-vsnip").setup,
-      },
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-vsnip",
+      "neovim/nvim-lspconfig",
+      config = require("plugconf.nvim-lspconfig").setup,
     },
-    config = require("plugconf.nvim-cmp").setup,
   },
 
   {
