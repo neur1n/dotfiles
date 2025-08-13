@@ -65,6 +65,11 @@
     },
     {
       "kind": "Exe",
+      "id": "SumatraPDF.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
       "id": "wezterm-gui.exe",
       "matching_strategy": "Equals"
     }
