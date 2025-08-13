@@ -6,18 +6,6 @@ function M.setup()
       basedpyright = {
         analysis = {
           typeCheckingMode = "standard",
-          -- diagnosticSeverityOverrides = {
-          --   reportAny = false,
-          --   reportGeneralTypeIssues = false,
-          --   reportMissingParameterType = false,
-          --   reportMissingTypeStubs = false,
-          --   reportUnknownParameterType = false,
-          --   -- reportUnusedClass = "unused",
-          --   -- reportUnusedFunction = "unused",
-          --   -- reportUnusedImport = "unused",
-          --   -- reportUnusedParameter = "unused",
-          --   -- reportUnusedVariable = "unused",
-          -- }
         }
       }
     },
