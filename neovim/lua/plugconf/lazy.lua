@@ -86,9 +86,6 @@ local plugin = {
       "TSUpdate",
     },
     config = require("plugconf.nvim-treesitter").setup,
-    dependencies = {
-      "nushell/tree-sitter-nu",
-    },
   },
   {
     "nvim-telescope/telescope.nvim",
