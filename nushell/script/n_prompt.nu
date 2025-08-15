@@ -157,7 +157,7 @@ def show-venv [] {
     $envs
   })
 
-  let envs = (if ($env.CONDA_CURR? != null) {
+  let envs = (if not ($env.CONDA_CURR? | is-empty) {
     $envs | append $"󰌠($env.CONDA_CURR)"
   } else {
     $envs
