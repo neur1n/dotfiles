@@ -1,42 +1,7 @@
+use std-rfc/kv *
+
 export-env {
-  if not ("MSVS_ACTIVATED" in $env) {
-    $env.MSVS_BASE_PATH = $env.Path
-
-    let info = (
-        if not (which vswhere | is-empty) {
-          (vswhere -format json | from json)
-        } else {
-          ('{"installationPath": [""]}' | from json)
-        }
-    )
-
-    $env.MSVS_ROOT = ($info.installationPath.0 | str replace -a '\\' '/')
-
-    $env.MSVS_MSVC_ROOT = (
-        if not ($"($env.MSVS_ROOT)/VC/Tools/MSVC/" | path exists) {
-          ""
-        } else if (ls ($"($env.MSVS_ROOT)/VC/Tools/MSVC/*" | into glob) | is-empty) {
-          ""
-        } else {
-          ((ls ($"($env.MSVS_ROOT)/VC/Tools/MSVC/*" | into glob)).name.0 | str replace -a '\\' '/')
-        })
-
-    $env.MSVS_MSDK_ROOT = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' InstallationFolder | get value)
-
-    $env.MSVS_MSDK_VER = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' ProductVersion | get value) + ".0"
-
-    $env.MSVS_INCLUDE_PATH = ([
-      $"($env.MSVS_ROOT)/Include/($env.MSVS_MSDK_VER)/cppwinrt/winrt",
-      $"($env.MSVS_MSVC_ROOT)/include",
-      $"($env.MSVS_MSDK_ROOT)Include/($env.MSVS_MSDK_VER)/cppwinrt/winrt",
-      $"($env.MSVS_MSDK_ROOT)Include/($env.MSVS_MSDK_VER)/shared",
-      $"($env.MSVS_MSDK_ROOT)Include/($env.MSVS_MSDK_VER)/ucrt",
-      $"($env.MSVS_MSDK_ROOT)Include/($env.MSVS_MSDK_VER)/um",
-      $"($env.MSVS_MSDK_ROOT)Include/($env.MSVS_MSDK_VER)/winrt"
-    ] | str join ";")
-
-    $env.MSVS_ACTIVATED = false
-  }
+  job spawn {find}
 }
 
 export def --env activate [
@@ -44,6 +9,11 @@ export def --env activate [
     --target (-t): string = "x64",    # Target architecture, must be x64 or x86 (case insensitive)
     --sdk    (-s): string = "latest"  # Version of Windows SDK, must be "latest" or a valid version string
   ] {
+  if ($env.MSVS_ROOT? | is-empty) {
+    find
+    kv get "msvs envars" | load-env
+  }
+
   if (($env.MSVS_ROOT | is-empty) or ($env.MSVS_MSVC_ROOT | is-empty)) {
     print "Neither Microsoft Visual Studio nor MSVC is available."
     return
@@ -51,22 +21,17 @@ export def --env activate [
 
   let fh = ($host | str downcase)
   let ft = ($target | str downcase)
-  let fs = (
-      if ($sdk != "latest") {
-        $sdk
-      } else {
-        $env.MSVS_MSDK_VER
-      })
+  let fs = (if ($sdk != "latest") {$sdk} else {$env.MSVS_MSDK_VER})
 
   if (($fh != "x64") and ($fh != "x86")) {
     print $"Wrong host architecture specified: ($fh)."
-    help n_msvc activate
+    help n_msvs activate
     return
   }
 
   if (($ft != "x64") and ($ft != "x86")) {
     print $"Wrong target architecture specified: ($ft)."
-    help n_msvc activate
+    help n_msvs activate
     return
   }
 
@@ -124,7 +89,6 @@ export def --env activate [
 
   load-env {
     Path: $env_path,
-    PATH: $env_path,
     INCLUDE: $env.MSVS_INCLUDE_PATH,
     LIB: $lib_path
   }
@@ -133,6 +97,11 @@ export def --env activate [
 }
 
 export def --env deactivate [] {
+  if ($env.MSVS_ROOT? | is-empty) {
+    find
+    kv get "msvs envars" | load-env
+  }
+
   if (($env.MSVS_ROOT? | is-empty) or ($env.MSVS_MSVC_ROOT? | is-empty)) {
     print "Neither Microsoft Visual Studio nor MSVC is available."
     return
@@ -140,8 +109,64 @@ export def --env deactivate [] {
 
   load-env {
     Path: $env.MSVS_BASE_PATH,
-    PATH: $env.MSVS_BASE_PATH
   }
 
-  $env.MSVS_ACTIVATED = false
+  hide-env MSVS_BASE_PATH
+  hide-env MSVS_ACTIVATED
+  hide-env MSVS_ROOT
+  hide-env MSVS_MSVC_ROOT
+  hide-env MSVS_MSDK_ROOT
+  hide-env MSVS_MSDK_VER
+  hide-env MSVS_INCLUDE_PATH
+  hide-env INCLUDE
+  hide-env LIB
+}
+
+export def find [] {
+  let base_path = $env.Path
+
+  let info = (
+      if not (which vswhere | is-empty) {
+        (vswhere -nocolor -nologo -sort -utf8 -format json | from json)
+      } else {
+        ('{"installationPath": [""]}' | from json)
+      }
+  )
+
+  let root = ($info.installationPath.0 | str replace -a '\\' '/')
+
+  let msvc_root = (
+      if not ($"($root)/VC/Tools/MSVC/" | path exists) {
+        ""
+      } else if (ls ($"($root)/VC/Tools/MSVC/*" | into glob) | is-empty) {
+        ""
+      } else {
+        ((ls ($"($root)/VC/Tools/MSVC/*" | into glob)).name.0 | str replace -a '\\' '/')
+      })
+
+  let msdk_root = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' InstallationFolder | get value)
+
+  let msdk_ver = (registry query --hklm 'SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\Windows\v10.0' ProductVersion | get value) + ".0"
+
+  let include_path = ([
+    $"($root)/Include/($msdk_ver)/cppwinrt/winrt",
+    $"($msvc_root)/include",
+    $"($msdk_root)Include/($msdk_ver)/cppwinrt/winrt",
+    $"($msdk_root)Include/($msdk_ver)/shared",
+    $"($msdk_root)Include/($msdk_ver)/ucrt",
+    $"($msdk_root)Include/($msdk_ver)/um",
+    $"($msdk_root)Include/($msdk_ver)/winrt"
+  ] | str join ";")
+
+  let vars = {
+    MSVS_BASE_PATH: $base_path
+    MSVS_ACTIVATED: false
+    MSVS_ROOT: $root,
+    MSVS_MSVC_ROOT: $msvc_root,
+    MSVS_MSDK_ROOT: $msdk_root,
+    MSVS_MSDK_VER: $msdk_ver,
+    MSVS_INCLUDE_PATH: $include_path,
+  }
+
+  kv set "msvs envars" $vars
 }

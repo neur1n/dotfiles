@@ -80,7 +80,7 @@ export def find [] {
         $acc | upsert ($it | path basename) $it
       }})
 
-  let $vars = {
+  let vars = {
     CONDA_BASE_PATH: $base_path,
     CONDA_CURR: "",
     CONDA_ROOT: $root,
