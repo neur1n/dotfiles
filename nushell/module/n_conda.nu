@@ -45,6 +45,11 @@ export def --env deactivate [] {
   $env.CONDA_CURR = ""
 
   load-env {Path: $env.CONDA_BASE_PATH, PATH: $env.CONDA_BASE_PATH}
+
+  hide-env CONDA_BASE_PATH
+  hide-env CONDA_CURR
+  hide-env CONDA_ENVS
+  hide-env CONDA_ROOT
 }
 
 export def find [] {
