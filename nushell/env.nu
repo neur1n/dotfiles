@@ -31,7 +31,7 @@ $env.NU_PLUGIN_DIRS = [
 #================================================================= Customize{{{
 $env.NUCONF = ($nu.config-path | path expand | path dirname)
 
-let bin = (ls ($"($env.NUCONF)/../bin/($nu.os-info.name)/*" | into glob)).name
+let bin = (ls ($"($env.NUCONF)/../bin/($nu.os-info.name)/($nu.os-info.arch)/*" | into glob)).name
 
 $env.Path = (
   if "Path" in $env {
