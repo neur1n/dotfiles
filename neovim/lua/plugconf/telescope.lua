@@ -16,8 +16,11 @@ function M.keymap()
 end
 
 function M.setup()
+  local theme = require("telescope.themes").get_dropdown()
+  theme["path_display"] = {"truncate"}
+
   require("telescope").setup({
-    defaults = require("telescope.themes").get_ivy(),
+    defaults = theme,
     extensions = {
       fzf = {
         fuzzy = true,
