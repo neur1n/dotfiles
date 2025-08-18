@@ -1,50 +1,50 @@
-use n_emo.nu
-use n_sys.nu
+use n_emoji.nu
 use n_git.nu
-use n_hl.nu
-use n_plt.nu
-use n_util.nu
+use n_highlight.nu
+use n_palette.nu
+use n_system.nu
+use n_utility.nu
 
 
-let palette = (n_plt get-palette)
-let rainbow = (n_plt get-rainbow $palette)
+let palette = (n_palette fetch)
+let rainbow = (n_palette rainbow $palette)
 
-let cs = {
-  sess: ($rainbow | get (n_util random-index $rainbow)),
-  path: ($rainbow | get (n_util random-index $rainbow)),
-  time: ($rainbow | get (n_util random-index $rainbow)),
-  venv: ($rainbow | get (n_util random-index $rainbow)),
-  indi: ($rainbow | get (n_util random-index $rainbow))
+let scheme = {
+  sess: ($rainbow | get (n_utility random-index $rainbow)),
+  path: ($rainbow | get (n_utility random-index $rainbow)),
+  time: ($rainbow | get (n_utility random-index $rainbow)),
+  venv: ($rainbow | get (n_utility random-index $rainbow)),
+  indi: ($rainbow | get (n_utility random-index $rainbow))
 }
 
 def show-session [] {
-  let sep = (n_hl create "" $cs.sess)
+  let sep = (n_highlight create "" $scheme.sess)
 
-  let logo = (n_sys os-logo)
+  let logo = (n_system os-logo)
   let user = (
       if ($nu.os-info.name == "windows") {
         $env.USERNAME
       } else {
         (whoami)
       })
-  let addr = (n_sys ip)
+  let addr = (n_system ip)
 
-  let sess = (n_hl create $"($user)($logo)($addr)" $palette.bgh $cs.sess)
+  let sess = (n_highlight create $"($user)($logo)($addr)" $palette.bgh $scheme.sess)
 
-  $"(n_hl render $sep)(n_hl render $sess)"
+  $"(n_highlight render $sep)(n_highlight render $sess)"
 }
 
 def show-path [] {
-  let lsep = (n_hl create "" $cs.path $cs.sess)
-  let path = (n_hl create $env.PWD $palette.bgh $cs.path)
+  let lsep = (n_highlight create "" $scheme.path $scheme.sess)
+  let path = (n_highlight create $env.PWD $palette.bgh $scheme.path)
   let rsep = (
       if (n_git in-repo) {
-        (n_hl create "" $cs.path $palette.graym)
+        (n_highlight create "" $scheme.path $palette.graym)
       } else {
-        (n_hl create "" $cs.path)
+        (n_highlight create "" $scheme.path)
       })
 
-  $"(n_hl render $lsep)(n_hl render $path)(n_hl render $rsep)"
+  $"(n_highlight render $lsep)(n_highlight render $path)(n_highlight render $rsep)"
 }
 
 def show-git [] {
@@ -123,29 +123,29 @@ def show-git [] {
           $u
         })
 
-    let name = (n_hl create $b $palette.bgh $palette.graym)
-    let revc = (n_hl create $r $palette.bgh $palette.graym)
-    let staged = (n_hl create $s $palette.green $palette.graym)
-    let unstaged = (n_hl create $u $palette.red $palette.graym)
-    let rsep = (n_hl create "" $palette.graym)
+    let name = (n_highlight create $b $palette.bgh $palette.graym)
+    let revc = (n_highlight create $r $palette.bgh $palette.graym)
+    let staged = (n_highlight create $s $palette.green $palette.graym)
+    let unstaged = (n_highlight create $u $palette.red $palette.graym)
+    let rsep = (n_highlight create "" $palette.graym)
 
-    $"(n_hl render $name)(n_hl render $revc)(n_hl render $staged)(n_hl render $unstaged)(n_hl render $rsep)"
+    $"(n_highlight render $name)(n_highlight render $revc)(n_highlight render $staged)(n_highlight render $unstaged)(n_highlight render $rsep)"
   }
 }
 
 def show-timestamp [] {
-  let lsep = (n_hl create "\n" $cs.time)
-  let ts = (n_hl create (date now | format date "%H:%M:%S") $palette.bgh $cs.time)
+  let lsep = (n_highlight create "\n" $scheme.time)
+  let ts = (n_highlight create (date now | format date "%H:%M:%S") $palette.bgh $scheme.time)
 
-  $"(n_hl render $lsep)(n_hl render $ts)"
+  $"(n_highlight render $lsep)(n_highlight render $ts)"
 }
 
 def show-mode [mode: string] {
-  let lsep = (n_hl create "" $cs.venv $cs.time)
-  let emo = (n_hl create $"(n_emo get-emoji)" $palette.bgh $cs.venv)
-  let rsep = (n_hl create (if ($mode == "i") {" "} else {" "}) $cs.venv)
+  let lsep = (n_highlight create "" $scheme.venv $scheme.time)
+  let emoji = (n_highlight create $"(n_emoji fetch)" $palette.bgh $scheme.venv)
+  let rsep = (n_highlight create (if ($mode == "i") {" "} else {" "}) $scheme.venv)
 
-  $"(n_hl render $lsep)(n_hl render $emo)(n_hl render $rsep)"
+  $"(n_highlight render $lsep)(n_highlight render $emoji)(n_highlight render $rsep)"
 }
 
 def show-venv [] {
@@ -165,11 +165,11 @@ def show-venv [] {
 
   let name = ($envs | str join "·")
 
-  let lsep = (n_hl create (if ($name | is-empty) {""} else {"["}) $cs.venv)
-  let venv = (n_hl create $name $cs.venv)
-  let rsep = (n_hl create (if ($name | is-empty) {""} else {"] "}) $cs.venv)
+  let lsep = (n_highlight create (if ($name | is-empty) {""} else {"["}) $scheme.venv)
+  let venv = (n_highlight create $name $scheme.venv)
+  let rsep = (n_highlight create (if ($name | is-empty) {""} else {"] "}) $scheme.venv)
 
-  $"(n_hl render $lsep)(n_hl render $venv)(n_hl render $rsep)"
+  $"(n_highlight render $lsep)(n_highlight render $venv)(n_highlight render $rsep)"
 }
 
 def left-prompt [] {

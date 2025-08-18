@@ -1,19 +1,19 @@
-use n_util.nu
+use n_utility.nu
 
 
-export def get-palette [name?: string] {
-  let s = ((special) | get (n_util random-index (special)))
+export def fetch [name?: string] {
+  let s = ((special) | get (n_utility random-index (special)))
 
   if ($name == null) or (palettes | transpose k | find $name | is-empty) {
     let tbl = (palettes | transpose k v)
-    let idx = (n_util random-index $tbl.k)
+    let idx = (n_utility random-index $tbl.k)
     (($tbl.v | get $idx) | update special $s)
   } else {
     ((palettes | get $name) | update special $s)
   }
 }
 
-export def get-rainbow [plt: record] {
+export def rainbow [plt: record] {
   [
     $plt.red,
     $plt.orange,
@@ -93,22 +93,22 @@ def iceberg [] {
 
 def neovim [] {
   {
-    bgh    : "#0a0b10",
-    bgm    : "#1c1d23",
+    bgh    : "#07080d",
+    bgm    : "#14161b",
     bgs    : "#2c2e33",
-    fgh    : "#ebeef5",
-    fgm    : "#d7dae1",
+    fgh    : "#eef1f8",
+    fgm    : "#e0e2ea",
     fgs    : "#c4c6cd",
     grayh  : "#4f5258",
     graym  : "#75787e",
     grays  : "#9b9ea4",
-    red    : "#ffc3fa",
-    orange : "#ffbcb5",
-    yellow : "#f4d88c",
-    green  : "#aaedb7",
-    cyan   : "#83efef",
-    blue   : "#9fd8ff",
-    purple : "#cfcefd",
+    red    : "#ffc0b9",
+    orange : "#fed0a7",
+    yellow : "#fce094",
+    green  : "#b3f6c0",
+    cyan   : "#8cf8f7",
+    blue   : "#a6dbff",
+    purple : "#ffcaff",
     special: "#4f86f7"
   }
 }
@@ -171,20 +171,3 @@ def palettes [] {
     synthwave: (synthwave),
   }
 }
-
-#262335
-#2e2a4f
-#353163
-#d7b49e
-#a2c7e5
-#fbf9ff
-#464646
-#4e4e4e
-#5f5f5f
-#fe4450
-#f39237
-#ffe347
-#72f1b8
-#3bf4fb
-#2ee2fa
-#af125a

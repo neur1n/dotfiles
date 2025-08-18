@@ -1,6 +1,3 @@
-use n_sys.nu
-
-
 export def append-path [paths: path] {
   if ($nu.os-info.name == "windows") {
     $env.Path = ($env.Path | append $paths)

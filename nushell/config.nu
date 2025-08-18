@@ -13,7 +13,7 @@ $env.config.shell_integration.osc133 = false
 
 #================================================================= Customize{{{
 use n_c.nu
-use n_util.nu
+use n_utility.nu
 source n_prompt.nu
 source ~/.zoxide.nu
 
