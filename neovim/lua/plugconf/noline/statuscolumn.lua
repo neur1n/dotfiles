@@ -6,7 +6,7 @@ local Component = require("noline.component")
 
 local State = require("plugconf.noline.state")
 
-local palette = Palette.get()
+local palette = Palette.get(Palette.current())
 local colors = {
   palette.red,
   palette.orange,

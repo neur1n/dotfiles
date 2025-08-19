@@ -11,7 +11,7 @@ local Runner = require("plugconf.noline.runner")
 local Tab = require("plugconf.noline.tab")
 local VCS = require("plugconf.noline.vcs")
 
-local palette = Palette.get()
+local palette = Palette.get(Palette.current())
 local colors = {
   palette.red,
   palette.orange,

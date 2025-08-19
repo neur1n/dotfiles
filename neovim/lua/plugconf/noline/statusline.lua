@@ -13,7 +13,7 @@ local Diagnosis = require("plugconf.noline.diagnosis")
 local Mode = require("plugconf.noline.mode")
 local Tag = require("plugconf.noline.tag")
 
-local palette = Palette.get()
+local palette = Palette.get(Palette.current())
 local colors = {
   palette.red,
   palette.orange,
