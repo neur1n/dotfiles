@@ -6,28 +6,32 @@ local Component = require("noline.component")
 
 local State = require("plugconf.noline.state")
 
-local palette = Palette.get(Palette.current())
-local colors = {
-  palette.red,
-  palette.orange,
-  palette.yellow,
-  palette.green,
-  palette.blue,
-  palette.cyan,
-  palette.purple,
-}
+local function get_color()
+  local palette = Palette.get(Palette.current())
 
-function M.render_c()
+  return {
+    palette.red,
+    palette.orange,
+    palette.yellow,
+    palette.green,
+    palette.blue,
+    palette.cyan,
+    palette.purple,
+  }
+end
+
+function M.render_c(color)
   if not State.stc_initializedt then
-    local color = 0
+    local palette = Palette.get(Palette.current())
     local bg = palette.bgm
+    local c = 0
 
     math.randomseed(os.time())
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NStatusColumn", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
   end
@@ -35,7 +39,9 @@ end
 
 function M.render_nc()
   if not State.stc_initializedt then
+    local palette = Palette.get(Palette.current())
     local bg = palette.bgs
+
     vim.api.nvim_set_hl(0, "NStatusColumnNC", {
       fg = nil, bg = bg.g,
       ctermfg = nil, ctermbg = bg.c,
@@ -81,7 +87,8 @@ end
 function M.redraw()
   State.stc_initializedt = false
 
-  M.render_c()
+  local color = get_color()
+  M.render_c(color)
   M.render_nc()
   M.update()
 end

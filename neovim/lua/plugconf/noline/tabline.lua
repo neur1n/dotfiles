@@ -11,48 +11,52 @@ local Runner = require("plugconf.noline.runner")
 local Tab = require("plugconf.noline.tab")
 local VCS = require("plugconf.noline.vcs")
 
-local palette = Palette.get(Palette.current())
-local colors = {
-  palette.red,
-  palette.orange,
-  palette.yellow,
-  palette.green,
-  palette.blue,
-  palette.cyan,
-  palette.purple,
-}
+local function get_color()
+  local palette = Palette.get(Palette.current())
 
-function M.render()
+  return {
+    palette.red,
+    palette.orange,
+    palette.yellow,
+    palette.green,
+    palette.blue,
+    palette.cyan,
+    palette.purple,
+  }
+end
+
+function M.render(color)
   if not State.tal_initialized then
-    local color = 0
+    local palette = Palette.get(Palette.current())
     local bg = palette.bgm
+    local c = 0
 
     math.randomseed(os.time())
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NTab", {
-      fg = colors[color].g, bg = bg.g, bold = true, reverse = true,
-      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true, reverse = true},
+      fg = color[c].g, bg = bg.g, bold = true, reverse = true,
+      ctermfg = color[c].c, ctermbg = bg.c, cterm = {bold = true, reverse = true},
       force = true
     })
     vim.api.nvim_set_hl(0, "NTabL", {
-      fg = colors[color].g, bg = bg.g, bold = true,
-      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      fg = color[c].g, bg = bg.g, bold = true,
+      ctermfg = color[c].c, ctermbg = bg.c, cterm = {bold = true},
       force = true
     })
     vim.api.nvim_set_hl(0, "NTabR", {link = "NTabL", force = true})
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NTabNC", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NVcs", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
 
@@ -99,7 +103,8 @@ end
 function M.redraw()
   State.tal_initialized = false
 
-  M.render()
+  local color = get_color()
+  M.render(color)
   M.update()
 end
 

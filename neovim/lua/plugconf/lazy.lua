@@ -160,8 +160,8 @@ local plugin = {
   },
   {
     "neur1n/noline.nvim",
-    lazy = true,
-    event = "VeryLazy",
+    lazy = false,
+    event = "ColorScheme *",
     config = require("plugconf.noline").setup
   },
 }

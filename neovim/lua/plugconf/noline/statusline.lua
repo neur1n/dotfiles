@@ -13,80 +13,84 @@ local Diagnosis = require("plugconf.noline.diagnosis")
 local Mode = require("plugconf.noline.mode")
 local Tag = require("plugconf.noline.tag")
 
-local palette = Palette.get(Palette.current())
-local colors = {
-  palette.red,
-  palette.orange,
-  palette.yellow,
-  palette.green,
-  palette.blue,
-  palette.cyan,
-  palette.purple,
-}
+local function get_color()
+  local palette = Palette.get(Palette.current())
 
-function M.render_c()
+  return {
+    palette.red,
+    palette.orange,
+    palette.yellow,
+    palette.green,
+    palette.blue,
+    palette.cyan,
+    palette.purple,
+  }
+end
+
+function M.render_c(color)
   if not State.stl_initialized then
-    local color = 0
+    local palette = Palette.get(Palette.current())
     local bg = palette.bgm
+    local c = 0
 
     math.randomseed(os.time())
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NStart", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
     vim.api.nvim_set_hl(0, "NEnd", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NModeN", {
-      fg = colors[color].g, bg = bg.g, bold = true,
-      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      fg = color[c].g, bg = bg.g, bold = true,
+      ctermfg = color[c].c, ctermbg = bg.c, cterm = {bold = true},
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NModeV", {
-      fg = colors[color].g, bg = bg.g, bold = true,
-      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      fg = color[c].g, bg = bg.g, bold = true,
+      ctermfg = color[c].c, ctermbg = bg.c, cterm = {bold = true},
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NModeI", {
-      fg = colors[color].g, bg = bg.g, bold = true,
-      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      fg = color[c].g, bg = bg.g, bold = true,
+      ctermfg = color[c].c, ctermbg = bg.c, cterm = {bold = true},
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NModeR", {
-      fg = colors[color].g, bg = bg.g, bold = true,
-      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      fg = color[c].g, bg = bg.g, bold = true,
+      ctermfg = color[c].c, ctermbg = bg.c, cterm = {bold = true},
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NModeC", {
-      fg = colors[color].g, bg = bg.g, bold = true,
-      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {bold = true},
+      fg = color[c].g, bg = bg.g, bold = true,
+      ctermfg = color[c].c, ctermbg = bg.c, cterm = {bold = true},
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NNameD", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
     vim.api.nvim_set_hl(0, "NName", {
-      fg = colors[color].g, bg = bg.g, reverse = true,
-      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {reverse = true},
+      fg = color[c].g, bg = bg.g, reverse = true,
+      ctermfg = color[c].c, ctermbg = bg.c, cterm = {reverse = true},
       force = true
     })
     vim.api.nvim_set_hl(0, "NEdit", {link = "NName"})
@@ -118,22 +122,22 @@ function M.render_c()
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NFileInfoD", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
     vim.api.nvim_set_hl(0, "NFileInfo", {
-      fg = colors[color].g, bg = bg.g, reverse = true,
-      ctermfg = colors[color].c, ctermbg = bg.c, cterm = {reverse = true},
+      fg = color[c].g, bg = bg.g, reverse = true,
+      ctermfg = color[c].c, ctermbg = bg.c, cterm = {reverse = true},
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NRuler", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
   end
@@ -141,17 +145,18 @@ function M.render_c()
   Mode.highlight()
 end
 
-function M.render_nc()
+function M.render_nc(color)
   if not State.stl_initialized then
-    local color = 0
+    local palette = Palette.get(Palette.current())
     local bg = palette.bgm
+    local c = 0
 
     math.randomseed(os.time())
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NNameNC", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
 
@@ -188,17 +193,17 @@ function M.render_nc()
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NFileInfoNC", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
 
-    color = math.random(#colors)
+    c = math.random(#color)
     vim.api.nvim_set_hl(0, "NRulerNC", {
-      fg = colors[color].g, bg = bg.g,
-      ctermfg = colors[color].c, ctermbg = bg.c,
+      fg = color[c].g, bg = bg.g,
+      ctermfg = color[c].c, ctermbg = bg.c,
       force = true
     })
   end
@@ -310,8 +315,9 @@ end
 function M.redraw()
   State.stl_initialized = false
 
-  M.render_c()
-  M.render_nc()
+  local color = get_color()
+  M.render_c(color)
+  M.render_nc(color)
   M.update()
 end
 
