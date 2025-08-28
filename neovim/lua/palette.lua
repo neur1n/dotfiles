@@ -1,7 +1,6 @@
 local M = {}
 
 local clack = {
-  name    = "clack",
   bgh     = {c = 234, g = "#16161d"},
   bgm     = {c = 235, g = "#1f1f2a"},
   bgs     = {c = 236, g = "#292937"},
@@ -22,7 +21,6 @@ local clack = {
 }
 
 local github = {
-  name    = "github",
   bgh     = {c = 234, g = "#1f2428"},
   bgm     = {c = 235, g = "#24292e"},
   bgs     = {c = 236, g = "#2c313a"},
@@ -43,7 +41,6 @@ local github = {
 }
 
 local iceberg = {
-  name    = "iceberg",
   bgh     = {c = 233, g = "#0f1117"},
   bgm     = {c = 234, g = "#161822"},
   bgs     = {c = 235, g = "#1e2132"},
@@ -64,7 +61,6 @@ local iceberg = {
 }
 
 local neovim = {
-  name    = "neovim",
   bgh     = {c = 232, g = "#07080d"},
   bgm     = {c = 234, g = "#14161b"},
   bgs     = {c = 236, g = "#2c2e33"},
@@ -85,7 +81,6 @@ local neovim = {
 }
 
 local nightfox = {
-  name    = "nightfox",
   bgh     = {c = 234, g = "#131a24"},
   bgm     = {c = 235, g = "#192330"},
   bgs     = {c = 236, g = "#212e3f"},
@@ -106,7 +101,6 @@ local nightfox = {
 }
 
 local synthwave = {
-  name    = "synthwave",
   bgh     = {c = 233, g = "#201d2c"},
   bgm     = {c = 235, g = "#262335"},
   bgs     = {c = 237, g = "#2e2a4f"},
@@ -126,13 +120,22 @@ local synthwave = {
   special = {c = 212, g = "#ff7edb"}
 }
 
-local palettes = {
-  clack,
-  github,
-  iceberg,
-  neovim,
-  nightfox,
-  synthwave,
+local palette = {
+  clack = clack,
+  github = github,
+  iceberg = iceberg,
+  neovim = neovim,
+  nightfox = nightfox,
+  synthwave = synthwave,
+}
+
+local pltname = {
+  "clack",
+  "github",
+  "iceberg",
+  "neovim",
+  "nightfox",
+  "synthwave",
 }
 
 local current = "unknown"
@@ -142,14 +145,13 @@ function M.current()
 end
 
 function M.get(name)
-  if palettes[name] then
+  if palette[name] then
     current = name
-    return palettes[name]
+    return palette[name]
   else
     math.randomseed(os.time())
-    local idx = math.random(#palettes)
-    current = palettes[idx].name
-    return palettes[idx]
+    current = pltname[math.random(#pltname)]
+    return palette[current]
   end
 end
 

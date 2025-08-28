@@ -1,5 +1,5 @@
 {
-  "bp": {
+  "breakpoint": {
     "prefix": ["breakpoint"],
     "body": [
       "breakpoint()$0"
