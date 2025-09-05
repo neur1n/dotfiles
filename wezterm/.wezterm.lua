@@ -7,6 +7,9 @@ local Launcher= require("n_launcher")
 
 require("n_snippet")
 
+local font = Font.get()
+local scheme = Color.get()
+
 Wezterm.on("gui-startup", function(_)
   local _, _, window = Wezterm.mux.spawn_window({})
   local dim = window:gui_window():get_dimensions()
@@ -17,14 +20,12 @@ Wezterm.on("gui-startup", function(_)
 end)
 
 Wezterm.on("update-right-status", function(window, pane)
-  local date = Wezterm.strftime("%a %Y-%m-%d %H:%M ")
+  local date = Wezterm.strftime("%a %Y-%m-%d %H:%M")
   window:set_right_status(date)
 end)
 
-local font = Font.get()
-
-local config = {
-  colors = Color.get(),
+return {
+  colors = scheme,
   default_cwd = ".",
   default_prog = {"nu"},
   enable_scroll_bar = true,
@@ -37,13 +38,8 @@ local config = {
   launch_menu = Launcher.get(),
   line_height = 1.0,
   tab_bar_at_bottom = true,
+  window_background_opacity = 0.9,
   window_close_confirmation = "AlwaysPrompt",
-  window_padding = {
-    top = 0,
-    bottom = 0,
-    left = 0,
-    right = 0,
-  },
+  window_decorations = "INTEGRATED_BUTTONS|RESIZE",
+  window_padding = {top = 0, bottom = 0, left = 0, right = 0},
 }
-
-return config

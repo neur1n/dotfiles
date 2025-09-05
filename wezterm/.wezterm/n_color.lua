@@ -33,13 +33,13 @@ local palettes = {
   },
   neovim = {
     "#75787e",
-    "#ffc3fa",
-    "#aaedb7",
-    "#f4d88c",
-    "#9fd8ff",
-    "#cfcefd",
-    "#83efef",
-    "#d7dae1",
+    "#ffc0b9",
+    "#b3f6c0",
+    "#fce094",
+    "#a6dbff",
+    "#ffcaff",
+    "#8cf8f7",
+    "#e0e2ea",
   },
   nightfox = {
     "#4e4e4e",
@@ -77,7 +77,7 @@ local schemes = {
     brights = palettes["clack"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["clack"][math.random(2, #palettes["clack"]-1)],
+        bg_color = palettes["clack"][math.random(2, 7)],
         fg_color = "#1f1f2a",
       },
     },
@@ -95,7 +95,7 @@ local schemes = {
     brights = palettes["github"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["github"][math.random(2, #palettes["github"]-1)],
+        bg_color = palettes["github"][math.random(2, 7)],
         fg_color = "#24292e",
       },
     },
@@ -113,7 +113,7 @@ local schemes = {
     brights = palettes["iceberg"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["iceberg"][math.random(2, #palettes["iceberg"]-1)],
+        bg_color = palettes["iceberg"][math.random(2, 7)],
         fg_color = "#161822",
       },
     },
@@ -131,7 +131,7 @@ local schemes = {
     brights = palettes["neovim"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["neovim"][math.random(2, #palettes["neovim"]-1)],
+        bg_color = palettes["neovim"][math.random(2, 7)],
         fg_color = "#1c1d23",
       },
     },
@@ -149,7 +149,7 @@ local schemes = {
     brights = palettes["nightfox"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["nightfox"][math.random(2, #palettes["nightfox"]-1)],
+        bg_color = palettes["nightfox"][math.random(2, 7)],
         fg_color = "#192330",
       },
     },
@@ -167,7 +167,7 @@ local schemes = {
     brights = palettes["synthwave"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["synthwave"][math.random(2, #palettes["synthwave"]-1)],
+        bg_color = palettes["synthwave"][math.random(2, 7)],
         fg_color = "#2e2a4f",
       },
     },
