@@ -8,6 +8,7 @@
   "default_workspace_padding": 5,
   "default_container_padding": 5,
   "floating_window_aspect_ratio": "Widescreen",
+  "mouse_follow_focus": false,
   "window_hiding_behaviour": "Cloak",
   "stackbar": {
     "height": 50,
