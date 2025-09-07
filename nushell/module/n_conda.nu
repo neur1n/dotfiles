@@ -7,7 +7,7 @@ export-env {
 export def --env activate [name: string] {
   if ($env.CONDA_ENVS? | is-empty) {
     find
-    kv get "conda envars" | load-env
+    kv get "conda envar" | load-env
   }
 
   if ($env.CONDA_ROOT | is-empty) {
@@ -34,7 +34,7 @@ export def --env activate [name: string] {
 export def --env deactivate [] {
   if ($env.CONDA_ENVS? | is-empty) {
     find
-    kv get "conda envars" | load-env
+    kv get "conda envar" | load-env
   }
 
   if ($env.CONDA_ROOT | is-empty) {
@@ -44,7 +44,7 @@ export def --env deactivate [] {
 
   $env.CONDA_CURR = ""
 
-  load-env {Path: $env.CONDA_BASE_PATH, PATH: $env.CONDA_BASE_PATH}
+  load-env {PATH: $env.CONDA_BASE_PATH}
 
   hide-env CONDA_BASE_PATH
   hide-env CONDA_CURR
@@ -53,7 +53,7 @@ export def --env deactivate [] {
 }
 
 export def find [] {
-  let $base_path = (if ($nu.os-info.name == "windows") {$env.Path} else {$env.PATH})
+  let $base_path = $env.PATH
 
   let info = (
       if not (which mamba | is-empty) {
@@ -87,13 +87,13 @@ export def find [] {
     CONDA_ENVS: $envs
   }
 
-  kv set "conda envars" $vars
+  kv set "conda envar" $vars
 }
 
 export def list [] {
   if ($env.CONDA_ENVS? | is-empty) {
     find
-    kv get "conda envars" | load-env
+    kv get "conda envar" | load-env
   }
 
   $env.CONDA_ENVS
@@ -111,7 +111,6 @@ def update-path-linux [env_path: path] {
   ]
 
   return {
-    Path: ($env.PATH | prepend $env_path),
     PATH: ($env.PATH | prepend $env_path)
   }
 }
@@ -123,7 +122,6 @@ def update-path-windows [env_path: path] {
   ]
 
   return {
-    Path: ($env.Path | prepend $env_path),
-    PATH: ($env.Path | prepend $env_path)
+    PATH: ($env.PATH | prepend $env_path)
   }
 }

@@ -1,20 +1,22 @@
+use std-rfc/kv *
+
 use n_emoji.nu
 use n_git.nu
 use n_highlight.nu
 use n_palette.nu
 use n_system.nu
-use n_utility.nu
 
 
 let palette = (n_palette fetch)
 let rainbow = (n_palette rainbow $palette)
 
+let maxidx = ($rainbow | length) - 1
 let scheme = {
-  sess: ($rainbow | get (n_utility random-index $rainbow)),
-  path: ($rainbow | get (n_utility random-index $rainbow)),
-  time: ($rainbow | get (n_utility random-index $rainbow)),
-  venv: ($rainbow | get (n_utility random-index $rainbow)),
-  indi: ($rainbow | get (n_utility random-index $rainbow))
+  sess: ($rainbow | get (random int 0..$maxidx)),
+  path: ($rainbow | get (random int 0..$maxidx)),
+  time: ($rainbow | get (random int 0..$maxidx)),
+  venv: ($rainbow | get (random int 0..$maxidx)),
+  indi: ($rainbow | get (random int 0..$maxidx))
 }
 
 def show-session [] {
@@ -49,14 +51,10 @@ def show-path [] {
 
 def show-git [] {
   if not (n_git in-repo) {
-    return ""
-  }
-
-  let status = (n_git status)
-
-  if not (n_git in-repo) {
     ""
   } else {
+    let status = (n_git status)
+
     let r = ""  # rev count
 
     let acnt = $status.ahead
@@ -191,7 +189,7 @@ def indicator [mode: string] {
 }
 
 $env.PROMPT_COMMAND = {|| left-prompt}
-$env.PROMPT_COMMAND_RIGHT = {|| ""}
+$env.PROMPT_COMMAND_RIGHT = {||}
 
 $env.PROMPT_INDICATOR = {|| ""}
 $env.PROMPT_INDICATOR_VI_INSERT = {|| indicator "i"}

@@ -32,22 +32,7 @@ $env.NU_PLUGIN_DIRS = [
 $env.NUCONF = ($nu.config-path | path expand | path dirname)
 
 let bin = (ls ($"($env.NUCONF)/../bin/($nu.os-info.name)/($nu.os-info.arch)/*" | into glob)).name
-
-$env.Path = (
-  if "Path" in $env {
-    $env.Path | split row (char esep) | prepend $bin
-  } else {
-    $env.PATH | split row (char esep) | prepend $bin
-  }
-)
-
-$env.PATH = (
-  if "Path" in $env {
-    $env.Path | split row (char esep) | prepend $bin
-  } else {
-    $env.PATH | split row (char esep) | prepend $bin
-  }
-)
+$env.PATH = ($env.PATH | split row (char esep) | prepend $bin)
 
 zoxide init nushell | save -f ~/.zoxide.nu
 # Customize}}}

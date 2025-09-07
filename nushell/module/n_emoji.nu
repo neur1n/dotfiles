@@ -1,6 +1,3 @@
-use n_utility.nu
-
-
 export def fetch [] {
   let emoji = [
     "😀", "😃", "😄", "😁", "😆", "😅", "🤣", "😂", "🙂", "🙃",
@@ -18,6 +15,6 @@ export def fetch [] {
     "🙊",
   ]
 
-  let idx = (n_utility random-index $emoji)
+  let idx = (random int 0..(($emoji | length) - 1))
   ($emoji | get $idx)
 }

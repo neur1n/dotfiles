@@ -1,23 +1,3 @@
-export def append-path [paths: path] {
-  if ($nu.os-info.name == "windows") {
-    $env.Path = ($env.Path | append $paths)
-    $env.Path
-  } else {
-    $env.PATH = ($env.PATH | append $paths)
-    $env.PATH
-  }
-}
-
-export def insert-path [paths: path] {
-  if ($nu.os-info.name == "windows") {
-    $env.Path = ($env.Path | prepend $paths)
-    $env.Path
-  } else {
-    $env.PATH = ($env.PATH | prepend $paths)
-    $env.PATH
-  }
-}
-
 export def neovim [
     --fuzzy  (-f),
     --listen (-l),
@@ -65,10 +45,6 @@ export def neovim [
 
 export def pid [name: string] {
   (ps | where name =~ $name | get pid | get 0)
-}
-
-export def random-index [data: any] {
-  (random int ..(($data | length) - 1))
 }
 
 export def repeat [times: int, command: closure] {

@@ -88,7 +88,7 @@ export def --env activate [
   ] | str join ";")
 
   load-env {
-    Path: $env_path,
+    PATH: $env_path,
     INCLUDE: $env.MSVS_INCLUDE_PATH,
     LIB: $lib_path
   }
@@ -108,7 +108,7 @@ export def --env deactivate [] {
   }
 
   load-env {
-    Path: $env.MSVS_BASE_PATH,
+    PATH: $env.MSVS_BASE_PATH,
   }
 
   hide-env MSVS_BASE_PATH
@@ -123,7 +123,7 @@ export def --env deactivate [] {
 }
 
 export def find [] {
-  let base_path = $env.Path
+  let base_path = $env.PATH
 
   let info = (
       if not (which vswhere | is-empty) {
