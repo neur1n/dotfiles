@@ -52,7 +52,6 @@ function M.setup()
   require("plugconf.lsp.basedpyright").setup()
   require("plugconf.lsp.clangd").setup()
   require("plugconf.lsp.lua_ls").setup()
-  require("plugconf.lsp.ltex").setup()
   require("plugconf.lsp.texlab").setup()
   vim.lsp.enable("nushell")
 end
