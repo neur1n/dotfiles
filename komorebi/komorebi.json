@@ -60,13 +60,13 @@
   ],
   "manage_rules": [
     {
-      "kind": "Exe",
-      "id": "neovide.exe",
+      "kind": "Class",
+      "id": "SUMATRA_PDF_FRAME",
       "matching_strategy": "Equals"
     },
     {
       "kind": "Exe",
-      "id": "SumatraPDF.exe",
+      "id": "neovide.exe",
       "matching_strategy": "Equals"
     },
     {
