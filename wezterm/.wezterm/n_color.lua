@@ -104,8 +104,8 @@ local schemes = {
   {
     foreground    = "#d2d4de",
     background    = "#161822",
-    cursor_fg     = "#d2d4de",
-    cursor_bg     = "#161822",
+    cursor_fg     = "#161822",
+    cursor_bg     = "#d2d4de",
     cursor_border = "#d2d4de",
     selection_fg  = "#161822",
     selection_bg  = "#e7feff",
