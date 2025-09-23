@@ -42,9 +42,7 @@ export def --env deactivate [] {
     return
   }
 
-  $env.CONDA_CURR = ""
-
-  load-env {PATH: $env.CONDA_BASE_PATH}
+  load-env {(system-path): $env.CONDA_BASE_PATH}
 
   hide-env CONDA_BASE_PATH
   hide-env CONDA_CURR
@@ -111,7 +109,7 @@ def update-path-linux [env_path: path] {
   ]
 
   return {
-    PATH: ($env.PATH | prepend $env_path)
+    (system-path): ($env.PATH | prepend $env_path)
   }
 }
 
@@ -122,6 +120,14 @@ def update-path-windows [env_path: path] {
   ]
 
   return {
-    PATH: ($env.PATH | prepend $env_path)
+    (system-path): ($env.PATH | prepend $env_path)
+  }
+}
+
+def system-path [] {
+  if ("Path" in $env) {
+    "Path"
+  } else {
+    "PATH"
   }
 }
