@@ -1,9 +1,9 @@
 {
-  "equation": {
+  "align": {
     "prefix": ["align"],
     "body": [
       "\\begin{align}",
-      "  $0",
+      "  \\item $0",
       "  \\label{eqn:$1}",
       "\\end{align}"
     ],
@@ -13,7 +13,7 @@
     "prefix": ["enumerate"],
     "body": [
       "\\begin{enumerate}",
-      "  $0",
+      "  \\item $0",
       "\\end{enumerate}"
     ],
     "description": "enumerate environment"
@@ -31,12 +31,12 @@
   "figure": {
     "prefix": ["figure"],
     "body": [
-      "\\begin{figure}[${1:htb}]",
+      "\\begin{figure}[${1:!htb}]",
       "  \\centering",
-      "  \\includegraphics[width=${1:\\columnwidth}]{$2}",
+      "  \\includegraphics[width=${2:\\\\columnwidth}]{$3}",
       "",
-      "  \\caption{$3}",
-      "  \\label{fig:$4}",
+      "  \\caption{$4}",
+      "  \\label{fig:$5}",
       "\\end{figure}"
     ],
     "description": "figure environment"
@@ -53,12 +53,12 @@
   "table": {
     "prefix": ["table"],
     "body": [
-      "\\begin{table}[${1:htb}]",
+      "\\begin{table}[${1:!htb}]",
       "  \\centering",
       "  \\caption{$2}",
       "  \\label{tab:$3}",
       "",
-      "  % \\resizebox{${4:\\columnwidth}}{!}{%",
+      "  % \\resizebox{${4:\\\\columnwidth}}{!}{%",
       "  \\begin{tabular}{$5}",
       "    \\toprule",
       "    $0",

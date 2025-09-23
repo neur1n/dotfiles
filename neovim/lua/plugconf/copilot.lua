@@ -16,6 +16,24 @@ function M.setup()
       },
     },
   })
+
+  local id = vim.api.nvim_create_augroup("n_copilot", {clear = true})
+
+  vim.api.nvim_create_autocmd("User", {
+    group = id,
+    pattern = "BlinkCmpMenuOpen",
+    callback = function()
+      vim.b.copilot_suggestion_hidden = true
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("User", {
+    group = id,
+    pattern = "BlinkCmpMenuClose",
+    callback = function()
+      vim.b.copilot_suggestion_hidden = false
+    end,
+  })
 end
 
 return M
