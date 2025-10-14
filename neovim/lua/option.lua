@@ -29,6 +29,7 @@ local options = {
   fillchars = "vert: ",
   foldmethod = "marker",
   foldlevelstart = 99,
+  guicursor = "n-c-sm:block,v:hor20,i-ci-ve:ver25,r-cr-o:hor20,t:ver25-blinkon500-blinkoff500-TermCursor",
   laststatus = 2,
   list = true,
   listchars = "tab:⇥·,trail:·,nbsp:␣,extends:»,precedes:«",
