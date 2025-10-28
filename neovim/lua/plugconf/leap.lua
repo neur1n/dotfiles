@@ -2,8 +2,8 @@ local M = {}
 
 function M.keymap()
   return {
-    {"t", "<Plug>(leap-forward-to)", mode = {"n", "o", "x"}, {noremap = true}},
-    {"T", "<Plug>(leap-backward-to)", mode = {"n", "o", "x"}, {noremap = true}},
+    {"t", "<Plug>(leap-forward)", mode = {"n", "o", "x"}, {noremap = true}},
+    {"T", "<Plug>(leap-backward)", mode = {"n", "o", "x"}, {noremap = true}},
   }
 end
 
