@@ -94,7 +94,7 @@ Does ripgrep have support for shell auto-completion?
 
 Yes! If you installed ripgrep through a package manager on a Unix system, then
 the shell completion files included in the release archive should have been
-installed for you automatically. If not, you can generate completes using
+installed for you automatically. If not, you can generate completions using
 ripgrep's command line interface.
 
 For **bash**:
@@ -113,13 +113,30 @@ $ mkdir -p "$dir"
 $ rg --generate complete-fish > "$dir/rg.fish"
 ```
 
-For **zsh**:
+For **zsh**, the recommended approach is:
 
-```
+```zsh
 $ dir="$HOME/.zsh-complete"
 $ mkdir -p "$dir"
 $ rg --generate complete-zsh > "$dir/_rg"
 ```
+
+And then add `$HOME/.zsh-complete` to your `fpath` in, e.g., your
+`$HOME/.zshrc` file:
+
+```zsh
+fpath=($HOME/.zsh-complete $fpath)
+```
+
+Or if you'd prefer to load and generate completions at the same time, you can
+add the following to your `$HOME/.zshrc` file:
+
+```zsh
+$ source <(rg --generate complete-zsh)
+```
+
+Note though that while this approach is easier to setup, is generally slower
+than the previous method, and will add more time to loading your shell prompt.
 
 For **PowerShell**, create the completions:
 
@@ -248,8 +265,8 @@ The `--colors` flag is a bit more complicated. The general format is:
   to bold the output or not).
 * `{value}` is determined by the value of `{attribute}`. If
   `{attribute}` is `style`, then `{value}` should be one of `nobold`,
-  `bold`, `nointense`, `intense`, `nounderline` or `underline`. If
-  `{attribute}` is `fg` or `bg`, then `{value}` should be a color.
+  `bold`, `nointense`, `intense`, `nounderline`, `underline`, `noitalic` or
+  `italic`. If `{attribute}` is `fg` or `bg`, then `{value}` should be a color.
 
 A color is specified by either one of eight of English names, a single 256-bit
 number or an RGB triple (with over 16 million possible values, or "true
@@ -268,8 +285,8 @@ As a special case, `--colors '{type}:none'` will clear all colors and styles
 associated with `{type}`, which lets you start with a clean slate (instead of
 building on top of ripgrep's default color settings).
 
-Here's an example that makes highlights the matches with a nice blue background
-with bolded white text:
+Here's an example that highlights the matches with a nice blue background with
+bolded white text:
 
 ```
 $ rg somepattern \
@@ -1038,7 +1055,7 @@ How can I donate to ripgrep or its maintainers?
 
 I welcome [sponsorship](https://github.com/sponsors/BurntSushi/).
 
-Or if you'd prefer, donating to a charitably organization that you like would
+Or if you'd prefer, donating to a charitable organization that you like would
 also be most welcome. My favorites are:
 
 * [The Internet Archive](https://archive.org/donate/)
