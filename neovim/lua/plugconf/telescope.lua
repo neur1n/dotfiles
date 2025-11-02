@@ -2,17 +2,17 @@ local M = {}
 
 function M.keymap()
   return {
-    {"<Leader>sb", "<Cmd>lua require('telescope.builtin').buffers()<CR>", mode = "n", {noremap = true, silent = true}},
-    {"<Leader>sc", "<Cmd>lua require('telescope.builtin').command_history()<CR>", mode = "n", {noremap = true, silent = true}},
-    {"<Leader>sd", "<Cmd>lua require('telescope.builtin').diagnostics({bufnr=0})<CR>", mode = "n", {noremap = true, silent = true}},
-    {"<Leader>sf", "<Cmd>lua require('telescope.builtin').find_files()<CR>", mode = "n", {noremap = true, silent = true}},
-    {"<Leader>sg", "<Cmd>lua require('telescope.builtin').live_grep()<CR>", mode = "n", {noremap = true, silent = true}},
-    {"<Leader>so", "<Cmd>lua require('telescope.builtin').oldfiles()<CR>", mode = "n", {noremap = true, silent = true}},
-    {"<Leader>sr", "<Cmd>lua require('telescope.builtin').find_files({cwd=require('utility').project_root()})<CR>", mode = "n", {noremap = true, silent = true}},
-    {"<Leader>ss", "<Cmd>lua require('telescope.builtin').search_history()<CR>", mode = "n", {noremap = true, silent = true}},
-    {"<Leader>st", "<Cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>fb", "<Cmd>lua require('telescope.builtin').buffers()<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>fc", "<Cmd>lua require('telescope.builtin').command_history()<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>fd", "<Cmd>lua require('telescope.builtin').diagnostics({bufnr=0})<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>ff", "<Cmd>lua require('telescope.builtin').find_files()<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>fg", "<Cmd>lua require('telescope.builtin').live_grep()<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>fo", "<Cmd>lua require('telescope.builtin').oldfiles()<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>fr", "<Cmd>lua require('telescope.builtin').find_files({cwd=require('utility').project_root()})<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>fs", "<Cmd>lua require('telescope.builtin').search_history()<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>ft", "<Cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>", mode = "n", {noremap = true, silent = true}},
     -- From extensions.
-    {"<Leader>sm", "<Cmd>Telescope foldmarkers<CR>", mode = "n", {noremap = true, silent = true}},
+    {"<Leader>fm", "<Cmd>Telescope foldmarkers<CR>", mode = "n", {noremap = true, silent = true}},
   }
 end
 

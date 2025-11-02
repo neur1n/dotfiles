@@ -11,6 +11,21 @@ local plugin = {
     },
   },
   {
+    "m4xshen/autoclose.nvim",
+    lazy = true,
+    event = "VeryLazy",
+    config = require("plugconf.autoclose").setup,
+  },
+  {
+    "nvim-focus/focus.nvim",
+    lazy = true,
+    cmd = {
+      "FocusEnable",
+      "FocusToggle",
+    },
+    config = require("plugconf.focus").setup,
+  },
+  {
     "lewis6991/gitsigns.nvim",
     lazy = true,
     event = "VeryLazy",
@@ -34,12 +49,6 @@ local plugin = {
     config = require("plugconf.leap").setup,
   },
   {
-    "windwp/nvim-autopairs",
-    lazy = true,
-    event = "VeryLazy",
-    config = require("plugconf.nvim-autopairs").setup,
-  },
-  {
     "NvChad/nvim-colorizer.lua",
     lazy = true,
     cmd = {
@@ -53,15 +62,6 @@ local plugin = {
     lazy = true,
     keys = require("plugconf.nvim-dap").keymap,
     config = require("plugconf.nvim-dap").setup,
-  },
-  {
-    "nvim-focus/focus.nvim",
-    lazy = true,
-    cmd = {
-      "FocusEnable",
-      "FocusToggle",
-    },
-    config = require("plugconf.focus").setup,
   },
   {
     "kylechui/nvim-surround",
@@ -136,11 +136,6 @@ local plugin = {
 
   -- Completion
   {
-    "zbirenbaum/copilot.lua",
-    event = "VeryLazy",
-    config = require("plugconf.copilot").setup,
-  },
-  {
     "Saghen/blink.cmp",
     version = "1.*",
     event = "VeryLazy",
@@ -149,6 +144,11 @@ local plugin = {
       "neovim/nvim-lspconfig",
       config = require("plugconf.nvim-lspconfig").setup,
     },
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    event = "VeryLazy",
+    config = require("plugconf.copilot").setup,
   },
 
   {

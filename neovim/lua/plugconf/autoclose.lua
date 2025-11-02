@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-  require("nvim-autopairs").setup()
+  require("autoclose").setup()
 end
 
 return M
