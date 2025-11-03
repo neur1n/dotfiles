@@ -26,6 +26,7 @@ end)
 
 return {
   colors = scheme,
+  cursor_blink_rate = 0,
   default_cwd = ".",
   default_prog = {"nu"},
   enable_scroll_bar = true,
@@ -38,6 +39,7 @@ return {
   launch_menu = Launcher.get(),
   line_height = 1.0,
   tab_bar_at_bottom = true,
+  warn_about_missing_glyphs = false,
   window_background_opacity = 0.9,
   window_close_confirmation = "AlwaysPrompt",
   window_decorations = "INTEGRATED_BUTTONS|RESIZE",
