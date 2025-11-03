@@ -26,6 +26,15 @@ local plugin = {
     config = require("plugconf.focus").setup,
   },
   {
+    "ibhagwan/fzf-lua",
+    lazy = true,
+    keys = require("plugconf.fzf-lua").keymap,
+    config = require("plugconf.fzf-lua").setup,
+    dependencies = {
+      "neur1n/fzf-lua-foldmarkers",
+    },
+  },
+  {
     "lewis6991/gitsigns.nvim",
     lazy = true,
     event = "VeryLazy",
@@ -86,24 +95,6 @@ local plugin = {
       "TSUpdate",
     },
     config = require("plugconf.nvim-treesitter").setup,
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    lazy = true,
-    keys = require("plugconf.telescope").keymap,
-    config = require("plugconf.telescope").setup,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      {
-        "gbirke/telescope-foldmarkers.nvim",
-        lazy = true,
-      },
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        lazy = true,
-        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-      },
-    },
   },
   {
     "junegunn/vim-easy-align",
