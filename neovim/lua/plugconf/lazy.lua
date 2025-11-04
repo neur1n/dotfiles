@@ -32,6 +32,7 @@ local plugin = {
     config = require("plugconf.fzf-lua").setup,
     dependencies = {
       "neur1n/fzf-lua-foldmarkers",
+      config = require("plugconf.fzf-lua-foldmarkers").setup,
     },
   },
   {
