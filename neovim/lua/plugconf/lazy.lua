@@ -11,10 +11,10 @@ local plugin = {
     },
   },
   {
-    "m4xshen/autoclose.nvim",
+    "folke/flash.nvim",
     lazy = true,
     event = "VeryLazy",
-    config = require("plugconf.autoclose").setup,
+    config = require("plugconf.flash").setup,
   },
   {
     "nvim-focus/focus.nvim",
@@ -30,10 +30,6 @@ local plugin = {
     lazy = true,
     keys = require("plugconf.fzf-lua").keymap,
     config = require("plugconf.fzf-lua").setup,
-    dependencies = {
-      "neur1n/fzf-lua-foldmarkers",
-      config = require("plugconf.fzf-lua-foldmarkers").setup,
-    },
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -52,12 +48,12 @@ local plugin = {
     },
     config = require("plugconf.indent-blankline").setup,
   },
-  {
-    "ggandor/leap.nvim",
-    lazy = true,
-    keys = require("plugconf.leap").keymap,
-    config = require("plugconf.leap").setup,
-  },
+  -- {
+  --   "ggandor/leap.nvim",
+  --   lazy = true,
+  --   keys = require("plugconf.leap").keymap,
+  --   config = require("plugconf.leap").setup,
+  -- },
   {
     "NvChad/nvim-colorizer.lua",
     lazy = true,
@@ -141,14 +137,6 @@ local plugin = {
     "zbirenbaum/copilot.lua",
     event = "VeryLazy",
     config = require("plugconf.copilot").setup,
-  },
-
-  {
-    "neur1n/neuims",
-    lazy = true,
-    cmd = {
-      "IMSToggle",
-    },
   },
   {
     "neur1n/noline.nvim",
