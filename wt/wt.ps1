@@ -6,9 +6,9 @@ param(
 $dstPath = "$env:LOCALAPPDATA/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 $srcPath = "$PSScriptRoot/base.json"
 
-$actionPath = "$PSScriptRoot/action.json"
 $fontPath = "$PSScriptRoot/font.json"
 $schemePath = "$PSScriptRoot/scheme.json"
+$snippetPath = "$PSScriptRoot/snippet.json"
 $themePath = "$PSScriptRoot/theme.json"
 
 ################################################################### Function{{{
@@ -26,38 +26,6 @@ function Get-Base {
   }
 
   return $base
-}
-
-function Set-Action {
-  param(
-    [Parameter(Mandatory=$true)][psobject]$Base,
-    [string]$Path
-  )
-
-  if (-not (Test-Path $Path)) {
-    Write-Host "No action.json found at '$Path'. Skipping."
-    return
-  }
-
-  try {
-    $actionRoot = Get-Content -Path $Path -Raw -ErrorAction Stop | ConvertFrom-Json
-  } catch {
-    Write-Warning "Failed to parse action.json at '$Path'. Skipping. $_"
-    return
-  }
-
-  if (-not $actionRoot.action -or $actionRoot.action.Count -eq 0) {
-    Write-Host "No actions defined in '$Path'. Skipping."
-    return
-  }
-
-  if (-not $Base.actions) {
-    $Base | Add-Member -MemberType NoteProperty -Name actions -Value @() -Force
-  }
-
-  foreach ($a in $actionRoot.action) {
-    $Base.actions += $a
-  }
 }
 
 function Set-Font {
@@ -130,6 +98,38 @@ function Set-Scheme {
   }
 }
 
+function Set-Snippet {
+  param(
+    [Parameter(Mandatory=$true)][psobject]$Base,
+    [string]$Path
+  )
+
+  if (-not (Test-Path $Path)) {
+    Write-Host "No snippet.json found at '$Path'. Skipping."
+    return
+  }
+
+  try {
+    $snippetRoot = Get-Content -Path $Path -Raw -ErrorAction Stop | ConvertFrom-Json
+  } catch {
+    Write-Warning "Failed to parse snippet.json at '$Path'. Skipping. $_"
+    return
+  }
+
+  if (-not $snippetRoot.snippet -or $snippetRoot.snippet.Count -eq 0) {
+    Write-Host "No snippets defined in '$Path'. Skipping."
+    return
+  }
+
+  if (-not $Base.actions) {
+    $Base | Add-Member -MemberType NoteProperty -Name actions -Value @() -Force
+  }
+
+  foreach ($a in $snippetRoot.snippet) {
+    $Base.actions += $a
+  }
+}
+
 function Set-Theme {
   param(
     [Parameter(Mandatory=$true)][psobject]$Base,
@@ -184,10 +184,10 @@ function Save-Settings {
 ####################################################################### Main{{{
 $base = Get-Base -Path $srcPath
 
-Set-Action -Base $base -Path $actionPath
-Set-Font   -Base $base -Path $fontPath
-Set-Scheme -Base $base -Path $schemePath
-Set-Theme  -Base $base -Path $themePath
+Set-Font    -Base $base -Path $fontPath
+Set-Scheme  -Base $base -Path $schemePath
+Set-Snippet -Base $base -Path $snippetPath
+Set-Theme   -Base $base -Path $themePath
 
 Save-Settings -Base $base -Path $dstPath
 

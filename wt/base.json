@@ -51,7 +51,6 @@
       "name": "Reload Settings"
     }
   ],
-  "opacity": 80,
   "profiles": {
     "defaults": {
       "cursorShape": "filledBox",
@@ -60,7 +59,7 @@
         "size": 12,
         "weight": "normal"
       },
-      "startingDirectory": "D:/ws"
+      "opacity": 90
     },
     "list": [
       {
@@ -84,7 +83,6 @@
     ]
   },
   "theme": "dark",
-  "useAcrylic": true,
   "useAcrylicInTabRow": true,
   "useTabSwitcher": false,
   "windowingBehavior": "useNew"

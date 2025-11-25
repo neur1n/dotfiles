@@ -1,7 +1,5 @@
 local Wezterm = require("wezterm")
 
-local Pane = require("n_pane")
-
 local M = {}
 
 local function load(path)
@@ -28,34 +26,16 @@ local function load(path)
 end
 
 function M.select()
-  local list = load(Wezterm.config_dir .. "/.wezterm/snippet_vault.json")
+  local list = load(Wezterm.config_dir .. "/.wezterm/snippet.json")
 
   return Wezterm.action.InputSelector{
     action = Wezterm.action_callback(function(window, pane, id, label)
       local snippet = Wezterm.json_parse(id)
-      local panes = nil
-
-      if snippet.spawn == true then
-        local _, p, _ = window:mux_window():spawn_tab{}
-        panes = Pane.split(p, snippet.split)
-      else
-        panes = Pane.split(pane, snippet.split)
-      end
-
-      local cmd = ""
-      local ms = 0
-
-      for _, e in ipairs(snippet.event) do
-        for _, p in pairs(panes) do
-          cmd, ms = next(e)
-          p:send_text(cmd .. "\r")
-          Wezterm.sleep_ms(ms)
-        end
-      end
+      pane:send_text(snippet.input .. "\r")
     end),
     choices = list,
     fuzzy = true,
-    title = "Snippets"
+    title = "Snippet"
   }
 end
 
