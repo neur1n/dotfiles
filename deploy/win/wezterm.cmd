@@ -1,9 +1,9 @@
 @echo off
 
-SET src=%~dp0.
+SET src=%~dp0.\..\..\wezterm
 SET dst=%USERPROFILE%
 
-MKLINK /J %dst%\.wezterm %src%\..\..\wezterm\.wezterm
-MKLINK %dst%\.wezterm.lua %src%\..\..\wezterm\.wezterm.lua
+MKLINK /J %dst%\.wezterm %src%\.wezterm
+MKLINK %dst%\.wezterm.lua %src%\.wezterm.lua
 
 START %dst%

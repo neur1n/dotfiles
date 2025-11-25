@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 
-ln -ns `ls -d1 $PWD/../../wezterm/.wezterm.lua` ~/.wezterm.lua
-ln -ns `ls -d1 $PWD/../../wezterm/.wezterm` ~/.wezterm
+src="$PWD/../../wezterm"
+dst="$HOME"
+
+ln -ns $src/.wezterm.lua $dst/.wezterm.lua
+ln -ns $src/.wezterm $dst/.wezterm

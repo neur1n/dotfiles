@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-#
-if [[ ! -d "~/.config/nushell" ]]; then
-  mkdir -p ~/.config/nushell
-fi
 
-ln -ns `ls -d1 $PWD/../../nushell/*` ~/.config/nushell/
+src="$PWD/../../nushell"
+dst="$HOME/.config/nushell"
+
+ln -ns $src $dst
+
+xdg-open $dst &

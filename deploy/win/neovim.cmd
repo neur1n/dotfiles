@@ -1,12 +1,8 @@
 @echo off
 
-SET src=%~dp0.
+SET src=%~dp0.\..\..\neovim
 SET dst=%LOCALAPPDATA%\nvim
 
-IF EXIST %dst% (
-  RMDIR /S /Q %dst%
-)
-
-MKLINK /J %dst% %src%\..\..\neovim
+MKLINK /J %dst% %src%
 
 START %dst%

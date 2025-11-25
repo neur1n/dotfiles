@@ -1,2 +1,5 @@
 .netrwhist
 *.swp
+
+/nushell/history.*
+/nushell/plugin.msgpackz
