@@ -1,5 +1,11 @@
 local M = {}
 
+function M.keymap()
+  return {
+    {"s", "<Cmd>lua require('flash').jump()<CR>", mode = "n", {noremap = true, silent = true}},
+  }
+end
+
 function M.setup()
   require("flash").setup({
     modes = {
@@ -9,9 +15,6 @@ function M.setup()
         },
         jump_labels = true,
       },
-      search = {
-        enabled = true,
-      }
     },
   })
 end

@@ -13,7 +13,7 @@ local plugin = {
   {
     "folke/flash.nvim",
     lazy = true,
-    event = "VeryLazy",
+    keys = require("plugconf.flash").keymap,
     config = require("plugconf.flash").setup,
   },
   {
