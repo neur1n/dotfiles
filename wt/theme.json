@@ -1,0 +1,64 @@
+{
+  "theme": [
+    {
+      "name": "clack",
+      "tab": {
+        "background": ["#dd6151", "#ffac00", "#f2c700", "#93c247", "#69d0a5", "#5991ae", "#d37ba2"]
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "frame": "#e7feff"
+      }
+    },
+    {
+      "name": "github",
+      "tab": {
+        "background": ["#ea4a5a", "#d18616", "#ffea7f", "#34d058", "#39c5cf", "#2188ff", "#b392f0"]
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "frame": "#e7feff"
+      }
+    },
+    {
+      "name": "iceberg",
+      "tab": {
+        "background": ["#e27878", "#e2a578", "#fabd2f", "#b5bf82", "#89b9c2", "#84a0c7", "#a093c8"]
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "frame": "#e7feff"
+      }
+    },
+    {
+      "name": "neovim",
+      "tab": {
+        "background": ["#ffc0b9", "#fed0a7", "#fce094", "#b3f6c0", "#8cf8f7", "#a6dbff", "#ffcaff"]
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "frame": "#e7feff"
+      }
+    },
+    {
+      "name": "nightfox",
+      "tab": {
+        "background": ["#c94f6d", "#f4a261", "#dbc074", "#81b29a", "#63cdcf", "#719cd6", "#9d79d6"]
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "frame": "#e7feff"
+      }
+    },
+    {
+      "name": "synthwave",
+      "tab": {
+        "background": ["#fe4450", "#f39237", "#ffe347", "#72f1b8", "#3bf4fb", "#2ee2fa", "#af125a"]
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "frame": "#e7feff"
+      }
+    }
+  ]
+}
