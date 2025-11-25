@@ -40,6 +40,10 @@
           {
             "command": "wezterm-gui.exe",
             "name": "WezTerm"
+          },
+          {
+            "command": "wt.exe",
+            "name": "Terminal"
           }
         ]
       }

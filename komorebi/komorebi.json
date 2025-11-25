@@ -47,7 +47,7 @@
   "floating_applications": [
     {
       "kind": "Exe",
-      "id": "neovide.exe",
+      "id": "WindowsTerminal.exe",
       "matching_strategy": "Equals"
     }
   ],
@@ -66,12 +66,12 @@
     },
     {
       "kind": "Exe",
-      "id": "neovide.exe",
+      "id": "wezterm-gui.exe",
       "matching_strategy": "Equals"
     },
     {
       "kind": "Exe",
-      "id": "wezterm-gui.exe",
+      "id": "WindowsTerminal.exe",
       "matching_strategy": "Equals"
     }
   ]
