@@ -45,11 +45,6 @@
     }
   ],
   "floating_applications": [
-    {
-      "kind": "Exe",
-      "id": "WindowsTerminal.exe",
-      "matching_strategy": "Equals"
-    }
   ],
   "ignore_rules": [
     {
