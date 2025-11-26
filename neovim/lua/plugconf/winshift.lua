@@ -2,7 +2,7 @@ local M = {}
 
 function M.keymap()
   return {
-    {"<Leader>ws", "<Cmd>WinShift swap<CR>", mode = {"n"}, {noremap = true}},
+    {"<Leader>ws", "<Cmd>WinShift swap<CR>", mode = "n", {noremap = true}},
   }
 end
 

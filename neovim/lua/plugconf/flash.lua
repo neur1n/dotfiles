@@ -2,7 +2,7 @@ local M = {}
 
 function M.keymap()
   return {
-    {"s", "<Cmd>lua require('flash').jump()<CR>", mode = "n", {noremap = true, silent = true}},
+    {"s", "<Cmd>lua require('flash').jump({highlight = {backdrop = false}})<CR>", mode = {"n", "v"}, {noremap = true, silent = true}},
   }
 end
 
