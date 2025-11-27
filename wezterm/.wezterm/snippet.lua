@@ -31,7 +31,7 @@ function M.select()
   return Wezterm.action.InputSelector{
     action = Wezterm.action_callback(function(window, pane, id, label)
       local snippet = Wezterm.json_parse(id)
-      pane:send_text(snippet.input .. "\r")
+      pane:send_text(snippet.input)
     end),
     choices = list,
     fuzzy = true,

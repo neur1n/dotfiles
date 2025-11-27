@@ -1,11 +1,11 @@
 local Wezterm = require("wezterm")
 
-local Color = require("n_color")
-local Font = require("n_font")
-local Keymap= require("n_keymap")
-local Launcher= require("n_launcher")
+local Color = require("color")
+local Font = require("font")
+local Keymap= require("keymap")
+local Launcher= require("launcher")
 
-require("n_snippet")
+require("snippet")
 
 local font = Font.get()
 local scheme = Color.get()
