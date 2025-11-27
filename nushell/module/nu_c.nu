@@ -1,14 +1,3 @@
-export def init-workspace [...rest: string] {
-  let targets = ["inc", "src", "thirdparty"]
-  let targets = ($targets | append $rest)
-
-  for t in $targets {
-    if not ($t | path exists) {
-      mkdir $t | ignore
-    }
-  }
-}
-
 export def run-build [build: string = "default"] {
   let tmp = ($build | str downcase)
 

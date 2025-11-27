@@ -25,13 +25,13 @@ export def --env activate [
 
   if (($fh != "x64") and ($fh != "x86")) {
     print $"Wrong host architecture specified: ($fh)."
-    help n_msvs activate
+    help msvs activate
     return
   }
 
   if (($ft != "x64") and ($ft != "x86")) {
     print $"Wrong target architecture specified: ($ft)."
-    help n_msvs activate
+    help msvs activate
     return
   }
 

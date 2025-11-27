@@ -12,18 +12,17 @@ $env.config.shell_integration.osc133 = false
 # Override}}}
 
 #================================================================= Customize{{{
-use n_c.nu
-use n_utility.nu
-source n_prompt.nu
+use nu_c.nu
+use nu_utility.nu
+source nu_prompt.nu
 source ~/.zoxide.nu
 
-alias c-init = n_c init-workspace
-alias c-cmake = n_c run-cmake
-alias c-build = n_c run-build
-alias c-install = n_c run-install
+alias c-cmake = nu_c run-cmake
+alias c-build = nu_c run-build
+alias c-install = nu_c run-install
 
 alias gco = git checkout
 alias glg = git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%ai%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 
-alias neovim = n_utility neovim
+alias neovim = nu_utility neovim
 # Customize}}}
