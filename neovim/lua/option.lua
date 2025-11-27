@@ -93,7 +93,19 @@ function M.setup()
 
   M.set_font()
 
-  -- Corner cases
+  -- Global Variables
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = function() return {}, 0 end,
+      ["*"] = function() return {}, 0 end,
+    },
+  }
+
   vim.g.tex_flavor = "latex"
 end
 
