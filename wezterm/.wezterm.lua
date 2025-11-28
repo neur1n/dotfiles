@@ -21,7 +21,12 @@ end)
 
 Wezterm.on("update-right-status", function(window, pane)
   local date = Wezterm.strftime("%a %Y-%m-%d %H:%M")
-  window:set_right_status(date)
+  local element = Wezterm.format{
+    {Foreground = {Color = scheme.foreground}},
+    {Background = {Color = "none"}},
+    {Text = date},
+  }
+  window:set_right_status(element)
 end)
 
 return {
@@ -31,7 +36,7 @@ return {
   default_prog = {"nu"},
   enable_scroll_bar = true,
   font = Wezterm.font(font.name),
-  font_size = font.size,
+  font_size = font.size + 2,
   harfbuzz_features = {"calt=1", "clig=1", "liga=1"},
   initial_cols = 200,
   initial_rows = 50,
@@ -43,5 +48,6 @@ return {
   window_background_opacity = 0.9,
   window_close_confirmation = "AlwaysPrompt",
   window_decorations = "INTEGRATED_BUTTONS|RESIZE",
+  window_frame = {active_titlebar_bg = "none", inactive_titlebar_bg = "none"},
   window_padding = {top = 0, bottom = 0, left = 0, right = 0},
 }
