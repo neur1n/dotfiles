@@ -22,6 +22,16 @@ function M.setup()
     fuzzy = {implementation = "prefer_rust_with_warning"},
     sources = {
       default = {"buffer", "lsp", "path", "snippets"},
+      providers = {
+        snippets = {
+          opts = {
+            extended_filetypes = {
+              cpp = {"c"},
+              cuda = {"c", "cpp"},
+            },
+          },
+        },
+      },
     },
     keymap = {
       preset = "none",
