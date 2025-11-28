@@ -36,7 +36,7 @@ return {
   default_prog = {"nu"},
   enable_scroll_bar = true,
   font = Wezterm.font(font.name),
-  font_size = font.size + 2,
+  font_size = font.size,
   harfbuzz_features = {"calt=1", "clig=1", "liga=1"},
   initial_cols = 200,
   initial_rows = 50,

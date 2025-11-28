@@ -77,6 +77,11 @@ export def same-file [file1: path, file2: path, echo: bool = false] {
   }
 }
 
+export def set-wezterm-tabe-title [] {
+  use nu_system.nu
+  run-external wezterm cli set-tab-title $"(whoami)@(nu_system ip)"
+}
+
 export def softlink [src: path, dst: path] {
   if ($nu.os-info.name == "windows") {
     MKLINK /J $dst $src
