@@ -59,7 +59,8 @@
         "size": 12,
         "weight": "normal"
       },
-      "opacity": 90
+      "opacity": 90,
+      "padding": "0"
     },
     "list": [
       {
