@@ -5,11 +5,12 @@
   "centerOnLaunch": true,
   "copyOnSelect": true,
   "defaultProfile": "Nushell",
-  "experimental":
-  {
+  "experimental": {
     "scrollToChangeOpacity": false,
     "scrollToZoom": false
   },
+  "initialCols": 200,
+  "initialRows": 50,
   "keybindings": [
     {
       "command": {
