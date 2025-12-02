@@ -3,7 +3,11 @@ local M = {}
 function M.setup()
   require("copilot").setup({
     filetypes = {
+      bib = true,
       markdown = true,
+      tex = true,
+      text = true,
+      ["*"] = false,
     },
     suggestion = {
       auto_trigger = true,
