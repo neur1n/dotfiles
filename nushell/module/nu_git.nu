@@ -38,17 +38,17 @@ export def status [] {
 
   for line in $raw {
     if ($line | str starts-with "# branch.oid") {
-      $info.hash = (($line | split column " " | get column3).0 | str substring 0..7)
+      $info.hash = (($line | split column " " | get column2).0 | str substring 0..7)
     } else if ($line | str starts-with "# branch.head") {
-      $info.branch = ($line | split column " " | get column3).0
+      $info.branch = ($line | split column " " | get column2).0
     } else if ($line | str starts-with "# branch.upstream") {
-      $info.upstream = ($line | split column " " | get column3).0
+      $info.upstream = ($line | split column " " | get column2).0
     } else if ($line | str starts-with "# branch.ab") {
       let ab = ($line | split column " " col1 col2 ahead behind)
       $info.ahead = ($ab.ahead.0 | into int | math abs)
       $info.behind = ($ab.behind.0 | into int | math abs)
     } else if ($line | str starts-with "1") or ($line | str starts-with "2") {
-      let staging = ($line | split column " " | get column2 | split column "" staged unstaged --collapse-empty)
+      let staging = ($line | split column " " | get column1 | split column "" staged unstaged --collapse-empty)
       if $staging.staged.0 == "A" {
         $info.staged_added += 1
       } else if $staging.staged.0 == "D" {
