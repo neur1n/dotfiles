@@ -266,10 +266,6 @@ function M.setup_nc()
   expr = expr .. Component.create(Edit.paste("P", decor["sep"]), "NMode")
   expr = expr .. Component.create(Edit.spell("S", decor["sep"]), "NMode")
 
-  -- NOTE: This requires the statuscolumn to be initialized first.
-  expr = expr .. Component.create({"▏"}, "NStatusColumnNC")
-  expr = expr .. Component.create({Buffer.number(), decor["sep"], File.name()}, "NNameNC")
-
   expr = expr .. Component.create({
     Edit.modified(glyph.md, " "),
     Edit.modifiable(glyph.ma, " "),

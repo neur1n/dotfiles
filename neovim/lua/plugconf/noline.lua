@@ -1,7 +1,6 @@
 local M = {}
 
 function M.setup()
-  local Stc = require("plugconf.noline.statuscolumn")
   local Stl = require("plugconf.noline.statusline")
   local Tal = require("plugconf.noline.tabline")
   local Runner = require("plugconf.noline.runner")
@@ -14,7 +13,6 @@ function M.setup()
     group = id,
     pattern = "*",
     callback = function ()
-      Stc.update()
       Stl.update()
       Tal.update()
     end,
@@ -24,7 +22,6 @@ function M.setup()
     group = id,
     pattern = "*",
     callback = function ()
-      Stc.redraw()
       Stl.redraw()
       Tal.redraw()
     end,
@@ -34,7 +31,6 @@ function M.setup()
     group = id,
     pattern = "*",
     callback = function ()
-      Stc.redraw()
       Stl.redraw()
       Tal.redraw()
     end,
@@ -45,13 +41,11 @@ function M.setup()
     pattern = "AsyncRunInterrupt",
     callback = function ()
       Runner.interrupt()
-      Stc.redraw()
       Stl.redraw()
       Tal.redraw()
     end,
   })
 
-  Stc.redraw()
   Stl.redraw()
   Tal.redraw()
 end
