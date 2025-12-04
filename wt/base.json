@@ -9,8 +9,6 @@
     "scrollToChangeOpacity": false,
     "scrollToZoom": false
   },
-  "initialCols": 200,
-  "initialRows": 50,
   "keybindings": [
     {
       "command": {
