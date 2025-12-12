@@ -48,12 +48,12 @@ local plugin = {
     },
     config = require("plugconf.indent-blankline").setup,
   },
-  -- {
-  --   "ggandor/leap.nvim",
-  --   lazy = true,
-  --   keys = require("plugconf.leap").keymap,
-  --   config = require("plugconf.leap").setup,
-  -- },
+  {
+    "neur1n/noline.nvim",
+    lazy = false,
+    event = "ColorScheme *",
+    config = require("plugconf.noline").setup
+  },
   {
     "NvChad/nvim-colorizer.lua",
     lazy = true,
@@ -62,6 +62,13 @@ local plugin = {
       "ColorizerToggle",
     },
     config = require("plugconf.nvim-colorizer").setup,
+  },
+  {
+    "nvim-mini/mini.files",
+    version = "*",
+    lazy = true,
+    keys = require("plugconf.mini-files").keymap,
+    config = require("plugconf.mini-files").setup,
   },
   {
     "mfussenegger/nvim-dap",
@@ -137,12 +144,6 @@ local plugin = {
     "zbirenbaum/copilot.lua",
     event = "VeryLazy",
     config = require("plugconf.copilot").setup,
-  },
-  {
-    "neur1n/noline.nvim",
-    lazy = false,
-    event = "ColorScheme *",
-    config = require("plugconf.noline").setup
   },
 }
 
