@@ -49,11 +49,14 @@ function M.setup()
     end,
   })
 
-  require("plugconf.lsp.basedpyright").setup()
-  require("plugconf.lsp.clangd").setup()
-  require("plugconf.lsp.lua_ls").setup()
-  require("plugconf.lsp.texlab").setup()
-  vim.lsp.enable("nushell")
+  require("plugconf.lsp.c").setup()
+  require("plugconf.lsp.lua").setup()
+  require("plugconf.lsp.mlir").setup()
+  require("plugconf.lsp.nu").setup()
+  require("plugconf.lsp.pdll").setup()
+  require("plugconf.lsp.python").setup()
+  require("plugconf.lsp.tablegen").setup()
+  require("plugconf.lsp.tex").setup()
 end
 
 return M
