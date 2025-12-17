@@ -1,9 +1,8 @@
 local M = {}
 
 function M.setup()
-  require("nvim-treesitter.install").prefer_git = false
-
   local id = vim.api.nvim_create_augroup("n_treesitter", {clear = true})
+
   vim.api.nvim_create_autocmd("FileType", {
     group = id,
     pattern = {"<filetype>"},

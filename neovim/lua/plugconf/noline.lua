@@ -7,25 +7,10 @@ function M.setup()
 
   vim.o.showtabline = 2
 
+  Stl.redraw()
+  Tal.redraw()
+
   local id = vim.api.nvim_create_augroup("n_noline", {clear = true})
-
-  vim.api.nvim_create_autocmd({"BufEnter", "FileChangedShellPost", "FileType", "WinEnter"}, {
-    group = id,
-    pattern = "*",
-    callback = function ()
-      Stl.update()
-      Tal.update()
-    end,
-  })
-
-  vim.api.nvim_create_autocmd("BufEnter", {
-    group = id,
-    pattern = "*",
-    callback = function ()
-      Stl.redraw()
-      Tal.redraw()
-    end,
-  })
 
   vim.api.nvim_create_autocmd("ColorScheme", {
     group = id,
@@ -36,18 +21,31 @@ function M.setup()
     end,
   })
 
-  vim.api.nvim_create_autocmd("User", {
+  vim.api.nvim_create_autocmd({"BufEnter", "FileChangedShellPost", "FileType", "WinEnter"}, {
     group = id,
-    pattern = "AsyncRunInterrupt",
+    pattern = "*",
     callback = function ()
-      Runner.interrupt()
-      Stl.redraw()
-      Tal.redraw()
+      Stl.update()
+      Tal.update()
     end,
   })
 
-  Stl.redraw()
-  Tal.redraw()
+  vim.api.nvim_create_autocmd("User", {
+    group = id,
+    pattern = {"AsyncRunStart", "AsyncRunStop"},
+    callback = function ()
+      Tal.update()
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("User", {
+    group = id,
+    pattern = {"AsyncRunInterrupt"},
+    callback = function ()
+      Runner.interrupt()
+      Tal.update()
+    end,
+  })
 end
 
 return M

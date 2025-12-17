@@ -3,14 +3,20 @@ local M = {}
 local Component = require("noline.component")
 
 local function treesitter_current_function()
-  local node = ""
-
-  if not pcall(function () node = vim.treesitter.get_node() end) then
-    return ""
-  end
+  local node = vim.treesitter.get_node()
 
   if not node then
-    return ""
+    local ok, parser = pcall(vim.treesitter.get_parser)
+    if ok and parser then
+      parser:parse()
+    else
+      return ""
+    end
+
+    node = vim.treesitter.get_node()
+    if not node then
+      return ""
+    end
   end
 
   local expr = node

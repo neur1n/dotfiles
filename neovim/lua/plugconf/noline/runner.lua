@@ -15,20 +15,20 @@ function M.status()
     if status ~= nil then
       if status == "running" then
         interrupted = false
-        msg = "🤔"
+        msg = "🚀"
       elseif status == "success" then
         if interrupted then
-          msg = "😑"
+          msg = "⛔"
         else
           interrupted = false
-          msg = "😎"
+          msg = "🎉"
         end
       elseif status == "failure" then
         if interrupted then
-          msg = "😑"
+          msg = "⛔"
         else
           interrupted = false
-          msg = "🤯"
+          msg = "💥"
         end
       end
     end

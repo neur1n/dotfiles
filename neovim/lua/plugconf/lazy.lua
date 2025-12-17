@@ -92,12 +92,7 @@ local plugin = {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     lazy = true,
-    event = "VeryLazy",
-    cmd = {
-      "TSInstall",
-      "TSUninstall",
-      "TSUpdate",
-    },
+    event = "FileType",
     config = require("plugconf.nvim-treesitter").setup,
   },
   {
