@@ -3,7 +3,7 @@ require("colorscheme").setup()
 require("command").setup()
 require("environment").setup()
 require("keymap").setup()
-require("netrw").setup(false)
+require("netrw").setup(true)
 require("option").setup()
 require("quickfix").setup()
 

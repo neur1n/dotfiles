@@ -14,7 +14,13 @@ function M.setup()
     },
     modes = {
       char = {
-        enabled = false,
+        highlight = {
+          backdrop = false,
+        },
+        jump_labels = true,
+        label = {
+          exclude = "cdy"
+        },
       },
     },
   })
