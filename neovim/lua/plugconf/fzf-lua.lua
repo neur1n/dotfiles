@@ -16,7 +16,16 @@ function M.keymap()
 end
 
 function M.setup()
-  require("fzf-lua").setup()
+  require("fzf-lua").setup({
+    files = {
+      hidden = true,
+      no_ignore = true,
+    },
+    grep = {
+      hidden = true,
+      no_ignore = true,
+    },
+  })
 end
 
 return M
