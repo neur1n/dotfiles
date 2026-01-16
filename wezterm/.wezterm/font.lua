@@ -16,7 +16,6 @@ local fonts = {
   {["name"] = "IntoneMono Nerd Font Mono"     , ["size"] = 11},
   {["name"] = "JetBrainsMono Nerd Font Mono"  , ["size"] = 11},
   {["name"] = "Maple Mono NF"                 , ["size"] = 11},
-  {["name"] = "Monocraft Nerd Font"           , ["size"] = 9.5},
   {["name"] = "ProFontWindows Nerd Font Mono" , ["size"] = 13},
   {["name"] = "ProggyClean Nerd Font Mono"    , ["size"] = 16},
   {["name"] = "RecMonoCasual Nerd Font Mono"  , ["size"] = 11},
