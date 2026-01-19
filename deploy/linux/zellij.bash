@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-src="$PWD/../../neovim"
-dst="$HOME/.config/nvim"
+src="$PWD/../../zellij"
+dst="$HOME/.config/zellij"
 
 ln -ns $src $dst
 
