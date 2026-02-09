@@ -18,6 +18,7 @@ end
 function M.setup()
   require("fzf-lua").setup({
     files = {
+      formatter = "path.filename_first",
       hidden = true,
       no_ignore = true,
     },
