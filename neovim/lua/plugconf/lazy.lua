@@ -135,11 +135,6 @@ local plugin = {
       config = require("plugconf.nvim-lspconfig").setup,
     },
   },
-  {
-    "zbirenbaum/copilot.lua",
-    event = "VeryLazy",
-    config = require("plugconf.copilot").setup,
-  },
 }
 
 function M.setup()
