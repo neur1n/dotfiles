@@ -22,6 +22,7 @@ local fonts = {
 
 local options = {
   backspace = "indent,start",
+  cmdheight = 0,
   colorcolumn = "80",
   completeopt = "menu,menuone,noselect",
   cursorline = true,
