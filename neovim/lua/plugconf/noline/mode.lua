@@ -59,15 +59,13 @@ end
 
 local shrink_threshold = 100
 
-local special_fts = {
-  ["help"]     = "HELP",
-  ["startify"] = "STARTIFY",
-  ["vim-plug"] = "VIM-PLUG",
+local special_type = {
+  ["help"] = "HELP",
 }
 
 function M.get(l_decor, r_decor)
   local expr = ""
-  local type = special_fts[vim.o.filetype]
+  local type = special_type[vim.o.filetype]
 
   if type ~= nil then
     expr = Component.decorate(type, l_decor, r_decor)

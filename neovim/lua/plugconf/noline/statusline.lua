@@ -296,7 +296,8 @@ end
 
 function M.update()
   for number, handle in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-    if vim.fn.win_gettype() == "" then
+    local buf = vim.api.nvim_win_get_buf(handle)
+    if vim.fn.win_gettype() == "" and vim.bo[buf].buftype ~= "nofile" then
       if number == vim.api.nvim_win_get_number(0) then
         vim.api.nvim_win_set_option(handle, "statusline",
           "%{%v:lua.require'plugconf.noline.statusline'.setup_c()%}")
