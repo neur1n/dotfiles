@@ -1,15 +1,15 @@
 [CmdletBinding()]
-param(
-  [switch]$Reload
-)
+param()
 
 $dstPath = "$env:LOCALAPPDATA/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 $srcPath = "$PSScriptRoot/base.json"
 
-$fontPath = "$PSScriptRoot/font.json"
-$schemePath = "$PSScriptRoot/scheme.json"
-$snippetPath = "$PSScriptRoot/snippet.json"
-$themePath = "$PSScriptRoot/theme.json"
+$sharedRoot = Join-Path $PSScriptRoot ".."
+
+$fontPath = Join-Path $sharedRoot "font.json"
+$schemePath = Join-Path $sharedRoot "scheme.json"
+$snippetPath = Join-Path $sharedRoot "snippet.json"
+$themePath = Join-Path $sharedRoot "theme.json"
 
 ################################################################### Function{{{
 function Get-Base {
@@ -172,6 +172,17 @@ function Save-Settings {
     [Parameter(Mandatory=$true)][string]$Path
   )
 
+  $directory = Split-Path -Parent $Path
+
+  if ($directory -and -not (Test-Path $directory)) {
+    try {
+      $null = New-Item -Path $directory -ItemType Directory -Force -ErrorAction Stop
+    } catch {
+      Write-Error "Failed to create destination directory '$directory'. $_"
+      exit 1
+    }
+  }
+
   try {
     $Base | ConvertTo-Json -Depth 20 | Set-Content -Path $Path -Encoding utf8
   } catch {
@@ -190,8 +201,4 @@ Set-Snippet -Base $base -Path $snippetPath
 Set-Theme   -Base $base -Path $themePath
 
 Save-Settings -Base $base -Path $dstPath
-
-if (-not $Reload) {
-  Start-Process wt.exe
-}
 # Main}}}

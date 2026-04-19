@@ -39,15 +39,6 @@
     {
       "id": "Terminal.PasteFromClipboard",
       "keys": "ctrl+shift+v"
-    },
-    {
-      "command": {
-        "action": "wt",
-        "commandline": "powershell -NoLogo -Command \"&(Join-Path $env:USERPROFILE .wt/wt.ps1) -Reload\""
-      },
-      "id": "User.ReloadSettings",
-      "keys": "ctrl+shift+r",
-      "name": "Reload Settings"
     }
   ],
   "profiles": {
