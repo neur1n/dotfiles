@@ -83,8 +83,33 @@ export def set-wezterm-tabe-title [] {
 }
 
 export def softlink [src: path, dst: path] {
+  let src_abs = ($src | path expand)
+  let dst_abs = ($dst | path expand)
+
+  if not ($src_abs | path exists) {
+    error make {
+      msg: $"Source path does not exist: ($src_abs)"
+    }
+  }
+
+  if ($dst_abs | path exists) {
+    error make {
+      msg: $"Destination already exists: ($dst_abs)"
+    }
+  }
+
+  let src_type = ($src_abs | path type)
+
   if ($nu.os-info.name == "windows") {
-    MKLINK /J $dst $src
+    if $src_type == "dir" {
+      ^CMD /C MKLINK /J $dst_abs $src_abs
+    } else if $src_type == "file" {
+      ^CMD /C MKLINK $dst_abs $src_abs
+    } else {
+      error make {
+        msg: $"Unsupported source type: ($src_type)"
+      }
+    }
   } else {
     ln -s $src $dst
   }
