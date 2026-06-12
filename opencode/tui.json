@@ -9,5 +9,8 @@
     "input_submit": "ctrl+return",
     "messages_first": "ctrl+a",
     "messages_last": "ctrl+e"
-  }
+  },
+  "plugin": [
+    "@slkiser/opencode-quota"
+  ]
 }

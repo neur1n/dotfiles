@@ -1,6 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "default_agent": "plan",
+  "lsp": false,
   "permission": {
     "bash": "ask"
-  }
+  },
+  "plugin": [
+    "@slkiser/opencode-quota"
+  ]
 }
