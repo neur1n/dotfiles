@@ -1,6 +1,6 @@
 keybinds clear-defaults=true {
   locked {
-    bind "Ctrl g" { SwitchToMode "normal"; }
+    bind "Alt g" { SwitchToMode "normal"; }
   }
   pane {
     bind "left" { MoveFocus "left"; }
@@ -138,8 +138,8 @@ keybinds clear-defaults=true {
     bind "Alt Shift p" { ToggleGroupMarking; }
   }
   shared_except "locked" "renametab" "renamepane" {
-    bind "Ctrl g" { SwitchToMode "locked"; }
-    bind "Ctrl q" { Quit; }
+    bind "Alt g" { SwitchToMode "locked"; }
+    bind "Alt q" { Quit; }
   }
   shared_except "locked" "entersearch" {
     bind "enter" { SwitchToMode "locked"; }
