@@ -38,6 +38,15 @@ local plugin = {
     config = require("plugconf.gitsigns").setup,
   },
   {
+    "neur1n/hyphen.nvim",
+    lazy = true,
+    cmd = {
+      "HyphenClear",
+      "HyphenConvert",
+      "HyphenShow",
+    },
+  },
+  {
     "lukas-reineke/indent-blankline.nvim",
     lazy = true,
     cmd = {
@@ -55,7 +64,7 @@ local plugin = {
     config = require("plugconf.noline").setup
   },
   {
-    "NvChad/nvim-colorizer.lua",
+    "catgoose/nvim-colorizer.lua",
     lazy = true,
     cmd = {
       "ColorizerAttachToBuffer",

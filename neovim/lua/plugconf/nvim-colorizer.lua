@@ -2,9 +2,12 @@ local M = {}
 
 function M.setup()
   require("colorizer").setup({
-    user_default_options = {
-      names = false
-    }
+    options = {
+      parsers = {
+        hex = {rrggbbaa = true},
+        names = {enable = false},
+      },
+    },
   })
 end
 
