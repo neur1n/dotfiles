@@ -13,6 +13,8 @@ $env.config.shell_integration.osc133 = false
 # Override}}}
 
 #================================================================= Customize{{{
+$env.OPENCODE_ENABLE_EXA = 1
+
 use nu_c.nu
 use nu_utility.nu
 source nu_prompt.nu
