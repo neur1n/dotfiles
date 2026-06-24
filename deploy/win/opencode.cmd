@@ -3,6 +3,8 @@
 SET src=%~dp0.\..\..\opencode
 SET dst=%USERPROFILE%\.config\opencode
 
+MKLINK /J %dst%\commands %src%\commands
+MKLINK /J %dst%\skills %src%\skills
 MKLINK /J %dst%\opencode-quota %src%\opencode-quota
 MKLINK %dst%\AGENTS.md %src%\AGENTS.md
 MKLINK %dst%\opencode.json %src%\opencode.json
