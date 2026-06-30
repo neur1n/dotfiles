@@ -1,14 +1,14 @@
 local Wezterm = require("wezterm")
 
-local Color = require("color")
 local Font = require("font")
 local Keymap= require("keymap")
 local Launcher= require("launcher")
+local Scheme = require("scheme")
 
 require("snippet")
 
 local font = Font.get()
-local scheme = Color.get()
+local scheme = Scheme.get()
 
 Wezterm.on("gui-startup", function(_)
   local _, _, window = Wezterm.mux.spawn_window({})

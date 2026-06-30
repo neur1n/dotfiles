@@ -1,6 +1,6 @@
 local M = {}
 
-local palettes = {
+local palette = {
   clack = {
     "#4e4e4e",
     "#dd6151",
@@ -51,6 +51,16 @@ local palettes = {
     "#63cdcf",
     "#cdcecf",
   },
+  poimandres = {
+    "#767c9d",
+    "#d0679d",
+    "#5de4c7",
+    "#fffac2",
+    "#89ddff",
+    "#aca3cd",
+    "#5fb3a1",
+    "#ecf4fc",
+  },
   synthwave = {
     "#4e4e4e",
     "#fe4450",
@@ -63,7 +73,7 @@ local palettes = {
   },
 }
 
-local schemes = {
+local scheme = {
   -- clack
   {
     foreground    = "#fafafa",
@@ -73,11 +83,11 @@ local schemes = {
     cursor_border = "#ff7f50",
     selection_fg  = "#1f1f2a",
     selection_bg  = "#e7feff",
-    ansi = palettes["clack"],
-    brights = palettes["clack"],
+    ansi = palette["clack"],
+    brights = palette["clack"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["clack"][math.random(2, 7)],
+        bg_color = palette["clack"][math.random(2, 7)],
         fg_color = "#1f1f2a",
       },
     },
@@ -91,11 +101,11 @@ local schemes = {
     cursor_border = "#ff7f50",
     selection_fg  = "#24292e",
     selection_bg  = "#e7feff",
-    ansi = palettes["github"],
-    brights = palettes["github"],
+    ansi = palette["github"],
+    brights = palette["github"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["github"][math.random(2, 7)],
+        bg_color = palette["github"][math.random(2, 7)],
         fg_color = "#24292e",
       },
     },
@@ -109,11 +119,11 @@ local schemes = {
     cursor_border = "#ff7f50",
     selection_fg  = "#161822",
     selection_bg  = "#e7feff",
-    ansi = palettes["iceberg"],
-    brights = palettes["iceberg"],
+    ansi = palette["iceberg"],
+    brights = palette["iceberg"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["iceberg"][math.random(2, 7)],
+        bg_color = palette["iceberg"][math.random(2, 7)],
         fg_color = "#161822",
       },
     },
@@ -127,11 +137,11 @@ local schemes = {
     cursor_border = "#ff7f50",
     selection_fg  = "#1c1d23",
     selection_bg  = "#e7feff",
-    ansi = palettes["neovim"],
-    brights = palettes["neovim"],
+    ansi = palette["neovim"],
+    brights = palette["neovim"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["neovim"][math.random(2, 7)],
+        bg_color = palette["neovim"][math.random(2, 7)],
         fg_color = "#1c1d23",
       },
     },
@@ -145,12 +155,30 @@ local schemes = {
     cursor_border = "#ff7f50",
     selection_fg  = "#192330",
     selection_bg  = "#e7feff",
-    ansi = palettes["nightfox"],
-    brights = palettes["nightfox"],
+    ansi = palette["nightfox"],
+    brights = palette["nightfox"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["nightfox"][math.random(2, 7)],
+        bg_color = palette["nightfox"][math.random(2, 7)],
         fg_color = "#192330",
+      },
+    },
+  },
+  -- poimandres
+  {
+    foreground    = "#ecf4fc",
+    background    = "#1b1e28",
+    cursor_fg     = "#1b1e28",
+    cursor_bg     = "#ff7f50",
+    cursor_border = "#ff7f50",
+    selection_fg  = "#1b1e28",
+    selection_bg  = "#e7feff",
+    ansi = palette["poimandres"],
+    brights = palette["poimandres"],
+    tab_bar = {
+      active_tab = {
+        bg_color = palette["poimandres"][math.random(2, 7)],
+        fg_color = "#1b1e28",
       },
     },
   },
@@ -163,11 +191,11 @@ local schemes = {
     cursor_border = "#ff7f50",
     selection_fg  = "#2e2a4f",
     selection_bg  = "#e7feff",
-    ansi = palettes["synthwave"],
-    brights = palettes["synthwave"],
+    ansi = palette["synthwave"],
+    brights = palette["synthwave"],
     tab_bar = {
       active_tab = {
-        bg_color = palettes["synthwave"][math.random(2, 7)],
+        bg_color = palette["synthwave"][math.random(2, 7)],
         fg_color = "#2e2a4f",
       },
     },
@@ -175,7 +203,7 @@ local schemes = {
 }
 
 function M.get()
-  return schemes[math.random(#schemes)]
+  return scheme[math.random(#scheme)]
 end
 
 return M

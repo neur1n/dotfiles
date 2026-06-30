@@ -98,6 +98,26 @@ const nightfox = {
   special: "#e7feff"
 }
 
+const poimandres = {
+  bgh    : "#171922",
+  bgm    : "#1b1e28",
+  bgs    : "#303340",
+  fgh    : "#e4f0fb",
+  fgm    : "#ecf4fc",
+  fgs    : "#f3f8fd",
+  grayh  : "#506477",
+  graym  : "#767c9d",
+  grays  : "#a6accd",
+  red    : "#d0679d",
+  orange : "#e8b2af",
+  yellow : "#fffac2",
+  green  : "#5de4c7",
+  cyan   : "#5fb3a1",
+  blue   : "#89ddff",
+  purple : "#aca3cd",
+  special: "#e7feff"
+}
+
 const synthwave = {
   bgh    : "#201d2c",
   bgm    : "#262335",

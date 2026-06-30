@@ -17,7 +17,7 @@ local clack = {
   cyan    = {c =  79, g = "#69d0a5"},
   blue    = {c =  67, g = "#5991ae"},
   purple  = {c = 175, g = "#d37ba2"},
-  special = {c = 180, g = "#e7feff"}
+  special = {c = 195, g = "#e7feff"}
 }
 
 local github = {
@@ -37,7 +37,7 @@ local github = {
   cyan    = {c =  80, g = "#39c5cf"},
   blue    = {c =  33, g = "#2188ff"},
   purple  = {c = 141, g = "#b392f0"},
-  special = {c = 180, g = "#e7feff"}
+  special = {c = 195, g = "#e7feff"}
 }
 
 local iceberg = {
@@ -57,7 +57,7 @@ local iceberg = {
   cyan    = {c = 109, g = "#89b8c2"},
   blue    = {c = 110, g = "#84a0c6"},
   purple  = {c = 140, g = "#a093c7"},
-  special = {c = 180, g = "#e7feff"}
+  special = {c = 195, g = "#e7feff"}
 }
 
 local neovim = {
@@ -77,7 +77,7 @@ local neovim = {
   cyan    = {c = 123, g = "#8cf8f7"},
   blue    = {c = 153, g = "#a6dbff"},
   purple  = {c = 189, g = "#ffcaff"},
-  special = {c = 180, g = "#e7feff"}
+  special = {c = 195, g = "#e7feff"}
 }
 
 local nightfox = {
@@ -97,7 +97,27 @@ local nightfox = {
   cyan    = {c =  80, g = "#63cdcf"},
   blue    = {c =  74, g = "#719cd6"},
   purple  = {c = 140, g = "#9d79d6"},
-  special = {c = 180, g = "#e7feff"}
+  special = {c = 195, g = "#e7feff"}
+}
+
+local poimandres = {
+  bgh     = {c = 234, g = "#171922"},
+  bgm     = {c = 235, g = "#1b1e28"},
+  bgs     = {c = 237, g = "#303340"},
+  fgh     = {c = 254, g = "#e4f0fb"},
+  fgm     = {c = 255, g = "#ecf4fc"},
+  fgs     = {c = 231, g = "#f3f8fd"},
+  grayh   = {c =  60, g = "#506477"},
+  graym   = {c = 244, g = "#767c9d"},
+  grays   = {c = 146, g = "#a6accd"},
+  red     = {c = 169, g = "#d0679d"},
+  orange  = {c = 181, g = "#e8b2af"},
+  yellow  = {c = 229, g = "#fffac2"},
+  green   = {c =  80, g = "#5de4c7"},
+  cyan    = {c =  73, g = "#5fb3a1"},
+  blue    = {c = 117, g = "#89ddff"},
+  purple  = {c = 146, g = "#aca3cd"},
+  special = {c = 195, g = "#e7feff"}
 }
 
 local synthwave = {
@@ -117,7 +137,7 @@ local synthwave = {
   cyan    = {c =  87, g = "#3bf4fb"},
   blue    = {c =  45, g = "#2ee2fa"},
   purple  = {c = 125, g = "#af125a"},
-  special = {c = 212, g = "#e7feff"}
+  special = {c = 195, g = "#e7feff"}
 }
 
 local palette = {
@@ -126,6 +146,7 @@ local palette = {
   iceberg = iceberg,
   neovim = neovim,
   nightfox = nightfox,
+  poimandres = poimandres,
   synthwave = synthwave,
 }
 
@@ -135,6 +156,7 @@ local pltname = {
   "iceberg",
   "neovim",
   "nightfox",
+  "poimandres",
   "synthwave",
 }
 
