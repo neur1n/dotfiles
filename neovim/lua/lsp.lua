@@ -8,10 +8,10 @@ function M.setup()
     virtual_text = false,
     signs = {
       text = {
-        [vim.diagnostic.severity.ERROR] = "🔥",
-        [vim.diagnostic.severity.WARN] = "⚡",
-        [vim.diagnostic.severity.INFO] = "🔎",
-        [vim.diagnostic.severity.HINT] = "💡",
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.INFO] = "",
+        [vim.diagnostic.severity.HINT] = "󰵚",
       },
     },
   })
@@ -25,7 +25,7 @@ function M.setup()
       vim.keymap.set("n", "<Leader>gD", vim.lsp.buf.declaration, opt)
       vim.keymap.set("n", "<Leader>gt", vim.lsp.buf.type_definition, opt)
       vim.keymap.set("n", "<Leader>gf", function()
-        vim.lsp.buf.format{async = true}
+        vim.lsp.buf.format({async = true})
       end, opt)
     end,
   })
@@ -33,9 +33,9 @@ function M.setup()
   vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
     group = id,
     pattern = "*",
-    callback = function ()
+    callback = function()
       vim.diagnostic.open_float({
-        scope="cursor",
+        scope = "cursor",
         -- NOTE: These are used by `vim.lsp.util.open_floating_preview` internally.
         close_events = {
           "BufHidden",
@@ -49,14 +49,27 @@ function M.setup()
     end,
   })
 
-  require("plugconf.lsp.c").setup()
-  require("plugconf.lsp.lua").setup()
-  require("plugconf.lsp.mlir").setup()
-  require("plugconf.lsp.nu").setup()
-  require("plugconf.lsp.pdll").setup()
-  require("plugconf.lsp.python").setup()
-  require("plugconf.lsp.tablegen").setup()
-  require("plugconf.lsp.tex").setup()
+  if vim.fn.executable("basedpyright-langserver") == 1 then
+    vim.lsp.enable("basedpyright")
+  end
+
+  if vim.fn.executable("clangd") == 1 then
+    vim.lsp.enable("clangd")
+  end
+
+  if vim.fn.executable("lua-language-server") == 1 then
+    vim.lsp.enable("lua_ls")
+  end
+
+  if vim.fn.executable("nu") == 1 then
+    vim.lsp.enable("nushell")
+  end
+
+  if vim.fn.executable("texlab") == 1 then
+    vim.lsp.enable("texlab")
+    vim.keymap.set("n", "<Leader>tb", "<Cmd>LspTexlabBuild<CR>", {noremap = true})
+    vim.keymap.set("n", "<Leader>tf", "<Cmd>LspTexlabForward<CR>", {noremap = true})
+  end
 end
 
 return M

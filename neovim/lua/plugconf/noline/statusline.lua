@@ -211,8 +211,8 @@ end
 
 local decor = Decorator.get()
 local glyph = {
-  ["md"] = "", ["ma"] = "", ["ro"] = "󰌾",
-  ["e"] = "🔥", ["w"] = "⚡", ["h"] = "💡", ["i"] = "🔎"
+  ["md"] = "", ["ma"] = "", ["ro"] = "",
+  ["e"] = "", ["w"] = "", ["i"] = "", ["h"] = "󰵚"
 }
 
 function M.setup_c()
@@ -237,12 +237,12 @@ function M.setup_c()
 
   expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.ERROR, glyph.e, " "), "NDiagE")
   expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.WARN,  glyph.w, " "), "NDiagW")
-  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.HINT,  glyph.h, " "), "NDiagH")
   expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.INFO,  glyph.i, " "), "NDiagI")
+  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.HINT,  glyph.h, " "), "NDiagH")
 
   expr = expr .. "%=%<"
 
-  expr = expr .. Component.create(Tag.get("📦"), "NTag")
+  expr = expr .. Component.create(Tag.get(" "), "NTag")
 
   expr = expr .. "%="
 
@@ -275,12 +275,12 @@ function M.setup_nc()
 
   expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.ERROR, glyph.e, " "), "NDiagENC")
   expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.WARN,  glyph.w, " "), "NDiagWNC")
-  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.HINT,  glyph.h, " "), "NDiagHNC")
   expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.INFO,  glyph.i, " "), "NDiagINC")
+  expr = expr .. Component.create(Diagnosis.info("lsp", vim.diagnostic.severity.HINT,  glyph.h, " "), "NDiagHNC")
 
   expr = expr .. "%=%<"
 
-  expr = expr .. Component.create(Tag.get("📦"), "NTagNC")
+  expr = expr .. Component.create(Tag.get(" "), "NTagNC")
 
   expr = expr .. "%="
 
