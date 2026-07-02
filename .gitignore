@@ -1,5 +1,11 @@
-.netrwhist
+#-------------------------------------------------------------------- neovim{{{
 *.swp
+.netrwhist
+# neovim}}}
 
+#------------------------------------------------------------------- nushell{{{
 /nushell/history.*
 /nushell/plugin.msgpackz
+# nushell}}}
+
+snippet.json
