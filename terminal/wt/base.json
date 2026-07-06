@@ -5,6 +5,13 @@
   "centerOnLaunch": true,
   "copyOnSelect": true,
   "defaultProfile": "Nushell",
+  "disabledProfileSources": [
+    "VSDebugConsole",
+    "Windows.Terminal.Azure",
+    "Windows.Terminal.PowershellCore",
+    "Windows.Terminal.VisualStudio",
+    "Windows.Terminal.Wsl"
+  ],
   "experimental": {
     "scrollToChangeOpacity": false,
     "scrollToZoom": false
