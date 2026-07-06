@@ -49,6 +49,8 @@ function M.setup()
     end,
   })
 
+  vim.lsp.log.set_level(vim.log.levels.ERROR)
+
   if vim.fn.executable("basedpyright-langserver") == 1 then
     vim.lsp.enable("basedpyright")
   end
