@@ -1,5 +1,5 @@
 export def run-build [build: string = "default"] {
-  let tmp = ($build | str downcase)
+  let tmp = ($build | str lowercase)
 
   let args = (
       if ($tmp == "debug") {
@@ -26,7 +26,7 @@ export def run-cmake [
     "-DCMAKE_EXPORT_COMPILE_COMMANDS=1"
   ]
 
-  let tmp = ($build | str downcase)
+  let tmp = ($build | str lowercase)
   let args = (
       if ($tmp == "debug") {
         ($args | append "-DCMAKE_CONFIGURATION_TYPES=Debug")
@@ -38,7 +38,7 @@ export def run-cmake [
         $args
       })
 
-  let tmp = ($compiler | str downcase)
+  let tmp = ($compiler | str lowercase)
   let args = (
       if ($tmp == "msvc") {
         ($args | append "-DCMAKE_C_COMPILER=cl" | append "-DCMAKE_CXX_COMPILER=cl")
@@ -72,7 +72,7 @@ export def run-cmake [
 }
 
 export def run-install [build: string = "default"] {
-  let tmp = ($build | str downcase)
+  let tmp = ($build | str lowercase)
 
   let args = (
       if ($tmp == "debug") {
