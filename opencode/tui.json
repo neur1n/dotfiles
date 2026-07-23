@@ -5,13 +5,11 @@
     "input_buffer_end": "ctrl+end",
     "input_line_home": "home",
     "input_line_end": "end",
-    "input_newline": "return",
-    "input_submit": "ctrl+return",
     "messages_first": "ctrl+a",
     "messages_last": "ctrl+e"
   },
   "plugin": [
-    "@slkiser/opencode-quota",
-    "opencode-mini-session"
+    "@slkiser/opencode-quota@latest",
+    "opencode-mini-session@latest"
   ]
 }

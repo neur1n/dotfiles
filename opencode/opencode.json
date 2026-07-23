@@ -1,11 +1,14 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "autoupdate": "notify",
   "default_agent": "plan",
   "lsp": false,
   "permission": {
     "bash": "ask"
   },
+  "snapshot": false,
   "plugin": [
-    "@slkiser/opencode-quota"
+    "@mohak34/opencode-notifier@latest",
+    "@slkiser/opencode-quota@latest"
   ]
 }
