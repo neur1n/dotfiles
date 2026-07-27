@@ -8,4 +8,11 @@
 /nushell/plugin.msgpackz
 # nushell}}}
 
+#------------------------------------------------------------------ opencode{{{
+/opencode/node_modules
+/opencode/opencode-notifier-state.json
+/opencode/package.json
+/opencode/package-lock.json
+# opencode}}}
+
 snippet.json
