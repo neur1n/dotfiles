@@ -40,6 +40,7 @@ return {
   harfbuzz_features = {"calt=1", "clig=1", "liga=1"},
   initial_cols = 128,
   initial_rows = 36,
+  integrated_title_button_style = "Windows",
   keys = Keymap.get(),
   launch_menu = Launcher.get(),
   line_height = 1.0,
