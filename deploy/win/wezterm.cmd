@@ -1,9 +1,3 @@
 @echo off
-
-SET src=%~dp0.\..\..\wezterm
-SET dst=%USERPROFILE%
-
-MKLINK /J %dst%\.wezterm %src%\.wezterm
-MKLINK %dst%\.wezterm.lua %src%\.wezterm.lua
-
-START %dst%
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0deploy.ps1" wezterm %*
+exit /b %errorlevel%
