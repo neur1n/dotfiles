@@ -7,25 +7,18 @@
     "bash": {
       "git blame *": "allow",
       "git cat-file *": "allow",
-      "git describe": "allow",
-      "git describe *": "allow",
-      "git diff": "allow",
-      "git diff *": "allow",
-      "git grep *": "allow",
-      "git log": "allow",
-      "git log *": "allow",
-      "git ls-files": "allow",
-      "git ls-files *": "allow",
-      "git ls-tree *": "allow",
-      "git merge-base *": "allow",
-      "git rev-list *": "allow",
-      "git rev-parse *": "allow",
-      "git show": "allow",
-      "git show *": "allow",
-      "git shortlog": "allow",
-      "git shortlog *": "allow",
-      "git status": "allow",
-      "git status *": "allow",
+      "git describe*": "allow",
+      "git diff*": "allow",
+      "git grep*": "allow",
+      "git log*": "allow",
+      "git ls-files*": "allow",
+      "git ls-tree*": "allow",
+      "git merge-base*": "allow",
+      "git rev-list*": "allow",
+      "git rev-parse*": "allow",
+      "git show*": "allow",
+      "git shortlog*": "allow",
+      "git status*": "allow",
       "*": "ask"
     }
   },
@@ -35,6 +28,7 @@
     "@slkiser/opencode-quota@latest"
   ],
   "provider": {
-    "openai": {}
+    "openai": {},
+    "deepseek": {}
   }
 }
