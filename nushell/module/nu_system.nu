@@ -6,6 +6,8 @@ export def ip [] {
     } else {
       $addr.0 | str replace -am '.*\b((\d{1,3}\.){3}\d{1,3})\b' '$1'
     }
+  } else if ($nu.os-info.name == "macos") {
+    ipconfig getifaddr en0 | str trim
   } else {
     (hostname -I | awk "{print $1}")
   }

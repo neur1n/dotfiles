@@ -15,4 +15,5 @@
 /opencode/package-lock.json
 # opencode}}}
 
+.DS_Store
 snippet.json
