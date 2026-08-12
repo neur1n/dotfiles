@@ -1,6 +1,7 @@
 #-------------------------------------------------------------------- neovim{{{
 *.swp
 .netrwhist
+/neovim/lazy-lock.json
 # neovim}}}
 
 #------------------------------------------------------------------- nushell{{{
@@ -9,7 +10,8 @@
 # nushell}}}
 
 #------------------------------------------------------------------ opencode{{{
-/opencode/node_modules
+/opencode/node_modules/
+/opencode/bun.lock
 /opencode/opencode-notifier-state.json
 /opencode/package.json
 /opencode/package-lock.json
