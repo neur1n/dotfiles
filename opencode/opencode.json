@@ -2,7 +2,13 @@
   "$schema": "https://opencode.ai/config.json",
   "autoupdate": "notify",
   "default_agent": "plan",
-  "lsp": false,
+  "lsp": true,
+  "mcp": {
+    "deja": {
+      "command": ["deja", "mcp"],
+      "type": "local"
+    }
+  },
   "permission": {
     "bash": {
       "git blame *": "allow",
@@ -16,8 +22,8 @@
       "git merge-base*": "allow",
       "git rev-list*": "allow",
       "git rev-parse*": "allow",
-      "git show*": "allow",
       "git shortlog*": "allow",
+      "git show*": "allow",
       "git status*": "allow",
       "*": "ask"
     }
@@ -28,7 +34,7 @@
     "@slkiser/opencode-quota@latest"
   ],
   "provider": {
-    "openai": {},
-    "deepseek": {}
+    "deepseek": {},
+    "openai": {}
   }
 }
