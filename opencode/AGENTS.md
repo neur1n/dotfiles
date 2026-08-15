@@ -30,34 +30,22 @@ When I request a draft, replacement, design, or plan:
 
 ## Writing and Editing Workflow
 
-For academic writing, paper polishing, rebuttals, LaTeX prose refinement, and related text-editing tasks:
-- Do not edit `.tex`, `.bib`, `.md`, or paper source files directly unless I explicitly ask you to.
-- Provide rewritten text, replacement paragraphs, or patch-style suggestions in the session window.
-- Preserve LaTeX commands, citations, labels, references, macros, math notation, and formatting unless I explicitly request changes.
-- If a section has logical or technical issues, explain the issue before giving the replacement text.
+For academic writing, paper polishing, rebuttals, LaTeX prose refinement, and
+related text-editing tasks:
+- Do not edit `.tex`, `.bib`, `.md`, or paper source files directly unless I
+  explicitly ask you to.
+- Provide rewritten text, replacement paragraphs, or patch-style suggestions in
+  the session window.
+- Preserve LaTeX commands, citations, labels, references, macros, math
+  notation, and formatting unless I explicitly request changes.
+- If a section has logical or technical issues, explain the issue before giving
+  the replacement text.
 
 For coding, scripts, configs, build files, and implementation tasks:
 - You may propose direct edits when appropriate.
 - Still ask before modifying files if permissions require it.
 
 ## Deja Recall Policy
-
-<!-- deja guidance:start -->
-Before re-deriving past work, search deja when the user refers to past work,
-previous sessions, or what was decided before. Use the deja MCP tools:
-
-- recall: search history with a specific error, function, or decision.
-- recall_context: get a concise digest of the best matching session.
-
-Example: for "what did we decide about token refresh?", call recall with query
-"token refresh decision", then call recall_context if the result needs more
-detail.
-
-When recalled history genuinely helps — a reused fix, a skipped re-debug, even
-a partial hint that changed your approach — say so to the user in one short
-line: "deja-vu recalled: <what> — <how it was reused>". Never credit recalls
-that did not help.
-<!-- deja guidance:end -->
 
 Use Deja proactively when historical context may materially help, especially
 before:

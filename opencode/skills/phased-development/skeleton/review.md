@@ -2,8 +2,8 @@
 
 ## Contract
 
-The review records a human judgment about an exact target and candidate. Use one
-record type: `plan`, `acceptance`, or `authority-change`. A review must
+The review records a human judgment about an exact target and candidate. Use
+one record type: `plan`, `acceptance`, or `authority-change`. A review must
 identify the target, candidate digest when content is reviewed, reviewer,
 approval provenance, verdict, conditions, and authorized transition.
 
@@ -71,18 +71,18 @@ verdict: pending
 
 The candidate payload and manifest are stored beside this review record and are
 excluded from the reviewed scope. `.project/.setup/` is always excluded. The
-payload preserves the exact bytes and
-relevant metadata for every non-deleted entry; deleted entries are applied against
-the recorded base. The manifest's canonical JSON body is UTF-8, has
-lexicographically sorted keys, no insignificant whitespace, normalized unique
-POSIX-relative paths, and sorted path entries. It contains `format_version`,
-`base_revision`, `scope`, and `entries`. Each entry uses
-`kind: file|symlink|deleted`, relevant mode or symlink target, and a lowercase
-SHA-256 content hash; deleted paths have no content hash. Compute
-`candidate_digest` over that body without the digest field. The review's base,
-scope, manifest path, payload path, and digest must exactly match the manifest or
-evidence. Reconstruct and compare it immediately before formalization. A mismatch
-or changed base creates a new candidate and invalidates this review.
+payload preserves the exact bytes and relevant metadata for every non-deleted
+entry; deleted entries are applied against the recorded base. The manifest's
+canonical JSON body is UTF-8, has lexicographically sorted keys, no
+insignificant whitespace, normalized unique POSIX-relative paths, and sorted
+path entries. It contains `format_version`, `base_revision`, `scope`, and
+`entries`. Each entry uses `kind: file|symlink|deleted`, relevant mode or
+symlink target, and a lowercase SHA-256 content hash; deleted paths have no
+content hash. Compute `candidate_digest` over that body without the digest
+field. The review's base, scope, manifest path, payload path, and digest must
+exactly match the manifest or evidence. Reconstruct and compare it immediately
+before formalization. A mismatch or changed base creates a new candidate and
+invalidates this review.
 
 Candidate manifest shape:
 

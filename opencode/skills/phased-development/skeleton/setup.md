@@ -5,13 +5,13 @@
 This record is transient workflow-administration state. It coordinates
 installation, Bootstrap, Adapt, migration, configuration, repair, update, or
 removal without creating canonical project IDs. Store it under
-`.project/.setup/`, exclude that directory with `.project/.gitignore`, and delete
-it after successful or abandoned administration unless the user explicitly opts
-to retain it outside the canonical workflow.
+`.project/.setup/`, exclude that directory with `.project/.gitignore`, and
+delete it after successful or abandoned administration unless the user
+explicitly opts to retain it outside the canonical workflow.
 
 Direct user approval governs the requested administrative transition. Do not
-represent the record as a project review or human verdict in the canonical review
-collection.
+represent the record as a project review or human verdict in the canonical
+review collection.
 
 ## Skeleton
 

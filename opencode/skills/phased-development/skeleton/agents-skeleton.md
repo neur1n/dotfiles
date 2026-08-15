@@ -38,20 +38,20 @@ the transient `.project/.setup/` record instead of selecting a project issue.
 For registered project work:
 
 - Work only on an issue with status `ready` or `in_progress`.
-- Move `proposed` to `ready` only after scope, criteria, plan, dependencies, and
-  required authorization are complete.
+- Move `proposed` to `ready` only after scope, criteria, plan, dependencies,
+  and required authorization are complete.
 - Resolve dependencies before execution.
 - Obtain required human review before crossing a governed transition.
 - Do not create a pre-review commit solely to freeze a candidate.
-- Use `.project/.setup/` for workflow administration; do not consume project IDs
-  for installation, migration, or workflow maintenance.
+- Use `.project/.setup/` for workflow administration; do not consume project
+  IDs for installation, migration, or workflow maintenance.
 - Update issue evidence and the registered state digest after meaningful
   transitions.
 - Do not silently change an accepted decision or compatibility contract.
 
 For workflow administration, use `.project/.setup/`, direct user approval, and
-no project issue, plan, decision, or review IDs. Delete the setup directory after
-the operation.
+no project issue, plan, decision, or review IDs. Delete the setup directory
+after the operation.
 ```
 
 Append project-specific technical, security, language, testing, and ownership

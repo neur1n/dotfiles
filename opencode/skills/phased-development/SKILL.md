@@ -10,10 +10,10 @@ metadata:
 
 Use this skill only in one of these modes:
 
-- **Bootstrap:** create the proposed workflow in a new, unmanaged
-  workspace after the user explicitly requests it.
-- **Adapt:** register an existing workflow after the user explicitly adopts this
-  workflow; preserve existing governance files by default.
+- **Bootstrap:** create the proposed workflow in a new, unmanaged workspace
+  after the user explicitly requests it.
+- **Adapt:** register an existing workflow after the user explicitly adopts
+  this workflow; preserve existing governance files by default.
 - **Operate:** resume and execute work in an established workflow.
 
 Do not bootstrap or create governance merely because this skill is available.
@@ -21,9 +21,9 @@ Do not silently migrate existing governance. Ask when the repository does not
 fit the workflow's registered authority model.
 
 The workflow operates on the current execution frontier identified by
-`project.json` and the registered state digest. If more than one active frontier
-exists or the governing frontier is ambiguous, stop and ask which one controls
-the current work. Do not silently merge or choose between frontiers.
+`project.json` and the registered state digest. If more than one active
+frontier exists or the governing frontier is ambiguous, stop and ask which one
+controls the current work. Do not silently merge or choose between frontiers.
 
 ## Authority Boundary
 
@@ -40,10 +40,11 @@ to authorize the workflow itself.
 
 The workflow governs registered project work and project authority: outcomes,
 development scope, technical decisions, compatibility, gates, releases,
-implementation evidence, and normal project reviews. If administration discovers
-one of those effects, separate it from the administrative operation and record it
-through the normal project workflow. Updating the global skill is not a target
-project event; changing project policy or technical authority because of it is.
+implementation evidence, and normal project reviews. If administration
+discovers one of those effects, separate it from the administrative operation
+and record it through the normal project workflow. Updating the global skill is
+not a target project event; changing project policy or technical authority
+because of it is.
 
 Workflow administration may create transient coordination, snapshots, and
 handoffs under `.project/.setup/`. These records use no canonical IDs, are
@@ -65,10 +66,10 @@ Use these meanings when creating or interpreting records:
 | Decision | Durable technical or process choice, rationale, impact, and supersession | proposed -> accepted, rejected, or superseded |
 | Review | Human judgment about registered project work and an exact candidate | pending -> approved, rejected, or superseded |
 
-Record content is authoritative for its concern. Mutable metadata lives in record
-frontmatter; do not duplicate status or verdict fields in the body. `STATE.md` and
-`project.json` route agents to records; they do not override them. Stable IDs and
-filenames do not encode mutable status.
+Record content is authoritative for its concern. Mutable metadata lives in
+record frontmatter; do not duplicate status or verdict fields in the body.
+`STATE.md` and `project.json` route agents to records; they do not override
+them. Stable IDs and filenames do not encode mutable status.
 
 A material roadmap change to outcomes, phases, assumptions, gates, or release
 scope creates a new roadmap ID with `supersedes` pointing to the prior roadmap.
@@ -77,25 +78,25 @@ the successor, then mark the prior roadmap `superseded`. Minor editorial fixes
 that do not change authority may remain in place.
 
 When a record requires review, its `review` metadata points to the review ID or
-path. The review points back to the target record. Keep both links synchronized;
-do not rely on an index to discover a mandatory review.
+path. The review points back to the target record. Keep both links
+synchronized; do not rely on an index to discover a mandatory review.
 
-Local issues are the default execution record even when a remote tracker exists.
-An issue may record an external ID and explicitly declared remote authority for
-priority, assignment, or public status, but agents must not assume remote access
-or infer an external transition that they cannot verify.
+Local issues are the default execution record even when a remote tracker
+exists. An issue may record an external ID and explicitly declared remote
+authority for priority, assignment, or public status, but agents must not
+assume remote access or infer an external transition that they cannot verify.
 
 For every record, use the corresponding file in `skeleton/` as the starting
 contract and template. Read only the skeleton needed for the current operation.
 
 ## Bootstrap
 
-Use Bootstrap only after the user explicitly asks to establish this workflow in a
-workspace with no authoritative project workflow.
+Use Bootstrap only after the user explicitly asks to establish this workflow in
+a workspace with no authoritative project workflow.
 
 1. Inspect repository instructions, existing planning files, Git state, and the
-   requested project objective. If authoritative governance exists, stop and use
-   Adapt instead.
+   requested project objective. If authoritative governance exists, stop and
+   use Adapt instead.
 2. Create `.project/.gitignore` with `.setup/`, then use `.project/.setup/` for
    the administrative operation. Read `skeleton/setup.md` for its transient
    record shape. Prepare the proposed scaffold without committing it:
@@ -116,12 +117,13 @@ workspace with no authoritative project workflow.
    Do not create a policy directory. Put the default workflow policy in
    `AGENTS.md`. Do not create empty placeholder records.
  3. Read the relevant skeleton files from `skeleton/` and make the generated
-    records consistent with one another. Set `format_version` in `project.json`.
-    If no initial work is specified, omit the plan and issue records, set
-     `project.json.plan` to `null`, and use `none` for the current plan and issue in
-     `STATE.md`. If initial work is specified, create proposed plan and issue
-    records, point `project.json.plan` to the proposed plan, and link the current
-    paths from `STATE.md`; neither is approved by workflow administration alone.
+    records consistent with one another. Set `format_version` in
+    `project.json`. If no initial work is specified, omit the plan and issue
+    records, set `project.json.plan` to `null`, and use `none` for the current
+    plan and issue in `STATE.md`. If initial work is specified, create proposed
+    plan and issue records, point `project.json.plan` to the proposed plan, and
+    link the current paths from `STATE.md`; neither is approved by workflow
+    administration alone.
  4. Freeze the proposed scaffold as an administrative candidate under
     `.project/.setup/`. Use the setup record for direct user inspection; do not
     create a canonical review record or consume a project review ID.
@@ -142,7 +144,8 @@ those records to describe the setup operation itself.
 
 Bootstrap defaults are risk-based: small authorized work may proceed directly;
 substantial work needs an approved plan before execution; authority, breaking
-compatibility, phase, release, and policy changes require explicit human review.
+compatibility, phase, release, and policy changes require explicit human
+review.
 
 ## Adapt
 
@@ -150,25 +153,25 @@ Use Adapt only after the user explicitly adopts this workflow or
 repository instructions require it. Existing governance alone is not permission
 to create the registry or modify instructions.
 
-1. Preserve existing canonical records and paths. Do not move, rename, or rewrite
-   them merely to match `.project/`.
+1. Preserve existing canonical records and paths. Do not move, rename, or
+   rewrite them merely to match `.project/`.
 2. Create or update `.project/.gitignore` with `.setup/`. Create
    `.project/project.json` as the skill's discovery entry point if absent.
    Register existing manifests, state digests, roadmaps, plans, issues,
    decisions, reviews, and external references by path or URL.
 3. Create `.project/STATE.md` only when no equivalent digest exists. Otherwise
    register the existing digest and leave it authoritative for its scope.
- 4. Add or extend `AGENTS.md` so future sessions read the registry and follow the
-    registered authority model. Substitute registered paths into the binding; do
-    not hard-code `.project/STATE.md` when the manifest points elsewhere. Preserve
-    unrelated repository instructions.
+ 4. Add or extend `AGENTS.md` so future sessions read the registry and follow
+    the registered authority model. Substitute registered paths into the
+    binding; do not hard-code `.project/STATE.md` when the manifest points
+    elsewhere. Preserve unrelated repository instructions.
 5. Use local issue records for executable scope and evidence unless a remote
    tracker is explicitly verified as reliably available to the agent.
 
 Use `.project/.setup/` for path mapping, migration notes, snapshots, and
 handoffs. Physical migration into `.project/` is workflow administration and
-does not create a canonical migration issue, plan, or review. Obtain direct user
-approval before formalizing it, then remove `.project/.setup/`.
+does not create a canonical migration issue, plan, or review. Obtain direct
+user approval before formalizing it, then remove `.project/.setup/`.
 
 If migration also changes a project outcome, technical decision, compatibility
 boundary, gate, release decision, or project policy, separate that effect and
@@ -180,7 +183,8 @@ translation.
 
 ## Operate
 
-When operating registered project work, skip absent layers and read in this order:
+When operating registered project work, skip absent layers and read in this
+order:
 
 1. Root `AGENTS.md` and other applicable repository instructions.
 2. `.project/project.json` or the registered equivalent.
@@ -191,18 +195,18 @@ When operating registered project work, skip absent layers and read in this orde
 7. Current code, Git state, and required external reality checks.
 
 Do not read all historical records by default. Read only records referenced by
-the active work, required to resolve a dependency or contradiction, or requested
-for historical context. Do not create a missing digest, issue, decision, review,
-or index merely because this skill is loaded. Create a record only when the
-workflow or current work requires it.
+the active work, required to resolve a dependency or contradiction, or
+requested for historical context. Do not create a missing digest, issue,
+decision, review, or index merely because this skill is loaded. Create a record
+only when the workflow or current work requires it.
 
 When maintaining the workflow itself, use `.project/.setup/` rather than
 creating a project issue or review. Clean up abandoned setup records before
 resuming ordinary project work.
 
-Before editing, verify that the issue is `ready` or `in_progress`, its dependencies
-are resolved, and the requested scope is authorized by the active plan. Preserve
-partial authorization at the task or deliverable level.
+Before editing, verify that the issue is `ready` or `in_progress`, its
+dependencies are resolved, and the requested scope is authorized by the active
+plan. Preserve partial authorization at the task or deliverable level.
 
 Move an issue from `proposed` to `ready` only when its scope and acceptance
 criteria are complete, its plan and dependencies are known, and the work is
@@ -210,17 +214,19 @@ authorized. Substantial work requires an approved plan review first. Small work
 may use explicit user or project authorization. The agent may record this
 transition but may not invent a required human authorization.
 
-For small authorized work, make the change and record verification in the issue.
-For substantial work, prepare the plan and obtain the required plan review before
-execution. After implementation, record evidence and prepare acceptance review
-when required. Do not close an issue without its acceptance evidence.
+For small authorized work, make the change and record verification in the
+issue. For substantial work, prepare the plan and obtain the required plan
+review before execution. After implementation, record evidence and prepare
+acceptance review when required. Do not close an issue without its acceptance
+evidence.
 
 Update the smallest correct set of records:
 
 - implementation detail -> code and issue evidence;
 - scope or sequencing -> plan and issue;
 - durable choice -> decision and affected records;
-- compatibility change -> affected specification or project record and consumers;
+- compatibility change -> affected specification or project record and
+  consumers;
 - gate or release change -> roadmap and required authority review;
 - blocker or deferred discovery -> issue.
 
@@ -231,7 +237,8 @@ record wins.
 ## Human Review
 
 An agent may research, plan, implement authorized work, verify automation, and
-prepare review packets. It may not represent its own assessment as human approval.
+prepare review packets. It may not represent its own assessment as human
+approval.
 
 Human review is required before:
 
@@ -243,10 +250,10 @@ Human review is required before:
 
 Use `skeleton/review.md` for plan, acceptance, or authority-change review of
 registered project work. Use `skeleton/setup.md` for transient workflow
-administration; it is not a project review record.
-Project review records must name the target, scope, reviewer, approval provenance,
-verdict, conditions, and exact transition authorized. Setup records use direct
-user approval as defined by `skeleton/setup.md`.
+administration; it is not a project review record. Project review records must
+name the target, scope, reviewer, approval provenance, verdict, conditions, and
+exact transition authorized. Setup records use direct user approval as defined
+by `skeleton/setup.md`.
 
 ## Project Candidate Snapshot
 
@@ -259,9 +266,9 @@ candidate is identified by:
 
 - the immutable accepted base revision;
 - the reviewed path scope and canonicalization procedure; and
-- a deterministic SHA-256 manifest sorted by path, containing file type, relevant
-  mode or symlink target, and content hash for added, modified, untracked, and
-  deleted paths.
+- a deterministic SHA-256 manifest sorted by path, containing file type,
+  relevant mode or symlink target, and content hash for added, modified,
+  untracked, and deleted paths.
 
 Store an accessible frozen snapshot payload and a manifest as
 `<review-id>-candidate/` and `<review-id>-candidate.json` beside the review
@@ -269,24 +276,25 @@ record. The payload may be a deterministic archive or read-only snapshot
 directory, but it must preserve the exact bytes and relevant metadata for every
 non-deleted entry. Deleted entries are applied against the recorded base during
 reconstruction. Its manifest's canonical JSON body must contain
-`format_version`, `base_revision`, `scope`, and sorted `entries`. Normalize every
-scope and entry path to a unique POSIX-relative repository path with no leading
-`./`; sort paths lexicographically. Each entry uses `kind: file|symlink|deleted`,
-a mode when applicable, a symlink target when applicable, and a lowercase
-SHA-256 content hash for non-deleted content. Serialize with lexicographically
-sorted keys, UTF-8, and no insignificant whitespace.
+`format_version`, `base_revision`, `scope`, and sorted `entries`. Normalize
+every scope and entry path to a unique POSIX-relative repository path with no
+leading `./`; sort paths lexicographically. Each entry uses `kind:
+file|symlink|deleted`, a mode when applicable, a symlink target when
+applicable, and a lowercase SHA-256 content hash for non-deleted content.
+Serialize with lexicographically sorted keys, UTF-8, and no insignificant
+whitespace.
 
-Compute `candidate_digest` over that body without the digest field, then store the
-digest in both the manifest and review record. Use `EMPTY_TREE` as the base when
-a repository has no commit. Exclude `.project/.setup/`, the candidate payload,
-candidate manifest, and mutable review record from the reviewed scope to avoid
-self-reference and accidental capture of workflow administration.
+Compute `candidate_digest` over that body without the digest field, then store
+the digest in both the manifest and review record. Use `EMPTY_TREE` as the base
+when a repository has no commit. Exclude `.project/.setup/`, the candidate
+payload, candidate manifest, and mutable review record from the reviewed scope
+to avoid self-reference and accidental capture of workflow administration.
 
 The review's `base_revision`, `reviewed_scope`, `candidate_manifest`,
-`candidate_payload`, and `candidate_digest` must exactly equal the corresponding
-manifest or evidence values. Keep both payload and manifest with the review
-evidence so another agent can reconstruct the candidate without the original
-working tree.
+`candidate_payload`, and `candidate_digest` must exactly equal the
+corresponding manifest or evidence values. Keep both payload and manifest with
+the review evidence so another agent can reconstruct the candidate without the
+original working tree.
 
 Immediately before commit, merge, release, or promotion, reconstruct the same
 manifest over the actual transition input and verify the base and digest. Any
@@ -308,12 +316,12 @@ Before closing governed work or advancing a gate, check applicable items:
 Use the repository's health command if one exists; otherwise perform a small
 equivalent check. A failed check blocks the governed transition.
 
-Create one temporary handoff only when substantial project work stops before a clean
-record boundary. Include current issue and task, completed and remaining work,
-decisions, blockers, pending human actions, modified files, candidate digest,
-verification, and the first resume action. On resume, validate it against
-canonical records and Git state, move durable facts into those records, and
-retire the handoff.
+Create one temporary handoff only when substantial project work stops before a
+clean record boundary. Include current issue and task, completed and remaining
+work, decisions, blockers, pending human actions, modified files, candidate
+digest, verification, and the first resume action. On resume, validate it
+against canonical records and Git state, move durable facts into those records,
+and retire the handoff.
 
 For workflow administration, put the handoff under `.project/.setup/` instead.
 Delete the setup directory after successful or abandoned administration unless

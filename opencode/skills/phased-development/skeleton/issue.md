@@ -4,8 +4,9 @@
 
 The local issue is the agent-readable execution record, even when an external
 tracker exists. It owns local scope, dependencies, acceptance criteria, and
-evidence. Its default lifecycle is `proposed`, `ready`, `in_progress`, `blocked`,
-`closed`. An external ID is a reference, not proof of remote availability.
+evidence. Its default lifecycle is `proposed`, `ready`, `in_progress`,
+`blocked`, `closed`. An external ID is a reference, not proof of remote
+availability.
 
 ## Skeleton
 

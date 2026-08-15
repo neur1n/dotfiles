@@ -3,9 +3,9 @@
 ## Contract
 
 `STATE.md` is a small derived navigation digest. It identifies the current
-frontier and next action but never overrides the roadmap, plan, issue, decision,
-review, code, or Git state. Keep it below roughly 80 lines and update it after
-meaningful transitions.
+frontier and next action but never overrides the roadmap, plan, issue,
+decision, review, code, or Git state. Keep it below roughly 80 lines and update
+it after meaningful transitions.
 
 ## Skeleton
 

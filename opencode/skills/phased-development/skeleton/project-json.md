@@ -2,9 +2,9 @@
 
 ## Contract
 
-`project.json` is the stable discovery manifest for the workflow. It
-registers paths, roles, and the persisted manifest format. It is not an index of
-records and cannot override record frontmatter or canonical content.
+`project.json` is the stable discovery manifest for the workflow. It registers
+paths, roles, and the persisted manifest format. It is not an index of records
+and cannot override record frontmatter or canonical content.
 
 Required properties:
 
@@ -17,9 +17,9 @@ Required properties:
 - `issue_directory`, `decision_directory`, and `review_directory`: local record
   directories.
 
-Optional properties may register an external tracker or a custom project-defined
-collection. Such properties must state the external or custom source of truth;
-they do not create an index.
+Optional properties may register an external tracker or a custom
+project-defined collection. Such properties must state the external or custom
+source of truth; they do not create an index.
 
 ## Skeleton
 
