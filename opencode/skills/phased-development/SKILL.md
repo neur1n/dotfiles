@@ -51,6 +51,12 @@ handoffs under `.project/.setup/`. These records use no canonical IDs, are
 ignored by Git, and are deleted after successful or abandoned administration
 unless the user explicitly opts to retain them outside the canonical workflow.
 
+Project-review evidence has a separate transient cache under
+`.project/.review/<review-id>/`. Candidate manifests, frozen payloads,
+generated review packets, and machine reports belong there rather than beside
+the tracked review record. The cache is ignored by Git and follows the
+project-candidate lifecycle below; it is not workflow-administration state.
+
 ## Core Contracts
 
 Use these meanings when creating or interpreting records:
@@ -65,6 +71,22 @@ Use these meanings when creating or interpreting records:
 | Issue | Local executable work, dependencies, acceptance criteria, and evidence | proposed -> ready -> in_progress -> closed; `blocked` may interrupt |
 | Decision | Durable technical or process choice, rationale, impact, and supersession | proposed -> accepted, rejected, or superseded |
 | Review | Human judgment about registered project work and an exact candidate | pending -> approved, rejected, or superseded |
+
+## Roles
+
+Keep responsibilities distinct even when one person holds multiple roles:
+
+- **Agent:** researches, implements authorized work, runs checks, prepares the
+  review packet, and verifies candidate and commit identities.
+- **Authorized operator:** controls candidate staging and the code commit.
+- **Reviewer:** inspects the exact candidate and gives the substantive review
+  disposition.
+- **Human authority:** decides scope, contract, policy, phase, release, or Gate
+  changes when those decisions are not delegated by policy.
+
+The authorized operator, reviewer, and human authority may be the same person.
+Record the responsibilities separately without requiring separate identities.
+The agent must not stage, commit, switch branches, or claim human approval.
 
 Record content is authoritative for its concern. Mutable metadata lives in
 record frontmatter; do not duplicate status or verdict fields in the body.
@@ -97,9 +119,10 @@ a workspace with no authoritative project workflow.
 1. Inspect repository instructions, existing planning files, Git state, and the
    requested project objective. If authoritative governance exists, stop and
    use Adapt instead.
-2. Create `.project/.gitignore` with `.setup/`, then use `.project/.setup/` for
-   the administrative operation. Read `skeleton/setup.md` for its transient
-   record shape. Prepare the proposed scaffold without committing it:
+2. Create `.project/.gitignore` with `.setup/` and `.review/`, then use
+   `.project/.setup/` for the administrative operation. Read
+   `skeleton/setup.md` for its transient record shape. Prepare the proposed
+   scaffold without committing it:
 
    ```text
    AGENTS.md
@@ -155,9 +178,9 @@ to create the registry or modify instructions.
 
 1. Preserve existing canonical records and paths. Do not move, rename, or
    rewrite them merely to match `.project/`.
-2. Create or update `.project/.gitignore` with `.setup/`. Create
-   `.project/project.json` as the skill's discovery entry point if absent.
-   Register existing manifests, state digests, roadmaps, plans, issues,
+2. Create or update `.project/.gitignore` with `.setup/` and `.review/`.
+   Create `.project/project.json` as the skill's discovery entry point if
+   absent. Register existing manifests, state digests, roadmaps, plans, issues,
    decisions, reviews, and external references by path or URL.
 3. Create `.project/STATE.md` only when no equivalent digest exists. Otherwise
    register the existing digest and leave it authoritative for its scope.
@@ -231,8 +254,8 @@ Update the smallest correct set of records:
 - blocker or deferred discovery -> issue.
 
 Reconcile the registered state digest after meaningful transitions and before
-stopping substantial work. If it disagrees with a canonical record, the canonical
-record wins.
+stopping substantial work. If it disagrees with a canonical record, the
+canonical record wins.
 
 ## Human Review
 
@@ -255,52 +278,52 @@ name the target, scope, reviewer, approval provenance, verdict, conditions, and
 exact transition authorized. Setup records use direct user approval as defined
 by `skeleton/setup.md`.
 
-## Project Candidate Snapshot
+For Git-backed work, read `reference/staged-tree-review.md` for the detailed
+candidate-freeze procedure. The staged-tree identity is the default review
+backend; the file-manifest snapshot remains available when Git cannot provide a
+usable candidate identity.
+
+## Candidate Identity
 
 This procedure applies to registered project work and durable project reviews.
 Workflow-administration candidates use `.project/.setup/` and direct user
 approval instead; they do not enter the canonical review model.
 
-Do not create a pre-review commit solely to freeze content. A reviewed project
-candidate is identified by:
+Do not create a pre-review commit solely to freeze content. For the default
+`git-tree-v1` backend, the reviewed candidate is identified by:
 
-- the immutable accepted base revision;
-- the reviewed path scope and canonicalization procedure; and
-- a deterministic SHA-256 manifest sorted by path, containing file type,
-  relevant mode or symlink target, and content hash for added, modified,
-  untracked, and deleted paths.
+- the source repository and branch;
+- the immutable base commit, or `EMPTY_TREE` for a root candidate;
+- the approved path scope; and
+- the tree ID produced from the complete staged candidate with `git write-tree`.
 
-Store an accessible frozen snapshot payload and a manifest as
-`<review-id>-candidate/` and `<review-id>-candidate.json` beside the review
-record. The payload may be a deterministic archive or read-only snapshot
-directory, but it must preserve the exact bytes and relevant metadata for every
-non-deleted entry. Deleted entries are applied against the recorded base during
-reconstruction. Its manifest's canonical JSON body must contain
-`format_version`, `base_revision`, `scope`, and sorted `entries`. Normalize
-every scope and entry path to a unique POSIX-relative repository path with no
-leading `./`; sort paths lexicographically. Each entry uses `kind:
-file|symlink|deleted`, a mode when applicable, a symlink target when
-applicable, and a lowercase SHA-256 content hash for non-deleted content.
-Serialize with lexicographically sorted keys, UTF-8, and no insignificant
-whitespace.
+The authorized operator stages the candidate and records this identity. Staging
+freezes the candidate for review; it does not imply acceptance. The agent
+prepares the packet only after the identity is recorded and must not modify the
+candidate while preparing it. Any candidate-content change creates a new tree
+ID and requires the appropriate review again.
 
-Compute `candidate_digest` over that body without the digest field, then store
-the digest in both the manifest and review record. Use `EMPTY_TREE` as the base
-when a repository has no commit. Exclude `.project/.setup/`, the candidate
-payload, candidate manifest, and mutable review record from the reviewed scope
-to avoid self-reference and accidental capture of workflow administration.
+Immediately before the code commit, recompute the staged tree ID. After the
+commit, verify that the commit parent is the recorded base and `HEAD^{tree}` is
+the reviewed tree ID. A mismatch invalidates acceptance for the actual content.
+The tree ID identifies content, not test results, human judgment, or Gate
+success; record those separately. Governance-only edits are not part of the
+implementation candidate and are committed through the governance transition.
 
-The review's `base_revision`, `reviewed_scope`, `candidate_manifest`,
-`candidate_payload`, and `candidate_digest` must exactly equal the
-corresponding manifest or evidence values. Keep both payload and manifest with
-the review evidence so another agent can reconstruct the candidate without the
-original working tree.
+For `git-tree-v1`, no candidate payload or manifest is required by default.
+Keep the review packet, command output, and optional archive under the ignored
+`.project/.review/<review-id>/` cache. For `snapshot-v1`, store the exact
+payload and deterministic compact manifest in that cache, using the snapshot
+contract in `skeleton/review.md`. Compact JSON applies only to that machine
+manifest.
 
-Immediately before commit, merge, release, or promotion, reconstruct the same
-manifest over the actual transition input and verify the base and digest. Any
-mismatch creates a new candidate and requires the applicable review again. A
-plain `git diff` is insufficient unless it accounts for untracked files and
-relevant metadata.
+Keep transient candidate material while a review is pending and until an
+approved transition has been formalized and verified. For a rejected,
+superseded, or abandoned review, remove it once no resubmission or appeal
+depends on it. Retain the tracked `REVIEW-*.md` record with its candidate
+identity, evidence, verdict, conditions, and formalized commit. If long-term
+byte-level retention is required, archive the material outside the canonical
+workflow and record that explicit choice.
 
 ## Integrity And Handoff
 
@@ -309,17 +332,28 @@ Before closing governed work or advancing a gate, check applicable items:
 - record metadata and referenced paths agree;
 - dependencies and authorization boundaries are satisfied;
 - evidence belongs to the reviewed candidate;
-- required human verdicts have provenance and the exact target digest;
+- required human verdicts have provenance and the exact target identity;
 - deferred work has a local issue; and
 - recorded status agrees with code and Git state.
 
 Use the repository's health command if one exists; otherwise perform a small
 equivalent check. A failed check blocks the governed transition.
 
+## Optional Governance Tooling
+
+A project may keep a reusable workflow-integrity validator under
+`.project/script/` when repeated checks justify maintaining one. This tooling
+is governance infrastructure, not application source and not a product test.
+Run it separately from product tests and report the results separately. Do not
+create a persistent validator merely because this skill is installed; one-off
+checks may remain session-local or use external tooling. Generated validator
+reports belong in the relevant transient `.project/.review/<review-id>/` or
+`.project/.setup/` cache, not beside the script.
+
 Create one temporary handoff only when substantial project work stops before a
 clean record boundary. Include current issue and task, completed and remaining
 work, decisions, blockers, pending human actions, modified files, candidate
-digest, verification, and the first resume action. On resume, validate it
+identity, verification, and the first resume action. On resume, validate it
 against canonical records and Git state, move durable facts into those records,
 and retire the handoff.
 

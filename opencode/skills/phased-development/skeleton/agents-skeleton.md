@@ -33,6 +33,18 @@ the transient `.project/.setup/` record instead of selecting a project issue.
 - The registered state digest: derived navigation only.
 - `project.json`: discovery paths and format only.
 
+## Roles
+
+- Agent: implements authorized work, runs checks, prepares review material, and
+  verifies candidate and commit identities.
+- Authorized operator: stages the candidate and commits the accepted code.
+- Reviewer: inspects the exact candidate and records the substantive disposition.
+- Human authority: decides scope, contract, policy, phase, release, or Gate
+  changes when those decisions are not delegated by policy.
+
+These responsibilities remain distinct even when one person holds multiple
+roles. Do not require separate people unless project policy requires them.
+
 ## Rules
 
 For registered project work:
@@ -43,8 +55,21 @@ For registered project work:
 - Resolve dependencies before execution.
 - Obtain required human review before crossing a governed transition.
 - Do not create a pre-review commit solely to freeze a candidate.
+- The agent must not stage, commit, switch branches, or claim human approval.
+- For Git-backed reviews, the authorized operator records the base revision,
+  staged scope, and tree ID before the agent prepares the review packet.
+- Any candidate-content change creates a new tree ID and requires the applicable
+  review again. Verify the committed tree ID before finalizing the review.
 - Use `.project/.setup/` for workflow administration; do not consume project
   IDs for installation, migration, or workflow maintenance.
+- Keep optional recurring workflow-integrity tooling under `.project/script/`,
+  not application source or product-test directories.
+- Run governance-integrity checks separately from product tests and report their
+  results separately. Do not create persistent tooling merely because the
+  workflow is installed.
+- Keep generated candidate packets, reports, and snapshot manifests or payloads
+  in the ignored `.project/.review/<review-id>/` cache and remove them according
+  to the review lifecycle. Git-tree reviews do not require a snapshot payload.
 - Update issue evidence and the registered state digest after meaningful
   transitions.
 - Do not silently change an accepted decision or compatibility contract.
