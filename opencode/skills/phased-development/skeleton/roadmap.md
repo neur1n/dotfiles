@@ -1,15 +1,4 @@
-# Roadmap Skeleton
-
-## Contract
-
-The roadmap is authoritative for project outcomes, phases, assumptions, and
-promotion gates. It does not contain implementation evidence or replace the
-active plan. Its default lifecycle is `proposed`, `active`, `completed`,
-`superseded`, or `cancelled`. A material revision creates a new roadmap ID with
-`supersedes` pointing to the prior roadmap; accepted roadmaps are not silently
-rewritten.
-
-## Skeleton
+# Roadmap
 
 ```markdown
 ---
@@ -24,22 +13,21 @@ review: none
 
 ## Outcome
 
-<What the project must deliver and why>
+<Project result and reason>
 
-## Success Criteria
+## Success Criterion
 
-- <observable project-level result>
+- <observable result>
 
-## Phases
+## Phase
 
 ### Phase 1: <name>
 
 - Objective: <phase outcome>
-- Gate: <condition required before promotion>
-- Dependencies: none
-- Status: proposed
+- Gate: <promotion condition>
+- Dependency: none
 
-## Assumptions
+## Assumption
 
-- <management, resource, compatibility, or scope assumption>
+- <scope, resource, compatibility, or management assumption>
 ```

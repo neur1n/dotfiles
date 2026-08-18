@@ -1,52 +1,34 @@
-# `STATE.md` Skeleton
-
-## Contract
-
-`STATE.md` is a small derived navigation digest. It identifies the current
-frontier and next action but never overrides the roadmap, plan, issue,
-decision, review, code, or Git state. Keep it below roughly 80 lines and update
-it after meaningful transitions.
-
-## Skeleton
+# `STATE.md`
 
 ```markdown
 # Current Project State
 
 > Derived navigation only. Reconcile against canonical records before acting.
 
-- Status: proposed
+- Status: <status>
 - Last reconciled: <date>
-- Roadmap: <manifest roadmap path>
+- Roadmap: <path>
 - Current phase: <phase or none>
 - Current plan: <path or none>
 - Current issue: <path or none>
 
 ## Current Objective
 
-<one or two sentences>
+<Current outcome>
 
 ## Last Completed
 
-- <last meaningful completed action>
+- <completed action or none>
 
-## Next Recommended Action
+## Next Action
 
 - <one concrete action>
 
-## Blockers
+## Blocker
 
 - <blocker or none>
 
-## Human Actions Pending
+## Pending Human Action
 
-- <pending action or none>
-
-## Relevant Authorities
-
-- <path or ID>
-
-## Session Continuity
-
-- Work status: <clean boundary or in progress>
-- Temporary handoff: <path or none>
+- <action or none>
 ```

@@ -1,13 +1,4 @@
-# Plan Skeleton
-
-## Contract
-
-The plan is authoritative for the active workstream's executable scope and
-sequence. It must reference the roadmap and issue. Its default lifecycle is
-`proposed`, `approved`, `active`, `completed`, `superseded`. Human plan review
-is required for substantial work under the default bootstrap policy.
-
-## Skeleton
+# Plan
 
 ```markdown
 ---
@@ -15,7 +6,7 @@ id: PLAN-0001
 status: proposed
 roadmap: ROADMAP-0001
 phase: phase-1-<slug>
-issue: ISSUE-0001
+issue: []
 review: none
 ---
 
@@ -23,36 +14,31 @@ review: none
 
 ## Objective
 
-<What this plan will accomplish>
+<Result this plan will produce>
 
 ## Scope
 
-### Included
+- Included: <work>
+- Excluded: <work>
 
-- <included work>
+## Step
 
-### Excluded
+1. <implementation step>
 
-- <deferred or prohibited work>
-
-## Approach
-
-1. <step>
-
-## Affected Files And Interfaces
+## Affected File Or Interface
 
 - <path or interface>
 
-## Risks And Reversibility
+## Risk And Reversibility
 
-- <risk and rollback>
+- <risk and recovery>
 
 ## Verification
 
-- <automated check>
-- <human check, if required>
+- <mechanical check>
+- <human inspection>
 
 ## Completion Evidence
 
-- <filled after execution>
+- <filled after implementation>
 ```

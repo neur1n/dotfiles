@@ -1,14 +1,4 @@
-# Decision Skeleton
-
-## Contract
-
-The decision records one durable technical or process choice, alternatives,
-rationale, impact, and supersession. It is not an issue or implementation log.
-Its default lifecycle is `proposed`, `accepted`, `rejected`, `superseded`.
-Accepted decisions are not silently edited; a later decision names the earlier
-ID in `supersedes`.
-
-## Skeleton
+# Decision
 
 ```markdown
 ---
@@ -23,9 +13,9 @@ review: none
 
 ## Context
 
-<Problem or choice requiring a durable decision>
+<Choice requiring a durable decision>
 
-## Options Considered
+## Option
 
 1. <option and tradeoff>
 
@@ -35,13 +25,13 @@ review: none
 
 ## Rationale
 
-<Why this option was selected>
+<Reason for the choice>
 
-## Consequences
+## Consequence
 
-- <compatibility, migration, operational, or scope impact>
+- <compatibility, migration, operational, or scope effect>
 
-## Affected Records And Consumers
+## Affected Record Or Consumer
 
 - <path, ID, or consumer>
 ```
