@@ -13,8 +13,8 @@ function M.setup()
     on_attach = function()
       local gs = package.loaded.gitsigns
 
-      vim.keymap.set("n", "[h", function() gs.nav_hunk("prev") end, {noremap = true})
-      vim.keymap.set("n", "]h", function() gs.nav_hunk("next") end, {noremap = true})
+      vim.keymap.set("n", "[h", function() gs.nav_hunk("prev", {target = "all"}) end, {noremap = true})
+      vim.keymap.set("n", "]h", function() gs.nav_hunk("next", {target = "all"}) end, {noremap = true})
       vim.keymap.set("n", "<Leader>ph", gs.preview_hunk, {noremap = true})
     end
   })
