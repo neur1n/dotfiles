@@ -92,9 +92,9 @@ process choice. `STATE.md` is derived navigation, not authority.
 2. The human confirms scope, stages the complete candidate, runs `git
    write-tree`, and records the base commit, tree ID, and staged paths.
 3. The agent prepares `.project/.review/<review-id>/packet.md` from that tree.
-   The packet includes the exact diff, check results, risks, unresolved
-   questions, and how the human should inspect relevant output, including
-   expected and failure signals.
+   The packet includes the check results, risks, unresolved questions, and how
+   the human should inspect relevant output, including expected and failure
+   signals.
 4. The human approves, requests changes, rejects, or abandons the candidate.
    Candidate-content changes require a new tree ID and renewed review.
 5. Before an approved commit, the agent verifies read-only that the base and
