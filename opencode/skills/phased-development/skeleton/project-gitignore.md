@@ -2,5 +2,4 @@
 
 ```gitignore
 .setup/
-.review/
 ```

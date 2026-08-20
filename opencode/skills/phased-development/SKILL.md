@@ -19,8 +19,8 @@ an explicit human action. An override does not delegate human-only Git
 operations to the agent or permit fabricated approval or evidence.
 
 - **Agent:** scaffolds, plans, implements, tests, inventories changes, performs
-  advisory review, prepares review packets, inspects outputs, proposes semantic
-  commit messages, and verifies Git identity read-only.
+  advisory review, inspects outputs, proposes semantic commit messages, and
+  verifies Git identity read-only.
 - **Human:** reviews plans and implementations, confirms scope, controls
   staging, records tree IDs, gives dispositions, and commits.
 
@@ -33,7 +33,6 @@ Keep governance under `.project/`, except for the root discovery pointer:
 
 ```text
 .project/
-  .review/      # ignored temporary review material
   .setup/       # optional ignored setup scratch space
   decision/
   issue/
@@ -91,19 +90,15 @@ process choice. `STATE.md` is derived navigation, not authority.
    limitations.
 2. The human confirms scope, stages the complete candidate, runs `git
    write-tree`, and records the base commit, tree ID, and staged paths.
-3. The agent prepares `.project/.review/<review-id>/packet.md` from that tree.
-   The packet includes the check results, risks, unresolved questions, and how
-   the human should inspect relevant output, including expected and failure
-   signals.
-4. The human approves, requests changes, rejects, or abandons the candidate.
-   Candidate-content changes require a new tree ID and renewed review.
-5. Before an approved commit, the agent verifies read-only that the base and
+3. The human reviews, approves, requests changes, rejects, or abandons the
+   candidate. Candidate-content changes require a new tree ID and renewed
+   review.
+4. Before an approved commit, the agent verifies read-only that the base and
    index still match the reviewed candidate and proposes a semantic commit
    message. The human commits.
-6. The agent verifies the committed tree, records the commit and disposition in
+5. The agent verifies the committed tree, records the commit and disposition in
    the durable review, updates the smallest correct set of records, and
-   reconciles `STATE.md`. The human commits governance. Remove the temporary
-   packet when it is no longer needed.
+   reconciles `STATE.md`. The human commits governance.
 
 When this kernel does not cover an exceptional transition, ask the human rather
 than inventing policy or approval.

@@ -36,7 +36,6 @@ review: none
 ## Verification
 
 - <mechanical check>
-- <human inspection>
 
 ## Completion Evidence
 

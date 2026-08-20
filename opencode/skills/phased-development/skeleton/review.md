@@ -4,45 +4,39 @@
 ---
 id: REVIEW-0001
 status: pending
-type: <plan|implementation|roadmap|decision>
+type: <roadmap|decision|plan|implementation|gate>
 target: <path or ID>
 base_commit: <commit or EMPTY_TREE>
 candidate_tree: <tree ID or pending>
 scope: []
+staged_paths: []
 reviewer: <human identity or role>
 date: <date or pending>
 provenance: <recorded human decision or pending>
+verdict: <pending|approve|changes|reject|abandon>
 transition: <exact authorized transition or none>
 candidate_commit: <commit, pending, or none>
 ---
 
 # Review: <target>
 
-## Acceptance Criterion
+## Evidence
 
-- <criterion>
+- <command, result, environment, or none>
 
-## Mechanical Evidence
+## Human Finding
 
-- <command, result, environment, and candidate tree>
-
-## Human Inspection
-
-- Procedure: <how to inspect the output>
-- Expected: <observable success>
-- Failure: <observable failure>
-- Limitation: <environment limitation or none>
-
-## Finding
-
-- <finding or none>
+- <human finding or none>
 
 ## Condition
 
-- Blocking: <condition or none>
-- Non-blocking: <condition or none>
+- <blocking|non-blocking>: <condition or none>
 
-## Disposition Rationale
+## Agent Assessment
 
-<Reason for the status>
+- <agent observations, risks, and recommendation>
+
+## Human Decision
+
+- <human rationale and authorized transition>
 ```
