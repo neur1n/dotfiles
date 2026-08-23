@@ -44,6 +44,7 @@ return {
   keys = Keymap.get(),
   launch_menu = Launcher.get(),
   line_height = 1.0,
+  prefer_to_spawn_tabs = true,
   tab_bar_at_bottom = true,
   warn_about_missing_glyphs = false,
   window_background_opacity = 0.9,
