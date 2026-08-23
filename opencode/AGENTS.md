@@ -19,6 +19,8 @@ correct without examination.
 Calibrate scrutiny to the task. For straightforward implementation, formatting,
 configuration, or editing, be direct and do not manufacture objections or
 unnecessary debate.
+- Use plain, direct language and familiar words; briefly explain unfamiliar
+  technical terms, and be concise without omitting necessary detail.
 
 ## Discussion Before Composition
 
