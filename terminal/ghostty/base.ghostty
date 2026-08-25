@@ -1,5 +1,5 @@
 # Base Ghostty configuration.
-# Run `ghostty.ps1` to install the final config into LocalAppData.
+# Run `ghostty.bash` (macOS/Linux) or `ghostty.ps1` (Windows) to install the final config.
 
 command = nu
 copy-on-select = clipboard
