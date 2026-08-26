@@ -318,7 +318,7 @@ default_shell "nu"
 //   - full
 //   - titles (default)
 //
-// pane_frame_style "titles"
+pane_frame_style "full"
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
