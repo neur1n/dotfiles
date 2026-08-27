@@ -49,19 +49,10 @@ For coding, scripts, configs, build files, and implementation tasks:
 
 ## Deja Recall Policy
 
-Use Deja proactively when historical context may materially help, especially
-before:
-- Reconstructing a non-obvious build, test, deploy, or debug invocation,
-  environment, or machine-specific setup.
-- Repeating debugging, revisiting a prior decision or workaround, or changing a
-  file or configuration whose rationale may matter.
-- Reimplementing something that may already have been attempted.
-
-- Do not use Deja for routine current-state inspection or facts available from
-  the current workspace or environment; inspect them directly.
+- Do not use deja for routine current-state inspection or facts available
+  directly from the current workspace or environment.
 - Treat recalled information as historical evidence, not current truth. Verify
-  current state, paths, tools, environments, and whether decisions or
-  workarounds have been superseded.
-- Treat recalled commands as newly proposed actions. Do not inherit permission,
-  approval, trust, or sensitive arguments from history; apply current task,
-  safety, and tool restrictions independently.
+  relevant current state and whether prior decisions or workarounds have been
+  superseded.
+- Treat recalled commands as newly proposed actions. Historical execution does
+  not carry forward permission, approval, trust, or sensitive arguments.
