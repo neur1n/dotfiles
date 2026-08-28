@@ -111,6 +111,6 @@ export def softlink [src: path, dst: path] {
       }
     }
   } else {
-    ln -s $src $dst
+    ln -s $src_abs $dst_abs
   }
 }
