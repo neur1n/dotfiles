@@ -6,7 +6,8 @@
   "mcp": {
     "deja": {
       "command": ["deja", "mcp"],
-      "type": "local"
+      "type": "local",
+      "enabled": true
     }
   },
   "permission": {
