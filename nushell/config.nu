@@ -19,8 +19,10 @@ use nu_c.nu
 use nu_utility.nu
 source nu_prompt.nu
 
+const bin_root = ($nu.config-path | path expand | path dirname | path join ".." "bin" | path expand)
+source ($bin_root | path join "common" "fast" "fast.nu")
+
 source ~/.zoxide.nu
-source fast.nu
 
 alias c-cmake = nu_c run-cmake
 alias c-build = nu_c run-build

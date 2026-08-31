@@ -1,3 +1,5 @@
+# Source this file after installing the fast binary in PATH.
+
 def --env fast [] {
   let selection_file = ($nu.temp-dir | path join $"fast-selection-(random uuid).bin")
   let fast_bin = ($env.FAST_BIN? | default "fast")

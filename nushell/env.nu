@@ -29,10 +29,9 @@ $env.NU_PLUGIN_DIRS = [
 ]
 
 #================================================================= Customize{{{
-$env.NUCONF = ($nu.config-path | path expand | path dirname)
-
-let bin = (ls ($"($env.NUCONF)/../bin/($nu.os-info.name)/($nu.os-info.arch)/*" | into glob)).name
-$env.PATH = ($env.PATH | split row (char esep) | prepend $bin | prepend $"($env.NUCONF)/../bin/common")
+const bin_root = ($nu.config-path | path expand | path dirname | path join ".." "bin" | path expand)
+let bin_list = (ls ($"($bin_root)/($nu.os-info.name)/($nu.os-info.arch)/*" | into glob)).name
+$env.PATH = ($env.PATH | split row (char esep) | prepend $bin_list | prepend $"($bin_root)/common")
 
 zoxide init nushell | save -f ~/.zoxide.nu
 # Customize}}}
