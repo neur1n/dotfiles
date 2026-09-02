@@ -36,11 +36,11 @@ def show-session [] {
   $"(nu_highlight render $sep)(nu_highlight render $sess)"
 }
 
-def show-path [] {
+def show-path [git_status] {
   let lsep = (nu_highlight create "" $scheme.path $scheme.sess)
   let path = (nu_highlight create $env.PWD $palette.bgh $scheme.path)
   let rsep = (
-      if (nu_git in-repo) {
+      if not ($git_status | is-empty) {
         (nu_highlight create "" $scheme.path $palette.graym)
       } else {
         (nu_highlight create "" $scheme.path)
@@ -49,11 +49,11 @@ def show-path [] {
   $"(nu_highlight render $lsep)(nu_highlight render $path)(nu_highlight render $rsep)"
 }
 
-def show-git [] {
-  if not (nu_git in-repo) {
+def show-git [git_status] {
+  if ($git_status | is-empty) {
     ""
   } else {
-    let status = (nu_git status)
+    let status = $git_status
 
     let r = ""  # rev count
 
@@ -67,6 +67,7 @@ def show-git [] {
     let has_upstream = ($status.upstream | is-not-empty)
     let b = (if not ($status.branch | str contains "(detached)") {$status.branch} else {$status.hash})
     let b = (if ($has_upstream and ($acnt == 0) and ($bcnt == 0)) {$"($b)"} else {$b})
+    let b = (if ($status.stale? | default false) {$"~($b)"} else {$b})
 
     let s = ""  # staged
 
@@ -171,7 +172,8 @@ def show-venv [] {
 }
 
 def left-prompt [] {
-  $"(show-session)(show-path)(show-git)"
+  let git_status = (nu_git status)
+  $"(show-session)(show-path $git_status)(show-git $git_status)"
 }
 
 def right-prompt [] {
