@@ -1,17 +1,24 @@
 use std-rfc/kv *
 
-const git_prompt_timeout = 500ms
 const git_hard_timeout = 30sec
-const git_job_tag = 9527
 const git_state_key = "nu_git prompt state"
 
-export-env {
-  kv set $git_state_key {
+def empty-state [] {
+  {
     path: "",
+    request_id: null,
     job_id: null,
-    stale: false,
+    phase: "none",
     info: [],
-  } | ignore
+  }
+}
+
+def read-state [] {
+  kv get $git_state_key | default (empty-state)
+}
+
+export-env {
+  kv set $git_state_key (empty-state) | ignore
 }
 
 export def remove-submodule [path: string] {
@@ -78,8 +85,8 @@ def parse-status [stdout: string] {
   return $info
 }
 
-# Keep Git in a child job so the supervisor can enforce the timeout.
-def spawn-status-job [cwd: string] {
+# Keep Git in a child job so the supervisor can enforce the hard timeout.
+def spawn-status-job [cwd: string, request_id: string, on_update: closure] {
   job spawn --description $"git status ($cwd)" {
     let supervisor = (job id)
     let worker = (
@@ -104,7 +111,7 @@ def spawn-status-job [cwd: string] {
             {kind: "error"}
           })
 
-        $result | job send $supervisor
+        try { $result | job send $supervisor } catch { null } | ignore
       })
 
     let received = (
@@ -115,143 +122,95 @@ def spawn-status-job [cwd: string] {
       })
 
     if $received.ok {
-      {
-        source: "nu_git",
-        kind: "result",
-        path: $cwd,
-        job_id: $supervisor,
-        result: $received.value,
-      } | job send 0 --tag $git_job_tag
+      commit-status $cwd $request_id $received.value $on_update
     } else {
       try { job kill $worker } catch { null } | ignore
-
-      {
-        source: "nu_git",
-        kind: "hard-timeout",
-        path: $cwd,
-        job_id: $supervisor,
-      } | job send 0 --tag $git_job_tag
+      commit-status $cwd $request_id {kind: "timeout"} $on_update
     }
   }
 }
 
-def apply-status-message [state message cwd] {
-  mut next = $state
+def commit-status [cwd: string, request_id: string, result, on_update: closure] {
+  mut state = (read-state)
 
-  if ($message.source? | default "") != "nu_git" {
-    return $next
+  if (($state.path? | default "") != $cwd) or (($state.request_id? | default null) != $request_id) {
+    return
   }
 
-  if ($message.path? | default "") != $cwd {
-    return $next
-  }
-
-  if ($next.job_id | is-empty) or $message.job_id != $next.job_id {
-    return $next
-  }
-
-  if $message.kind == "result" and $message.result.kind == "repo" {
-    $next.info = $message.result.info
-    $next.stale = false
-  } else if $message.kind == "result" and $message.result.kind == "none" {
-    $next.info = []
-    $next.stale = false
+  if $result.kind == "repo" {
+    $state.phase = "ready"
+    $state.info = $result.info
+    $state.job_id = null
+    kv set $git_state_key $state | ignore
+    try { do $on_update ($state.info) } catch { null } | ignore
+  } else if $result.kind == "none" {
+    $state.phase = "none"
+    $state.info = []
+    $state.job_id = null
+    kv set $git_state_key $state | ignore
+    try { do $on_update [] } catch { null } | ignore
   } else {
-    $next.stale = not ($next.info | is-empty)
-  }
-
-  $next.job_id = null
-  $next
-}
-
-def wait-status-message [cwd job_id timeout] {
-  let deadline = ((date now) + $timeout)
-  mut messages = []
-
-  loop {
-    let remaining = ($deadline - (date now))
-    if $remaining <= 0sec {
-      break
-    }
-
-    let candidate = (
-      try {
-        job recv --tag $git_job_tag --timeout $remaining
-      } catch {
-        null
-      })
-
-    if ($candidate | is-empty) {
-      break
-    }
-
-    if (($candidate.source? | default "") == "nu_git") and (($candidate.path? | default "") == $cwd) and (($candidate.job_id? | default null) == $job_id) {
-      $messages = ($messages | append $candidate)
-      break
-    }
-  }
-
-  if ($messages | is-empty) {
-    null
-  } else {
-    $messages.0
+    $state.phase = "timeout"
+    $state.info = []
+    $state.job_id = null
+    kv set $git_state_key $state | ignore
+    try { do $on_update ({timeout: true}) } catch { null } | ignore
   }
 }
 
-export def --env status [] {
-  if (which git | is-empty) {
+export def current [] {
+  let state = (read-state)
+  if ($state.path? | default "") != $env.PWD {
     return []
   }
 
+  if ($state.phase? | default "none") == "ready" {
+    return $state.info
+  } else if ($state.phase? | default "none") == "timeout" {
+    return {timeout: true}
+  }
+
+  []
+}
+
+export def status [] {
+  current
+}
+
+export def prepare [on_update: closure] {
+  if (which git | is-empty) {
+    return
+  }
+
   let cwd = $env.PWD
-  mut state = (kv get $git_state_key | default {
-    path: "",
-    job_id: null,
-    stale: false,
-    info: [],
-  })
-
-  if not ("stale" in $state) {
-    $state = ($state | insert stale false)
-  }
-
-  if not ("info" in $state) {
-    $state = ($state | insert info [])
-  }
-
-  if not ("job_id" in $state) {
-    $state = ($state | insert job_id null)
-  }
+  mut state = (read-state)
 
   if $state.path != $cwd {
-    $state = {
-      path: $cwd,
-      job_id: null,
-      stale: false,
-      info: [],
+    if not ($state.job_id | is-empty) {
+      try { job kill $state.job_id } catch { null } | ignore
     }
+    $state = (empty-state)
+    $state.path = $cwd
   }
 
-  let job_id = if ($state.job_id | is-empty) {
-    let new_job_id = (spawn-status-job $cwd)
-    $state.job_id = $new_job_id
-    $new_job_id
-  } else {
-    $state.job_id
+  if (($state.phase? | default "none") == "pending") and (not ($state.job_id | is-empty)) {
+    return
   }
 
-  # Each prompt gets one fresh-status wait; an active job is reused.
-  let message = (wait-status-message $cwd $job_id $git_prompt_timeout)
-  if ($message | is-empty) {
-    $state.stale = not ($state.info | is-empty)
-  } else {
-    $state = (apply-status-message $state $message $cwd)
+  let request_id = (random uuid)
+  $state = {
+    path: $cwd,
+    request_id: $request_id,
+    job_id: null,
+    phase: "pending",
+    info: [],
   }
-
   kv set $git_state_key $state | ignore
-  if ($state.info | is-empty) {
-    []
-  } else {
-    $state.info | upsert stale $state.stale
+
+  let job_id = (spawn-status-job $cwd $request_id $on_update)
+  mut latest = (read-state)
+  if (($latest.path? | default "") == $cwd) and (($latest.request_id? | default null) == $request_id) and (($latest.phase? | default "none") == "pending") {
+    $latest.job_id = $job_id
+    kv set $git_state_key $latest | ignore
   }
 }

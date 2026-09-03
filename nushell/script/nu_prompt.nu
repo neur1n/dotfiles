@@ -1,5 +1,3 @@
-use std-rfc/kv *
-
 use nu_emoji.nu
 use nu_git.nu
 use nu_highlight.nu
@@ -36,11 +34,11 @@ def show-session [] {
   $"(nu_highlight render $sep)(nu_highlight render $sess)"
 }
 
-def show-path [git_status] {
+def show-path [has_git: bool] {
   let lsep = (nu_highlight create "" $scheme.path $scheme.sess)
   let path = (nu_highlight create $env.PWD $palette.bgh $scheme.path)
   let rsep = (
-      if not ($git_status | is-empty) {
+      if $has_git {
         (nu_highlight create "" $scheme.path $palette.graym)
       } else {
         (nu_highlight create "" $scheme.path)
@@ -52,6 +50,11 @@ def show-path [git_status] {
 def show-git [git_status] {
   if ($git_status | is-empty) {
     ""
+  } else if ($git_status.timeout? | default false) {
+    let name = (nu_highlight create "" $palette.bgh $palette.graym)
+    let rsep = (nu_highlight create "" $palette.graym)
+
+    $"(nu_highlight render $name)(nu_highlight render $rsep)"
   } else {
     let status = $git_status
 
@@ -67,7 +70,6 @@ def show-git [git_status] {
     let has_upstream = ($status.upstream | is-not-empty)
     let b = (if not ($status.branch | str contains "(detached)") {$status.branch} else {$status.hash})
     let b = (if ($has_upstream and ($acnt == 0) and ($bcnt == 0)) {$"($b)"} else {$b})
-    let b = (if ($status.stale? | default false) {$"~($b)"} else {$b})
 
     let s = ""  # staged
 
@@ -171,9 +173,24 @@ def show-venv [] {
   $"(nu_highlight render $lsep)(nu_highlight render $venv)(nu_highlight render $rsep)"
 }
 
+def render-indicator [mode: string git_status] {
+  $"(show-git $git_status)(show-timestamp)(show-mode $mode)(show-venv)"
+}
+
+def update-git-indicators [git_status] {
+  let has_git = not ($git_status | is-empty)
+  let left = $"(show-session)(show-path $has_git)"
+  let insert = (render-indicator "i" $git_status)
+  let normal = (render-indicator "n" $git_status)
+  commandline set-prompt --vi-insert $insert --vi-normal $normal $left
+}
+
 def left-prompt [] {
-  let git_status = (nu_git status)
-  $"(show-session)(show-path $git_status)(show-git $git_status)"
+  let git_status = (nu_git current)
+  let has_git = not ($git_status | is-empty)
+  let update = {|git_status| update-git-indicators $git_status}
+  nu_git prepare $update | ignore
+  $"(show-session)(show-path $has_git)"
 }
 
 def right-prompt [] {
@@ -187,7 +204,7 @@ def right-prompt [] {
 }
 
 def indicator [mode: string] {
-  $"(show-timestamp)(show-mode $mode)(show-venv)"
+  render-indicator $mode (nu_git current)
 }
 
 $env.PROMPT_COMMAND = {|| left-prompt}
