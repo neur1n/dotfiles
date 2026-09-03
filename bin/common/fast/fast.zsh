@@ -2,6 +2,19 @@ fast() {
   local selection target exit_code fast_bin
   fast_bin="${FAST_BIN:-fast}"
 
+  if [ "$#" -gt 0 ]; then
+    if command "$fast_bin" "$@"; then
+      exit_code=0
+    else
+      exit_code=$?
+    fi
+
+    if [ "$exit_code" -eq 127 ]; then
+      printf 'fast: executable "%s" not found; install it or set FAST_BIN\n' "$fast_bin" >&2
+    fi
+    return "$exit_code"
+  fi
+
   if ! selection="$(mktemp "${TMPDIR:-/tmp}/fast-selection.XXXXXX")"; then
     return 1
   fi
