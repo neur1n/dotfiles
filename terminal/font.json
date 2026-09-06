@@ -9,7 +9,11 @@
       "size": 13
     },
     {
-      "face": "AtkynsonMono NFM",
+      "face": "AnnotationM Nerd Font Mono",
+      "size": 11
+    },
+    {
+      "face": "AtkynsonMono Nerd Font Mono",
       "size": 10
     },
     {
@@ -23,10 +27,6 @@
     {
       "face": "DepartureMono Nerd Font Mono",
       "size": 10
-    },
-    {
-      "face": "FantasqueSansM Nerd Font Mono",
-      "size": 13
     },
     {
       "face": "FiraCode Nerd Font Mono",
@@ -47,18 +47,6 @@
     {
       "face": "JetBrainsMono Nerd Font Mono",
       "size": 11
-    },
-    {
-      "face": "Maple Mono NF",
-      "size": 11
-    },
-    {
-      "face": "ProFontWindows Nerd Font Mono",
-      "size": 13
-    },
-    {
-      "face": "ProggyClean Nerd Font Mono",
-      "size": 16
     },
     {
       "face": "RecMonoCasual Nerd Font Mono",
