@@ -520,6 +520,11 @@ pane_frame_style "full"
 // default is true
 // mouse_scroll_resize false
 
+// Whether scrolling a pane implicitly enters and exits Scroll mode
+// Default: true
+//
+scroll_mode_sync false
+
 // Whether to enable mouse hover visual effects (frame highlight and help text)
 // default is true
 // mouse_hover_effects false
