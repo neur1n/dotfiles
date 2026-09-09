@@ -1,5 +1,23 @@
 # `STATE.md`
 
+## Contract
+
+`STATE.md` is a bounded, replace-in-place navigation snapshot. It selects one
+current execution frontier and points to canonical records; it does not retain
+project history or duplicate issue, decision, review, test, or Git evidence.
+
+Keep the objective to one to three sentences, the last completed list to one to
+three meaningful transitions, and the next action to exactly one item. Include
+only blockers and pending human actions that affect that next action, normally
+no more than five of each, and no more than eight direct authority links.
+
+The digest should normally fit within roughly 80 lines. Treat that size as a
+review signal rather than a hard correctness limit. If more space appears
+necessary, first move durable detail to its canonical record, remove stale
+content, and check whether multiple execution frontiers need human selection.
+
+## Skeleton
+
 ```markdown
 # Current Project State
 
@@ -18,17 +36,21 @@
 
 ## Last Completed
 
-- <completed action or none>
+- <one to three recent meaningful transitions, or none>
 
 ## Next Action
 
 - <one concrete action>
 
-## Blocker
+## Blockers
 
-- <blocker or none>
+- <only blockers affecting the next action, or none>
 
-## Pending Human Action
+## Pending Human Actions
 
-- <action or none>
+- <only actions affecting the next action, or none>
+
+## Relevant Authorities
+
+- <direct path or ID needed for the current frontier, or none>
 ```

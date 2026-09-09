@@ -82,7 +82,13 @@ Set up new or existing repositories with the same general procedure:
 
 Use an issue only when executable, deferred, blocked, or cross-session work
 benefits from separate tracking. Use a decision for a durable technical or
-process choice. `STATE.md` is derived navigation, not authority.
+process choice.
+
+`STATE.md` is a bounded, replace-in-place navigation snapshot for one selected
+execution frontier, not authority, an event log, or a second issue index. It
+must not grow with project history. When creating or reconciling it, read and
+follow `skeleton/state.md`; keep durable status, evidence, rationale, review
+inventories, and completed history in their canonical records and Git.
 
 ## Exact-Tree Review
 
