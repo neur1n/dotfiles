@@ -27,6 +27,16 @@ operations to the agent or permit fabricated approval or evidence.
 The agent must not stage, unstage, update the index, run `git write-tree`,
 commit, amend, push, or alter branches, tags, refs, or history.
 
+## Record History
+
+Use Git and the canonical record that owns a fact as the default history. Keep
+`project.json`, `STATE.md`, and indexes focused on discovery or navigation; do
+not use them as historical snapshot stores or copy canonical acceptance
+evidence into them. Put durable choices, scope history, implementation
+evidence, and review verdicts in the owning decision, plan, issue, or review.
+Add a project-specific snapshot only for a stated retention or query need, with
+its authority, retention, and read path defined by the project.
+
 ## Layout
 
 Keep governance under `.project/`, except for the root discovery pointer:
