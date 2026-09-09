@@ -74,8 +74,9 @@ Set up new or existing repositories with the same general procedure:
 
 1. Read `project.json`, `STATE.md`, the current roadmap and plan, relevant
    local records, current code, and Git state.
-2. Draft or revise the plan and run the exact-tree review. The human commits
-   the approved plan and its governance before implementation begins.
+2. Before drafting or revising a plan, read and follow `skeleton/plan.md`, then
+   run the exact-tree review. The human commits the approved plan and its
+   governance before implementation begins.
 3. Implement the approved scope, run applicable checks, inspect relevant
    output, inventory every changed path, and propose candidate scope.
 4. Run the exact-tree review for the implementation.
