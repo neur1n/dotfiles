@@ -58,8 +58,8 @@ AGENTS.md
 
 Create directories when first needed; do not add placeholders. Keep governance
 tooling under `.project/script/`, separate from application code and product
-tests. The root `AGENTS.md` only points to this skill, `project.json`, and
-`STATE.md`.
+tests. The root `AGENTS.md` only loads this skill. Independent repository
+instructions may remain there, but must not define or complete this workflow.
 
 ## Setup
 
@@ -80,10 +80,48 @@ Set up new or existing repositories with the same general procedure:
 6. Present the complete result, verification, assumptions, and risks. The human
    reviews, stages, and commits it.
 
+## Context Selection
+
+Choose the context target before reading workflow records. An artifact, path,
+identifier, workstream, or scope explicitly named by the human is the target
+for that request. Use `project.json` and `STATE.md` to find the default
+frontier only when no target is named. A request for current project status,
+session resumption, or a project-wide next step selects that default frontier
+and reads `project.json` and `STATE.md`. Selecting another target does not
+update the persisted frontier.
+
+For questions, exploration, and design discussion, start from the explicit
+target and read only what is needed to answer; do not load the execution
+frontier by default. For implementation, read `project.json`, `STATE.md`, Git
+state, affected code, and any plan or issue that governs the request. For a
+governance change or session resumption, read `project.json`, `STATE.md`, Git
+state, and the selected governance records; read code only when needed to
+verify a claim. Do not also read the manifest's plan when an explicit target
+belongs to another workstream unless a concrete coordination or authority
+conflict requires it. Read a roadmap only for a roadmap-owned concern, such as
+an outcome, phase, gate, resource assumption, or cross-workstream coordination.
+
+Treat references and dependencies as candidates, not required reading. Query an
+optional index only when it can resolve the current target or answer the
+current request, and inspect only matching entries. Do not enumerate record
+directories or traverse unrelated workstreams or transitive references by
+default. Historical records, including closed issues, completed or superseded
+plans, superseded decisions, past reviews, old roadmaps, and Git history, are
+also excluded by default. Read one when the human names it or a concrete need
+for its content exists, such as authority, evidence, provenance, regression,
+audit, rollback, or reconciliation. Accepted decisions and current versioned
+contracts remain authority when applicable.
+
+Stop reading when the available evidence is sufficient. For a large file,
+locate relevant sections before reading them, and do not reread ranges already
+in context. Prefer compact routing or status results over full record content.
+
 ## Work Loop
 
-1. Read `project.json`, `STATE.md`, the current roadmap and plan, relevant
-   local records, current code, and Git state.
+Use this loop for implementation and governance transitions after selecting the
+context above:
+
+1. Confirm that the selected workstream has human-approved executable scope.
 2. Before drafting or revising a plan, read and follow `skeleton/plan.md`, then
    run the exact-tree review. The human commits the approved plan and its
    governance before implementation begins.

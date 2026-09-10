@@ -5,6 +5,8 @@
 `STATE.md` is a bounded, replace-in-place navigation snapshot. It selects one
 current execution frontier and points to canonical records; it does not retain
 project history or duplicate issue, decision, review, test, or Git evidence.
+The selected frontier is the default navigation cursor, not the complete set of
+active or planned work; other workstreams remain in their canonical records.
 
 Keep the objective to one to three sentences, the last completed list to one to
 three meaningful transitions, and the next action to exactly one item. Include
@@ -27,8 +29,8 @@ content, and check whether multiple execution frontiers need human selection.
 - Last reconciled: <date>
 - Roadmap: <path>
 - Current phase: <phase or none>
-- Current plan: <path or none>
-- Current issue: <path or none>
+- Selected plan: <path or none>
+- Selected issue: <path or none>
 
 ## Current Objective
 
