@@ -11,9 +11,14 @@ local plugin = {
     },
   },
   {
+    "Saghen/blink.cmp",
+    version = "1.*",
+    event = "VeryLazy",
+    config = require("plugconf.blink-cmp").setup,
+  },
+  {
     "folke/flash.nvim",
-    lazy = true,
-    keys = require("plugconf.flash").keymap,
+    lazy = false,
     config = require("plugconf.flash").setup,
   },
   {
@@ -131,14 +136,6 @@ local plugin = {
     lazy = true,
     keys = require("plugconf.zen-mode").keymap,
     config = require("plugconf.zen-mode").setup,
-  },
-
-  -- Completion
-  {
-    "Saghen/blink.cmp",
-    version = "1.*",
-    event = "VeryLazy",
-    config = require("plugconf.blink-cmp").setup,
   },
 }
 
