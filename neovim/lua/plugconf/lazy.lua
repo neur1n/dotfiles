@@ -17,11 +17,6 @@ local plugin = {
     config = require("plugconf.blink-cmp").setup,
   },
   {
-    "folke/flash.nvim",
-    lazy = false,
-    config = require("plugconf.flash").setup,
-  },
-  {
     "nvim-focus/focus.nvim",
     lazy = true,
     cmd = {
