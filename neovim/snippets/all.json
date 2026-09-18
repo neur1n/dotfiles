@@ -1,0 +1,23 @@
+{
+  "date": {
+    "prefix": ["date"],
+    "body": [
+      "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+    ],
+    "description": "YYYY-MM-DD"
+  },
+  "datetime": {
+    "prefix": ["datetime"],
+    "body": [
+      "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE"
+    ],
+    "description": "YYYY-MM-DD HH:MM"
+  },
+  "time": {
+    "prefix": ["time"],
+    "body": [
+      "$CURRENT_HOUR:$CURRENT_MINUTE"
+    ],
+    "description": "HH:MM"
+  }
+}

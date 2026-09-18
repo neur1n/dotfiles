@@ -1,0 +1,73 @@
+{
+  "align": {
+    "prefix": ["align"],
+    "body": [
+      "\\begin{align}",
+      "  \\item $0",
+      "  \\label{eqn:$1}",
+      "\\end{align}"
+    ],
+    "description": "align environment"
+  },
+  "enumerate": {
+    "prefix": ["enumerate"],
+    "body": [
+      "\\begin{enumerate}",
+      "  \\item $0",
+      "\\end{enumerate}"
+    ],
+    "description": "enumerate environment"
+  },
+  "equation": {
+    "prefix": ["equation"],
+    "body": [
+      "\\begin{equation}",
+      "  $0",
+      "  \\label{eqn:$1}",
+      "\\end{equation}"
+    ],
+    "description": "equation environment"
+  },
+  "figure": {
+    "prefix": ["figure"],
+    "body": [
+      "\\begin{figure}[${1:!htb}]",
+      "  \\centering",
+      "  \\includegraphics[width=${2:\\\\columnwidth}]{$3}",
+      "",
+      "  \\caption{$4}",
+      "  \\label{fig:$5}",
+      "\\end{figure}"
+    ],
+    "description": "figure environment"
+  },
+  "itemize": {
+    "prefix": ["itemize"],
+    "body": [
+      "\\begin{itemize}",
+      "  $0",
+      "\\end{itemize}"
+    ],
+    "description": "itemize environment"
+  },
+  "table": {
+    "prefix": ["table"],
+    "body": [
+      "\\begin{table}[${1:!htb}]",
+      "  \\centering",
+      "  \\caption{$2}",
+      "  \\label{tab:$3}",
+      "",
+      "  % \\resizebox{${4:\\\\columnwidth}}{!}{%",
+      "  \\begin{tabular}{$5}",
+      "    \\toprule",
+      "    $0",
+      "    \\midrule",
+      "    \\bottomrule",
+      "  \\end{tabular}",
+      "  % }",
+      "\\end{table}"
+    ],
+    "description": "table environment"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "$help": "https://aka.ms/terminal-documentation",
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "actions": [],
+  "centerOnLaunch": true,
+  "copyOnSelect": true,
+  "defaultProfile": "Nushell",
+  "disabledProfileSources": [
+    "VSDebugConsole",
+    "Windows.Terminal.Azure",
+    "Windows.Terminal.PowershellCore",
+    "Windows.Terminal.VisualStudio",
+    "Windows.Terminal.Wsl"
+  ],
+  "experimental": {
+    "scrollToChangeOpacity": false,
+    "scrollToZoom": false
+  },
+  "keybindings": [
+    {
+      "command": {
+        "action": "copy",
+        "copyFormatting": false,
+        "singleLine": false,
+        "withControlSequences": false
+      },
+      "id": "Terminal.CopyToClipboard",
+      "keys": "ctrl+shift+c"
+    },
+    {
+      "id": "Terminal.MoveFocusDown",
+      "keys": "ctrl+shift+down"
+    },
+    {
+      "id": "Terminal.MoveFocusLeft",
+      "keys": "ctrl+shift+left"
+    },
+    {
+      "id": "Terminal.MoveFocusRight",
+      "keys": "ctrl+shift+right"
+    },
+    {
+      "id": "Terminal.MoveFocusUp",
+      "keys": "ctrl+shift+up"
+    },
+    {
+      "id": "Terminal.PasteFromClipboard",
+      "keys": "ctrl+shift+v"
+    }
+  ],
+  "profiles": {
+    "defaults": {
+      "cursorShape": "filledBox",
+      "font": {
+        "face": "Cascadia Code",
+        "size": 12,
+        "weight": "normal"
+      },
+      "opacity": 90,
+      "padding": "0"
+    },
+    "list": [
+      {
+        "commandline": "%SystemRoot%\\System32\\cmd.exe",
+        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+        "hidden": false,
+        "name": "Command Prompt"
+      },
+      {
+        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "hidden": false,
+        "name": "PowerShell"
+      },
+      {
+        "commandline": "nu",
+        "guid": "{7fb3a9ce-44fd-41b9-872a-0d376063f69b}",
+        "hidden": false,
+        "name": "Nushell"
+      }
+    ]
+  },
+  "theme": "dark",
+  "useAcrylicInTabRow": true,
+  "useTabSwitcher": false,
+  "windowingBehavior": "useNew"
+}

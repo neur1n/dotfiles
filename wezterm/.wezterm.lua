@@ -1,0 +1,55 @@
+local Wezterm = require("wezterm")
+
+local Font = require("font")
+local Keymap= require("keymap")
+local Launcher= require("launcher")
+local Scheme = require("scheme")
+
+require("snippet")
+
+local font = Font.get()
+local scheme = Scheme.get()
+
+Wezterm.on("gui-startup", function(_)
+  local _, _, window = Wezterm.mux.spawn_window({})
+  local dim = window:gui_window():get_dimensions()
+  local scr = Wezterm.gui.screens()
+  local x = (scr.active.width - dim.pixel_width) / 2
+  local y = (scr.active.height - dim.pixel_height) / 2
+  window:gui_window():set_position(x, y)
+end)
+
+Wezterm.on("update-right-status", function(window, pane)
+  local date = Wezterm.strftime("%a %Y-%m-%d %H:%M")
+  local element = Wezterm.format{
+    {Foreground = {Color = scheme.foreground}},
+    {Background = {Color = "none"}},
+    {Text = date},
+  }
+  window:set_right_status(element)
+end)
+
+return {
+  colors = scheme,
+  cursor_blink_rate = 0,
+  default_cwd = ".",
+  default_prog = {"nu"},
+  enable_scroll_bar = true,
+  font = Wezterm.font(font.name),
+  font_size = font.size,
+  harfbuzz_features = {"calt=1", "clig=1", "liga=1"},
+  initial_cols = 128,
+  initial_rows = 36,
+  integrated_title_button_style = "Windows",
+  keys = Keymap.get(),
+  launch_menu = Launcher.get(),
+  line_height = 1.0,
+  prefer_to_spawn_tabs = true,
+  tab_bar_at_bottom = true,
+  warn_about_missing_glyphs = false,
+  window_background_opacity = 0.9,
+  window_close_confirmation = "AlwaysPrompt",
+  window_decorations = "INTEGRATED_BUTTONS|RESIZE",
+  window_frame = {active_titlebar_bg = "none", inactive_titlebar_bg = "none"},
+  window_padding = {top = 0, bottom = 0, left = 0, right = 0},
+}

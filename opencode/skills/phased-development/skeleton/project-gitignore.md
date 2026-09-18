@@ -1,0 +1,5 @@
+# `.project/.gitignore`
+
+```gitignore
+.setup/
+```

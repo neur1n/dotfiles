@@ -1,0 +1,47 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": "notify",
+  "default_agent": "plan",
+  "lsp": true,
+  "mcp": {
+    "deja": {
+      "command": ["deja", "mcp"],
+      "type": "local",
+      "enabled": true
+    }
+  },
+  "permission": {
+    "bash": {
+      "*": "ask",
+      "git blame *": "allow",
+      "git cat-file *": "allow",
+      "git describe": "allow",
+      "git describe *": "allow",
+      "git diff": "allow",
+      "git diff *": "allow",
+      "git grep *": "allow",
+      "git log": "allow",
+      "git log *": "allow",
+      "git ls-files": "allow",
+      "git ls-files *": "allow",
+      "git ls-tree *": "allow",
+      "git merge-base *": "allow",
+      "git rev-list *": "allow",
+      "git rev-parse *": "allow",
+      "git shortlog *": "allow",
+      "git show": "allow",
+      "git show *": "allow",
+      "git status": "allow",
+      "git status *": "allow"
+    }
+  },
+  "plugin": [
+    "@mohak34/opencode-notifier@latest",
+    "@slkiser/opencode-quota@latest"
+  ],
+  "provider": {
+    "deepseek": {},
+    "openai": {}
+  },
+  "snapshot": true
+}

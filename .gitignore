@@ -1,0 +1,21 @@
+#-------------------------------------------------------------------- neovim{{{
+*.swp
+.netrwhist
+/neovim/lazy-lock.json
+# neovim}}}
+
+#------------------------------------------------------------------- nushell{{{
+/nushell/history.*
+/nushell/plugin.msgpackz
+# nushell}}}
+
+#------------------------------------------------------------------ opencode{{{
+/opencode/node_modules/
+/opencode/bun.lock
+/opencode/opencode-notifier-state.json
+/opencode/package.json
+/opencode/package-lock.json
+# opencode}}}
+
+.DS_Store
+snippet.json
