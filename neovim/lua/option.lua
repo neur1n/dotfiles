@@ -56,19 +56,19 @@ local options = {
 }
 
 function M.set_font()
-  local cmd = ""
+  local cmd = nil
   if vim.fn.has("win32") == 1 then
     cmd = "wmic path Win32_VideoController get CurrentHorizontalResolution"
   else
     cmd = "xdpyinfo | grep dimensions"
   end
 
-  local width = 0
+  local width = 2560
   local handle = io.popen(cmd)
   if handle then
     local output = handle:read("*a")
     handle:close()
-    width = tonumber(output:match("(%d+)")) or 2560
+    width = tonumber(output:match("(%d+)")) or width
   end
 
   math.randomseed(os.time())

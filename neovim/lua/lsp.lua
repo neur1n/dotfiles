@@ -30,7 +30,7 @@ function M.setup()
     end,
   })
 
-  vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
+  vim.api.nvim_create_autocmd("CursorHold", {
     group = id,
     pattern = "*",
     callback = function()
