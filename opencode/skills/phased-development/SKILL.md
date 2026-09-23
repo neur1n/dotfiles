@@ -44,7 +44,10 @@ a trigger, treat it as an active risk or unresolved scope question.
 
 ## Layout
 
-Keep governance under `.project/`, except for the root discovery pointer:
+Use this layout for a new scaffold. When adapting an existing repository,
+preserve canonical governance records in their established locations and map
+them in `project.json` rather than creating duplicates. Keep `.project/` as the
+discovery entry point and the root `AGENTS.md` as the pointer:
 
 ```text
 .project/
@@ -61,11 +64,11 @@ Keep governance under `.project/`, except for the root discovery pointer:
 AGENTS.md
 ```
 
-Create directories when first needed; do not add placeholders. Keep governance
-tooling under `.project/script/`, separate from application code and product
-tests. The generated root `AGENTS.md` must load this skill. It may also contain
-project-specific coding instructions, but must not replace or duplicate this
-skill.
+Create directories when first needed; do not add placeholders. Put new
+governance tooling under `.project/script/`, separate from application code and
+product tests; preserve existing canonical tooling locations. The generated
+root `AGENTS.md` must load this skill. It may also contain project-specific
+coding instructions, but must not replace or duplicate this skill.
 
 ## Setup
 
@@ -169,22 +172,28 @@ Use this process for implementation changes.
 1. The agent finishes the implementation, runs applicable checks, inspects
    relevant output, inventories changed paths, and reports scope, acceptance
    criteria, checks, risks, and limitations.
-2. The human stages the intended candidate and runs `git write-tree`.
-3. The human gives the agent the candidate tree ID and any additional context
-   needed to identify it.
-4. The agent may record the tree ID in the appropriate governance record and
-   inspect that exact tree using read-only operations. The human reviews the
-   candidate and provides feedback or authorization.
-5. If the implementation content changes after the tree ID was supplied, the
-   human stages the new candidate and provides a new tree ID. The agent treats
-   the new identity as a new review round.
+2. The human stages the intended implementation candidate, excluding pending
+   governance changes, and runs `git write-tree`.
+3. The human gives the agent the candidate tree ID.
+4. The agent inspects that exact tree read-only and obtains its relevant base
+   from Git state when possible. It checks changed paths against the reported
+   implementation scope; if the base or candidate cannot be identified
+   unambiguously, it asks the human rather than assuming one. If the staged
+   scope is wrong, the human corrects it and supplies a new tree ID. The agent
+   may record the tree ID in the appropriate governance record. The human
+   reviews the candidate and provides feedback or authorization.
+5. If the staged candidate changes after the tree ID was supplied, the human
+   supplies a new tree ID. The agent treats the new identity as a new review
+   round.
 6. When the human authorizes the code transition, the agent provides a semantic
-   code commit message. The human commits the candidate and provides the commit
-   hash.
+   code commit message. The human commits the candidate and may provide its
+   hash. Otherwise, the agent locates the commit read-only, asking the human
+   for its hash if it cannot identify the commit unambiguously.
 7. The agent verifies read-only that the committed tree corresponds to the
    reviewed candidate, updates the relevant governance using the supplied
    evidence and decision, and provides a corresponding governance commit
-   message.
+   message. The human reviews, stages, and commits those governance updates
+   separately.
 
 A human may commit a candidate before final review feedback when external
 testing requires it. That commit provides Git provenance but does not by itself
