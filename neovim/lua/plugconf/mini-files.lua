@@ -7,7 +7,11 @@ function M.keymap()
 end
 
 function M.setup()
-  require("mini.files").setup()
+  require("mini.files").setup({
+    options = {
+      permanent_delete = false,
+    }
+  })
 
   local id = vim.api.nvim_create_augroup("n_mini", {clear = true})
 
