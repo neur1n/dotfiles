@@ -37,7 +37,7 @@
   },
   "plugin": [
     "@mohak34/opencode-notifier@latest",
-    "@slkiser/opencode-quota@latest"
+    "@slkiser/opencode-quota@4"
   ],
   "provider": {
     "deepseek": {},

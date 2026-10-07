@@ -13,7 +13,7 @@
     "messages_last": "ctrl+e"
   },
   "plugin": [
-    "@slkiser/opencode-quota@latest",
-    "opencode-mini-session@latest"
+    "@slkiser/opencode-quota@4",
+    "opencode-mini-session@1"
   ]
 }

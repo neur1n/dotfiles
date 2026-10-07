@@ -58,7 +58,7 @@ local options = {
 function M.set_font()
   local cmd = nil
   if vim.fn.has("win32") == 1 then
-    cmd = "wmic path Win32_VideoController get CurrentHorizontalResolution"
+    cmd = [[powershell.exe -NoProfile -Command "Add-Type -AssemblyName System.Windows.Forms; Add-Type 'using System; using System.Runtime.InteropServices; public static class DpiHelper { [DllImport(\"user32.dll\")] public static extern bool SetProcessDPIAware(); }'; [DpiHelper]::SetProcessDPIAware() | Out-Null; [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width"]]
   else
     cmd = "xdpyinfo | grep dimensions"
   end
