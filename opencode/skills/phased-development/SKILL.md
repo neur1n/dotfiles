@@ -1,9 +1,6 @@
 ---
 name: phased-development
 description: 'Use ONLY when the user asks to establish, adapt, or use phased development, or when `.project/project.json` declares `"workflow": "phased-development"`. Scaffold and operate a human-reviewed Git workflow across sessions.'
-compatibility: opencode
-metadata:
-  category: development-workflow
 ---
 
 # Phased Development
@@ -41,6 +38,30 @@ its authority, retention, and read path defined by the project.
 When work is intentionally deferred or simplified, record its ceiling and an
 observable trigger for reconsideration in the owning governance record. Without
 a trigger, treat it as an active risk or unresolved scope question.
+
+## Versioning And Compatibility
+
+Follow established versioning policy and compatibility commitments. Edits,
+commits, reviews, and phase transitions do not themselves require a new
+version.
+
+When a change may affect compatibility or release requirements, or introduces a
+version boundary, explicitly propose retaining, introducing, or changing the
+version before implementing the affected change. Briefly justify the choice
+against applicable policy and evidence, including affected consumers and data
+that must remain usable. For retention, explain why the existing version
+remains appropriate; for introduction or change, explain why a distinct version
+is needed and how compatibility will be handled. A version bump alone does not
+preserve compatibility.
+
+Distinguish confirmed facts from assumptions. Missing local usage or release
+records does not prove absence of consumers or compatibility obligations;
+development status alone does not settle them either. If an unknown materially
+affects the choice or implementation, state it, recommend a choice with its
+assumptions, and ask the human the specific question needed to resolve it. Do
+not silently break an existing commitment or add speculative versioning,
+compatibility layers, or migrations. Changes unrelated to compatibility or
+release requirements need no separate version justification.
 
 ## Layout
 

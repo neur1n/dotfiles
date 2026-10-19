@@ -15,6 +15,7 @@
 /opencode/opencode-notifier-state.json
 /opencode/package.json
 /opencode/package-lock.json
+/opencode/service.json
 # opencode}}}
 
 .DS_Store

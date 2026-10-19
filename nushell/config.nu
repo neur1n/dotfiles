@@ -12,8 +12,6 @@ $env.config.rm.always_trash = true
 # Override}}}
 
 #================================================================= Customize{{{
-$env.OPENCODE_ENABLE_EXA = 1
-
 use nu_c.nu
 use nu_utility.nu
 source nu_prompt.nu

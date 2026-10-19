@@ -1,47 +1,66 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "autoupdate": "notify",
+  "update": "notify",
   "default_agent": "plan",
-  "lsp": true,
   "mcp": {
-    "deja": {
-      "command": ["deja", "mcp"],
-      "type": "local",
-      "enabled": true
+    "servers": {
+      "deja": {
+        "command": ["deja", "mcp"],
+        "type": "local",
+        "disabled": false,
+        "codemode": false
+      }
     }
   },
-  "permission": {
-    "bash": {
-      "*": "ask",
-      "git blame *": "allow",
-      "git cat-file *": "allow",
-      "git describe": "allow",
-      "git describe *": "allow",
-      "git diff": "allow",
-      "git diff *": "allow",
-      "git grep *": "allow",
-      "git log": "allow",
-      "git log *": "allow",
-      "git ls-files": "allow",
-      "git ls-files *": "allow",
-      "git ls-tree *": "allow",
-      "git merge-base *": "allow",
-      "git rev-list *": "allow",
-      "git rev-parse *": "allow",
-      "git shortlog *": "allow",
-      "git show": "allow",
-      "git show *": "allow",
-      "git status": "allow",
-      "git status *": "allow"
-    }
-  },
-  "plugin": [
-    "@mohak34/opencode-notifier@latest",
-    "@slkiser/opencode-quota@4"
+  "permissions": [
+    {"action": "shell", "resource": "*", "effect": "ask" },
+    {"action": "shell", "resource": "git blame *", "effect": "allow"},
+    {"action": "shell", "resource": "git cat-file *", "effect": "allow"},
+    {"action": "shell", "resource": "git describe", "effect": "allow"},
+    {"action": "shell", "resource": "git describe *", "effect": "allow"},
+    {"action": "shell", "resource": "git diff", "effect": "allow"},
+    {"action": "shell", "resource": "git diff *", "effect": "allow"},
+    {"action": "shell", "resource": "git grep *", "effect": "allow"},
+    {"action": "shell", "resource": "git log", "effect": "allow"},
+    {"action": "shell", "resource": "git log *", "effect": "allow"},
+    {"action": "shell", "resource": "git ls-files", "effect": "allow"},
+    {"action": "shell", "resource": "git ls-files *", "effect": "allow"},
+    {"action": "shell", "resource": "git ls-tree *", "effect": "allow"},
+    {"action": "shell", "resource": "git merge-base *", "effect": "allow"},
+    {"action": "shell", "resource": "git rev-list *", "effect": "allow"},
+    {"action": "shell", "resource": "git rev-parse *", "effect": "allow"},
+    {"action": "shell", "resource": "git shortlog *", "effect": "allow"},
+    {"action": "shell", "resource": "git show", "effect": "allow"},
+    {"action": "shell", "resource": "git show *", "effect": "allow"},
+    {"action": "shell", "resource": "git status", "effect": "allow"},
+    {"action": "shell", "resource": "git status *", "effect": "allow"}
   ],
-  "provider": {
+  "plugins": [
+    "@slkiser/opencode-quota@latest"
+  ],
+  "providers": {
     "deepseek": {},
-    "openai": {}
+    "openai": {
+      "models": {
+        "gpt-6.1-sol": {
+          "limit": {
+            "context": 500000,
+            "input": 372000,
+            "output": 128000
+          }
+        },
+        "gpt-5.6-luna": {
+          "limit": {
+            "context": 500000,
+            "input": 372000,
+            "output": 128000
+          }
+        }
+      }
+    }
   },
-  "snapshot": true
+  "snapshots": true,
+  "websearch": {
+    "provider": "exa"
+  }
 }

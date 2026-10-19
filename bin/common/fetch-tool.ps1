@@ -1,5 +1,5 @@
 <#
-Download the latest stable prebuilt archives for a small CLI toolset.
+Download the latest prebuilt archives for a small CLI toolset.
 
 Supported host:
   Windows x86_64 / ARM64
@@ -13,6 +13,10 @@ Targets: bottom, deja-vu, fd, fzf, neovim, nushell, opencode,
 
 The script only downloads archives; it does not extract or install them.
 Downloader preference: wget.exe, then curl.exe.
+
+OpenCode uses the official V2 download endpoint; other targets use GitHub's
+latest stable release API. Optional GITHUB_TOKEN authenticates API queries
+only, never archive downloads. API redirects are not followed.
 #>
 
 param(
@@ -28,6 +32,7 @@ $ErrorActionPreference = "Stop"
 function Show-Usage {
   Write-Host "Usage: fetch-tool.ps1 <target> [destination]"
   Write-Host "Targets: bottom deja-vu fd fzf neovim nushell opencode ripgrep tree-sitter zellij zoxide"
+  Write-Host "Optional environment: GITHUB_TOKEN (GitHub API queries only)."
 }
 
 $ValidTargets = @(
@@ -80,37 +85,131 @@ $script:Ok = 0
 $script:Skip = 0
 $script:Fail = 0
 
+function Write-Diagnostic {
+  param([string]$Message)
+
+  if (-not [string]::IsNullOrEmpty($env:GITHUB_TOKEN)) {
+    $Message = $Message.Replace($env:GITHUB_TOKEN, '[REDACTED]')
+  }
+  if ($Message.Length -gt 500) {
+    $Message = $Message.Substring(0, 500)
+  }
+  [Console]::Error.WriteLine("       $Message")
+}
+
+function Invoke-Request {
+  param(
+    [Parameter(Mandatory)][string]$Url,
+    [Parameter(Mandatory)][string]$Path,
+    [switch]$GitHubApi
+  )
+
+  $headersPath = [System.IO.Path]::GetTempFileName()
+  $errorsPath = [System.IO.Path]::GetTempFileName()
+  try {
+    $requestArgs = @('--user-agent', 'dotfiles-fetch-tool')
+    if ($GitHubApi) {
+      if (-not $Url.StartsWith('https://api.github.com/', [System.StringComparison]::Ordinal)) {
+        throw 'Refusing to send GitHub API headers to another host.'
+      }
+      $requestArgs += @('--header', 'Accept: application/vnd.github+json')
+      if (-not [string]::IsNullOrEmpty($env:GITHUB_TOKEN)) {
+        $requestArgs += @('--header', "Authorization: Bearer $env:GITHUB_TOKEN")
+      }
+    }
+
+    Remove-Item -LiteralPath $Path -Force -ErrorAction SilentlyContinue
+    # Windows PowerShell wraps native stderr in error records. Capture their
+    # message text, not formatted records that would corrupt response headers.
+    $savedPreference = $ErrorActionPreference
+    try {
+      $ErrorActionPreference = 'Continue'
+      if ($Downloader -eq 'wget') {
+        if ($GitHubApi) {
+          $requestArgs += '--max-redirect=0'
+        }
+        $nativeMessages = @(& $Wget.Source --no-verbose --server-response --content-on-error @requestArgs -O $Path $Url 2>&1)
+        $logPath = $headersPath
+      } else {
+        if ($GitHubApi) {
+          $requestArgs += @('--no-location', '--max-redirs', '0')
+        } else {
+          $requestArgs += '--location'
+        }
+        # Keep HTTP error bodies so GitHub's message can be reported.
+        $nativeMessages = @(& $Curl.Source --silent --show-error @requestArgs --dump-header $headersPath -o $Path $Url 2>&1)
+        $logPath = $errorsPath
+      }
+      $code = $LASTEXITCODE
+    } finally {
+      $ErrorActionPreference = $savedPreference
+    }
+    $nativeMessages | ForEach-Object { $_.ToString() } | Set-Content -LiteralPath $logPath
+
+    $headers = @(Get-Content -LiteralPath $headersPath)
+    $statusLines = @($headers | Where-Object { $_ -match '^\s*HTTP/\S+\s+\d{3}' })
+    $status = if ($statusLines.Count -gt 0) {
+      [regex]::Match($statusLines[-1], 'HTTP/\S+\s+(\d{3})').Groups[1].Value
+    } else {
+      'unavailable'
+    }
+    if ($code -eq 0 -and $status -match '^2\d{2}$') {
+      return $true
+    }
+
+    Write-Diagnostic "Request URL: $Url"
+    Write-Diagnostic "Downloader: $Downloader; exit code: $code; HTTP status: $status"
+    if ($GitHubApi) {
+      if (Test-Path -LiteralPath $Path -PathType Leaf) {
+        try {
+          $errorBody = Get-Content -LiteralPath $Path -Raw -Encoding UTF8 | ConvertFrom-Json
+          if ($errorBody.message) {
+            Write-Diagnostic "GitHub message: $($errorBody.message)"
+          }
+        } catch {
+          # A proxy may return HTML instead of a GitHub JSON error body.
+        }
+      }
+      $responseHeaders = @{}
+      foreach ($line in $headers) {
+        if ($line -match '^\s*HTTP/') {
+          $responseHeaders.Clear()
+        } elseif ($line -match '^\s*([^: ]+):\s*(.*)$') {
+          $responseHeaders[$Matches[1]] = $Matches[2].Trim()
+        }
+      }
+      foreach ($key in 'x-ratelimit-remaining', 'x-ratelimit-reset', 'retry-after') {
+        if ($responseHeaders.ContainsKey($key)) {
+          Write-Diagnostic "$key`: $($responseHeaders[$key])"
+        }
+      }
+      if ($status -match '^3\d{2}$') {
+        Write-Diagnostic 'API redirects are disabled to protect GITHUB_TOKEN.'
+      }
+    }
+
+    # wget mixes headers and transport errors in stderr; omit header lines.
+    $details = if ($Downloader -eq 'wget') { $headers } else { @(Get-Content -LiteralPath $errorsPath) }
+    $details | Where-Object { $_ -and $_ -notmatch '^\s' } | Select-Object -Last 5 |
+      ForEach-Object { Write-Diagnostic $_ }
+    return $false
+  } finally {
+    Remove-Item -LiteralPath $headersPath, $errorsPath -Force -ErrorAction SilentlyContinue
+  }
+}
+
 function Get-Text {
   param([Parameter(Mandatory)][string]$Url)
 
-  if ($Downloader -eq "wget") {
-    $out = & $Wget.Source -qO- $Url
-  } else {
-    $out = & $Curl.Source -fsSL $Url
+  $bodyPath = [System.IO.Path]::GetTempFileName()
+  try {
+    if (-not (Invoke-Request -Url $Url -Path $bodyPath -GitHubApi)) {
+      throw "API request failed: $Url"
+    }
+    return (Get-Content -LiteralPath $bodyPath -Raw -Encoding UTF8)
+  } finally {
+    Remove-Item -LiteralPath $bodyPath -Force -ErrorAction SilentlyContinue
   }
-
-  if ($LASTEXITCODE -ne 0) {
-    throw "Failed to fetch $Url"
-  }
-
-  return ($out -join "`n")
-}
-
-function Invoke-Download {
-  param(
-    [Parameter(Mandatory)][string]$Url,
-    [Parameter(Mandatory)][string]$Path
-  )
-
-  Remove-Item -Force -ErrorAction SilentlyContinue $Path
-
-  if ($Downloader -eq "wget") {
-    & $Wget.Source -O $Path $Url
-  } else {
-    & $Curl.Source -fL --progress-bar -o $Path $Url
-  }
-
-  return ($LASTEXITCODE -eq 0)
 }
 
 function Test-ZipArchive {
@@ -144,7 +243,20 @@ function Download-ReleaseAsset {
   $releaseUrl = "https://api.github.com/repos/$Repo/releases/latest"
   try {
     $json = Get-Text $releaseUrl
-    $release = $json | ConvertFrom-Json
+    try {
+      $release = $json | ConvertFrom-Json
+      if ($null -eq $release -or -not ($release.assets -is [array])) {
+        throw 'Expected an assets array.'
+      }
+      foreach ($asset in $release.assets) {
+        if (-not ($asset.name -is [string]) -or -not ($asset.browser_download_url -is [string])) {
+          throw 'Expected asset names and download URLs.'
+        }
+      }
+    } catch {
+      Write-Diagnostic "Could not parse release metadata (expected assets with names and download URLs). URL: $releaseUrl"
+      throw
+    }
   } catch {
     Write-Host "[FAIL] $Name`: could not query latest release for $Repo" -ForegroundColor Red
     $candidateUrls = @(
@@ -169,8 +281,7 @@ function Download-ReleaseAsset {
     return
   }
 
-  $found = $false
-
+  $selectedUrls = @()
   foreach ($pattern in $Patterns) {
     $asset = @($release.assets) |
       Where-Object { $_.name -match $pattern } |
@@ -180,23 +291,43 @@ function Download-ReleaseAsset {
       continue
     }
 
-    $found = $true
-    $path = Join-Path $Destination $asset.name
+    $selectedUrls += $asset.browser_download_url
+  }
+
+  if ($selectedUrls.Count -eq 0) {
+    Write-Host "[SKIP] $Name`: no native release asset for windows/$Arch" -ForegroundColor Yellow
+    Write-Host "       Candidate URL: $releaseUrl" -ForegroundColor Yellow
+    $script:Skip++
+    return
+  }
+
+  Download-Assets -Name $Name -Urls $selectedUrls
+}
+
+function Download-Assets {
+  param(
+    [Parameter(Mandatory)][string]$Name,
+    [Parameter(Mandatory)][string[]]$Urls
+  )
+
+  foreach ($url in $Urls) {
+    $filename = ($url -split '/')[-1]
+    $path = Join-Path $Destination $filename
 
     Write-Host ""
-    Write-Host "[$Name] $($asset.name)"
+    Write-Host "[$Name] $filename"
 
-    if (-not (Invoke-Download -Url $asset.browser_download_url -Path $path)) {
-      Write-Warning "$Name`: download failed for $($asset.name); trying fallback if available."
-      Write-Warning "Candidate URL: $($asset.browser_download_url)"
-      Remove-Item -Force -ErrorAction SilentlyContinue $path
+    if (-not (Invoke-Request -Url $url -Path $path)) {
+      Write-Warning "$Name`: download failed for $filename; trying fallback if available."
+      Write-Warning "Candidate URL: $url"
+      Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
       continue
     }
 
     if (-not (Test-ZipArchive -Path $path)) {
-      Write-Warning "$Name`: archive validation failed for $($asset.name); trying fallback if available."
-      Write-Warning "Candidate URL: $($asset.browser_download_url)"
-      Remove-Item -Force -ErrorAction SilentlyContinue $path
+      Write-Warning "$Name`: archive validation failed for $filename; trying fallback if available."
+      Write-Warning "Candidate URL: $url"
+      Remove-Item -LiteralPath $path -Force -ErrorAction SilentlyContinue
       continue
     }
 
@@ -205,14 +336,17 @@ function Download-ReleaseAsset {
     return
   }
 
-  if (-not $found) {
-    Write-Host "[SKIP] $Name`: no native release asset for windows/$Arch" -ForegroundColor Yellow
-    Write-Host "       Candidate URL: $releaseUrl" -ForegroundColor Yellow
-    $script:Skip++
-  } else {
-    Write-Host "[FAIL] $Name`: all matching assets failed to download/validate" -ForegroundColor Red
-    $script:Fail++
+  Write-Host "[FAIL] $Name`: all matching assets failed to download/validate" -ForegroundColor Red
+  $script:Fail++
+}
+
+function Download-OpenCode {
+  param([Parameter(Mandatory)][string]$Filename)
+
+  if ($Target -ne 'opencode') {
+    return
   }
+  Download-Assets -Name 'opencode' -Urls @("https://opencode.ai/update/api/latest/cli/opencode/$Filename")
 }
 
 Write-Host "Detected: windows/$Arch"
@@ -246,9 +380,7 @@ if ($Arch -eq "x86_64") {
   )
 
   # Explicitly choose the normal x64 build, never *baseline*.
-  Download-ReleaseAsset "opencode" "anomalyco/opencode" @(
-    '^opencode-windows-x64\.zip$'
-  )
+  Download-OpenCode 'opencode-windows-x64.zip'
 
   Download-ReleaseAsset "ripgrep" "BurntSushi/ripgrep" @(
     '^ripgrep-.*-x86_64-pc-windows-msvc\.zip$'
@@ -294,9 +426,7 @@ elseif ($Arch -eq "aarch64") {
     '^nu-.*-aarch64-pc-windows-msvc\.zip$'
   )
 
-  Download-ReleaseAsset "opencode" "anomalyco/opencode" @(
-    '^opencode-windows-arm64\.zip$'
-  )
+  Download-OpenCode 'opencode-windows-arm64.zip'
 
   Download-ReleaseAsset "ripgrep" "BurntSushi/ripgrep" @(
     '^ripgrep-.*-aarch64-pc-windows-msvc\.zip$'

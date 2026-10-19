@@ -13,6 +13,10 @@ it. Indexes, when present, are navigation projections and do not replace their
 canonical records. Project-specific properties are allowed when they serve a
 stable discovery need and their source of truth is defined by the project.
 
+`format_version` identifies the discovery manifest's format contract, not its
+revision count or the project's release version; ordinary metadata and pointer
+updates do not change it.
+
 ```json
 {
   "format_version": 1,

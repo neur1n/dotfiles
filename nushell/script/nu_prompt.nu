@@ -17,8 +17,13 @@ let scheme = {
   indi: ($rainbow | get (random int 0..$maxidx))
 }
 
+# Each fragment resets ANSI attributes, so apply bold to every fragment.
+def render-fragment [obj: record] {
+  nu_highlight render ($obj | update bol true)
+}
+
 def show-session [] {
-  let sep = (nu_highlight create "" $scheme.sess)
+  let lsep = (nu_highlight create "" $scheme.sess)
 
   let logo = (nu_system os-logo)
   let user = (
@@ -30,31 +35,24 @@ def show-session [] {
   let addr = (nu_system ip)
 
   let sess = (nu_highlight create $"($user)($logo)($addr)" $palette.bgh $scheme.sess)
+  let rsep = (nu_highlight create "" $scheme.sess)
 
-  $"(nu_highlight render $sep)(nu_highlight render $sess)"
+  $"(render-fragment $lsep)(render-fragment $sess)(render-fragment $rsep)"
 }
 
-def show-path [has_git: bool] {
-  let lsep = (nu_highlight create "" $scheme.path $scheme.sess)
-  let path = (nu_highlight create $env.PWD $palette.bgh $scheme.path)
-  let rsep = (
-      if $has_git {
-        (nu_highlight create "" $scheme.path $palette.graym)
-      } else {
-        (nu_highlight create "" $scheme.path)
-      })
+def show-path [] {
+  let path = (nu_highlight create $env.PWD $scheme.path)
 
-  $"(nu_highlight render $lsep)(nu_highlight render $path)(nu_highlight render $rsep)"
+  render-fragment $path
 }
 
 def show-git [git_status] {
   if ($git_status | is-empty) {
     ""
   } else if ($git_status.timeout? | default false) {
-    let name = (nu_highlight create "" $palette.bgh $palette.graym)
-    let rsep = (nu_highlight create "" $palette.graym)
+    let name = (nu_highlight create "()" $palette.fgh)
 
-    $"(nu_highlight render $name)(nu_highlight render $rsep)"
+    render-fragment $name
   } else {
     let status = $git_status
 
@@ -124,13 +122,13 @@ def show-git [git_status] {
           $u
         })
 
-    let name = (nu_highlight create $b $palette.bgh $palette.graym)
-    let revc = (nu_highlight create $r $palette.bgh $palette.graym)
-    let staged = (nu_highlight create $s $palette.green $palette.graym)
-    let unstaged = (nu_highlight create $u $palette.red $palette.graym)
-    let rsep = (nu_highlight create "" $palette.graym)
+    let name = (nu_highlight create ("(" + $b) $palette.fgh)
+    let revc = (nu_highlight create $r $palette.fgh)
+    let staged = (nu_highlight create $s $palette.green)
+    let unstaged = (nu_highlight create $u $palette.red)
+    let rsep = (nu_highlight create ")" $palette.fgh)
 
-    $"(nu_highlight render $name)(nu_highlight render $revc)(nu_highlight render $staged)(nu_highlight render $unstaged)(nu_highlight render $rsep)"
+    $"(render-fragment $name)(render-fragment $revc)(render-fragment $staged)(render-fragment $unstaged)(render-fragment $rsep)"
   }
 }
 
@@ -138,7 +136,7 @@ def show-timestamp [] {
   let lsep = (nu_highlight create "\n" $scheme.time)
   let ts = (nu_highlight create (date now | format date "%H:%M:%S") $palette.bgh $scheme.time)
 
-  $"(nu_highlight render $lsep)(nu_highlight render $ts)"
+  $"(render-fragment $lsep)(render-fragment $ts)"
 }
 
 def show-mode [mode: string] {
@@ -146,7 +144,7 @@ def show-mode [mode: string] {
   let emoji = (nu_highlight create $"(nu_emoji fetch)" $palette.bgh $scheme.venv)
   let rsep = (nu_highlight create (if ($mode == "i") {" "} else {" "}) $scheme.venv)
 
-  $"(nu_highlight render $lsep)(nu_highlight render $emoji)(nu_highlight render $rsep)"
+  $"(render-fragment $lsep)(render-fragment $emoji)(render-fragment $rsep)"
 }
 
 def show-venv [] {
@@ -170,27 +168,28 @@ def show-venv [] {
   let venv = (nu_highlight create $name $scheme.venv)
   let rsep = (nu_highlight create (if ($name | is-empty) {""} else {"] "}) $scheme.venv)
 
-  $"(nu_highlight render $lsep)(nu_highlight render $venv)(nu_highlight render $rsep)"
+  $"(render-fragment $lsep)(render-fragment $venv)(render-fragment $rsep)"
 }
 
 def render-indicator [mode: string git_status] {
-  $"(show-git $git_status)(show-timestamp)(show-mode $mode)(show-venv)"
+  let git = (show-git $git_status)
+  let git = (if ($git | is-empty) {""} else {$" ($git)"})
+
+  $"($git)(show-timestamp)(show-mode $mode)(show-venv)"
 }
 
 def update-git-indicators [git_status] {
-  let has_git = not ($git_status | is-empty)
-  let left = $"(show-session)(show-path $has_git)"
   let insert = (render-indicator "i" $git_status)
   let normal = (render-indicator "n" $git_status)
-  commandline set-prompt --vi-insert $insert --vi-normal $normal $left
+
+  # Background Git updates must not replace the synchronous session/PWD prompt.
+  commandline set-prompt --vi-insert $insert --vi-normal $normal
 }
 
 def left-prompt [] {
-  let git_status = (nu_git current)
-  let has_git = not ($git_status | is-empty)
   let update = {|git_status| update-git-indicators $git_status}
   nu_git prepare $update | ignore
-  $"(show-session)(show-path $has_git)"
+  $"(show-session)(show-path)"
 }
 
 def right-prompt [] {
@@ -213,4 +212,4 @@ $env.PROMPT_COMMAND_RIGHT = {||}
 $env.PROMPT_INDICATOR = {|| ""}
 $env.PROMPT_INDICATOR_VI_INSERT = {|| indicator "i"}
 $env.PROMPT_INDICATOR_VI_NORMAL = {|| indicator "n"}
-$env.PROMPT_MULTILINE_INDICATOR = {|| " \n::: "}
+$env.PROMPT_MULTILINE_INDICATOR = {|| render-fragment (nu_highlight create " \n::: ")}

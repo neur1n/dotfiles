@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/v2/cli.json",
+  "animations": true,
+  "keybinds": {
+    "app.exit": "none",
+    "input.buffer.home": "ctrl+home",
+    "input.buffer.end": "ctrl+end",
+    "input.line.home": "home",
+    "input.line.end": "end",
+    "input.newline": "return",
+    "input.submit": "ctrl+return",
+    "session.first": "ctrl+a",
+    "session.last": "ctrl+e",
+    "session.queued_prompts": false
+  },
+  "session": {
+    "scrollbar": true,
+    "sidebar": "hide"
+  },
+  "theme": {
+    "mode": "dark",
+    "name": "catppuccin-frappe"
+  }
+}
