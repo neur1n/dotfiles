@@ -89,7 +89,12 @@ function M.setup()
 
   M.set_font()
 
-  vim.g.clipboard = "osc52"
+  if vim.g.neovide and vim.fn.has("mac") == 1 then
+    vim.g.clipboard = "pbcopy"
+  else
+    vim.g.clipboard = "osc52"
+  end
+
   vim.g.tex_flavor = "latex"
 end
 

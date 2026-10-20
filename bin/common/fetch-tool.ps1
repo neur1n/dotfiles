@@ -97,6 +97,32 @@ function Write-Diagnostic {
   [Console]::Error.WriteLine("       $Message")
 }
 
+function Invoke-NativeDownloader {
+  param([string]$FilePath, [string[]]$Arguments)
+
+  $startInfo = New-Object System.Diagnostics.ProcessStartInfo
+  $startInfo.FileName = $FilePath
+  $startInfo.UseShellExecute = $false
+  $startInfo.WorkingDirectory = (Get-Location).ProviderPath
+  # Neither stream is redirected: progress/control characters never enter a
+  # PowerShell pipeline. Arguments is used for Windows PowerShell 5.1 support.
+  $startInfo.Arguments = ($Arguments | ForEach-Object {
+    # Windows native argv quoting: double backslashes before quotes and at
+    # the end of a quoted argument, preserving spaces and literal quotes.
+    $quoted = [regex]::Replace($_, '(\\*)"', '$1$1\"')
+    '"' + [regex]::Replace($quoted, '(\\+)$', '$1$1') + '"'
+  }) -join ' '
+  $process = New-Object System.Diagnostics.Process
+  $process.StartInfo = $startInfo
+  try {
+    [void]$process.Start()
+    $process.WaitForExit()
+    return $process.ExitCode
+  } finally {
+    $process.Dispose()
+  }
+}
+
 function Invoke-Request {
   param(
     [Parameter(Mandatory)][string]$Url,
@@ -119,33 +145,38 @@ function Invoke-Request {
     }
 
     Remove-Item -LiteralPath $Path -Force -ErrorAction SilentlyContinue
-    # Windows PowerShell wraps native stderr in error records. Capture their
-    # message text, not formatted records that would corrupt response headers.
-    $savedPreference = $ErrorActionPreference
-    try {
-      $ErrorActionPreference = 'Continue'
+    if (-not $GitHubApi) {
+      # Archive commands inherit stderr. wget's own logger saves HTTP headers
+      # and errors, while --show-progress still writes the native bar to stderr.
       if ($Downloader -eq 'wget') {
-        if ($GitHubApi) {
-          $requestArgs += '--max-redirect=0'
-        }
-        $nativeMessages = @(& $Wget.Source --no-verbose --server-response --content-on-error @requestArgs -O $Path $Url 2>&1)
-        $logPath = $headersPath
+        $requestArgs += @('--no-verbose', '--server-response', '--content-on-error',
+          '--show-progress', '--progress=bar:force', '--output-file', $headersPath, '-O', $Path, $Url)
+        $code = Invoke-NativeDownloader -FilePath $Wget.Source -Arguments $requestArgs
       } else {
-        if ($GitHubApi) {
-          $requestArgs += @('--no-location', '--max-redirs', '0')
-        } else {
-          $requestArgs += '--location'
-        }
-        # Keep HTTP error bodies so GitHub's message can be reported.
-        $nativeMessages = @(& $Curl.Source --silent --show-error @requestArgs --dump-header $headersPath -o $Path $Url 2>&1)
-        $logPath = $errorsPath
+        $requestArgs += @('--no-silent', '--show-error', '--location', '--dump-header', $headersPath, '-o', $Path, $Url)
+        $code = Invoke-NativeDownloader -FilePath $Curl.Source -Arguments $requestArgs
       }
-      $code = $LASTEXITCODE
-    } finally {
-      $ErrorActionPreference = $savedPreference
+    } else {
+      # API responses stay quiet. Convert Windows PowerShell native error
+      # records to message text before saving them for redacted diagnostics.
+      $savedPreference = $ErrorActionPreference
+      try {
+        $ErrorActionPreference = 'Continue'
+        if ($Downloader -eq 'wget') {
+          $requestArgs += '--max-redirect=0'
+          & $Wget.Source --no-verbose --server-response --content-on-error @requestArgs -O $Path $Url 2>&1 |
+            ForEach-Object { $_.ToString() } | Set-Content -LiteralPath $headersPath
+        } else {
+          $requestArgs += @('--silent', '--no-location', '--max-redirs', '0')
+          # Keep HTTP error bodies so GitHub's message can be reported.
+          & $Curl.Source --show-error @requestArgs --dump-header $headersPath -o $Path $Url 2>&1 |
+            ForEach-Object { $_.ToString() } | Set-Content -LiteralPath $errorsPath
+        }
+        $code = $LASTEXITCODE
+      } finally {
+        $ErrorActionPreference = $savedPreference
+      }
     }
-    $nativeMessages | ForEach-Object { $_.ToString() } | Set-Content -LiteralPath $logPath
-
     $headers = @(Get-Content -LiteralPath $headersPath)
     $statusLines = @($headers | Where-Object { $_ -match '^\s*HTTP/\S+\s+\d{3}' })
     $status = if ($statusLines.Count -gt 0) {

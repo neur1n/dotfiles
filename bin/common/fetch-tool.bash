@@ -110,18 +110,27 @@ request_file() (
 
   rm -f -- "$path"
   if [[ "$DOWNLOADER" == "wget" ]]; then
-    [[ "$api" != true ]] || args+=(--max-redirect=0)
-    wget --no-verbose --server-response --content-on-error "${args[@]}" -O "$path" "$url" 2> "$work/headers"
-    code=$?
+    if [[ "$api" == true ]]; then
+      args+=(--max-redirect=0)
+      wget --no-verbose --server-response --content-on-error "${args[@]}" -O "$path" "$url" 2> "$work/headers"
+      code=$?
+    else
+      # wget logs headers/errors itself; --show-progress keeps the native bar
+      # on inherited stderr even when --output-file is used.
+      wget --no-verbose --server-response --content-on-error --show-progress --progress=bar:force \
+        --output-file "$work/headers" "${args[@]}" -O "$path" "$url"
+      code=$?
+    fi
   else
     if [[ "$api" == true ]]; then
-      args+=(--no-location --max-redirs 0)
+      args+=(--silent --no-location --max-redirs 0)
+      curl --show-error "${args[@]}" --dump-header "$work/headers" -o "$path" "$url" 2> "$work/errors"
+      code=$?
     else
-      args+=(--location)
+      # Native meter and errors go straight to stderr; only headers are saved.
+      curl --no-silent --show-error --location "${args[@]}" --dump-header "$work/headers" -o "$path" "$url"
+      code=$?
     fi
-    # Do not use --fail: the error response body contains GitHub's message.
-    curl --silent --show-error "${args[@]}" --dump-header "$work/headers" -o "$path" "$url" 2> "$work/errors"
-    code=$?
   fi
 
   status="$(awk '/^[[:space:]]*HTTP\// { status=$2 } END { print status }' "$work/headers")"

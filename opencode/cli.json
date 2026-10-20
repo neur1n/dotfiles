@@ -1,6 +1,10 @@
 {
   "$schema": "https://opencode.ai/v2/cli.json",
   "animations": true,
+  "attention": {
+    "notifications": true,
+    "sound": true
+  },
   "keybinds": {
     "app.exit": "none",
     "input.buffer.home": "ctrl+home",
