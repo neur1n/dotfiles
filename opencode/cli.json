@@ -19,7 +19,8 @@
   },
   "session": {
     "scrollbar": true,
-    "sidebar": "hide"
+    "sidebar": "hide",
+    "verbosity": "low"
   },
   "theme": {
     "mode": "dark",
