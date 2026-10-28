@@ -1,13 +1,23 @@
 local M = {}
 
-function M.opened()
-  for n = 1, vim.fn.winnr("$") do
-    if vim.fn.getwinvar(n, "&filetype") == "qf" then
-      return true
-    end
+function M.toggle()
+  local current = vim.fn.getwininfo(vim.api.nvim_get_current_win())[1]
+  if current.quickfix == 1 then
+    vim.cmd(current.loclist == 1 and "lclose" or "cclose")
+    return
   end
 
-  return false
+  local loclist = vim.fn.getloclist(0, {winid = 0, size = 0})
+  if loclist.winid ~= 0 then
+    vim.cmd("lclose")
+  elseif vim.fn.getqflist({winid = 0}).winid ~= 0 then
+    vim.cmd("cclose")
+  else
+    -- Prefer this window's non-empty location list; otherwise use quickfix.
+    local winid = vim.api.nvim_get_current_win()
+    vim.cmd(loclist.size > 0 and "botright lopen" or "botright copen")
+    vim.api.nvim_set_current_win(winid)
+  end
 end
 
 function M.setup()
@@ -18,15 +28,8 @@ function M.setup()
     vim.cmd("wincmd p")
   end, {noremap = true, silent = true})
 
-  -- Toggle the quickfix
-  vim.keymap.set("n", "+", function()
-    if M.opened() then
-      vim.cmd("cclose")
-    else
-      vim.cmd("botright copen")
-      vim.cmd("wincmd p")
-    end
-  end, {noremap = true, silent = true})
+  -- Toggle the current location list or quickfix.
+  vim.keymap.set("n", "+", M.toggle, {noremap = true, silent = true})
 end
 
 return M

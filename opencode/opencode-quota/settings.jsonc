@@ -1,0 +1,10 @@
+{
+  "layout": {
+    "bar": "line"
+  },
+  "statusLine": {
+    "window": {
+      "openai": "five_hour"
+    }
+  }
+}

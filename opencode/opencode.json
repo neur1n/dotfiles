@@ -12,6 +12,11 @@
         "type": "local",
         "disabled": false,
         "codemode": false
+      },
+      "rea": {
+        "command": ["rea", "mcp"],
+        "type": "local",
+        "disabled": false
       }
     }
   },
@@ -42,7 +47,6 @@
     "@slkiser/opencode-quota@latest"
   ],
   "providers": {
-    "deepseek": {},
     "openai": {
       "models": {
         "gpt-6.1-sol": {
