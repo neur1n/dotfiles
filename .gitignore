@@ -5,6 +5,7 @@
 # neovim}}}
 
 #------------------------------------------------------------------- nushell{{{
+/nushell/.zoxide.nu
 /nushell/history.*
 /nushell/plugin.msgpackz
 # nushell}}}
