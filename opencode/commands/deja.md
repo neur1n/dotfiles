@@ -5,14 +5,15 @@ description: Search this machine's past AI coding sessions (deja-vu)
 Search the user's own past sessions across every AI coding tool on this
 machine, then answer from what you find.
 
-Use the deja recall tool with the user's words as the query — the most specific
-tokens win: an exact error string, a function name, a file path, a flag. If a
-result looks right but is too short to act on, follow up with recall_context.
+Call the deja tool in `recall` mode with the user's words as the query — the
+most specific tokens win (an exact error string, a function name, a file path,
+a flag). If a result looks right but is too short to act on, follow up with
+`context` mode using a term from it.
 
-If the deja MCP tools are unavailable, run the CLI instead:
+If the deja MCP tool is unavailable, run the CLI instead:
 
 ```bash
-deja "$ARGUMENTS"
+deja --framed search -- "$ARGUMENTS"
 ```
 
 Answer with what actually happened in those sessions — when it was, which

@@ -182,7 +182,7 @@ Use this process for governance maintenance.
 3. When feedback requires further work, the agent revises the content and
    identifies the resulting change for review again.
 4. When the human authorizes a transition, the agent performs the corresponding
-   governance maintenance and proposes a semantic commit message.
+   governance maintenance.
 5. An authorization applies only to the reviewed scope and transition.
    Unrelated changes are not included silently.
 
