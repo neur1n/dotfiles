@@ -6,5 +6,10 @@
     "window": {
       "openai": "five_hour"
     }
+  },
+  "toast": {
+    "afterReply": "off",
+    "afterCompaction": false,
+    "seconds": 5
   }
 }
