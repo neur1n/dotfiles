@@ -6,6 +6,7 @@ function M.setup()
   if vim.fn.has("mac") == 1 then
     vim.g.neovide_input_macos_option_key_is_meta = "only_left"
     vim.g.neovide_input_use_logo = true
+    vim.g.neovide_scroll_animation_length = 0
 
     local function paste()
       local text = vim.fn.system("pbpaste")
